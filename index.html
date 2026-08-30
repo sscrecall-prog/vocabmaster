@@ -922,11 +922,11 @@
       <div class="sidebar-stats">
         <div>
           <span style="color: var(--text-muted);">Overall Progress</span>
-          <div style="font-size: 1.1rem; color: var(--accent); font-weight: 800;" id="totalProgressText">5 / 47 Ready</div>
+          <div style="font-size: 1.1rem; color: var(--accent); font-weight: 800;" id="totalProgressText">6 / 47 Ready</div>
         </div>
         <div style="width: 70px;">
           <div class="progress-bar-mini">
-            <div class="progress-fill" id="totalProgressFill" style="width: 10.5%;"></div>
+            <div class="progress-fill" id="totalProgressFill" style="width: 12.8%;"></div>
           </div>
         </div>
       </div>
@@ -945,10 +945,10 @@
       
       <!-- Session Banner -->
       <div class="session-banner" id="sessionHero">
-        <span class="banner-badge" id="heroBadge">Session 05 • Roots of Medicine & Healing</span>
-        <h1 class="banner-title" id="heroTitle">Roots: Doctors, Skin, Eyes & Teaching</h1>
+        <span class="banner-badge" id="heroBadge">Session 06 • Bones, Heart, Nerves & Mind</span>
+        <h1 class="banner-title" id="heroTitle">Roots of Straightening, Heart, Nerves & Mind</h1>
         <p class="banner-desc" id="heroDesc">
-          Explore the fascinating derivations behind intern, obstetrics, pediatrics, pedagogy, demagogues, skin (derma), eyes (oculus/ophthalmos), and optical specialists.
+          Master the roots orthos (straight), odontos (tooth), kardia (heart), neuron (nerve), algos (pain), psyche (mind), and geras (old age).
         </p>
       </div>
 
@@ -975,14 +975,14 @@
             <div class="flashcard-inner">
               <div class="flashcard-front">
                 <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Tap Card to Flip ↻</span>
-                <h2 id="fcWord" style="font-size: 2.2rem; font-weight: 800; margin-bottom: 6px;">Demagogue</h2>
-                <span id="fcPhonetic" class="phonetic-code">DEM′-ə-gog</span>
-                <p id="fcQuote" class="quote-box" style="margin-top: 16px; width: 100%;">"One who stirs up political discontent for personal ambition."</p>
+                <h2 id="fcWord" style="font-size: 2.2rem; font-weight: 800; margin-bottom: 6px;">Orthodontia</h2>
+                <span id="fcPhonetic" class="phonetic-code">awr-thə-DON′-shə</span>
+                <p id="fcQuote" class="quote-box" style="margin-top: 16px; width: 100%;">"The straightening and correction of teeth."</p>
               </div>
               <div class="flashcard-back">
                 <span style="font-size: 0.75rem; font-weight: 700; color: var(--success); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Meaning & Etymology</span>
-                <h3 id="fcMeaning" style="font-size: 1.15rem; font-weight: 700; line-height: 1.5; margin-bottom: 12px;">A politician who misleads the masses through wild oratory and false promises.</h3>
-                <p id="fcDetails" style="font-size: 0.85rem; color: var(--text-muted);">Root: demos (people) + agogos (leader / leading).</p>
+                <h3 id="fcMeaning" style="font-size: 1.15rem; font-weight: 700; line-height: 1.5; margin-bottom: 12px;">Dental specialty focused on straightening teeth and correcting bad bites.</h3>
+                <p id="fcDetails" style="font-size: 0.85rem; color: var(--text-muted);">Root: orthos (straight) + odontos (tooth).</p>
               </div>
             </div>
           </div>
@@ -1019,7 +1019,7 @@
       <section id="view-yesno" class="view-pane">
         <div class="quiz-card">
           <h3 class="quiz-heading">❓ Rapid Conceptual Verification</h3>
-          <p class="quiz-subtext">Tap YES or NO to test your instant comprehension of the etymology and derivations.</p>
+          <p class="quiz-subtext">Tap TRUE or FALSE to test your instant comprehension of the etymology and terms.</p>
 
           <div id="yesNoQuizList">
             <!-- Dynamically generated yes/no rows -->
@@ -1270,95 +1270,311 @@
       // SESSION 5
       {
         id: 5,
-        title: "Origins & Related Words (Doctors)",
+        title: "Origins & Related Words (Doctors I)",
         subtitle: "Roots: Skin, Eyes, Children & Teaching",
         category: "Etymology & Roots",
-        desc: "Explore the fascinating derivations behind intern, obstetrics, pediatrics, pedagogy, demagogues, skin (derma), eyes (oculus/ophthalmos), and optical specialists.",
+        desc: "Explore the derivations behind intern, obstetrics, pediatrics, pedagogy, demagogues, skin (derma), eyes (oculus/ophthalmos), and optical specialists.",
         words: [
-          { word: "Intern (e)", phonetic: "IN′-turn", root: "Root: internus (Latin = inside)", quote: "A medical graduate serving an apprenticeship.", meaning: "A recent medical school graduate training inside a hospital before full licensing.", traits: ["Distinct from internist (specialist).", "Serves a clinical apprenticeship.", "Inside the hospital system."] },
-          { word: "Obstetrics", phonetic: "ob-STET′-riks", root: "Root: obstetrix (midwife, 'to stand before')", quote: "Medical specialty of childbirth and delivery.", meaning: "The branch of medicine and surgery concerned with childbirth and midwifery.", traits: ["Practitioner: obstetrician.", "Adjectives: obstetric, obstetrical.", "Became recognized field in 1834."] },
-          { word: "Pediatrics", phonetic: "pee-dee-AT′-riks", root: "Root: paidos (child) + iatreia (medical healing)", quote: "The medical healing and care of children.", meaning: "The branch of medicine dealing with children and their diseases.", traits: ["Practitioner: pediatrician.", "Adjective: pediatric.", "Contrast with Latin 'pedis' (foot)."] },
-          { word: "Pedagogy", phonetic: "PED′-ə-gō-jee", root: "Root: paidos (child) + agogos (leading)", quote: "The principles and methods of teaching.", meaning: "The method and practice of teaching, especially as an academic subject or theoretical concept.", traits: ["Adjective: pedagogical.", "Literally 'the leading of children'.", "Core college education curriculum."] },
-          { word: "Pedagogue", phonetic: "PED′-ə-gog", root: "Root: paidos (child) + agogos (leader)", quote: "A narrow-minded, dogmatic, strait-laced teacher.", meaning: "A teacher, especially a strict, pedantic, or old-fashioned dogmatic one.", traits: ["Deteriorated in meaning over time.", "Used as a word of contempt.", "Lacks progressive flexibility."] },
-          { word: "Demagogue", phonetic: "DEM′-ə-gog", root: "Root: demos (people) + agogos (leading)", quote: "One who stirs up political discontent for personal power.", meaning: "A political leader who seeks support by appealing to popular desires and prejudices rather than rational argument.", traits: ["Practice: demagoguery.", "Adjective: demagogic.", "Misleads masses via wild oratory."] },
-          { word: "Demagoguery", phonetic: "dem-ə-GOG′-ə-ree", root: "Suffix: -ery (practice / conduct)", quote: "The practice of stirring up political dissatisfaction.", meaning: "Political activity or practices that seek support by appealing to desires and prejudices.", traits: ["Noun form of demagogue.", "Exploits societal grievances.", "Self-serving manipulation."] },
-          { word: "Dermatology", phonetic: "dur-mə-TOL′-ə-jee", root: "Root: derma (Greek = skin) + logos (study)", quote: "Medical specialty dealing with skin diseases.", meaning: "The branch of medicine concerned with the diagnosis and treatment of skin disorders.", traits: ["Practitioner: dermatologist.", "Adjective: dermatological.", "Covers all skin layers."] },
-          { word: "Hypodermic", phonetic: "hī-pə-DURM′-ik", root: "Root: hypos (under) + derma (skin)", quote: "Penetrating under the skin.", meaning: "Relating to the region immediately beneath the skin (e.g. hypodermic needle/injection).", traits: ["Greek hypos = under.", "Directly enters subcutaneous layer.", "Essential for vaccines & serums."] },
-          { word: "Epidermis", phonetic: "ep-ə-DUR′-mis", root: "Root: epi- (upon / outer) + derma (skin)", quote: "The outermost layer of the skin.", meaning: "The outer, nonvascular, nonsensitive layer of the skin, covering the dermis.", traits: ["Outermost protective biological barrier.", "Constantly sheds and renews cells.", "Shields internal tissues."] },
+          { word: "Intern (e)", phonetic: "IN′-turn", root: "Root: internus (Latin = inside)", quote: "A medical graduate serving an apprenticeship.", meaning: "A recent medical school graduate training inside a hospital before full licensing.", traits: ["Distinct from internist.", "Serves clinical apprenticeship.", "Inside hospital system."] },
+          { word: "Obstetrics", phonetic: "ob-STET′-riks", root: "Root: obstetrix (midwife, 'to stand before')", quote: "Medical specialty of childbirth and delivery.", meaning: "The branch of medicine and surgery concerned with childbirth and midwifery.", traits: ["Practitioner: obstetrician.", "Adjectives: obstetric, obstetrical.", "Recognized field since 1834."] },
+          { word: "Pediatrics", phonetic: "pee-dee-AT′-riks", root: "Root: paidos (child) + iatreia (healing)", quote: "Medical healing and care of children.", meaning: "The branch of medicine dealing with children and their diseases.", traits: ["Practitioner: pediatrician.", "Adjective: pediatric.", "Contrast with Latin 'pedis' (foot)."] },
+          { word: "Pedagogy", phonetic: "PED′-ə-gō-jee", root: "Root: paidos (child) + agogos (leading)", quote: "Principles and methods of teaching.", meaning: "The method and practice of teaching, especially as an academic subject or theoretical concept.", traits: ["Adjective: pedagogical.", "Literally 'leading of children'.", "Core college education subject."] },
+          { word: "Pedagogue", phonetic: "PED′-ə-gog", root: "Root: paidos (child) + agogos (leader)", quote: "A narrow-minded, dogmatic teacher.", meaning: "A teacher, especially a strict, pedantic, or old-fashioned dogmatic one.", traits: ["Deteriorated in meaning over time.", "Used as a word of contempt.", "Lacks progressive flexibility."] },
+          { word: "Demagogue", phonetic: "DEM′-ə-gog", root: "Root: demos (people) + agogos (leading)", quote: "One who stirs political discontent for power.", meaning: "A political leader who seeks support by appealing to popular desires and prejudices.", traits: ["Practice: demagoguery.", "Adjective: demagogic.", "Misleads masses via wild oratory."] },
+          { word: "Demagoguery", phonetic: "dem-ə-GOG′-ə-ree", root: "Suffix: -ery (practice / conduct)", quote: "Practice of stirring up political dissatisfaction.", meaning: "Political activity or practices that seek support by appealing to prejudices.", traits: ["Noun form of demagogue.", "Exploits societal grievances.", "Self-serving manipulation."] },
+          { word: "Dermatology", phonetic: "dur-mə-TOL′-ə-jee", root: "Root: derma (skin) + logos (study)", quote: "Medical specialty dealing with skin diseases.", meaning: "The branch of medicine concerned with the diagnosis and treatment of skin disorders.", traits: ["Practitioner: dermatologist.", "Adjective: dermatological.", "Covers all skin layers."] },
+          { word: "Hypodermic", phonetic: "hī-pə-DURM′-ik", root: "Root: hypos (under) + derma (skin)", quote: "Penetrating under the skin.", meaning: "Relating to the region immediately beneath the skin (e.g. hypodermic needle).", traits: ["Greek hypos = under.", "Enters subcutaneous layer.", "Essential for vaccines & serums."] },
+          { word: "Epidermis", phonetic: "ep-ə-DUR′-mis", root: "Root: epi- (outer) + derma (skin)", quote: "The outermost layer of the skin.", meaning: "The outer, nonvascular, nonsensitive layer of the skin, covering the dermis.", traits: ["Outermost protective barrier.", "Constantly sheds & renews cells.", "Shields internal tissues."] },
           { word: "Taxidermist", phonetic: "TAKS′-ə-dur-mist", root: "Root: taxis (arrangement) + derma (skin)", quote: "One who prepares and stuffs animal skins.", meaning: "A person who prepares, stuffs, and mounts the skins of animals with lifelike effect.", traits: ["Business: taxidermy.", "Mounts wildlife specimens.", "Preserves animal hides."] },
-          { word: "Pachyderm", phonetic: "PAK′-ə-durm", root: "Root: pachys (thick) + derma (skin)", quote: "A thick-skinned animal (elephant, rhino).", meaning: "A very large mammal with thick skin, especially an elephant, rhinoceros, or hippopotamus.", traits: ["Greek pachys = thick.", "Literally 'thick skin'.", "Used humorously for insensitive people."] },
-          { word: "Dermatitis", phonetic: "dur-mə-TĪ′-tis", root: "Root: derma (skin) + -itis (inflammation)", quote: "General inflammation or irritation of the skin.", meaning: "A medical condition in which the skin becomes red, swollen, and sore, sometimes with blisters.", traits: ["Suffix -itis always means inflammation.", "Includes rashes and eczema.", "Treated by dermatologists."] },
-          { word: "Ophthalmology", phonetic: "off-thal-MOL′-ə-jee", root: "Root: ophthalmos (eye) + logos (study)", quote: "Medical science of the eye and vision surgery.", meaning: "The branch of medicine concerned with the study and treatment of disorders and diseases of the eye.", traits: ["Practitioner: ophthalmologist.", "Adjective: ophthalmological.", "Full medical & surgical discipline."] },
-          { word: "Oculist", phonetic: "OK′-yə-list", root: "Root: oculus (Latin = eye)", quote: "An earlier title for an eye doctor.", meaning: "An ophthalmologist or eye physician (older terminology).", traits: ["Derived from Latin oculus.", "Replaced largely by ophthalmologist.", "Medical eye specialist."] },
-          { word: "Ocular", phonetic: "OK′-yə-lər", root: "Root: oculus (eye) + -ar (adjective)", quote: "Pertaining to or connected with the eye.", meaning: "Of or connected with the eyes or vision.", traits: ["Adjective referring to the eye.", "Example: ocular examination.", "Used in optics and anatomy."] },
+          { word: "Pachyderm", phonetic: "PAK′-ə-durm", root: "Root: pachys (thick) + derma (skin)", quote: "A thick-skinned animal (elephant, rhino).", meaning: "A very large mammal with thick skin, especially an elephant, rhinoceros, or hippopotamus.", traits: ["Greek pachys = thick.", "Literally 'thick skin'.", "Used for insensitive people."] },
+          { word: "Dermatitis", phonetic: "dur-mə-TĪ′-tis", root: "Root: derma (skin) + -itis (inflammation)", quote: "General inflammation of the skin.", meaning: "A medical condition in which the skin becomes red, swollen, and sore, with blisters.", traits: ["Suffix -itis = inflammation.", "Includes rashes & eczema.", "Treated by dermatologists."] },
+          { word: "Ophthalmology", phonetic: "off-thal-MOL′-ə-jee", root: "Root: ophthalmos (eye) + logos (study)", quote: "Medical science of the eye and vision surgery.", meaning: "The branch of medicine concerned with the study and treatment of eye disorders.", traits: ["Practitioner: ophthalmologist.", "Adjective: ophthalmological.", "Full medical & surgical discipline."] },
+          { word: "Oculist", phonetic: "OK′-yə-list", root: "Root: oculus (Latin = eye)", quote: "An earlier title for an eye doctor.", meaning: "An ophthalmologist or eye physician (older terminology).", traits: ["Derived from Latin oculus.", "Replaced by ophthalmologist.", "Medical eye specialist."] },
+          { word: "Ocular", phonetic: "OK′-yə-lər", root: "Root: oculus (eye) + -ar (adjective)", quote: "Pertaining to or connected with the eye.", meaning: "Of or connected with the eyes or vision.", traits: ["Adjective referring to the eye.", "Example: ocular exam.", "Used in optics & anatomy."] },
           { word: "Monocle", phonetic: "MON′-ə-kəl", root: "Root: monos (one) + oculus (eye)", quote: "A single eyeglass for one eye.", meaning: "A single eyeglass kept in position by the muscles around the eye.", traits: ["Used for one eye only.", "Vintage symbol of aristocracy.", "Early corrective lens."] },
-          { word: "Binoculars", phonetic: "bə-NOK′-yə-lərz", root: "Root: bi- (two) + oculus (eye)", quote: "Field glasses that increase the range of two eyes.", meaning: "An optical instrument with a lens for each eye, used for viewing distant objects.", traits: ["Increases range of both eyes simultaneously.", "Provides stereoscopic vision.", "Used for navigation & outdoors."] },
-          { word: "Inoculate", phonetic: "in-OK′-yə-layt", root: "Root: in- (into) + oculus (eye / puncture)", quote: "Injecting serum through an eye-like puncture in skin.", meaning: "To treat with a vaccine to produce immunity against a disease.", traits: ["Spelling note: single 'n' (inoculate).", "Creates a microscopic puncture.", "Prevents viral epidemics."] },
+          { word: "Binoculars", phonetic: "bə-NOK′-yə-lərz", root: "Root: bi- (two) + oculus (eye)", quote: "Field glasses increasing range of two eyes.", meaning: "An optical instrument with a lens for each eye, used for viewing distant objects.", traits: ["Increases range of both eyes.", "Stereoscopic vision.", "Used for outdoors & navigation."] },
+          { word: "Inoculate", phonetic: "in-OK′-yə-layt", root: "Root: in- (into) + oculus (eye / puncture)", quote: "Injecting serum through an eye-like puncture.", meaning: "To treat with a vaccine to produce immunity against a disease.", traits: ["Spelling note: single 'n'.", "Creates microscopic puncture.", "Prevents epidemics."] },
           { word: "Optometrist", phonetic: "op-TOM′-ə-trist", root: "Root: opsis (sight) + metron (measurement)", quote: "One who measures vision and prescribes glasses.", meaning: "A practitioner who examines the eyes for visual defects and prescribes corrective lenses.", traits: ["Not a medical doctor / surgeon.", "Field: optometry; Adj: optometric.", "Measures refractive errors & tests glaucoma."] },
-          { word: "Optician", phonetic: "op-TISH′-ən", root: "Root: opsis (sight) + -ician (expert)", quote: "One who grinds lenses and dispenses optical goods.", meaning: "A person qualified to make and supply eyeglasses and contact lenses on prescription.", traits: ["Fills prescriptions from eye doctors.", "Field: optics; Adj: optical.", "Grinds and fits lenses."] }
+          { word: "Optician", phonetic: "op-TISH′-ən", root: "Root: opsis (sight) + -ician (expert)", quote: "One who grinds lenses and dispenses optical goods.", meaning: "A person qualified to make and supply eyeglasses on prescription.", traits: ["Fills prescriptions from eye doctors.", "Field: optics; Adj: optical.", "Grinds and fits lenses."] }
         ],
         matchingOptions: [
-          { key: "a", text: "principles and methods of teaching (pedagogy)" },
-          { key: "b", text: "stuffing and mounting animal skins (taxidermy)" },
-          { key: "c", text: "delivery of newborn infants (obstetrics)" },
-          { key: "d", text: "stirring up discontent for personal power (demagoguery)" },
-          { key: "e", text: "treatment of skin diseases (dermatology)" },
-          { key: "f", text: "medical science of women's diseases (gynecology)" },
-          { key: "g", text: "medical healing of children (pediatrics)" },
-          { key: "h", text: "penetrating under the skin (hypodermic)" },
-          { key: "i", text: "outermost layer of skin (epidermis)" },
-          { key: "j", text: "thick-skinned animal like an elephant (pachyderm)" },
-          { key: "k", text: "inflammation/infection of the skin (dermatitis)" },
-          { key: "l", text: "medical doctor specialized in eye surgery (ophthalmologist)" },
-          { key: "m", text: "practitioner who measures vision and fits lenses (optometrist)" },
-          { key: "n", text: "technician who grinds lenses and sells glasses (optician)" }
+          { key: "a", text: "principles and methods of teaching (pedagogy)" }, { key: "b", text: "stuffing and mounting animal skins (taxidermy)" },
+          { key: "c", text: "delivery of newborn infants (obstetrics)" }, { key: "d", text: "stirring up discontent for personal power (demagoguery)" },
+          { key: "e", text: "treatment of skin diseases (dermatology)" }, { key: "f", text: "medical science of women's diseases (gynecology)" },
+          { key: "g", text: "medical healing of children (pediatrics)" }, { key: "h", text: "penetrating under the skin (hypodermic)" },
+          { key: "i", text: "outermost layer of skin (epidermis)" }, { key: "j", text: "thick-skinned animal like an elephant (pachyderm)" },
+          { key: "k", text: "inflammation/infection of the skin (dermatitis)" }, { key: "l", text: "medical doctor specialized in eye surgery (ophthalmologist)" },
+          { key: "m", text: "practitioner who measures vision and fits lenses (optometrist)" }, { key: "n", text: "technician who grinds lenses and sells glasses (optician)" }
         ],
-        matchingAnswers: {
-          "Pedagogy": "a", "Taxidermy": "b", "Obstetrics": "c", "Demagoguery": "d",
-          "Dermatology": "e", "Gynecology": "f", "Pediatrics": "g", "Hypodermic": "h",
-          "Epidermis": "i", "Pachyderm": "j", "Dermatitis": "k", "Ophthalmologist": "l",
-          "Optometrist": "m", "Optician": "n"
-        },
+        matchingAnswers: { "Pedagogy": "a", "Taxidermy": "b", "Obstetrics": "c", "Demagoguery": "d", "Dermatology": "e", "Gynecology": "f", "Pediatrics": "g", "Hypodermic": "h", "Epidermis": "i", "Pachyderm": "j", "Dermatitis": "k", "Ophthalmologist": "l", "Optometrist": "m", "Optician": "n" },
         yesNoQuestions: [
-          { q: "Does a treatise on obstetrics deal with childbirth?", a: "yes" },
-          { q: "Does gynecology deal with the female reproductive organs?", a: "yes" },
-          { q: "Is pediatrics concerned with the diseases of old age?", a: "no" },
-          { q: "Does pedagogy refer to teaching?", a: "yes" },
-          { q: "Is a pedagogue an expert and inspiring teacher?", a: "no" },
-          { q: "Is a demagogue genuinely interested in the welfare of the people?", a: "no" },
-          { q: "Is a lion a pachyderm?", a: "no" },
-          { q: "Is the epidermis one of the layers of the skin?", a: "yes" },
-          { q: "Is dermatitis an inflammation of one of the limbs?", a: "no" },
-          { q: "Is a taxidermist a medical practitioner?", a: "no" },
-          { q: "Is an ophthalmologist a medical doctor?", a: "yes" },
-          { q: "Is an optometrist a medical doctor who performs eye surgery?", a: "no" },
+          { q: "Does a treatise on obstetrics deal with childbirth?", a: "yes" }, { q: "Does gynecology deal with the female reproductive organs?", a: "yes" },
+          { q: "Is pediatrics concerned with the diseases of old age?", a: "no" }, { q: "Does pedagogy refer to teaching?", a: "yes" },
+          { q: "Is a pedagogue an expert and inspiring teacher?", a: "no" }, { q: "Is a demagogue genuinely interested in the welfare of the people?", a: "no" },
+          { q: "Is a lion a pachyderm?", a: "no" }, { q: "Is the epidermis one of the layers of the skin?", a: "yes" },
+          { q: "Is dermatitis an inflammation of one of the limbs?", a: "no" }, { q: "Is a taxidermist a medical practitioner?", a: "no" },
+          { q: "Is an ophthalmologist a medical doctor?", a: "yes" }, { q: "Is an optometrist a medical doctor who performs eye surgery?", a: "no" },
           { q: "Does an optician prescribe glasses?", a: "no" }
         ],
         recallQuestions: [
-          { q: "Specialty of child delivery and maternal care:", word: "obstetrics", hint: "O..." },
-          { q: "Outermost layer of skin:", word: "epidermis", hint: "E..." },
-          { q: "Principles and methods of teaching:", word: "pedagogy", hint: "P..." },
-          { q: "Thick-skinned animal (elephant/rhino):", word: "pachyderm", hint: "P..." },
-          { q: "General skin inflammation or irritation:", word: "dermatitis", hint: "D..." },
-          { q: "Politician who foments political discontent for power:", word: "demagogue", hint: "D..." },
-          { q: "One who sells optical equipment and grinds lenses:", word: "optician", hint: "O..." },
-          { q: "Medical graduate serving an apprenticeship in a hospital:", word: "intern", hint: "I..." },
-          { q: "Treatment and medical healing of childhood diseases:", word: "pediatrics", hint: "P..." },
-          { q: "Practice of stirring up political dissatisfaction for personal gain:", word: "demagoguery", hint: "D..." },
-          { q: "One who stuffs and mounts the skins of animals:", word: "taxidermist", hint: "T..." },
-          { q: "Another title for an eye doctor (derived from Latin oculus):", word: "oculist", hint: "O..." },
-          { q: "Medical science dealing with female ailments:", word: "gynecology", hint: "G..." },
-          { q: "Medical specialty relating to diseases and surgery of the eye:", word: "ophthalmology", hint: "O..." },
-          { q: "A single eyeglass for one eye:", word: "monocle", hint: "M..." },
-          { q: "Adjective pertaining to the eye:", word: "ocular", hint: "O..." },
+          { q: "Specialty of child delivery and maternal care:", word: "obstetrics", hint: "O..." }, { q: "Outermost layer of skin:", word: "epidermis", hint: "E..." },
+          { q: "Principles and methods of teaching:", word: "pedagogy", hint: "P..." }, { q: "Thick-skinned animal (elephant/rhino):", word: "pachyderm", hint: "P..." },
+          { q: "General skin inflammation or irritation:", word: "dermatitis", hint: "D..." }, { q: "Politician who foments political discontent for power:", word: "demagogue", hint: "D..." },
+          { q: "One who sells optical equipment and grinds lenses:", word: "optician", hint: "O..." }, { q: "Medical graduate serving an apprenticeship in a hospital:", word: "intern", hint: "I..." },
+          { q: "Treatment and medical healing of childhood diseases:", word: "pediatrics", hint: "P..." }, { q: "Practice of stirring up political dissatisfaction for personal gain:", word: "demagoguery", hint: "D..." },
+          { q: "One who stuffs and mounts the skins of animals:", word: "taxidermist", hint: "T..." }, { q: "Another title for an eye doctor (derived from Latin oculus):", word: "oculist", hint: "O..." },
+          { q: "Medical science dealing with female ailments:", word: "gynecology", hint: "G..." }, { q: "Medical specialty relating to diseases and surgery of the eye:", word: "ophthalmology", hint: "O..." },
+          { q: "A single eyeglass for one eye:", word: "monocle", hint: "M..." }, { q: "Adjective pertaining to the eye:", word: "ocular", hint: "O..." },
           { q: "Practitioner who measures vision and tests for glaucoma:", word: "optometrist", hint: "O..." }
+        ]
+      },
+
+      // SESSION 6
+      {
+        id: 6,
+        title: "Origins & Related Words (Doctors II)",
+        subtitle: "Bones, Teeth, Heart, Nerves & Mind",
+        category: "Etymology & Roots",
+        desc: "Master the roots orthos (straight), odontos (tooth), kardia (heart), neuron (nerve), algos (pain), psyche (mind), and geras (old age).",
+        words: [
+          {
+            word: "Orthopedics",
+            phonetic: "awr-thə-PEE′-diks",
+            root: "Root: orthos (straight) + paidos (child / bone)",
+            quote: "Straightening and correcting bones and joints.",
+            meaning: "The medical specialty dealing with the correction of deformities of bones or muscles.",
+            traits: [
+              "Practitioner: orthopedist.",
+              "Adjective: orthopedic.",
+              "Treats fractures, spine curvature, and joints."
+            ]
+          },
+          {
+            word: "Orthodontia",
+            phonetic: "awr-thə-DON′-shə",
+            root: "Root: orthos (straight) + odontos (tooth)",
+            quote: "Straightening teeth and correcting bad bites.",
+            meaning: "The treatment of irregularities in the teeth (especially alignment and occlusion) and jaws.",
+            traits: [
+              "Practitioner: orthodontist.",
+              "Adjective: orthodontic.",
+              "Uses braces to retract buck teeth and align molars."
+            ]
+          },
+          {
+            word: "Cardiology",
+            phonetic: "kahr-dee-OL′-ə-jee",
+            root: "Root: kardia (heart) + logos (study)",
+            quote: "Science of the heart and circulatory system.",
+            meaning: "The branch of medicine that deals with diseases and abnormalities of the heart.",
+            traits: [
+              "Practitioner: cardiologist.",
+              "Adjective: cardiological.",
+              "Diagnoses heart diseases and circulation defects."
+            ]
+          },
+          {
+            word: "Cardiac",
+            phonetic: "KAHR′-dee-ak",
+            root: "Root: kardia (heart) + -ac (adjective)",
+            quote: "Pertaining to the heart or a heart condition.",
+            meaning: "Relating to the heart (e.g. cardiac arrest, cardiac condition).",
+            traits: [
+              "Adjective referring to the heart.",
+              "Refers to malfunctioning or physiology of heart.",
+              "Cardiovascular health."
+            ]
+          },
+          {
+            word: "Cardiogram",
+            phonetic: "KAHR′-dee-ə-gram′",
+            root: "Root: kardia (heart) + gramma (record / drawing)",
+            quote: "The electrically produced record of heartbeat.",
+            meaning: "A recording of the muscle activity within the heart made by a cardiograph.",
+            traits: [
+              "The physical printout / record produced.",
+              "Shows electrical pulses of the heart.",
+              "Used to diagnose arrhythmias and heart attacks."
+            ]
+          },
+          {
+            word: "Cardiograph",
+            phonetic: "KAHR′-dee-ə-graf′",
+            root: "Root: kardia (heart) + graphein (to write / record)",
+            quote: "The instrument that records heartbeat action.",
+            meaning: "An instrument for recording heart muscle activity electrically.",
+            traits: [
+              "The recording machine / instrument itself.",
+              "Generates the cardiogram.",
+              "Standard clinical cardiac monitor."
+            ]
+          },
+          {
+            word: "Neurology",
+            phonetic: "noor-OL′-ə-jee",
+            root: "Root: neuron (nerve) + logos (study)",
+            quote: "Scientific study of the nervous system.",
+            meaning: "The branch of medicine or biology that deals with the anatomy, functions, and disorders of nerves.",
+            traits: [
+              "Practitioner: neurologist.",
+              "Adjective: neurological.",
+              "Covers brain, spinal cord, and peripheral nerves."
+            ]
+          },
+          {
+            word: "Neuralgia",
+            phonetic: "noor-AL′-jə",
+            root: "Root: neuron (nerve) + algos (pain)",
+            quote: "Acute, sharp pain along a nerve.",
+            meaning: "Intense, typically intermittent pain along the course of a nerve, especially in the head or face.",
+            traits: [
+              "Root algos = pain.",
+              "Sharp nerve ache without bone injury.",
+              "Common in facial and spinal nerves."
+            ]
+          },
+          {
+            word: "Neuritis",
+            phonetic: "noor-Ī′-tis",
+            root: "Root: neuron (nerve) + -itis (inflammation)",
+            quote: "Inflammation of a nerve or nerves.",
+            meaning: "Inflammation of a nerve or nerves, characterized by pain, tenderness, and sometimes loss of function.",
+            traits: [
+              "Suffix -itis = inflammation.",
+              "Causes tenderness, numbness, or tingling.",
+              "Treated by neurologists."
+            ]
+          },
+          {
+            word: "Neurosis",
+            phonetic: "noor-Ō′-sis",
+            root: "Root: neuron (nerve) + -osis (abnormal condition)",
+            quote: "Excessive worry and emotional disturbance (in touch with reality).",
+            meaning: "A mild mental or emotional illness not caused by organic disease, involving symptoms of stress, anxiety, and obsessive behavior.",
+            traits: [
+              "Patient does NOT lose contact with reality.",
+              "Noun/Adj: neurotic.",
+              "Excessive energy wasted on unproductive worries."
+            ]
+          },
+          {
+            word: "Neurotic",
+            phonetic: "noor-OT′-ik",
+            root: "Root: neuron + -osis + -ic",
+            quote: "Suffering from or relating to neurosis.",
+            meaning: "A person with neurosis; abnormally sensitive, anxious, or obsessive.",
+            traits: [
+              "Both noun and adjective.",
+              "High anxiety, hand-washing compulsions, phobias.",
+              "Personality development is hindered."
+            ]
+          },
+          {
+            word: "Psychosis",
+            phonetic: "sī-KŌ′-sis",
+            root: "Root: psyche (mind / soul) + -osis (diseased condition)",
+            quote: "Full-blown mental unbalance (loss of contact with reality).",
+            meaning: "A severe mental disorder in which thought and emotions are so impaired that contact is lost with external reality.",
+            traits: [
+              "Patient has lost contact with standard reality.",
+              "Severe psychiatric condition.",
+              "Contrasts sharply with milder neurosis."
+            ]
+          },
+          {
+            word: "Psychotic",
+            phonetic: "sī-KOT′-ik",
+            root: "Root: psyche + -osis + -ic",
+            quote: "Mentally unbalanced; suffering from psychosis.",
+            meaning: "Relating to, denoting, or suffering from a psychosis.",
+            traits: [
+              "Both a noun and an adjective.",
+              "Experiences delusions or hallucinations.",
+              "Requires intensive psychiatric medical care."
+            ]
+          },
+          {
+            word: "Psychiatry",
+            phonetic: "sī-KĪ′-ə-tree",
+            root: "Root: psyche (mind) + iatreia (medical healing)",
+            quote: "Medical healing of the mind and mental disorders.",
+            meaning: "The medical specialty devoted to the diagnosis, prevention, and treatment of mental disorders.",
+            traits: [
+              "Practitioner: psychiatrist.",
+              "Adjective: psychiatric.",
+              "Mind-healer using psychotherapy and pharmaceuticals."
+            ]
+          },
+          {
+            word: "Geriatrics",
+            phonetic: "jair-ee-AT′-riks",
+            root: "Root: geras (Greek = old age) + iatreia (healing)",
+            quote: "Medical specialty dealing with health of the elderly.",
+            meaning: "The branch of medicine or social science dealing with the health and care of old people.",
+            traits: [
+              "Practitioner: geriatrician.",
+              "Adjective: geriatric.",
+              "Addresses aging, dementia, and longevity ailments."
+            ]
+          }
+        ],
+        matchingOptions: [
+          { key: "a", text: "treatment of skeletal deformities (orthopedics)" },
+          { key: "b", text: "straightening of teeth (orthodontia)" },
+          { key: "c", text: "nerve pain (neuralgia)" },
+          { key: "d", text: "inflammation of the nerves (neuritis)" },
+          { key: "e", text: "medical problems of the elderly (geriatrics)" },
+          { key: "f", text: "record of heartbeats (cardiogram)" },
+          { key: "g", text: "instrument for recording heartbeats (cardiograph)" },
+          { key: "h", text: "emotional disturbance / excessive worry (neurosis)" },
+          { key: "i", text: "severe mental unbalance & loss of reality (psychosis)" },
+          { key: "j", text: "treatment of personality & mental disorders (psychiatry)" }
+        ],
+        matchingAnswers: {
+          "Orthopedics": "a",
+          "Orthodontia": "b",
+          "Neuralgia": "c",
+          "Neuritis": "d",
+          "Geriatrics": "e",
+          "Cardiogram": "f",
+          "Cardiograph": "g",
+          "Neurosis": "h",
+          "Psychosis": "i",
+          "Psychiatry": "j"
+        },
+        yesNoQuestions: [
+          { q: "A gynecologist's patients are mostly men.", a: "no" },
+          { q: "Ophthalmology is the study of eye diseases.", a: "yes" },
+          { q: "Orthopedics is the specialty dealing with the bones and joints.", a: "yes" },
+          { q: "A cardiac patient has a heart ailment.", a: "yes" },
+          { q: "A person with a bad 'bite' may profit from orthodontia.", a: "yes" },
+          { q: "Neuralgia is a disease of the bones.", a: "no" },
+          { q: "A neurosis is the same as a psychosis.", a: "no" },
+          { q: "Neuritis is inflammation of the nerves.", a: "yes" },
+          { q: "Psychiatry is a medical specialty that deals with mental and emotional disturbances.", a: "yes" },
+          { q: "A cardiograph is a device for recording heartbeats.", a: "yes" },
+          { q: "Psychiatric treatment is designed to relieve tensions, fears, and insecurities.", a: "yes" },
+          { q: "A doctor who specializes in pediatrics has very old patients.", a: "no" },
+          { q: "A geriatrician has very young patients.", a: "no" }
+        ],
+        recallQuestions: [
+          { q: "Specialist who straightens teeth:", word: "orthodontist", hint: "O..." },
+          { q: "Acute pain along a nerve:", word: "neuralgia", hint: "N..." },
+          { q: "Medical specialty dealing with bones and joints:", word: "orthopedics", hint: "O..." },
+          { q: "Medical specialty dealing with emotional disturbances and mental illness:", word: "psychiatry", hint: "P..." },
+          { q: "Inflammation of the nerves:", word: "neuritis", hint: "N..." },
+          { q: "Emotional or personality disorder (retains reality):", word: "neurosis", hint: "N..." },
+          { q: "Mentally unbalanced person (lost contact with reality):", word: "psychotic", hint: "P..." },
+          { q: "Pertaining to the heart:", word: "cardiac", hint: "C..." },
+          { q: "Specialty dealing with medical problems of the elderly:", word: "geriatrics", hint: "G..." },
+          { q: "Instrument that records heart action:", word: "cardiograph", hint: "C..." },
+          { q: "Record produced by a cardiograph:", word: "cardiogram", hint: "C..." }
         ]
       }
     ];
 
-    // Scaffold Sessions 6 to 47
+    // Scaffold Sessions 7 to 47
     const SESSION_TITLES = [
-      "Medical Specialists & Roots (II)", 
       "Liars & Deceivers", "Actions & Human Behavior", "Speech Habits & Talkers", "Compliments & Flattery",
       "Insults & Offenses", "Love & Hatred", "Courage & Fearlessness", "Mind & Memory",
       "Customs & Traditions", "Time & Eternity", "Art & Literature", "Music & Aesthetics",
@@ -1372,8 +1588,8 @@
       "Poverty & Scarcity", "Change & Transformation", "Mastery Review & Graduation"
     ];
 
-    for (let i = 6; i <= 47; i++) {
-      const title = SESSION_TITLES[i - 6] || `Advanced Mastery Part ${i}`;
+    for (let i = 7; i <= 47; i++) {
+      const title = SESSION_TITLES[i - 7] || `Advanced Mastery Part ${i}`;
       SESSIONS_DATA.push({
         id: i,
         title: title,
@@ -1392,7 +1608,7 @@
     // Initialize App
     document.addEventListener('DOMContentLoaded', () => {
       renderSessionSidebar();
-      loadSession(5); // Automatically open newly added Session 5
+      loadSession(6); // Automatically open newly added Session 6
     });
 
     // Render 47-Session Sidebar
@@ -1492,7 +1708,7 @@
           <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 20px auto;">
             This session slot is fully wired into the 47-Session Architecture. When you supply Session ${session.id}'s PDF/notes, its flashcards, audio player, matching tests, and recall drills will activate automatically!
           </p>
-          <button class="btn-primary" onclick="loadSession(5)">View Session 5</button>
+          <button class="btn-primary" onclick="loadSession(6)">View Session 6</button>
         </div>
       `;
     }
@@ -1610,8 +1826,8 @@
           <div class="yn-row" data-ans="${q.a}">
             <span class="yn-question">${idx + 1}. ${q.q}</span>
             <div class="yn-buttons">
-              <button class="btn-yn" onclick="selectYN(this, 'yes')">YES</button>
-              <button class="btn-yn" onclick="selectYN(this, 'no')">NO</button>
+              <button class="btn-yn" onclick="selectYN(this, 'yes')">TRUE / YES</button>
+              <button class="btn-yn" onclick="selectYN(this, 'no')">FALSE / NO</button>
             </div>
           </div>
         `;
@@ -1639,7 +1855,7 @@
         noBtn.classList.remove('correct', 'wrong');
 
         if (selected) {
-          const val = selected.innerText.trim().toLowerCase();
+          const val = selected.classList.contains('active-yes') ? 'yes' : 'no';
           if (val === correct) {
             selected.classList.add('correct');
             score++;
