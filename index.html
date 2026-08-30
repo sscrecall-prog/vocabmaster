@@ -84,7 +84,7 @@
       overflow-x: hidden;
     }
 
-    /* Top Navigation Header */
+    /* Top Header */
     .app-header {
       position: sticky;
       top: 0;
@@ -922,11 +922,11 @@
       <div class="sidebar-stats">
         <div>
           <span style="color: var(--text-muted);">Overall Progress</span>
-          <div style="font-size: 1.1rem; color: var(--accent); font-weight: 800;" id="totalProgressText">3 / 47 Ready</div>
+          <div style="font-size: 1.1rem; color: var(--accent); font-weight: 800;" id="totalProgressText">4 / 47 Ready</div>
         </div>
         <div style="width: 70px;">
           <div class="progress-bar-mini">
-            <div class="progress-fill" id="totalProgressFill" style="width: 6.5%;"></div>
+            <div class="progress-fill" id="totalProgressFill" style="width: 8.5%;"></div>
           </div>
         </div>
       </div>
@@ -945,10 +945,10 @@
       
       <!-- Session Banner -->
       <div class="session-banner" id="sessionHero">
-        <span class="banner-badge" id="heroBadge">Session 03 • Handedness, Love & Marriage</span>
-        <h1 class="banner-title" id="heroTitle">Roots of Turn, Hands & Relationships</h1>
+        <span class="banner-badge" id="heroBadge">Session 04 • Medical Specialists</span>
+        <h1 class="banner-title" id="heroTitle">10 Medical Specialists</h1>
         <p class="banner-desc" id="heroDesc">
-          Master roots verto, dexter, sinister, gauche, droit, misein, anthropos, gyne, and gamos.
+          Master the titles, specific clinical fields, and diagnostic expertise of 10 essential medical practitioners.
         </p>
       </div>
 
@@ -975,14 +975,14 @@
             <div class="flashcard-inner">
               <div class="flashcard-front">
                 <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Tap Card to Flip ↻</span>
-                <h2 id="fcWord" style="font-size: 2.2rem; font-weight: 800; margin-bottom: 6px;">Ambidextrous</h2>
-                <span id="fcPhonetic" class="phonetic-code">am-bə-DEKS′-trəs</span>
-                <p id="fcQuote" class="quote-box" style="margin-top: 16px; width: 100%;">"Able to use both hands with equal skill."</p>
+                <h2 id="fcWord" style="font-size: 2.2rem; font-weight: 800; margin-bottom: 6px;">Internist</h2>
+                <span id="fcPhonetic" class="phonetic-code">in-TURN′-ist</span>
+                <p id="fcQuote" class="quote-box" style="margin-top: 16px; width: 100%;">"What is wrong with you?"</p>
               </div>
               <div class="flashcard-back">
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--success); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Meaning & Etymology</span>
-                <h3 id="fcMeaning" style="font-size: 1.15rem; font-weight: 700; line-height: 1.5; margin-bottom: 12px;">Capable of using both hands with equal dexterity.</h3>
-                <p id="fcDetails" style="font-size: 0.85rem; color: var(--text-muted);">Root: ambi (both) + dexter (right hand / skillful).</p>
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--success); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Clinical Specialization</span>
+                <h3 id="fcMeaning" style="font-size: 1.15rem; font-weight: 700; line-height: 1.5; margin-bottom: 12px;">Thorough internal diagnosis using laboratory and clinical tests.</h3>
+                <p id="fcDetails" style="font-size: 0.85rem; color: var(--text-muted);">Specialist in internal organs and complete health checkups.</p>
               </div>
             </div>
           </div>
@@ -999,8 +999,8 @@
       <!-- VIEW 3: Matching Quiz -->
       <section id="view-matching" class="view-pane">
         <div class="quiz-card">
-          <h3 class="quiz-heading">🧩 Match Words with Definitions</h3>
-          <p class="quiz-subtext">Select the correct matching definition for each term from the dropdown.</p>
+          <h3 class="quiz-heading">🧩 Match Doctor with Medical Field</h3>
+          <p class="quiz-subtext">Select the correct matching specialty for each doctor from the dropdown.</p>
           
           <div id="matchingQuizList">
             <!-- Dynamically generated matching rows -->
@@ -1019,7 +1019,7 @@
       <section id="view-yesno" class="view-pane">
         <div class="quiz-card">
           <h3 class="quiz-heading">❓ Rapid Conceptual Verification</h3>
-          <p class="quiz-subtext">Tap YES or NO to test your instant comprehension of the words and derivations.</p>
+          <p class="quiz-subtext">Tap YES or NO to test your instant comprehension of the medical specialists.</p>
 
           <div id="yesNoQuizList">
             <!-- Dynamically generated yes/no rows -->
@@ -1038,7 +1038,7 @@
       <section id="view-recall" class="view-pane">
         <div class="quiz-card">
           <h3 class="quiz-heading">✍️ Active Recall & Spelling Mastery</h3>
-          <p class="quiz-subtext">Type the exact vocabulary word based on the clue and starting letter hint.</p>
+          <p class="quiz-subtext">Type the exact specialist name based on the clinical description and first letter.</p>
 
           <div id="recallQuizList">
             <!-- Dynamically generated recall inputs -->
@@ -1172,19 +1172,19 @@
         title: "Origins & Related Words (II)",
         subtitle: "Roots of Turn, Hands & Relationships",
         category: "Etymology & Roots",
-        desc: "Master the fascinating roots verto (turn), dexter (right hand), sinister (left hand), gauche/droit, misein (hate), anthropos (mankind), gyne (woman), gamos (marriage), and asketes (monk).",
+        desc: "Master the roots verto (turn), dexter (right hand), sinister (left hand), gauche/droit, misein (hate), anthropos (mankind), gyne (woman), gamos (marriage), and asketes (monk).",
         words: [
-          { word: "Ambidextrous", phonetic: "am-bə-DEKS′-trəs", root: "Root: ambi (both) + dexter (right hand / skillful)", quote: "Able to use both hands with equal skill.", meaning: "Capable of using both hands with equal dexterity and ease.", traits: ["Both hands function like 'right hands'.", "Noun form: ambidexterity.", "Extreme physical versatility."] },
-          { word: "Ambidexterity", phonetic: "am′-bə-deks-TAIR′-ə-tee", root: "Suffix: -ity (quality / condition)", quote: "The quality of being ambidextrous.", meaning: "The state of being equally adept with both hands.", traits: ["Noun form of ambidextrous.", "Rare physical coordination.", "Balanced motor mastery."] },
-          { word: "Dexterous", phonetic: "DEKS′-trəs", root: "Root: dexter (Latin = right hand, skillful)", quote: "Skillful with the hands or body.", meaning: "Showing or having physical skill, manual dexterity, or cleverness.", traits: ["Noun form: dexterity.", "Spelling note: contains '-e-' before '-rous'.", "Essential for surgeons and artisans."] },
-          { word: "Dexterity", phonetic: "deks-TAIR′-ə-tee", root: "Suffix: -ity (noun suffix)", quote: "Skill and grace in physical movement.", meaning: "Readiness and grace in physical activity; especially skill and ease in using the hands.", traits: ["Manual skill and nimbleness.", "Opposite of clumsiness.", "High hand-eye coordination."] },
-          { word: "Sinister", phonetic: "SIN′-ə-stər", root: "Root: sinister (Latin = left hand)", quote: "Threatening, evil, or dangerous.", meaning: "Giving the impression that something harmful or evil is happening or will happen.", traits: ["Derived from ancient suspicion of lefties.", "Implies dark menace.", "Used for villains and omens."] },
-          { word: "Gauche", phonetic: "GŌSH", root: "Root: gauche (French = left hand)", quote: "Awkward, tactless, and without social finesse.", meaning: "Lacking ease or grace; socially awkward and clumsy in manners.", traits: ["Social rather than physical clumsiness.", "Pronounced like 'go' + 'sh'.", "Makes embarrassing blunders."] },
-          { word: "Gaucherie", phonetic: "GŌ′-shə-ree", root: "Suffix: -rie (noun practice / state)", quote: "An awkward, tactless way of behaving.", meaning: "A socially awkward or tactless act, manner, or remark.", traits: ["Noun form of gauche.", "Lacks tact, diplomacy, and grace.", "Opposite of adroitness."] },
+          { word: "Ambidextrous", phonetic: "am-bə-DEKS′-trəs", root: "Root: ambi (both) + dexter (right hand / skillful)", quote: "Able to use both hands with equal skill.", meaning: "Capable of using both hands with equal dexterity and ease.", traits: ["Both hands function like 'right hands'.", "Noun form: ambidexterity.", "Physical versatility."] },
+          { word: "Ambidexterity", phonetic: "am′-bə-deks-TAIR′-ə-tee", root: "Suffix: -ity (quality / condition)", quote: "The quality of being ambidextrous.", meaning: "The state of being equally adept with both hands.", traits: ["Noun form of ambidextrous.", "Rare physical coordination.", "Motor mastery."] },
+          { word: "Dexterous", phonetic: "DEKS′-trəs", root: "Root: dexter (Latin = right hand, skillful)", quote: "Skillful with the hands or body.", meaning: "Showing or having physical skill, manual dexterity, or cleverness.", traits: ["Noun form: dexterity.", "Spelling note: '-e-' before '-rous'.", "Essential for surgeons."] },
+          { word: "Dexterity", phonetic: "deks-TAIR′-ə-tee", root: "Suffix: -ity (noun suffix)", quote: "Skill and grace in physical movement.", meaning: "Readiness and grace in physical activity; especially skill in using the hands.", traits: ["Manual skill and nimbleness.", "Opposite of clumsiness.", "High coordination."] },
+          { word: "Sinister", phonetic: "SIN′-ə-stər", root: "Root: sinister (Latin = left hand)", quote: "Threatening, evil, or dangerous.", meaning: "Giving the impression that something harmful or evil is happening or will happen.", traits: ["Derived from suspicion of lefties.", "Implies dark menace.", "Used for villains & omens."] },
+          { word: "Gauche", phonetic: "GŌSH", root: "Root: gauche (French = left hand)", quote: "Awkward, tactless, and without social finesse.", meaning: "Lacking ease or grace; socially awkward and clumsy in manners.", traits: ["Social clumsiness.", "Pronounced like 'go' + 'sh'.", "Makes embarrassing blunders."] },
+          { word: "Gaucherie", phonetic: "GŌ′-shə-ree", root: "Suffix: -rie (noun practice / state)", quote: "An awkward, tactless way of behaving.", meaning: "A socially awkward or tactless act, manner, or remark.", traits: ["Noun form of gauche.", "Lacks tact & diplomacy.", "Opposite of adroitness."] },
           { word: "Adroit", phonetic: "ə-DROYT′", root: "Root: droit (French = right hand)", quote: "Clever, skillful, and quick-witted.", meaning: "Clever or skillful in using the hands or mind; ingenious in handling tricky situations.", traits: ["Mental and verbal dexterity.", "Quick-witted in emergencies.", "Opposite of gauche."] },
-          { word: "Adroitness", phonetic: "ə-DROYT′-nəs", root: "Suffix: -ness (noun quality)", quote: "Skill, ingenuity, and mental cleverness.", meaning: "The quality of being adroit; cleverness, resourcefulness, and finesse.", traits: ["Noun form of adroit.", "High social & intellectual poise.", "Handles problems smoothly."] },
+          { word: "Adroitness", phonetic: "ə-DROYT′-nəs", root: "Suffix: -ness (noun quality)", quote: "Skill, ingenuity, and mental cleverness.", meaning: "The quality of being adroit; cleverness, resourcefulness, and finesse.", traits: ["Noun form of adroit.", "High social poise.", "Handles problems smoothly."] },
           { word: "Anthropology", phonetic: "an-thrə-POL′-ə-jee", root: "Root: anthropos (mankind) + logos (study)", quote: "The study of human development and cultures.", meaning: "The scientific study of human origins, societies, cultures, and physical development.", traits: ["Practitioner: anthropologist.", "Adjective: anthropological.", "Covers human evolution."] },
-          { word: "Philanthropist", phonetic: "fə-LAN′-thrə-pist", root: "Root: philos (love) + anthropos (mankind)", quote: "One who loves mankind and donates to charity.", meaning: "A person who seeks to promote the welfare of others, especially by the generous donation of money.", traits: ["Practice: philanthropy.", "Adjective: philanthropic.", "Selfless benefactor."] },
+          { word: "Philanthropist", phonetic: "fə-LAN′-thrə-pist", root: "Root: philos (love) + anthropos (mankind)", quote: "One who loves mankind and donates to charity.", meaning: "A person who seeks to promote the welfare of others by generous donation of money.", traits: ["Practice: philanthropy.", "Adjective: philanthropic.", "Selfless benefactor."] },
           { word: "Gynecologist", phonetic: "gīn-ə-KOL′-ə-jist", root: "Root: gyne (woman) + logos (study)", quote: "Medical specialist who treats female disorders.", meaning: "A physician specialized in the medical care of the female reproductive system.", traits: ["Field: gynecology.", "Adjective: gynecological.", "Dedicated women's doctor."] },
           { word: "Monogamy", phonetic: "mə-NOG′-ə-mee", root: "Root: monos (one) + gamos (marriage)", quote: "The custom of only one marriage at a time.", meaning: "The practice or state of being married to one person at a time.", traits: ["Person: monogamist.", "Adjective: monogamous.", "Standard legal custom in Western world."] },
           { word: "Bigamy", phonetic: "BIG′-ə-mee", root: "Root: bi- (two) + gamos (marriage)", quote: "Unlawful act of having two spouses simultaneously.", meaning: "The act of entering into a marriage with one person while still legally married to another.", traits: ["Person: bigamist.", "Adjective: bigamous.", "Illegal in modern civil law."] },
@@ -1194,7 +1194,7 @@
           { word: "Misanthropy", phonetic: "mis-AN′-thrə-pee", root: "Root: misein (hate) + anthropos (mankind)", quote: "General hatred or distrust of humankind.", meaning: "A general hatred, dislike, or distrust of the human species or human behavior.", traits: ["Person: misanthrope / misanthropist.", "Adjective: misanthropic.", "Cynical worldview."] },
           { word: "Misogyny", phonetic: "mə-SOJ′-ə-nee", root: "Root: misein (hate) + gyne (woman)", quote: "Hatred, prejudice, or contempt against women.", meaning: "Dislike of, contempt for, or ingrained prejudice against women.", traits: ["Person: misogynist.", "Adjectives: misogynous, misogynistic.", "Rooted in gender hostility."] },
           { word: "Misogamy", phonetic: "mə-SOG′-ə-mee", root: "Root: misein (hate) + gamos (marriage)", quote: "Hatred of or aversion to marriage.", meaning: "The hatred of or strong prejudice against marriage.", traits: ["Person: misogamist.", "Adjective: misogamous.", "Avoids matrimony."] },
-          { word: "Asceticism", phonetic: "ə-SET′-ə-siz-əm", root: "Root: asketes (monk, hermit)", quote: "Devotion to a lonely, austere, self-denying life.", meaning: "Severe self-discipline and avoidance of all forms of indulgence, typically for religious reasons.", traits: ["Person & Adj: ascetic.", "Rejects worldly luxury.", "Spiritual purification."] }
+          { word: "Asceticism", phonetic: "ə-SET′-ə-siz-əm", root: "Root: asketes (monk, hermit)", quote: "Devotion to a lonely, austere, self-denying life.", meaning: "Severe self-discipline and avoidance of all forms of indulgence.", traits: ["Person & Adj: ascetic.", "Rejects worldly luxury.", "Spiritual purification."] }
         ],
         matchingOptions: [
           { key: "a", text: "capable of using both hands with equal skill (ambidextrous)" },
@@ -1259,12 +1259,191 @@
           { q: "One who loves mankind and donates to charity:", word: "philanthropist", hint: "P..." },
           { q: "Skill in the use of both hands:", word: "ambidexterity", hint: "A..." }
         ]
+      },
+
+      // SESSION 4
+      {
+        id: 4,
+        title: "How to Talk About Doctors",
+        subtitle: "10 Medical Specialists",
+        category: "Medicine & Health",
+        desc: "Learn the specific clinical specialties, diagnostic methods, and proper titles for 10 essential medical doctors.",
+        words: [
+          {
+            word: "Internist",
+            phonetic: "in-TURN′-ist",
+            root: "Root: internus (Latin = inside)",
+            quote: "What's wrong with you and why?",
+            meaning: "A physician specialized in internal medicine and comprehensive diagnostic checkups.",
+            traits: [
+              "Performs thorough physical examinations.",
+              "Uses X-rays, blood chemistry, urinalysis, and cardiograms.",
+              "Expert in diagnosing complex internal ailments."
+            ]
+          },
+          {
+            word: "Gynecologist",
+            phonetic: "gīn-ə-KOL′-ə-jist",
+            root: "Root: gyne (woman) + logos (study)",
+            quote: "Treating female reproductive and sexual organs.",
+            meaning: "A medical specialist treating diseases and hygiene of the female reproductive system.",
+            traits: [
+              "Specializes in women's health and female disorders.",
+              "Field: gynecology; Adjective: gynecological.",
+              "Focuses on non-pregnancy female care."
+            ]
+          },
+          {
+            word: "Obstetrician",
+            phonetic: "ob-stə-TRISH′-ən",
+            root: "Root: obstetrix (Latin = midwife / to stand before)",
+            quote: "Having a baby? Pregnancy & delivery care.",
+            meaning: "A physician who delivers babies and cares for mothers during and after pregnancy.",
+            traits: [
+              "Oversees prenatal care, labor, and childbirth.",
+              "Field: obstetrics; Adjective: obstetric / obstetrical.",
+              "Ensures maternal and infant safety during birth."
+            ]
+          },
+          {
+            word: "Pediatrician",
+            phonetic: "pee′-dee-ə-TRISH′-ən",
+            root: "Root: paidos (child) + iatreia (healing)",
+            quote: "Is your baby or young child ill?",
+            meaning: "A medical doctor specialized in the care, development, and diseases of infants and children.",
+            traits: [
+              "Limits practice to babies, toddlers, and youngsters.",
+              "Supervises childhood inoculations and diet.",
+              "Field: pediatrics; Adjective: pediatric."
+            ]
+          },
+          {
+            word: "Dermatologist",
+            phonetic: "dur-mə-TOL′-ə-jist",
+            root: "Root: derma (skin) + logos (study)",
+            quote: "Keeping your skin clear and healthy.",
+            meaning: "A doctor specialized in the diagnosis and treatment of skin disorders.",
+            traits: [
+              "Treats acne, eczema, psoriasis, impetigo, and skin cancers.",
+              "Focuses on the body's outer protective covering.",
+              "Field: dermatology; Adjective: dermatological."
+            ]
+          },
+          {
+            word: "Ophthalmologist",
+            phonetic: "off-thal-MOL′-ə-jist",
+            root: "Root: ophthalmos (eye) + logos (study)",
+            quote: "Are your eyes and vision healthy?",
+            meaning: "A medical eye doctor who diagnoses vision disorders, prescribes glasses, drugs, and performs eye surgery.",
+            traits: [
+              "Treats myopia, astigmatism, cataracts, and glaucoma.",
+              "Full medical doctor and eye surgeon.",
+              "Field: ophthalmology; Adjective: ophthalmological."
+            ]
+          },
+          {
+            word: "Orthopedist",
+            phonetic: "awr-thə-PEE′-dist",
+            root: "Root: orthos (straight) + paidos (child / bone structure)",
+            quote: "How are your bones and skeletal system?",
+            meaning: "A surgeon specialized in correcting skeletal deformities, fractures, and spinal disorders.",
+            traits: [
+              "Treats broken bones, slipped discs, clubfoot, and hip dislocations.",
+              "Uses braces, appliances, and corrective bone surgery.",
+              "Field: orthopedics; Adjective: orthopedic."
+            ]
+          },
+          {
+            word: "Cardiologist",
+            phonetic: "kahr-dee-OL′-ə-jist",
+            root: "Root: kardia (heart) + logos (study)",
+            quote: "Does your heart go pitter-patter?",
+            meaning: "A physician specializing in diseases of the heart and the circulatory system.",
+            traits: [
+              "Diagnoses heart attacks, arrhythmias, and hypertension.",
+              "Interprets electrocardiograms (ECGs).",
+              "Field: cardiology; Adjective: cardiological."
+            ]
+          },
+          {
+            word: "Neurologist",
+            phonetic: "noor-OL′-ə-jist",
+            root: "Root: neuron (nerve) + logos (study)",
+            quote: "Is your brain and nervous system working?",
+            meaning: "A physician specializing in the brain, spinal cord, and nervous system disorders.",
+            traits: [
+              "Treats epilepsy, stroke, neuropathy, and brain ailments.",
+              "Focuses on organic and physical nerve disorders.",
+              "Field: neurology; Adjective: neurological."
+            ]
+          },
+          {
+            word: "Psychiatrist",
+            phonetic: "sī-KĪ′-ə-trist",
+            root: "Root: psyche (mind/soul) + iatreia (healing)",
+            quote: "Alleviating mental and emotional distress.",
+            meaning: "A medical doctor specialized in treating mental, emotional, and behavioral disorders.",
+            traits: [
+              "Uses psychotherapy, medication, and clinical techniques.",
+              "Alleviates severe neuroses, anxieties, and psychoses.",
+              "Field: psychiatry; Adjective: psychiatric."
+            ]
+          }
+        ],
+        matchingOptions: [
+          { key: "a", text: "diagnosis; internal organs (internist)" },
+          { key: "b", text: "female reproductive organs (gynecologist)" },
+          { key: "c", text: "pregnancy, childbirth (obstetrician)" },
+          { key: "d", text: "infants and young children (pediatrician)" },
+          { key: "e", text: "skin disorders (dermatologist)" },
+          { key: "f", text: "eyes and vision disorders (ophthalmologist)" },
+          { key: "g", text: "skeletal system and bones (orthopedist)" },
+          { key: "h", text: "heart and circulatory system (cardiologist)" },
+          { key: "i", text: "brain and nervous system (neurologist)" },
+          { key: "j", text: "mental or emotional disturbances (psychiatrist)" }
+        ],
+        matchingAnswers: {
+          "Internist": "a",
+          "Gynecologist": "b",
+          "Obstetrician": "c",
+          "Pediatrician": "d",
+          "Dermatologist": "e",
+          "Ophthalmologist": "f",
+          "Orthopedist": "g",
+          "Cardiologist": "h",
+          "Neurologist": "i",
+          "Psychiatrist": "j"
+        },
+        yesNoQuestions: [
+          { q: "Is an internist an expert in diagnosis?", a: "yes" },
+          { q: "Is a gynecologist familiar with the female reproductive organs?", a: "yes" },
+          { q: "Does an obstetrician specialize in diseases of childhood?", a: "no" },
+          { q: "Does a pediatrician deliver babies?", a: "no" },
+          { q: "If you had a skin disease, would you visit a dermatologist?", a: "yes" },
+          { q: "If you had trouble with your vision would you visit an orthopedist?", a: "no" },
+          { q: "Is an ophthalmologist an eye specialist?", a: "yes" },
+          { q: "Does a cardiologist treat bone fractures?", a: "no" },
+          { q: "Is a neurologist a nerve specialist?", a: "yes" },
+          { q: "If you were nervous, tense, overly anxious, constantly fearful for no apparent reason, would a psychiatrist be the specialist to see?", a: "yes" }
+        ],
+        recallQuestions: [
+          { q: "For a suspected brain or nerve disorder:", word: "neurologist", hint: "N..." },
+          { q: "For a thorough internal checkup and diagnosis:", word: "internist", hint: "I..." },
+          { q: "If you have a skin disease or infection:", word: "dermatologist", hint: "D..." },
+          { q: "If you have a heart or circulatory problem:", word: "cardiologist", hint: "C..." },
+          { q: "If you are tense, fearful, or deeply anxious:", word: "psychiatrist", hint: "P..." },
+          { q: "If you are pregnant and delivering a baby:", word: "obstetrician", hint: "O..." },
+          { q: "For disorders of the female reproductive organs:", word: "gynecologist", hint: "G..." },
+          { q: "For a health checkup for your two-month-old child:", word: "pediatrician", hint: "P..." },
+          { q: "For faulty vision, cataracts, or eye diseases:", word: "ophthalmologist", hint: "O..." },
+          { q: "For curvature of the spine or broken bones:", word: "orthopedist", hint: "O..." }
+        ]
       }
     ];
 
-    // Scaffold Sessions 4 to 47
+    // Scaffold Sessions 5 to 47
     const SESSION_TITLES = [
-      "Medical Therapists & Healers", "Scientists & Investigators", 
+      "Medical Specialists & Roots (I)", "Medical Specialists & Roots (II)", 
       "Liars & Deceivers", "Actions & Human Behavior", "Speech Habits & Talkers", "Compliments & Flattery",
       "Insults & Offenses", "Love & Hatred", "Courage & Fearlessness", "Mind & Memory",
       "Customs & Traditions", "Time & Eternity", "Art & Literature", "Music & Aesthetics",
@@ -1278,8 +1457,8 @@
       "Poverty & Scarcity", "Change & Transformation", "Mastery Review & Graduation"
     ];
 
-    for (let i = 4; i <= 47; i++) {
-      const title = SESSION_TITLES[i - 4] || `Advanced Mastery Part ${i}`;
+    for (let i = 5; i <= 47; i++) {
+      const title = SESSION_TITLES[i - 5] || `Advanced Mastery Part ${i}`;
       SESSIONS_DATA.push({
         id: i,
         title: title,
@@ -1298,7 +1477,7 @@
     // Initialize App
     document.addEventListener('DOMContentLoaded', () => {
       renderSessionSidebar();
-      loadSession(3); // Automatically open newly added Session 3
+      loadSession(4); // Automatically open newly added Session 4
     });
 
     // Render 47-Session Sidebar
@@ -1398,7 +1577,7 @@
           <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 20px auto;">
             This session slot is fully wired into the 47-Session Architecture. When you supply Session ${session.id}'s PDF/notes, its flashcards, audio player, matching tests, and recall drills will activate automatically!
           </p>
-          <button class="btn-primary" onclick="loadSession(3)">View Session 3</button>
+          <button class="btn-primary" onclick="loadSession(4)">View Session 4</button>
         </div>
       `;
     }
@@ -1465,7 +1644,7 @@
           <div class="match-item">
             <span class="match-label">${idx + 1}. ${word}</span>
             <select class="match-dropdown" data-correct="${correctKey}">
-              <option value="">Select definition...</option>
+              <option value="">Select definition / field...</option>
               ${session.matchingOptions.map(opt => `<option value="${opt.key}">${opt.key}. ${opt.text}</option>`).join('')}
             </select>
           </div>
