@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>VocabMaster — 47 Session Master Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  
+  <style>
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #ffffff;
+      --bg-elevated: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-subtle: #94a3b8;
+      --border-color: #e2e8f0;
+      --border-focus: #4f46e5;
+      --accent: #4f46e5;
+      --accent-hover: #4338ca;
+      --accent-light: #eef2ff;
+      --accent-glow: rgba(79, 70, 229, 0.16);
+      --success: #10b981;
+      --success-bg: #ecfdf5;
+      --error: #ef4444;
+      --error-bg: #fef2f2;
+      --warning: #f59e0b;
+      --warning-bg: #fffbeb;
+      --sidebar-width: 300px;
+      --header-height: 64px;
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 14px -2px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 24px -6px rgba(0,0,0,0.12);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #090d16;
+      --bg-surface: #0f172a;
+      --bg-card: #131d33;
+      --bg-elevated: #1a2744;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-subtle: #64748b;
+      --border-color: #1e293b;
+      --border-focus: #6366f1;
+      --accent: #6366f1;
+      --accent-hover: #818cf8;
+      --accent-light: rgba(99, 102, 241, 0.15);
+      --accent-glow: rgba(99, 102, 241, 0.25);
+      --success: #34d399;
+      --success-bg: rgba(16, 185, 129, 0.15);
+      --error: #f87171;
+      --error-bg: rgba(239, 68, 68, 0.15);
+      --warning: #fbbf24;
+      --warning-bg: rgba(245, 158, 11, 0.15);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+      --shadow-md: 0 4px 14px -2px rgba(0,0,0,0.5);
+      --shadow-lg: 0 12px 24px -6px rgba(0,0,0,0.6);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Top Navigation Header */
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--header-height);
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    [data-theme="dark"] .app-header {
+      background: rgba(15, 23, 42, 0.88);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu-toggle-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 1.15rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand-pill {
+      background: linear-gradient(135deg, var(--accent), #9333ea);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      letter-spacing: 0.5px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .icon-btn:hover {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+
+    /* Main Layout */
+    .app-layout {
+      display: flex;
+      flex: 1;
+      position: relative;
+    }
+
+    /* 47-Session Sidebar */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 200;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - var(--header-height));
+      position: sticky;
+      top: var(--header-height);
+      z-index: 210;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        height: 100vh;
+        transform: translateX(-100%);
+        box-shadow: var(--shadow-lg);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+    }
+
+    .sidebar-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sidebar-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sidebar-stats {
+      padding: 12px 18px;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .progress-bar-mini {
+      height: 6px;
+      background: var(--border-color);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #10b981);
+      border-radius: 4px;
+      transition: width 0.4s ease;
+    }
+
+    .sidebar-search {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .sidebar-input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-primary);
+      color: var(--text-main);
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .sidebar-input:focus {
+      border-color: var(--accent);
+    }
+
+    .session-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+      list-style: none;
+    }
+
+    .session-item {
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      border: 1px solid transparent;
+    }
+
+    .session-item:hover {
+      background: var(--bg-elevated);
+      color: var(--text-main);
+    }
+
+    .session-item.active {
+      background: var(--accent-light);
+      color: var(--accent);
+      border-color: rgba(99, 102, 241, 0.3);
+      font-weight: 700;
+    }
+
+    .session-item-badge {
+      font-size: 0.7rem;
+      padding: 2px 6px;
+      border-radius: var(--radius-full);
+      background: var(--bg-elevated);
+      color: var(--text-subtle);
+    }
+
+    .session-item.active .session-item-badge {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* Content Area */
+    .content-area {
+      flex: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px 20px 100px 20px;
+      width: 100%;
+    }
+
+    /* Hero Banner */
+    .session-banner {
+      background: linear-gradient(135deg, #4338ca 0%, #6366f1 60%, #9333ea 100%);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      color: white;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .banner-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .banner-title {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    .banner-desc {
+      font-size: 0.95rem;
+      opacity: 0.92;
+      max-width: 680px;
+      line-height: 1.5;
+    }
+
+    /* Mode Tabs */
+    .mode-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      scrollbar-width: none;
+    }
+    .mode-tabs::-webkit-scrollbar { display: none; }
+
+    .mode-tab-btn {
+      padding: 10px 18px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mode-tab-btn:hover {
+      background: var(--bg-elevated);
+      color: var(--text-main);
+    }
+
+    .mode-tab-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    /* Tab Panes */
+    .view-pane {
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+    .view-pane.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .vocab-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .vocab-card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .card-index {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--accent);
+      background: var(--accent-light);
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .audio-pill {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .audio-pill:hover {
+      background: var(--accent-light);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .vocab-word {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .phonetic-code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 2px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .root-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #9333ea;
+      background: rgba(147, 51, 234, 0.1);
+      padding: 2px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .quote-box {
+      background: var(--bg-elevated);
+      border-left: 3px solid var(--accent);
+      padding: 10px 12px;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-style: italic;
+      font-size: 0.875rem;
+      color: var(--text-main);
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    .vocab-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      flex: 1;
+    }
+
+    .traits-list {
+      list-style: none;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 10px;
+    }
+
+    .traits-list li {
+      font-size: 0.825rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      position: relative;
+      padding-left: 16px;
+    }
+
+    .traits-list li::before {
+      content: "•";
+      color: var(--accent);
+      font-weight: bold;
+      position: absolute;
+      left: 2px;
+    }
+
+    /* Flashcard View */
+    .flashcard-section {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .flashcard-wrapper {
+      perspective: 1000px;
+      height: 320px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .flashcard-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flashcard-wrapper.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-front, .flashcard-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: var(--radius-lg);
+      padding: 36px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-md);
+    }
+
+    .flashcard-front {
+      background: var(--bg-card);
+      color: var(--text-main);
+    }
+
+    .flashcard-back {
+      background: linear-gradient(135deg, var(--bg-elevated), var(--bg-card));
+      color: var(--text-main);
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    /* Test & Drill Components */
+    .quiz-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .quiz-heading {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quiz-subtext {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .match-item {
+      background: var(--bg-elevated);
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    @media (min-width: 600px) {
+      .match-item {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .match-label {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    .match-dropdown {
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-size: 0.875rem;
+      outline: none;
+      min-width: 240px;
+    }
+
+    .match-dropdown:focus {
+      border-color: var(--accent);
+    }
+
+    /* Yes/No Row */
+    .yn-row {
+      background: var(--bg-elevated);
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    @media (min-width: 600px) {
+      .yn-row {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .yn-question {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--text-main);
+    }
+
+    .yn-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-yn {
+      flex: 1;
+      padding: 8px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      min-width: 70px;
+    }
+
+    .btn-yn.active-yes {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .btn-yn.active-no {
+      background: #64748b;
+      color: #fff;
+      border-color: #64748b;
+    }
+
+    .btn-yn.correct {
+      background: var(--success) !important;
+      color: #fff !important;
+      border-color: var(--success) !important;
+    }
+
+    .btn-yn.wrong {
+      background: var(--error) !important;
+      color: #fff !important;
+      border-color: var(--error) !important;
+    }
+
+    /* Active Recall Input */
+    .recall-box {
+      background: var(--bg-elevated);
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+    }
+
+    .recall-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .recall-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .recall-field {
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-card);
+      color: var(--text-main);
+      font-size: 0.9rem;
+      font-weight: 600;
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .btn-primary {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--accent), #7c3aed);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.875rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    .btn-secondary {
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+
+    .score-banner {
+      margin-top: 18px;
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      background: var(--accent-light);
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-weight: 700;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Mobile Bottom Nav */
+    .bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-top: 1px solid var(--border-color);
+      z-index: 150;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    [data-theme="dark"] .bottom-nav {
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    @media (max-width: 768px) {
+      .bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .content-area {
+        padding-bottom: 100px;
+      }
+    }
+
+    .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      gap: 2px;
+      flex: 1;
+      height: 100%;
+    }
+
+    .bottom-nav-item.active {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .bottom-nav-icon {
+      font-size: 1.15rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <button class="menu-toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Sessions Menu">☰</button>
+      <a href="#" class="brand-logo">
+        <span>⚡ VocabMaster</span>
+        <span class="brand-pill">47 Sessions</span>
+      </a>
+    </div>
+
+    <div class="header-right">
+      <button class="icon-btn" onclick="toggleTheme()" id="themeToggleBtn" title="Toggle Dark/Light Mode">🌙</button>
+      <button class="icon-btn" onclick="window.print()" title="Print / PDF Export">🖨️</button>
+    </div>
+  </header>
+
+  <!-- Application Body Layout -->
+  <div class="app-layout">
+    
+    <!-- Sidebar Overlay for Mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- 47-Session Sidebar Drawer -->
+    <aside class="sidebar" id="appSidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">📚 Course Curriculum</div>
+        <button class="menu-toggle-btn" style="width:32px; height:32px; font-size: 1rem;" onclick="toggleSidebar()">✕</button>
+      </div>
+
+      <div class="sidebar-stats">
+        <div>
+          <span style="color: var(--text-muted);">Overall Progress</span>
+          <div style="font-size: 1.1rem; color: var(--accent); font-weight: 800;" id="totalProgressText">3 / 47 Ready</div>
+        </div>
+        <div style="width: 70px;">
+          <div class="progress-bar-mini">
+            <div class="progress-fill" id="totalProgressFill" style="width: 6.5%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-search">
+        <input type="text" id="sessionSearch" class="sidebar-input" placeholder="🔍 Search 47 Sessions..." onkeyup="filterSessions()" />
+      </div>
+
+      <ul class="session-list" id="sessionListContainer">
+        <!-- Dynamically rendered 47 sessions -->
+      </ul>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="content-area">
+      
+      <!-- Session Banner -->
+      <div class="session-banner" id="sessionHero">
+        <span class="banner-badge" id="heroBadge">Session 03 • Handedness, Love & Marriage</span>
+        <h1 class="banner-title" id="heroTitle">Roots of Turn, Hands & Relationships</h1>
+        <p class="banner-desc" id="heroDesc">
+          Master roots verto, dexter, sinister, gauche, droit, misein, anthropos, gyne, and gamos.
+        </p>
+      </div>
+
+      <!-- Mode Selector Tabs -->
+      <div class="mode-tabs">
+        <button class="mode-tab-btn active" onclick="switchView('notes')">📖 Master Notes</button>
+        <button class="mode-tab-btn" onclick="switchView('flashcards')">🃏 Flashcards</button>
+        <button class="mode-tab-btn" onclick="switchView('matching')">🧩 Matching Test</button>
+        <button class="mode-tab-btn" onclick="switchView('yesno')">❓ Yes / No Test</button>
+        <button class="mode-tab-btn" onclick="switchView('recall')">✍️ Active Recall</button>
+      </div>
+
+      <!-- VIEW 1: Master Notes Grid -->
+      <section id="view-notes" class="view-pane active">
+        <div class="cards-grid" id="vocabCardsContainer">
+          <!-- Cards populated dynamically via JS -->
+        </div>
+      </section>
+
+      <!-- VIEW 2: Interactive Flashcard Player -->
+      <section id="view-flashcards" class="view-pane">
+        <div class="flashcard-section">
+          <div class="flashcard-wrapper" id="flashcardElement" onclick="flipFlashcard()">
+            <div class="flashcard-inner">
+              <div class="flashcard-front">
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Tap Card to Flip ↻</span>
+                <h2 id="fcWord" style="font-size: 2.2rem; font-weight: 800; margin-bottom: 6px;">Ambidextrous</h2>
+                <span id="fcPhonetic" class="phonetic-code">am-bə-DEKS′-trəs</span>
+                <p id="fcQuote" class="quote-box" style="margin-top: 16px; width: 100%;">"Able to use both hands with equal skill."</p>
+              </div>
+              <div class="flashcard-back">
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--success); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Meaning & Etymology</span>
+                <h3 id="fcMeaning" style="font-size: 1.15rem; font-weight: 700; line-height: 1.5; margin-bottom: 12px;">Capable of using both hands with equal dexterity.</h3>
+                <p id="fcDetails" style="font-size: 0.85rem; color: var(--text-muted);">Root: ambi (both) + dexter (right hand / skillful).</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flashcard-nav">
+            <button class="btn-secondary" onclick="prevFlashcard()">← Previous</button>
+            <button class="audio-pill" onclick="speakCurrentFlashcard()">🔊 Listen</button>
+            <button class="btn-primary" onclick="nextFlashcard()">Next →</button>
+          </div>
+          <p style="margin-top: 14px; font-size: 0.85rem; color: var(--text-muted);" id="fcCounter">Card 1 of 10</p>
+        </div>
+      </section>
+
+      <!-- VIEW 3: Matching Quiz -->
+      <section id="view-matching" class="view-pane">
+        <div class="quiz-card">
+          <h3 class="quiz-heading">🧩 Match Words with Definitions</h3>
+          <p class="quiz-subtext">Select the correct matching definition for each term from the dropdown.</p>
+          
+          <div id="matchingQuizList">
+            <!-- Dynamically generated matching rows -->
+          </div>
+
+          <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn-primary" onclick="gradeMatching()">Check Answers</button>
+            <button class="btn-secondary" onclick="resetMatching()">Reset</button>
+          </div>
+
+          <div id="matchingScoreBox" class="score-banner"></div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: Yes/No Quiz -->
+      <section id="view-yesno" class="view-pane">
+        <div class="quiz-card">
+          <h3 class="quiz-heading">❓ Rapid Conceptual Verification</h3>
+          <p class="quiz-subtext">Tap YES or NO to test your instant comprehension of the words and derivations.</p>
+
+          <div id="yesNoQuizList">
+            <!-- Dynamically generated yes/no rows -->
+          </div>
+
+          <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn-primary" onclick="gradeYesNo()">Submit Score</button>
+            <button class="btn-secondary" onclick="resetYesNo()">Reset</button>
+          </div>
+
+          <div id="yesNoScoreBox" class="score-banner"></div>
+        </div>
+      </section>
+
+      <!-- VIEW 5: Active Recall -->
+      <section id="view-recall" class="view-pane">
+        <div class="quiz-card">
+          <h3 class="quiz-heading">✍️ Active Recall & Spelling Mastery</h3>
+          <p class="quiz-subtext">Type the exact vocabulary word based on the clue and starting letter hint.</p>
+
+          <div id="recallQuizList">
+            <!-- Dynamically generated recall inputs -->
+          </div>
+
+          <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn-primary" onclick="gradeRecall()">Check Spellings</button>
+            <button class="btn-secondary" onclick="revealRecall()">Show Answers</button>
+            <button class="btn-secondary" onclick="resetRecall()">Reset</button>
+          </div>
+
+          <div id="recallScoreBox" class="score-banner"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Mobile Bottom Navigation Bar -->
+  <nav class="bottom-nav">
+    <button class="bottom-nav-item active" onclick="switchView('notes')">
+      <span class="bottom-nav-icon">📖</span>
+      <span>Notes</span>
+    </button>
+    <button class="bottom-nav-item" onclick="switchView('flashcards')">
+      <span class="bottom-nav-icon">🃏</span>
+      <span>Cards</span>
+    </button>
+    <button class="bottom-nav-item" onclick="switchView('matching')">
+      <span class="bottom-nav-icon">🧩</span>
+      <span>Drills</span>
+    </button>
+    <button class="bottom-nav-item" onclick="toggleSidebar()">
+      <span class="bottom-nav-icon">📚</span>
+      <span>47 Sessions</span>
+    </button>
+  </nav>
+
+  <!-- Core JavaScript Application -->
+  <script>
+    // ==========================================
+    // 47 SESSIONS MASTER CURRICULUM REGISTRY
+    // ==========================================
+    const SESSIONS_DATA = [
+      // SESSION 1
+      {
+        id: 1,
+        title: "Personality Types",
+        subtitle: "10 Personality Archetypes",
+        category: "Human Nature",
+        desc: "Master the psychological drivers, behavioral patterns, and phonetic pronunciation of 10 essential human personality profiles.",
+        words: [
+          { word: "Egoist", phonetic: "EE′-gō-ist", root: "Root: ego (Latin = I, self)", quote: "What is in it for me?", meaning: "Ruthless self-advancement and personal gain.", traits: ["Driven by self-interest.", "Views life as 'dog-eat-dog'.", "Unapologetic about personal profit."] },
+          { word: "Egotist", phonetic: "EE′-gō-tist", root: "Root: ego (I) + t (talk)", quote: "Let me tell you how incredible I am.", meaning: "Extreme conceit, boasting, and endless self-flattery.", traits: ["Constantly brags about achievements.", "Hungry for the spotlight.", "Conversational narcissist."] },
+          { word: "Altruist", phonetic: "AL′-troo-ist", root: "Root: alter (Latin = other)", quote: "How can I improve the lives of others?", meaning: "Selfless devotion to the welfare of fellow humans.", traits: ["Finds joy in helping others.", "Puts collective needs first.", "Empathic and generous."] },
+          { word: "Introvert", phonetic: "IN′-trə-vurt′", root: "Root: intro- (inward) + verto (to turn)", quote: "I recharge in quiet solitude.", meaning: "Channels mental energy and reflection inward.", traits: ["Introspective and observant.", "Prefers quiet spaces or one-on-one bonds.", "Creative and deep thinker."] },
+          { word: "Extrovert", phonetic: "EKS′-trə-vurt′", root: "Root: extro- (outward) + verto (to turn)", quote: "Life is best shared with people!", meaning: "Directs vitality and enthusiasm outwardly toward people.", traits: ["Energized by crowds and discussions.", "Socially uninhibited.", "Excels in leadership and team roles."] },
+          { word: "Ambivert", phonetic: "AM′-bə-vurt′", root: "Root: ambi- (both) + verto (to turn)", quote: "Balance and adaptability in all environments.", meaning: "Maintains a flexible balance of inward and outward focus.", traits: ["Comfortable at parties or in solitude.", "Adapts based on context.", "Represents the psychological norm."] },
+          { word: "Misanthrope", phonetic: "MIS′-ən-thrōp′", root: "Root: misein (hate) + anthropos (mankind)", quote: "Humanity is fundamentally crooked.", meaning: "Chronic cynicism, suspicion, and dislike toward humankind.", traits: ["Distrusts human virtue.", "Believes people are selfish.", "Keeps emotional distance."] },
+          { word: "Misogynist", phonetic: "mə-SOJ′-ə-nist", root: "Root: misein (hate) + gyne (woman)", quote: "A deep hostility and aversion toward women.", meaning: "Prejudice, resentment, or hatred directed specifically at females.", traits: ["Contempt or bias toward women.", "Emotional defense barrier.", "Distrusts female equality."] },
+          { word: "Misogamist", phonetic: "mə-SOG′-ə-mist", root: "Root: misein (hate) + gamos (marriage)", quote: "Why get locked into a legal cage?", meaning: "Rejection of and opposition to the institution of marriage.", traits: ["Rejects formal marriage contracts.", "Values autonomy.", "Prefers freedom."] },
+          { word: "Ascetic", phonetic: "ə-SET′-ik", root: "Root: asketes (monk / hermit / disciplined)", quote: "Simplicity and self-denial elevate the spirit.", meaning: "Practices severe self-discipline and shuns earthly pleasures.", traits: ["Embraces austerity and fasting.", "Rejects luxury and hedonism.", "Pursues spiritual clarity."] }
+        ],
+        matchingOptions: [
+          { key: "a", text: "Turns thoughts inward" }, { key: "b", text: "Hates marriage" }, { key: "c", text: "Talks about accomplishments" },
+          { key: "d", text: "Hates people" }, { key: "e", text: "Does not pursue fleshly pleasures" }, { key: "f", text: "Interested in the welfare of others" },
+          { key: "g", text: "Believes in self-advancement" }, { key: "h", text: "Turns thoughts both inward & outward" }, { key: "i", text: "Hates women" }, { key: "j", text: "Turns thoughts outward" }
+        ],
+        matchingAnswers: { "Egoist": "g", "Egotist": "c", "Altruist": "f", "Introvert": "a", "Extrovert": "j", "Ambivert": "h", "Misanthrope": "d", "Misogynist": "i", "Misogamist": "b", "Ascetic": "e" },
+        yesNoQuestions: [
+          { q: "Is an egoist selfish?", a: "yes" }, { q: "Is modesty one of the characteristics of the egotist?", a: "no" }, { q: "Is an altruist selfish?", a: "no" },
+          { q: "Does an introvert pay much attention to himself?", a: "yes" }, { q: "Does an extrovert prefer solitude to companionship?", a: "no" },
+          { q: "Are most normal people ambiverts?", a: "yes" }, { q: "Does a misanthrope like people?", a: "no" }, { q: "Does a misogynist enjoy the company of women?", a: "no" },
+          { q: "Does an ascetic lead a life of luxury?", a: "no" }, { q: "Does a misogamist try to avoid marriage?", a: "yes" }
+        ],
+        recallQuestions: [
+          { q: "Who lives a lonely, austere life?", word: "ascetic", hint: "A..." }, { q: "Whose interests are turned outward?", word: "extrovert", hint: "E..." },
+          { q: "Who is supremely selfish?", word: "egoist", hint: "E..." }, { q: "Who hates people?", word: "misanthrope", hint: "M..." },
+          { q: "Whose interests are turned both inward and outward?", word: "ambivert", hint: "A..." }, { q: "Who is incredibly conceited?", word: "egotist", hint: "E..." },
+          { q: "Who is more interested in the welfare of others than in his own?", word: "altruist", hint: "A..." }, { q: "Who hates women?", word: "misogynist", hint: "M..." },
+          { q: "Whose interests are turned inward?", word: "introvert", hint: "I..." }, { q: "Who hates marriage?", word: "misogamist", hint: "M..." }
+        ]
+      },
+
+      // SESSION 2
+      {
+        id: 2,
+        title: "Origins & Related Words (I)",
+        subtitle: "Roots: 'Ego' (I) & 'Alter' (Other)",
+        category: "Etymology & Roots",
+        desc: "Explore how Latin roots 'ego' (I, self) and 'alter' (other) spawn essential English words dealing with self-concept, disputes, alternatives, and companions.",
+        words: [
+          { word: "Ego", phonetic: "EE′-gō", root: "Root: ego (Latin = I, self)", quote: "One's concept of oneself.", meaning: "One's self-esteem, self-importance, or concept of oneself.", traits: ["Mental perception of self.", "Vulnerable to criticism.", "Core psychology term."] },
+          { word: "Egocentric", phonetic: "ee-gō-SEN′-trik", root: "Root: ego (I) + centrum (center)", quote: "I am the center of the universe.", meaning: "Utterly involved with oneself; self-centered to an intolerable extreme.", traits: ["Extreme form of egoist.", "Both noun & adjective.", "Intolerable selfishness."] },
+          { word: "Egomaniac", phonetic: "ee-gō-MAY′-nee-ak", root: "Root: ego (I) + mania (obsession)", quote: "My desires are a morbid obsession.", meaning: "A person with a dangerous, obsessive fixation on their own needs.", traits: ["Dangerous extreme of egoism.", "Volatile and obsessed.", "Noun for extreme narcissist."] },
+          { word: "Egomaniacal", phonetic: "ee′-gō-mə-NĪ′-ə-kəl", root: "Suffix: -al (adjective)", quote: "Morbidly and obsessively wrapped up in oneself.", meaning: "Characterized by egomania; morbidly self-absorbed.", traits: ["Adjective form.", "Describes pathological self-focus.", "Severe emotional imbalance."] },
+          { word: "Altruism", phonetic: "AL′-troo-iz-əm", root: "Root: alter (Latin = other)", quote: "Putting others before oneself.", meaning: "The ethical principle and practice of concern for the happiness of other people.", traits: ["Philosophy of altruists.", "Derived from Latin alter.", "Philanthropic action."] },
+          { word: "Altruistic", phonetic: "al-troo-IS′-tik", root: "Suffix: -ic (pertaining to)", quote: "Actions directed toward the benefit of others.", meaning: "Unselfish, charitable, and motivated by a desire to help others.", traits: ["Adjective form.", "Opposite of egoistic.", "Focuses on community well-being."] },
+          { word: "To Alternate (v.)", phonetic: "AWL′-tər-nayt′", root: "Root: alter (other)", quote: "To take one and skip the other in turn.", meaning: "To occur in turn repeatedly; skip one and take the other.", traits: ["Cyclical recurrence.", "Example: alternating days.", "Succession by turns."] },
+          { word: "Alternate (adj./noun)", phonetic: "AWL′-tər-nət", root: "Root: alter (other)", quote: "The other choice or substitute.", meaning: "Other possible; a substitute person who takes over when original is absent.", traits: ["Adj: 'alternate Saturdays'.", "Noun: substitute delegate.", "Secondary replacement."] },
+          { word: "Alternative", phonetic: "awl-TUR′-nə-tiv", root: "Root: alter (other)", quote: "A choice between options.", meaning: "A distinct choice or course of action available among options.", traits: ["Freedom of selection.", "Backup pathway.", "'No alternative' = no other choice."] },
+          { word: "Alteration", phonetic: "awl′-tər-AY′-shən", root: "Root: alter (other) + -ation", quote: "A change into something other.", meaning: "The act or process of changing or modifying something.", traits: ["Making an entity different.", "Garment alterations.", "Implies change."] },
+          { word: "To Alter", phonetic: "AWL′-tər", root: "Root: alter (other)", quote: "To change; to make different.", meaning: "To make structural or conditional changes to plans or ideas.", traits: ["Verb: modify or adjust.", "Making other plans.", "Root verb behind alteration."] },
+          { word: "Altercation", phonetic: "awl′-tər-KAY′-shən", root: "Root: alter (other ideas)", quote: "A heated verbal dispute or fight with words.", meaning: "A noisy, angry argument or dispute caused by having clashing ideas.", traits: ["Stronger than a quarrel.", "High emotion and heat.", "Arises from conflicting opinions."] },
+          { word: "Alter Ego", phonetic: "AWL′-tər EE′-gō", root: "Root: alter (other) + ego (I, self)", quote: "My other I; my other self.", meaning: "A trusted intimate friend so similar in temperament that they are your mirror image.", traits: ["Literally 'other self'.", "Thinks and acts alike.", "Intimate mirror image."] }
+        ],
+        matchingOptions: [
+          { key: "a", text: "one excessively fixated on own desires (egocentric)" }, { key: "b", text: "to change (to alter)" }, { key: "c", text: "heated dispute (altercation)" },
+          { key: "d", text: "one's concept of oneself (ego)" }, { key: "e", text: "to take one, skip one (to alternate)" }, { key: "f", text: "putting another's welfare first (altruism)" },
+          { key: "g", text: "morbidly wrapped up in oneself (egomaniacal)" }, { key: "h", text: "interested in welfare of others (altruistic)" }, { key: "i", text: "a choice (alternative)" },
+          { key: "j", text: "a change (alteration)" }, { key: "k", text: "one's other self (alter ego)" }, { key: "l", text: "other possible / substitute (alternate)" }
+        ],
+        matchingAnswers: { "Ego": "d", "Egocentric": "a", "Altruism": "f", "To Alternate": "e", "To Alter": "b", "Altercation": "c", "Egomaniacal": "g", "Altruistic": "h", "Alternative": "i", "Alteration": "j", "Alter Ego": "k", "Alternate (adj.)": "l" },
+        yesNoQuestions: [
+          { q: "Is rejection usually a blow to one's ego?", a: "yes" }, { q: "Are egocentric people easy to get along with?", a: "no" }, { q: "Does an egomaniac have a normal personality?", a: "no" },
+          { q: "Are egomaniacal tendencies a sign of maturity?", a: "no" }, { q: "Is altruism a characteristic of selfish people?", a: "no" }, { q: "Are altruistic tendencies common to egoists?", a: "no" },
+          { q: "Is an alternate plan necessarily inferior?", a: "no" }, { q: "Does an alternative allow you some freedom of choice?", a: "yes" }, { q: "Does alteration imply keeping things the same?", a: "no" },
+          { q: "Do excitable people often engage in altercations?", a: "yes" }, { q: "Is your alter ego usually quite similar to yourself?", a: "yes" }
+        ],
+        recallQuestions: [
+          { q: "One's other self:", word: "alter ego", hint: "A..." }, { q: "To change / make different:", word: "alter", hint: "A..." },
+          { q: "A heated verbal dispute or fight with words:", word: "altercation", hint: "A..." }, { q: "Excessively, morbidly obsessed with one's own needs:", word: "egomaniacal", hint: "E..." },
+          { q: "Unselfish; interested in welfare of others:", word: "altruistic", hint: "A..." }, { q: "Utterly involved with oneself; self-centered:", word: "egocentric", hint: "E..." },
+          { q: "A choice between options:", word: "alternative", hint: "A..." }, { q: "One who substitutes for another:", word: "alternate", hint: "A..." }
+        ]
+      },
+
+      // SESSION 3
+      {
+        id: 3,
+        title: "Origins & Related Words (II)",
+        subtitle: "Roots of Turn, Hands & Relationships",
+        category: "Etymology & Roots",
+        desc: "Master the fascinating roots verto (turn), dexter (right hand), sinister (left hand), gauche/droit, misein (hate), anthropos (mankind), gyne (woman), gamos (marriage), and asketes (monk).",
+        words: [
+          { word: "Ambidextrous", phonetic: "am-bə-DEKS′-trəs", root: "Root: ambi (both) + dexter (right hand / skillful)", quote: "Able to use both hands with equal skill.", meaning: "Capable of using both hands with equal dexterity and ease.", traits: ["Both hands function like 'right hands'.", "Noun form: ambidexterity.", "Extreme physical versatility."] },
+          { word: "Ambidexterity", phonetic: "am′-bə-deks-TAIR′-ə-tee", root: "Suffix: -ity (quality / condition)", quote: "The quality of being ambidextrous.", meaning: "The state of being equally adept with both hands.", traits: ["Noun form of ambidextrous.", "Rare physical coordination.", "Balanced motor mastery."] },
+          { word: "Dexterous", phonetic: "DEKS′-trəs", root: "Root: dexter (Latin = right hand, skillful)", quote: "Skillful with the hands or body.", meaning: "Showing or having physical skill, manual dexterity, or cleverness.", traits: ["Noun form: dexterity.", "Spelling note: contains '-e-' before '-rous'.", "Essential for surgeons and artisans."] },
+          { word: "Dexterity", phonetic: "deks-TAIR′-ə-tee", root: "Suffix: -ity (noun suffix)", quote: "Skill and grace in physical movement.", meaning: "Readiness and grace in physical activity; especially skill and ease in using the hands.", traits: ["Manual skill and nimbleness.", "Opposite of clumsiness.", "High hand-eye coordination."] },
+          { word: "Sinister", phonetic: "SIN′-ə-stər", root: "Root: sinister (Latin = left hand)", quote: "Threatening, evil, or dangerous.", meaning: "Giving the impression that something harmful or evil is happening or will happen.", traits: ["Derived from ancient suspicion of lefties.", "Implies dark menace.", "Used for villains and omens."] },
+          { word: "Gauche", phonetic: "GŌSH", root: "Root: gauche (French = left hand)", quote: "Awkward, tactless, and without social finesse.", meaning: "Lacking ease or grace; socially awkward and clumsy in manners.", traits: ["Social rather than physical clumsiness.", "Pronounced like 'go' + 'sh'.", "Makes embarrassing blunders."] },
+          { word: "Gaucherie", phonetic: "GŌ′-shə-ree", root: "Suffix: -rie (noun practice / state)", quote: "An awkward, tactless way of behaving.", meaning: "A socially awkward or tactless act, manner, or remark.", traits: ["Noun form of gauche.", "Lacks tact, diplomacy, and grace.", "Opposite of adroitness."] },
+          { word: "Adroit", phonetic: "ə-DROYT′", root: "Root: droit (French = right hand)", quote: "Clever, skillful, and quick-witted.", meaning: "Clever or skillful in using the hands or mind; ingenious in handling tricky situations.", traits: ["Mental and verbal dexterity.", "Quick-witted in emergencies.", "Opposite of gauche."] },
+          { word: "Adroitness", phonetic: "ə-DROYT′-nəs", root: "Suffix: -ness (noun quality)", quote: "Skill, ingenuity, and mental cleverness.", meaning: "The quality of being adroit; cleverness, resourcefulness, and finesse.", traits: ["Noun form of adroit.", "High social & intellectual poise.", "Handles problems smoothly."] },
+          { word: "Anthropology", phonetic: "an-thrə-POL′-ə-jee", root: "Root: anthropos (mankind) + logos (study)", quote: "The study of human development and cultures.", meaning: "The scientific study of human origins, societies, cultures, and physical development.", traits: ["Practitioner: anthropologist.", "Adjective: anthropological.", "Covers human evolution."] },
+          { word: "Philanthropist", phonetic: "fə-LAN′-thrə-pist", root: "Root: philos (love) + anthropos (mankind)", quote: "One who loves mankind and donates to charity.", meaning: "A person who seeks to promote the welfare of others, especially by the generous donation of money.", traits: ["Practice: philanthropy.", "Adjective: philanthropic.", "Selfless benefactor."] },
+          { word: "Gynecologist", phonetic: "gīn-ə-KOL′-ə-jist", root: "Root: gyne (woman) + logos (study)", quote: "Medical specialist who treats female disorders.", meaning: "A physician specialized in the medical care of the female reproductive system.", traits: ["Field: gynecology.", "Adjective: gynecological.", "Dedicated women's doctor."] },
+          { word: "Monogamy", phonetic: "mə-NOG′-ə-mee", root: "Root: monos (one) + gamos (marriage)", quote: "The custom of only one marriage at a time.", meaning: "The practice or state of being married to one person at a time.", traits: ["Person: monogamist.", "Adjective: monogamous.", "Standard legal custom in Western world."] },
+          { word: "Bigamy", phonetic: "BIG′-ə-mee", root: "Root: bi- (two) + gamos (marriage)", quote: "Unlawful act of having two spouses simultaneously.", meaning: "The act of entering into a marriage with one person while still legally married to another.", traits: ["Person: bigamist.", "Adjective: bigamous.", "Illegal in modern civil law."] },
+          { word: "Polygamy", phonetic: "pə-LIG′-ə-mee", root: "Root: polys (many) + gamos (marriage)", quote: "The custom of plural marriage.", meaning: "The practice or custom of having more than one wife or husband at the same time.", traits: ["Person: polygamist.", "Adjective: polygamous.", "General term for multiple spouses."] },
+          { word: "Polygyny", phonetic: "pə-LIJ′-ə-nee", root: "Root: polys (many) + gyne (woman)", quote: "The custom of one man having many wives.", meaning: "Polygamy in which a man has more than one wife at the same time.", traits: ["Person: polygynist.", "Adjective: polygynous.", "Specific form for multiple wives."] },
+          { word: "Polyandry", phonetic: "pol-ee-AN′-dree", root: "Root: polys (many) + andros (male/husband)", quote: "The custom of one woman having many husbands.", meaning: "Polygamy in which a woman has more than one husband at the same time.", traits: ["Person: polyandrist.", "Adjective: polyandrous.", "Practiced historically in Himalayan regions."] },
+          { word: "Misanthropy", phonetic: "mis-AN′-thrə-pee", root: "Root: misein (hate) + anthropos (mankind)", quote: "General hatred or distrust of humankind.", meaning: "A general hatred, dislike, or distrust of the human species or human behavior.", traits: ["Person: misanthrope / misanthropist.", "Adjective: misanthropic.", "Cynical worldview."] },
+          { word: "Misogyny", phonetic: "mə-SOJ′-ə-nee", root: "Root: misein (hate) + gyne (woman)", quote: "Hatred, prejudice, or contempt against women.", meaning: "Dislike of, contempt for, or ingrained prejudice against women.", traits: ["Person: misogynist.", "Adjectives: misogynous, misogynistic.", "Rooted in gender hostility."] },
+          { word: "Misogamy", phonetic: "mə-SOG′-ə-mee", root: "Root: misein (hate) + gamos (marriage)", quote: "Hatred of or aversion to marriage.", meaning: "The hatred of or strong prejudice against marriage.", traits: ["Person: misogamist.", "Adjective: misogamous.", "Avoids matrimony."] },
+          { word: "Asceticism", phonetic: "ə-SET′-ə-siz-əm", root: "Root: asketes (monk, hermit)", quote: "Devotion to a lonely, austere, self-denying life.", meaning: "Severe self-discipline and avoidance of all forms of indulgence, typically for religious reasons.", traits: ["Person & Adj: ascetic.", "Rejects worldly luxury.", "Spiritual purification."] }
+        ],
+        matchingOptions: [
+          { key: "a", text: "capable of using both hands with equal skill (ambidextrous)" },
+          { key: "b", text: "skillful / manual dexterity (dexterous)" },
+          { key: "c", text: "evil, threatening (sinister)" },
+          { key: "d", text: "awkward, socially clumsy (gauche)" },
+          { key: "e", text: "hating mankind (misanthropic)" },
+          { key: "f", text: "study of human development (anthropology)" },
+          { key: "g", text: "study of female ailments (gynecology)" },
+          { key: "h", text: "system of only one marriage (monogamy)" },
+          { key: "i", text: "illegal plurality of marriages (bigamy)" },
+          { key: "j", text: "hatred of women (misogyny)" },
+          { key: "k", text: "devotion to lonely, austere life (asceticism)" },
+          { key: "l", text: "skill, cleverness (adroitness)" },
+          { key: "m", text: "custom in which one man has many wives (polygyny)" },
+          { key: "n", text: "female with a plurality of husbands (polyandry)" },
+          { key: "o", text: "one who loves mankind & gives charity (philanthropist)" }
+        ],
+        matchingAnswers: {
+          "Ambidextrous": "a", "Dexterous": "b", "Sinister": "c", "Gauche": "d", "Misanthropic": "e",
+          "Anthropology": "f", "Gynecology": "g", "Monogamy": "h", "Bigamy": "i", "Misogyny": "j",
+          "Asceticism": "k", "Adroitness": "l", "Polygyny": "m", "Polyandry": "n", "Philanthropist": "o"
+        },
+        yesNoQuestions: [
+          { q: "Can ambidextrous people use either the left or right hand equally well?", a: "yes" },
+          { q: "Should a surgeon be manually dexterous?", a: "yes" },
+          { q: "Is a sinister-looking person frightening?", a: "yes" },
+          { q: "Is gaucherie a social asset?", a: "no" },
+          { q: "Is an adroit speaker likely to be a successful lawyer?", a: "yes" },
+          { q: "Is a student of anthropology interested in primitive tribes?", a: "yes" },
+          { q: "Does a gynecologist have more male than female patients?", a: "no" },
+          { q: "Is monogamy the custom in Western countries?", a: "yes" },
+          { q: "Is a misogamist likely to show tendencies toward polygamy?", a: "no" },
+          { q: "Is a bigamist breaking the law?", a: "yes" },
+          { q: "Is a philanthropist generally altruistic?", a: "yes" },
+          { q: "Does a misanthropist enjoy human relationships?", a: "no" },
+          { q: "Does a misogynist enjoy female companionship?", a: "no" },
+          { q: "Are unmarried people necessarily misogamous?", a: "no" },
+          { q: "Are bachelors necessarily misogynous?", a: "no" },
+          { q: "Is asceticism compatible with luxurious living and the pursuit of pleasure?", a: "no" },
+          { q: "Does a polyandrist have more than one husband?", a: "yes" }
+        ],
+        recallQuestions: [
+          { q: "Philosophy of living austerely:", word: "asceticism", hint: "A..." },
+          { q: "Hatred of women:", word: "misogyny", hint: "M..." },
+          { q: "Hatred of marriage:", word: "misogamy", hint: "M..." },
+          { q: "Hatred of mankind:", word: "misanthropy", hint: "M..." },
+          { q: "Skillful (manual):", word: "dexterous", hint: "D..." },
+          { q: "Awkward / socially clumsy:", word: "gauche", hint: "G..." },
+          { q: "Evil, threatening:", word: "sinister", hint: "S..." },
+          { q: "Describing hatred of women (adj.):", word: "misogynous", hint: "M..." },
+          { q: "Skill / cleverness in handling situations:", word: "adroitness", hint: "A..." },
+          { q: "Pertaining to hatred of marriage (adj.):", word: "misogamous", hint: "M..." },
+          { q: "Pertaining to hatred of mankind (adj.):", word: "misanthropic", hint: "M..." },
+          { q: "Social custom of plural marriage:", word: "polygamy", hint: "P..." },
+          { q: "Unlawful state of having more than one spouse:", word: "bigamy", hint: "B..." },
+          { q: "Doctor specializing in female disorders:", word: "gynecologist", hint: "G..." },
+          { q: "Custom of one marriage at a time:", word: "monogamy", hint: "M..." },
+          { q: "One who hates the human race:", word: "misanthrope", hint: "M..." },
+          { q: "Able to use both hands with equal skill:", word: "ambidextrous", hint: "A..." },
+          { q: "Scientific study of mankind:", word: "anthropology", hint: "A..." },
+          { q: "One who loves mankind and donates to charity:", word: "philanthropist", hint: "P..." },
+          { q: "Skill in the use of both hands:", word: "ambidexterity", hint: "A..." }
+        ]
+      }
+    ];
+
+    // Scaffold Sessions 4 to 47
+    const SESSION_TITLES = [
+      "Medical Therapists & Healers", "Scientists & Investigators", 
+      "Liars & Deceivers", "Actions & Human Behavior", "Speech Habits & Talkers", "Compliments & Flattery",
+      "Insults & Offenses", "Love & Hatred", "Courage & Fearlessness", "Mind & Memory",
+      "Customs & Traditions", "Time & Eternity", "Art & Literature", "Music & Aesthetics",
+      "Philosophy & Beliefs", "Government & Politics", "Law & Justice", "Economics & Trade",
+      "War & Peace", "Science & Discovery", "Nature & Animals", "Health & Vitality",
+      "Disease & Afflictions", "Body & Anatomy", "Food & Dining", "Travel & Exploration",
+      "Language & Etymology", "Rhetoric & Persuasion", "Emotion & Passion", "Sorrow & Grief",
+      "Laughter & Joy", "Darkness & Light", "Sound & Silence", "Youth & Age",
+      "Beauty & Appearance", "Fate & Destiny", "Virtue & Morality", "Vice & Crime",
+      "Intellect & Genius", "Foolishness & Folly", "Power & Authority", "Wealth & Luxury",
+      "Poverty & Scarcity", "Change & Transformation", "Mastery Review & Graduation"
+    ];
+
+    for (let i = 4; i <= 47; i++) {
+      const title = SESSION_TITLES[i - 4] || `Advanced Mastery Part ${i}`;
+      SESSIONS_DATA.push({
+        id: i,
+        title: title,
+        subtitle: `Session ${i} Mastery Module`,
+        category: i <= 10 ? "Personalities & Roles" : (i <= 25 ? "Science & Humanity" : "Advanced Etymology"),
+        desc: `High-yield vocabulary patterns, root words, and contextual drills for ${title}.`,
+        words: [],
+        isLocked: false
+      });
+    }
+
+    // App State
+    let currentSessionId = 1;
+    let currentFlashcardIndex = 0;
+
+    // Initialize App
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSessionSidebar();
+      loadSession(3); // Automatically open newly added Session 3
+    });
+
+    // Render 47-Session Sidebar
+    function renderSessionSidebar() {
+      const container = document.getElementById('sessionListContainer');
+      container.innerHTML = '';
+
+      SESSIONS_DATA.forEach(session => {
+        const isReady = session.words && session.words.length > 0;
+        const li = document.createElement('li');
+        li.className = `session-item ${session.id === currentSessionId ? 'active' : ''}`;
+        li.setAttribute('data-id', session.id);
+        li.onclick = () => {
+          loadSession(session.id);
+          if (window.innerWidth <= 900) toggleSidebar();
+        };
+
+        li.innerHTML = `
+          <span>${session.id < 10 ? '0' + session.id : session.id}. ${session.title}</span>
+          <span class="session-item-badge">${isReady ? 'Ready ✅' : 'Roadmap'}</span>
+        `;
+        container.appendChild(li);
+      });
+    }
+
+    // Filter Sessions in Sidebar
+    function filterSessions() {
+      const term = document.getElementById('sessionSearch').value.toLowerCase();
+      document.querySelectorAll('.session-item').forEach(item => {
+        const text = item.innerText.toLowerCase();
+        item.style.display = text.includes(term) ? 'flex' : 'none';
+      });
+    }
+
+    // Load Session by ID
+    function loadSession(id) {
+      currentSessionId = id;
+      const session = SESSIONS_DATA.find(s => s.id === id) || SESSIONS_DATA[0];
+
+      // Update Active class in sidebar
+      document.querySelectorAll('.session-item').forEach(item => {
+        item.classList.toggle('active', parseInt(item.getAttribute('data-id')) === id);
+      });
+
+      // Update Hero
+      document.getElementById('heroBadge').innerText = `Session ${id < 10 ? '0' + id : id} • ${session.category}`;
+      document.getElementById('heroTitle').innerText = session.title;
+      document.getElementById('heroDesc').innerText = session.desc;
+
+      // Render Cards if available
+      if (session.words && session.words.length > 0) {
+        renderVocabCards(session.words);
+        currentFlashcardIndex = 0;
+        updateFlashcardUI();
+        renderMatchingQuiz(session);
+        renderYesNoQuiz(session);
+        renderRecallQuiz(session);
+      } else {
+        renderPlaceholderSession(session);
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Render Master Notes Cards
+    function renderVocabCards(words) {
+      const container = document.getElementById('vocabCardsContainer');
+      container.innerHTML = '';
+
+      words.forEach((w, idx) => {
+        const card = document.createElement('div');
+        card.className = 'vocab-card';
+        card.innerHTML = `
+          <div class="card-top">
+            <span class="card-index">${idx + 1 < 10 ? '0' + (idx + 1) : idx + 1}</span>
+            <button class="audio-pill" onclick="speakText('${w.word}')">🔊 Listen</button>
+          </div>
+          <h3 class="vocab-word">${w.word}</h3>
+          <span class="phonetic-code">${w.phonetic}</span>
+          ${w.root ? `<div class="root-tag">${w.root}</div>` : ''}
+          <div class="quote-box">"${w.quote}"</div>
+          <p class="vocab-desc">${w.meaning}</p>
+          <ul class="traits-list">
+            ${w.traits.map(t => `<li>${t}</li>`).join('')}
+          </ul>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // Render Placeholder for Future Sessions
+    function renderPlaceholderSession(session) {
+      const container = document.getElementById('vocabCardsContainer');
+      container.innerHTML = `
+        <div style="grid-column: 1/-1; background: var(--bg-card); border: 1px dashed var(--border-color); border-radius: var(--radius-md); padding: 48px 24px; text-align: center;">
+          <h3 style="font-size: 1.4rem; margin-bottom: 8px;">🚀 ${session.title} Ready for Data</h3>
+          <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 20px auto;">
+            This session slot is fully wired into the 47-Session Architecture. When you supply Session ${session.id}'s PDF/notes, its flashcards, audio player, matching tests, and recall drills will activate automatically!
+          </p>
+          <button class="btn-primary" onclick="loadSession(3)">View Session 3</button>
+        </div>
+      `;
+    }
+
+    // Flashcard Controller
+    function flipFlashcard() {
+      document.getElementById('flashcardElement').classList.toggle('flipped');
+    }
+
+    function updateFlashcardUI() {
+      const session = SESSIONS_DATA.find(s => s.id === currentSessionId);
+      if (!session || !session.words || session.words.length === 0) return;
+
+      const card = session.words[currentFlashcardIndex];
+      document.getElementById('flashcardElement').classList.remove('flipped');
+      document.getElementById('fcWord').innerText = card.word;
+      document.getElementById('fcPhonetic').innerText = card.phonetic;
+      document.getElementById('fcQuote').innerText = `"${card.quote}"`;
+      document.getElementById('fcMeaning').innerText = card.meaning;
+      document.getElementById('fcDetails').innerText = card.traits[0] || (card.root || '');
+      document.getElementById('fcCounter').innerText = `Card ${currentFlashcardIndex + 1} of ${session.words.length}`;
+    }
+
+    function nextFlashcard() {
+      const session = SESSIONS_DATA.find(s => s.id === currentSessionId);
+      if (!session || !session.words) return;
+      currentFlashcardIndex = (currentFlashcardIndex + 1) % session.words.length;
+      updateFlashcardUI();
+    }
+
+    function prevFlashcard() {
+      const session = SESSIONS_DATA.find(s => s.id === currentSessionId);
+      if (!session || !session.words) return;
+      currentFlashcardIndex = (currentFlashcardIndex - 1 + session.words.length) % session.words.length;
+      updateFlashcardUI();
+    }
+
+    function speakCurrentFlashcard() {
+      const session = SESSIONS_DATA.find(s => s.id === currentSessionId);
+      if (session && session.words) {
+        speakText(session.words[currentFlashcardIndex].word);
+      }
+    }
+
+    // Speech Synthesis
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.rate = 0.85;
+        window.speechSynthesis.speak(utter);
+      }
+    }
+
+    // Matching Quiz Renderer
+    function renderMatchingQuiz(session) {
+      const container = document.getElementById('matchingQuizList');
+      if (!session.matchingAnswers) return;
+
+      let html = '';
+      Object.keys(session.matchingAnswers).forEach((word, idx) => {
+        const correctKey = session.matchingAnswers[word];
+        html += `
+          <div class="match-item">
+            <span class="match-label">${idx + 1}. ${word}</span>
+            <select class="match-dropdown" data-correct="${correctKey}">
+              <option value="">Select definition...</option>
+              ${session.matchingOptions.map(opt => `<option value="${opt.key}">${opt.key}. ${opt.text}</option>`).join('')}
+            </select>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+      document.getElementById('matchingScoreBox').style.display = 'none';
+    }
+
+    function gradeMatching() {
+      const selects = document.querySelectorAll('#matchingQuizList .match-dropdown');
+      let score = 0;
+      selects.forEach(select => {
+        const correct = select.getAttribute('data-correct');
+        const chosen = select.value.toLowerCase();
+        if (chosen === correct) {
+          select.style.borderColor = 'var(--success)';
+          select.style.background = 'var(--success-bg)';
+          score++;
+        } else {
+          select.style.borderColor = 'var(--error)';
+          select.style.background = 'var(--error-bg)';
+        }
+      });
+      const box = document.getElementById('matchingScoreBox');
+      box.style.display = 'flex';
+      box.innerHTML = `<span>Score: <strong>${score} / ${selects.length}</strong></span> <span>${score === selects.length ? '🎉 Perfect!' : 'Review incorrect items above'}</span>`;
+    }
+
+    function resetMatching() {
+      const selects = document.querySelectorAll('#matchingQuizList .match-dropdown');
+      selects.forEach(s => {
+        s.value = '';
+        s.style.borderColor = '';
+        s.style.background = '';
+      });
+      document.getElementById('matchingScoreBox').style.display = 'none';
+    }
+
+    // Yes/No Quiz Renderer
+    function renderYesNoQuiz(session) {
+      const container = document.getElementById('yesNoQuizList');
+      if (!session.yesNoQuestions) return;
+
+      let html = '';
+      session.yesNoQuestions.forEach((q, idx) => {
+        html += `
+          <div class="yn-row" data-ans="${q.a}">
+            <span class="yn-question">${idx + 1}. ${q.q}</span>
+            <div class="yn-buttons">
+              <button class="btn-yn" onclick="selectYN(this, 'yes')">YES</button>
+              <button class="btn-yn" onclick="selectYN(this, 'no')">NO</button>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+      document.getElementById('yesNoScoreBox').style.display = 'none';
+    }
+
+    function selectYN(btn, val) {
+      const parent = btn.closest('.yn-buttons');
+      parent.querySelectorAll('.btn-yn').forEach(b => b.classList.remove('active-yes', 'active-no', 'correct', 'wrong'));
+      btn.classList.add(val === 'yes' ? 'active-yes' : 'active-no');
+    }
+
+    function gradeYesNo() {
+      const rows = document.querySelectorAll('#yesNoQuizList .yn-row');
+      let score = 0;
+      rows.forEach(row => {
+        const correct = row.getAttribute('data-ans');
+        const selected = row.querySelector('.active-yes, .active-no');
+        const yesBtn = row.querySelectorAll('.btn-yn')[0];
+        const noBtn = row.querySelectorAll('.btn-yn')[1];
+
+        yesBtn.classList.remove('correct', 'wrong');
+        noBtn.classList.remove('correct', 'wrong');
+
+        if (selected) {
+          const val = selected.innerText.trim().toLowerCase();
+          if (val === correct) {
+            selected.classList.add('correct');
+            score++;
+          } else {
+            selected.classList.add('wrong');
+            if (correct === 'yes') yesBtn.classList.add('correct');
+            else noBtn.classList.add('correct');
+          }
+        }
+      });
+      const box = document.getElementById('yesNoScoreBox');
+      box.style.display = 'flex';
+      box.innerHTML = `<span>Score: <strong>${score} / ${rows.length}</strong></span> <span>${score === rows.length ? '🌟 Mastery Achieved!' : 'Check marked answers'}</span>`;
+    }
+
+    function resetYesNo() {
+      document.querySelectorAll('#yesNoQuizList .btn-yn').forEach(b => {
+        b.classList.remove('active-yes', 'active-no', 'correct', 'wrong');
+      });
+      document.getElementById('yesNoScoreBox').style.display = 'none';
+    }
+
+    // Active Recall Quiz Renderer
+    function renderRecallQuiz(session) {
+      const container = document.getElementById('recallQuizList');
+      if (!session.recallQuestions) return;
+
+      let html = '';
+      session.recallQuestions.forEach((r, idx) => {
+        html += `
+          <div class="recall-box" data-target="${r.word}">
+            <p class="recall-title">${idx + 1}. ${r.q}</p>
+            <div class="recall-input-wrap">
+              <input type="text" class="recall-field" placeholder="${r.hint}" />
+              <span class="recall-status" style="font-size: 0.85rem; font-weight: 700;"></span>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+      document.getElementById('recallScoreBox').style.display = 'none';
+    }
+
+    function gradeRecall() {
+      const boxes = document.querySelectorAll('#recallQuizList .recall-box');
+      let score = 0;
+      boxes.forEach(b => {
+        const word = b.getAttribute('data-target').toLowerCase();
+        const input = b.querySelector('.recall-field');
+        const status = b.querySelector('.recall-status');
+        const val = input.value.trim().toLowerCase();
+
+        input.classList.remove('correct', 'wrong');
+        if (val === word) {
+          input.style.borderColor = 'var(--success)';
+          input.style.background = 'var(--success-bg)';
+          status.innerHTML = ' ✅ Correct';
+          status.style.color = 'var(--success)';
+          score++;
+        } else {
+          input.style.borderColor = 'var(--error)';
+          input.style.background = 'var(--error-bg)';
+          status.innerHTML = ` ❌ (${word})`;
+          status.style.color = 'var(--error)';
+        }
+      });
+      const box = document.getElementById('recallScoreBox');
+      box.style.display = 'flex';
+      box.innerHTML = `<span>Score: <strong>${score} / ${boxes.length}</strong></span> <span>${score === boxes.length ? '🏆 Vocabulary Master!' : 'Retry spellings'}</span>`;
+    }
+
+    function revealRecall() {
+      document.querySelectorAll('#recallQuizList .recall-box').forEach(b => {
+        const word = b.getAttribute('data-target');
+        const input = b.querySelector('.recall-field');
+        input.value = word;
+        input.style.borderColor = 'var(--success)';
+        input.style.background = 'var(--success-bg)';
+      });
+    }
+
+    function resetRecall() {
+      document.querySelectorAll('#recallQuizList .recall-box').forEach(b => {
+        const input = b.querySelector('.recall-field');
+        input.value = '';
+        input.style.borderColor = '';
+        input.style.background = '';
+        b.querySelector('.recall-status').innerHTML = '';
+      });
+      document.getElementById('recallScoreBox').style.display = 'none';
+    }
+
+    // View Switcher (Tabs & Bottom Nav Sync)
+    function switchView(viewKey) {
+      document.querySelectorAll('.view-pane').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.mode-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.bottom-nav-item').forEach(b => b.classList.remove('active'));
+
+      const targetPane = document.getElementById('view-' + viewKey);
+      if (targetPane) targetPane.classList.add('active');
+
+      document.querySelectorAll('.mode-tab-btn').forEach(b => {
+        if (b.getAttribute('onclick').includes(viewKey)) b.classList.add('active');
+      });
+
+      document.querySelectorAll('.bottom-nav-item').forEach(b => {
+        if (b.getAttribute('onclick').includes(viewKey)) b.classList.add('active');
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Sidebar Toggle
+    function toggleSidebar() {
+      const sidebar = document.getElementById('appSidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      sidebar.classList.toggle('open');
+      overlay.classList.toggle('active');
+    }
+
+    // Theme Toggle
+    function toggleTheme() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      document.getElementById('themeToggleBtn').innerText = isDark ? '🌙' : '☀️';
+    }
+  </script>
+</body>
+</html>
