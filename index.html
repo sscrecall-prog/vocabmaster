@@ -922,11 +922,11 @@
       <div class="sidebar-stats">
         <div>
           <span style="color: var(--text-muted);">Overall Progress</span>
-          <div style="font-size: 1.1rem; color: var(--accent); font-weight: 800;" id="totalProgressText">4 / 47 Ready</div>
+          <div style="font-size: 1.1rem; color: var(--accent); font-weight: 800;" id="totalProgressText">5 / 47 Ready</div>
         </div>
         <div style="width: 70px;">
           <div class="progress-bar-mini">
-            <div class="progress-fill" id="totalProgressFill" style="width: 8.5%;"></div>
+            <div class="progress-fill" id="totalProgressFill" style="width: 10.5%;"></div>
           </div>
         </div>
       </div>
@@ -945,10 +945,10 @@
       
       <!-- Session Banner -->
       <div class="session-banner" id="sessionHero">
-        <span class="banner-badge" id="heroBadge">Session 04 • Medical Specialists</span>
-        <h1 class="banner-title" id="heroTitle">10 Medical Specialists</h1>
+        <span class="banner-badge" id="heroBadge">Session 05 • Roots of Medicine & Healing</span>
+        <h1 class="banner-title" id="heroTitle">Roots: Doctors, Skin, Eyes & Teaching</h1>
         <p class="banner-desc" id="heroDesc">
-          Master the titles, specific clinical fields, and diagnostic expertise of 10 essential medical practitioners.
+          Explore the fascinating derivations behind intern, obstetrics, pediatrics, pedagogy, demagogues, skin (derma), eyes (oculus/ophthalmos), and optical specialists.
         </p>
       </div>
 
@@ -975,14 +975,14 @@
             <div class="flashcard-inner">
               <div class="flashcard-front">
                 <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Tap Card to Flip ↻</span>
-                <h2 id="fcWord" style="font-size: 2.2rem; font-weight: 800; margin-bottom: 6px;">Internist</h2>
-                <span id="fcPhonetic" class="phonetic-code">in-TURN′-ist</span>
-                <p id="fcQuote" class="quote-box" style="margin-top: 16px; width: 100%;">"What is wrong with you?"</p>
+                <h2 id="fcWord" style="font-size: 2.2rem; font-weight: 800; margin-bottom: 6px;">Demagogue</h2>
+                <span id="fcPhonetic" class="phonetic-code">DEM′-ə-gog</span>
+                <p id="fcQuote" class="quote-box" style="margin-top: 16px; width: 100%;">"One who stirs up political discontent for personal ambition."</p>
               </div>
               <div class="flashcard-back">
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--success); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Clinical Specialization</span>
-                <h3 id="fcMeaning" style="font-size: 1.15rem; font-weight: 700; line-height: 1.5; margin-bottom: 12px;">Thorough internal diagnosis using laboratory and clinical tests.</h3>
-                <p id="fcDetails" style="font-size: 0.85rem; color: var(--text-muted);">Specialist in internal organs and complete health checkups.</p>
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--success); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Meaning & Etymology</span>
+                <h3 id="fcMeaning" style="font-size: 1.15rem; font-weight: 700; line-height: 1.5; margin-bottom: 12px;">A politician who misleads the masses through wild oratory and false promises.</h3>
+                <p id="fcDetails" style="font-size: 0.85rem; color: var(--text-muted);">Root: demos (people) + agogos (leader / leading).</p>
               </div>
             </div>
           </div>
@@ -999,8 +999,8 @@
       <!-- VIEW 3: Matching Quiz -->
       <section id="view-matching" class="view-pane">
         <div class="quiz-card">
-          <h3 class="quiz-heading">🧩 Match Doctor with Medical Field</h3>
-          <p class="quiz-subtext">Select the correct matching specialty for each doctor from the dropdown.</p>
+          <h3 class="quiz-heading">🧩 Match Words with Definitions</h3>
+          <p class="quiz-subtext">Select the correct matching definition or field from the dropdown.</p>
           
           <div id="matchingQuizList">
             <!-- Dynamically generated matching rows -->
@@ -1019,7 +1019,7 @@
       <section id="view-yesno" class="view-pane">
         <div class="quiz-card">
           <h3 class="quiz-heading">❓ Rapid Conceptual Verification</h3>
-          <p class="quiz-subtext">Tap YES or NO to test your instant comprehension of the medical specialists.</p>
+          <p class="quiz-subtext">Tap YES or NO to test your instant comprehension of the etymology and derivations.</p>
 
           <div id="yesNoQuizList">
             <!-- Dynamically generated yes/no rows -->
@@ -1038,7 +1038,7 @@
       <section id="view-recall" class="view-pane">
         <div class="quiz-card">
           <h3 class="quiz-heading">✍️ Active Recall & Spelling Mastery</h3>
-          <p class="quiz-subtext">Type the exact specialist name based on the clinical description and first letter.</p>
+          <p class="quiz-subtext">Type the exact vocabulary word based on the clue and starting letter hint.</p>
 
           <div id="recallQuizList">
             <!-- Dynamically generated recall inputs -->
@@ -1197,67 +1197,32 @@
           { word: "Asceticism", phonetic: "ə-SET′-ə-siz-əm", root: "Root: asketes (monk, hermit)", quote: "Devotion to a lonely, austere, self-denying life.", meaning: "Severe self-discipline and avoidance of all forms of indulgence.", traits: ["Person & Adj: ascetic.", "Rejects worldly luxury.", "Spiritual purification."] }
         ],
         matchingOptions: [
-          { key: "a", text: "capable of using both hands with equal skill (ambidextrous)" },
-          { key: "b", text: "skillful / manual dexterity (dexterous)" },
-          { key: "c", text: "evil, threatening (sinister)" },
-          { key: "d", text: "awkward, socially clumsy (gauche)" },
-          { key: "e", text: "hating mankind (misanthropic)" },
-          { key: "f", text: "study of human development (anthropology)" },
-          { key: "g", text: "study of female ailments (gynecology)" },
-          { key: "h", text: "system of only one marriage (monogamy)" },
-          { key: "i", text: "illegal plurality of marriages (bigamy)" },
-          { key: "j", text: "hatred of women (misogyny)" },
-          { key: "k", text: "devotion to lonely, austere life (asceticism)" },
-          { key: "l", text: "skill, cleverness (adroitness)" },
-          { key: "m", text: "custom in which one man has many wives (polygyny)" },
-          { key: "n", text: "female with a plurality of husbands (polyandry)" },
-          { key: "o", text: "one who loves mankind & gives charity (philanthropist)" }
+          { key: "a", text: "capable of using both hands with equal skill (ambidextrous)" }, { key: "b", text: "skillful / manual dexterity (dexterous)" }, { key: "c", text: "evil, threatening (sinister)" },
+          { key: "d", text: "awkward, socially clumsy (gauche)" }, { key: "e", text: "hating mankind (misanthropic)" }, { key: "f", text: "study of human development (anthropology)" },
+          { key: "g", text: "study of female ailments (gynecology)" }, { key: "h", text: "system of only one marriage (monogamy)" }, { key: "i", text: "illegal plurality of marriages (bigamy)" },
+          { key: "j", text: "hatred of women (misogyny)" }, { key: "k", text: "devotion to lonely, austere life (asceticism)" }, { key: "l", text: "skill, cleverness (adroitness)" },
+          { key: "m", text: "custom in which one man has many wives (polygyny)" }, { key: "n", text: "female with a plurality of husbands (polyandry)" }, { key: "o", text: "one who loves mankind & gives charity (philanthropist)" }
         ],
-        matchingAnswers: {
-          "Ambidextrous": "a", "Dexterous": "b", "Sinister": "c", "Gauche": "d", "Misanthropic": "e",
-          "Anthropology": "f", "Gynecology": "g", "Monogamy": "h", "Bigamy": "i", "Misogyny": "j",
-          "Asceticism": "k", "Adroitness": "l", "Polygyny": "m", "Polyandry": "n", "Philanthropist": "o"
-        },
+        matchingAnswers: { "Ambidextrous": "a", "Dexterous": "b", "Sinister": "c", "Gauche": "d", "Misanthropic": "e", "Anthropology": "f", "Gynecology": "g", "Monogamy": "h", "Bigamy": "i", "Misogyny": "j", "Asceticism": "k", "Adroitness": "l", "Polygyny": "m", "Polyandry": "n", "Philanthropist": "o" },
         yesNoQuestions: [
-          { q: "Can ambidextrous people use either the left or right hand equally well?", a: "yes" },
-          { q: "Should a surgeon be manually dexterous?", a: "yes" },
-          { q: "Is a sinister-looking person frightening?", a: "yes" },
-          { q: "Is gaucherie a social asset?", a: "no" },
-          { q: "Is an adroit speaker likely to be a successful lawyer?", a: "yes" },
-          { q: "Is a student of anthropology interested in primitive tribes?", a: "yes" },
-          { q: "Does a gynecologist have more male than female patients?", a: "no" },
-          { q: "Is monogamy the custom in Western countries?", a: "yes" },
-          { q: "Is a misogamist likely to show tendencies toward polygamy?", a: "no" },
-          { q: "Is a bigamist breaking the law?", a: "yes" },
-          { q: "Is a philanthropist generally altruistic?", a: "yes" },
-          { q: "Does a misanthropist enjoy human relationships?", a: "no" },
-          { q: "Does a misogynist enjoy female companionship?", a: "no" },
-          { q: "Are unmarried people necessarily misogamous?", a: "no" },
-          { q: "Are bachelors necessarily misogynous?", a: "no" },
-          { q: "Is asceticism compatible with luxurious living and the pursuit of pleasure?", a: "no" },
-          { q: "Does a polyandrist have more than one husband?", a: "yes" }
+          { q: "Can ambidextrous people use either the left or right hand equally well?", a: "yes" }, { q: "Should a surgeon be manually dexterous?", a: "yes" }, { q: "Is a sinister-looking person frightening?", a: "yes" },
+          { q: "Is gaucherie a social asset?", a: "no" }, { q: "Is an adroit speaker likely to be a successful lawyer?", a: "yes" }, { q: "Is a student of anthropology interested in primitive tribes?", a: "yes" },
+          { q: "Does a gynecologist have more male than female patients?", a: "no" }, { q: "Is monogamy the custom in Western countries?", a: "yes" }, { q: "Is a misogamist likely to show tendencies toward polygamy?", a: "no" },
+          { q: "Is a bigamist breaking the law?", a: "yes" }, { q: "Is a philanthropist generally altruistic?", a: "yes" }, { q: "Does a misanthropist enjoy human relationships?", a: "no" },
+          { q: "Does a misogynist enjoy female companionship?", a: "no" }, { q: "Are unmarried people necessarily misogamous?", a: "no" }, { q: "Are bachelors necessarily misogynous?", a: "no" },
+          { q: "Is asceticism compatible with luxurious living and the pursuit of pleasure?", a: "no" }, { q: "Does a polyandrist have more than one husband?", a: "yes" }
         ],
         recallQuestions: [
-          { q: "Philosophy of living austerely:", word: "asceticism", hint: "A..." },
-          { q: "Hatred of women:", word: "misogyny", hint: "M..." },
-          { q: "Hatred of marriage:", word: "misogamy", hint: "M..." },
-          { q: "Hatred of mankind:", word: "misanthropy", hint: "M..." },
-          { q: "Skillful (manual):", word: "dexterous", hint: "D..." },
-          { q: "Awkward / socially clumsy:", word: "gauche", hint: "G..." },
-          { q: "Evil, threatening:", word: "sinister", hint: "S..." },
-          { q: "Describing hatred of women (adj.):", word: "misogynous", hint: "M..." },
-          { q: "Skill / cleverness in handling situations:", word: "adroitness", hint: "A..." },
-          { q: "Pertaining to hatred of marriage (adj.):", word: "misogamous", hint: "M..." },
-          { q: "Pertaining to hatred of mankind (adj.):", word: "misanthropic", hint: "M..." },
-          { q: "Social custom of plural marriage:", word: "polygamy", hint: "P..." },
-          { q: "Unlawful state of having more than one spouse:", word: "bigamy", hint: "B..." },
-          { q: "Doctor specializing in female disorders:", word: "gynecologist", hint: "G..." },
-          { q: "Custom of one marriage at a time:", word: "monogamy", hint: "M..." },
-          { q: "One who hates the human race:", word: "misanthrope", hint: "M..." },
-          { q: "Able to use both hands with equal skill:", word: "ambidextrous", hint: "A..." },
-          { q: "Scientific study of mankind:", word: "anthropology", hint: "A..." },
-          { q: "One who loves mankind and donates to charity:", word: "philanthropist", hint: "P..." },
-          { q: "Skill in the use of both hands:", word: "ambidexterity", hint: "A..." }
+          { q: "Philosophy of living austerely:", word: "asceticism", hint: "A..." }, { q: "Hatred of women:", word: "misogyny", hint: "M..." },
+          { q: "Hatred of marriage:", word: "misogamy", hint: "M..." }, { q: "Hatred of mankind:", word: "misanthropy", hint: "M..." },
+          { q: "Skillful (manual):", word: "dexterous", hint: "D..." }, { q: "Awkward / socially clumsy:", word: "gauche", hint: "G..." },
+          { q: "Evil, threatening:", word: "sinister", hint: "S..." }, { q: "Describing hatred of women (adj.):", word: "misogynous", hint: "M..." },
+          { q: "Skill / cleverness in handling situations:", word: "adroitness", hint: "A..." }, { q: "Pertaining to hatred of marriage (adj.):", word: "misogamous", hint: "M..." },
+          { q: "Pertaining to hatred of mankind (adj.):", word: "misanthropic", hint: "M..." }, { q: "Social custom of plural marriage:", word: "polygamy", hint: "P..." },
+          { q: "Unlawful state of having more than one spouse:", word: "bigamy", hint: "B..." }, { q: "Doctor specializing in female disorders:", word: "gynecologist", hint: "G..." },
+          { q: "Custom of one marriage at a time:", word: "monogamy", hint: "M..." }, { q: "One who hates the human race:", word: "misanthrope", hint: "M..." },
+          { q: "Able to use both hands with equal skill:", word: "ambidextrous", hint: "A..." }, { q: "Scientific study of mankind:", word: "anthropology", hint: "A..." },
+          { q: "One who loves mankind and donates to charity:", word: "philanthropist", hint: "P..." }, { q: "Skill in the use of both hands:", word: "ambidexterity", hint: "A..." }
         ]
       },
 
@@ -1269,181 +1234,131 @@
         category: "Medicine & Health",
         desc: "Learn the specific clinical specialties, diagnostic methods, and proper titles for 10 essential medical doctors.",
         words: [
-          {
-            word: "Internist",
-            phonetic: "in-TURN′-ist",
-            root: "Root: internus (Latin = inside)",
-            quote: "What's wrong with you and why?",
-            meaning: "A physician specialized in internal medicine and comprehensive diagnostic checkups.",
-            traits: [
-              "Performs thorough physical examinations.",
-              "Uses X-rays, blood chemistry, urinalysis, and cardiograms.",
-              "Expert in diagnosing complex internal ailments."
-            ]
-          },
-          {
-            word: "Gynecologist",
-            phonetic: "gīn-ə-KOL′-ə-jist",
-            root: "Root: gyne (woman) + logos (study)",
-            quote: "Treating female reproductive and sexual organs.",
-            meaning: "A medical specialist treating diseases and hygiene of the female reproductive system.",
-            traits: [
-              "Specializes in women's health and female disorders.",
-              "Field: gynecology; Adjective: gynecological.",
-              "Focuses on non-pregnancy female care."
-            ]
-          },
-          {
-            word: "Obstetrician",
-            phonetic: "ob-stə-TRISH′-ən",
-            root: "Root: obstetrix (Latin = midwife / to stand before)",
-            quote: "Having a baby? Pregnancy & delivery care.",
-            meaning: "A physician who delivers babies and cares for mothers during and after pregnancy.",
-            traits: [
-              "Oversees prenatal care, labor, and childbirth.",
-              "Field: obstetrics; Adjective: obstetric / obstetrical.",
-              "Ensures maternal and infant safety during birth."
-            ]
-          },
-          {
-            word: "Pediatrician",
-            phonetic: "pee′-dee-ə-TRISH′-ən",
-            root: "Root: paidos (child) + iatreia (healing)",
-            quote: "Is your baby or young child ill?",
-            meaning: "A medical doctor specialized in the care, development, and diseases of infants and children.",
-            traits: [
-              "Limits practice to babies, toddlers, and youngsters.",
-              "Supervises childhood inoculations and diet.",
-              "Field: pediatrics; Adjective: pediatric."
-            ]
-          },
-          {
-            word: "Dermatologist",
-            phonetic: "dur-mə-TOL′-ə-jist",
-            root: "Root: derma (skin) + logos (study)",
-            quote: "Keeping your skin clear and healthy.",
-            meaning: "A doctor specialized in the diagnosis and treatment of skin disorders.",
-            traits: [
-              "Treats acne, eczema, psoriasis, impetigo, and skin cancers.",
-              "Focuses on the body's outer protective covering.",
-              "Field: dermatology; Adjective: dermatological."
-            ]
-          },
-          {
-            word: "Ophthalmologist",
-            phonetic: "off-thal-MOL′-ə-jist",
-            root: "Root: ophthalmos (eye) + logos (study)",
-            quote: "Are your eyes and vision healthy?",
-            meaning: "A medical eye doctor who diagnoses vision disorders, prescribes glasses, drugs, and performs eye surgery.",
-            traits: [
-              "Treats myopia, astigmatism, cataracts, and glaucoma.",
-              "Full medical doctor and eye surgeon.",
-              "Field: ophthalmology; Adjective: ophthalmological."
-            ]
-          },
-          {
-            word: "Orthopedist",
-            phonetic: "awr-thə-PEE′-dist",
-            root: "Root: orthos (straight) + paidos (child / bone structure)",
-            quote: "How are your bones and skeletal system?",
-            meaning: "A surgeon specialized in correcting skeletal deformities, fractures, and spinal disorders.",
-            traits: [
-              "Treats broken bones, slipped discs, clubfoot, and hip dislocations.",
-              "Uses braces, appliances, and corrective bone surgery.",
-              "Field: orthopedics; Adjective: orthopedic."
-            ]
-          },
-          {
-            word: "Cardiologist",
-            phonetic: "kahr-dee-OL′-ə-jist",
-            root: "Root: kardia (heart) + logos (study)",
-            quote: "Does your heart go pitter-patter?",
-            meaning: "A physician specializing in diseases of the heart and the circulatory system.",
-            traits: [
-              "Diagnoses heart attacks, arrhythmias, and hypertension.",
-              "Interprets electrocardiograms (ECGs).",
-              "Field: cardiology; Adjective: cardiological."
-            ]
-          },
-          {
-            word: "Neurologist",
-            phonetic: "noor-OL′-ə-jist",
-            root: "Root: neuron (nerve) + logos (study)",
-            quote: "Is your brain and nervous system working?",
-            meaning: "A physician specializing in the brain, spinal cord, and nervous system disorders.",
-            traits: [
-              "Treats epilepsy, stroke, neuropathy, and brain ailments.",
-              "Focuses on organic and physical nerve disorders.",
-              "Field: neurology; Adjective: neurological."
-            ]
-          },
-          {
-            word: "Psychiatrist",
-            phonetic: "sī-KĪ′-ə-trist",
-            root: "Root: psyche (mind/soul) + iatreia (healing)",
-            quote: "Alleviating mental and emotional distress.",
-            meaning: "A medical doctor specialized in treating mental, emotional, and behavioral disorders.",
-            traits: [
-              "Uses psychotherapy, medication, and clinical techniques.",
-              "Alleviates severe neuroses, anxieties, and psychoses.",
-              "Field: psychiatry; Adjective: psychiatric."
-            ]
-          }
+          { word: "Internist", phonetic: "in-TURN′-ist", root: "Root: internus (Latin = inside)", quote: "What's wrong with you and why?", meaning: "A physician specialized in internal medicine and comprehensive diagnostic checkups.", traits: ["Performs thorough physical exams.", "Uses X-rays, blood tests, cardiograms.", "Diagnoses complex internal ailments."] },
+          { word: "Gynecologist", phonetic: "gīn-ə-KOL′-ə-jist", root: "Root: gyne (woman) + logos (study)", quote: "Treating female reproductive and sexual organs.", meaning: "A medical specialist treating diseases and hygiene of the female reproductive system.", traits: ["Specializes in women's health.", "Field: gynecology; Adj: gynecological.", "Focuses on non-pregnancy female care."] },
+          { word: "Obstetrician", phonetic: "ob-stə-TRISH′-ən", root: "Root: obstetrix (midwife / to stand before)", quote: "Having a baby? Pregnancy & delivery care.", meaning: "A physician who delivers babies and cares for mothers during and after pregnancy.", traits: ["Oversees prenatal care & childbirth.", "Field: obstetrics; Adj: obstetric.", "Ensures maternal & infant safety."] },
+          { word: "Pediatrician", phonetic: "pee′-dee-ə-TRISH′-ən", root: "Root: paidos (child) + iatreia (healing)", quote: "Is your baby or young child ill?", meaning: "A medical doctor specialized in the care, development, and diseases of infants and children.", traits: ["Limits practice to youngsters.", "Supervises inoculations & diet.", "Field: pediatrics; Adj: pediatric."] },
+          { word: "Dermatologist", phonetic: "dur-mə-TOL′-ə-jist", root: "Root: derma (skin) + logos (study)", quote: "Keeping your skin clear and healthy.", meaning: "A doctor specialized in the diagnosis and treatment of skin disorders.", traits: ["Treats acne, eczema, psoriasis, cancer.", "Focuses on outer skin covering.", "Field: dermatology; Adj: dermatological."] },
+          { word: "Ophthalmologist", phonetic: "off-thal-MOL′-ə-jist", root: "Root: ophthalmos (eye) + logos (study)", quote: "Are your eyes and vision healthy?", meaning: "A medical eye doctor who diagnoses vision disorders, prescribes glasses, drugs, and performs surgery.", traits: ["Treats myopia, cataracts, glaucoma.", "Full medical doctor & eye surgeon.", "Field: ophthalmology; Adj: ophthalmological."] },
+          { word: "Orthopedist", phonetic: "awr-thə-PEE′-dist", root: "Root: orthos (straight) + paidos (child / bone)", quote: "How are your bones and skeletal system?", meaning: "A surgeon specialized in correcting skeletal deformities, fractures, and spinal disorders.", traits: ["Treats fractures, slipped discs, clubfoot.", "Uses braces & corrective bone surgery.", "Field: orthopedics; Adj: orthopedic."] },
+          { word: "Cardiologist", phonetic: "kahr-dee-OL′-ə-jist", root: "Root: kardia (heart) + logos (study)", quote: "Does your heart go pitter-patter?", meaning: "A physician specializing in diseases of the heart and the circulatory system.", traits: ["Diagnoses heart attacks & arrhythmias.", "Interprets electrocardiograms (ECGs).", "Field: cardiology; Adj: cardiological."] },
+          { word: "Neurologist", phonetic: "noor-OL′-ə-jist", root: "Root: neuron (nerve) + logos (study)", quote: "Is your brain and nervous system working?", meaning: "A physician specializing in the brain, spinal cord, and nervous system disorders.", traits: ["Treats epilepsy, stroke, neuropathy.", "Focuses on organic nerve disorders.", "Field: neurology; Adj: neurological."] },
+          { word: "Psychiatrist", phonetic: "sī-KĪ′-ə-trist", root: "Root: psyche (mind/soul) + iatreia (healing)", quote: "Alleviating mental and emotional distress.", meaning: "A medical doctor specialized in treating mental, emotional, and behavioral disorders.", traits: ["Uses psychotherapy and medication.", "Alleviates severe neuroses & anxieties.", "Field: psychiatry; Adj: psychiatric."] }
         ],
         matchingOptions: [
-          { key: "a", text: "diagnosis; internal organs (internist)" },
-          { key: "b", text: "female reproductive organs (gynecologist)" },
-          { key: "c", text: "pregnancy, childbirth (obstetrician)" },
-          { key: "d", text: "infants and young children (pediatrician)" },
-          { key: "e", text: "skin disorders (dermatologist)" },
-          { key: "f", text: "eyes and vision disorders (ophthalmologist)" },
-          { key: "g", text: "skeletal system and bones (orthopedist)" },
-          { key: "h", text: "heart and circulatory system (cardiologist)" },
-          { key: "i", text: "brain and nervous system (neurologist)" },
+          { key: "a", text: "diagnosis; internal organs (internist)" }, { key: "b", text: "female reproductive organs (gynecologist)" }, { key: "c", text: "pregnancy, childbirth (obstetrician)" },
+          { key: "d", text: "infants and young children (pediatrician)" }, { key: "e", text: "skin disorders (dermatologist)" }, { key: "f", text: "eyes and vision disorders (ophthalmologist)" },
+          { key: "g", text: "skeletal system and bones (orthopedist)" }, { key: "h", text: "heart and circulatory system (cardiologist)" }, { key: "i", text: "brain and nervous system (neurologist)" },
           { key: "j", text: "mental or emotional disturbances (psychiatrist)" }
         ],
-        matchingAnswers: {
-          "Internist": "a",
-          "Gynecologist": "b",
-          "Obstetrician": "c",
-          "Pediatrician": "d",
-          "Dermatologist": "e",
-          "Ophthalmologist": "f",
-          "Orthopedist": "g",
-          "Cardiologist": "h",
-          "Neurologist": "i",
-          "Psychiatrist": "j"
-        },
+        matchingAnswers: { "Internist": "a", "Gynecologist": "b", "Obstetrician": "c", "Pediatrician": "d", "Dermatologist": "e", "Ophthalmologist": "f", "Orthopedist": "g", "Cardiologist": "h", "Neurologist": "i", "Psychiatrist": "j" },
         yesNoQuestions: [
-          { q: "Is an internist an expert in diagnosis?", a: "yes" },
-          { q: "Is a gynecologist familiar with the female reproductive organs?", a: "yes" },
-          { q: "Does an obstetrician specialize in diseases of childhood?", a: "no" },
-          { q: "Does a pediatrician deliver babies?", a: "no" },
-          { q: "If you had a skin disease, would you visit a dermatologist?", a: "yes" },
-          { q: "If you had trouble with your vision would you visit an orthopedist?", a: "no" },
-          { q: "Is an ophthalmologist an eye specialist?", a: "yes" },
-          { q: "Does a cardiologist treat bone fractures?", a: "no" },
-          { q: "Is a neurologist a nerve specialist?", a: "yes" },
+          { q: "Is an internist an expert in diagnosis?", a: "yes" }, { q: "Is a gynecologist familiar with the female reproductive organs?", a: "yes" }, { q: "Does an obstetrician specialize in diseases of childhood?", a: "no" },
+          { q: "Does a pediatrician deliver babies?", a: "no" }, { q: "If you had a skin disease, would you visit a dermatologist?", a: "yes" }, { q: "If you had trouble with your vision would you visit an orthopedist?", a: "no" },
+          { q: "Is an ophthalmologist an eye specialist?", a: "yes" }, { q: "Does a cardiologist treat bone fractures?", a: "no" }, { q: "Is a neurologist a nerve specialist?", a: "yes" },
           { q: "If you were nervous, tense, overly anxious, constantly fearful for no apparent reason, would a psychiatrist be the specialist to see?", a: "yes" }
         ],
         recallQuestions: [
-          { q: "For a suspected brain or nerve disorder:", word: "neurologist", hint: "N..." },
-          { q: "For a thorough internal checkup and diagnosis:", word: "internist", hint: "I..." },
-          { q: "If you have a skin disease or infection:", word: "dermatologist", hint: "D..." },
-          { q: "If you have a heart or circulatory problem:", word: "cardiologist", hint: "C..." },
-          { q: "If you are tense, fearful, or deeply anxious:", word: "psychiatrist", hint: "P..." },
-          { q: "If you are pregnant and delivering a baby:", word: "obstetrician", hint: "O..." },
-          { q: "For disorders of the female reproductive organs:", word: "gynecologist", hint: "G..." },
-          { q: "For a health checkup for your two-month-old child:", word: "pediatrician", hint: "P..." },
-          { q: "For faulty vision, cataracts, or eye diseases:", word: "ophthalmologist", hint: "O..." },
-          { q: "For curvature of the spine or broken bones:", word: "orthopedist", hint: "O..." }
+          { q: "For a suspected brain or nerve disorder:", word: "neurologist", hint: "N..." }, { q: "For a thorough internal checkup and diagnosis:", word: "internist", hint: "I..." },
+          { q: "If you have a skin disease or infection:", word: "dermatologist", hint: "D..." }, { q: "If you have a heart or circulatory problem:", word: "cardiologist", hint: "C..." },
+          { q: "If you are tense, fearful, or deeply anxious:", word: "psychiatrist", hint: "P..." }, { q: "If you are pregnant and delivering a baby:", word: "obstetrician", hint: "O..." },
+          { q: "For disorders of the female reproductive organs:", word: "gynecologist", hint: "G..." }, { q: "For a health checkup for your two-month-old child:", word: "pediatrician", hint: "P..." },
+          { q: "For faulty vision, cataracts, or eye diseases:", word: "ophthalmologist", hint: "O..." }, { q: "For curvature of the spine or broken bones:", word: "orthopedist", hint: "O..." }
+        ]
+      },
+
+      // SESSION 5
+      {
+        id: 5,
+        title: "Origins & Related Words (Doctors)",
+        subtitle: "Roots: Skin, Eyes, Children & Teaching",
+        category: "Etymology & Roots",
+        desc: "Explore the fascinating derivations behind intern, obstetrics, pediatrics, pedagogy, demagogues, skin (derma), eyes (oculus/ophthalmos), and optical specialists.",
+        words: [
+          { word: "Intern (e)", phonetic: "IN′-turn", root: "Root: internus (Latin = inside)", quote: "A medical graduate serving an apprenticeship.", meaning: "A recent medical school graduate training inside a hospital before full licensing.", traits: ["Distinct from internist (specialist).", "Serves a clinical apprenticeship.", "Inside the hospital system."] },
+          { word: "Obstetrics", phonetic: "ob-STET′-riks", root: "Root: obstetrix (midwife, 'to stand before')", quote: "Medical specialty of childbirth and delivery.", meaning: "The branch of medicine and surgery concerned with childbirth and midwifery.", traits: ["Practitioner: obstetrician.", "Adjectives: obstetric, obstetrical.", "Became recognized field in 1834."] },
+          { word: "Pediatrics", phonetic: "pee-dee-AT′-riks", root: "Root: paidos (child) + iatreia (medical healing)", quote: "The medical healing and care of children.", meaning: "The branch of medicine dealing with children and their diseases.", traits: ["Practitioner: pediatrician.", "Adjective: pediatric.", "Contrast with Latin 'pedis' (foot)."] },
+          { word: "Pedagogy", phonetic: "PED′-ə-gō-jee", root: "Root: paidos (child) + agogos (leading)", quote: "The principles and methods of teaching.", meaning: "The method and practice of teaching, especially as an academic subject or theoretical concept.", traits: ["Adjective: pedagogical.", "Literally 'the leading of children'.", "Core college education curriculum."] },
+          { word: "Pedagogue", phonetic: "PED′-ə-gog", root: "Root: paidos (child) + agogos (leader)", quote: "A narrow-minded, dogmatic, strait-laced teacher.", meaning: "A teacher, especially a strict, pedantic, or old-fashioned dogmatic one.", traits: ["Deteriorated in meaning over time.", "Used as a word of contempt.", "Lacks progressive flexibility."] },
+          { word: "Demagogue", phonetic: "DEM′-ə-gog", root: "Root: demos (people) + agogos (leading)", quote: "One who stirs up political discontent for personal power.", meaning: "A political leader who seeks support by appealing to popular desires and prejudices rather than rational argument.", traits: ["Practice: demagoguery.", "Adjective: demagogic.", "Misleads masses via wild oratory."] },
+          { word: "Demagoguery", phonetic: "dem-ə-GOG′-ə-ree", root: "Suffix: -ery (practice / conduct)", quote: "The practice of stirring up political dissatisfaction.", meaning: "Political activity or practices that seek support by appealing to desires and prejudices.", traits: ["Noun form of demagogue.", "Exploits societal grievances.", "Self-serving manipulation."] },
+          { word: "Dermatology", phonetic: "dur-mə-TOL′-ə-jee", root: "Root: derma (Greek = skin) + logos (study)", quote: "Medical specialty dealing with skin diseases.", meaning: "The branch of medicine concerned with the diagnosis and treatment of skin disorders.", traits: ["Practitioner: dermatologist.", "Adjective: dermatological.", "Covers all skin layers."] },
+          { word: "Hypodermic", phonetic: "hī-pə-DURM′-ik", root: "Root: hypos (under) + derma (skin)", quote: "Penetrating under the skin.", meaning: "Relating to the region immediately beneath the skin (e.g. hypodermic needle/injection).", traits: ["Greek hypos = under.", "Directly enters subcutaneous layer.", "Essential for vaccines & serums."] },
+          { word: "Epidermis", phonetic: "ep-ə-DUR′-mis", root: "Root: epi- (upon / outer) + derma (skin)", quote: "The outermost layer of the skin.", meaning: "The outer, nonvascular, nonsensitive layer of the skin, covering the dermis.", traits: ["Outermost protective biological barrier.", "Constantly sheds and renews cells.", "Shields internal tissues."] },
+          { word: "Taxidermist", phonetic: "TAKS′-ə-dur-mist", root: "Root: taxis (arrangement) + derma (skin)", quote: "One who prepares and stuffs animal skins.", meaning: "A person who prepares, stuffs, and mounts the skins of animals with lifelike effect.", traits: ["Business: taxidermy.", "Mounts wildlife specimens.", "Preserves animal hides."] },
+          { word: "Pachyderm", phonetic: "PAK′-ə-durm", root: "Root: pachys (thick) + derma (skin)", quote: "A thick-skinned animal (elephant, rhino).", meaning: "A very large mammal with thick skin, especially an elephant, rhinoceros, or hippopotamus.", traits: ["Greek pachys = thick.", "Literally 'thick skin'.", "Used humorously for insensitive people."] },
+          { word: "Dermatitis", phonetic: "dur-mə-TĪ′-tis", root: "Root: derma (skin) + -itis (inflammation)", quote: "General inflammation or irritation of the skin.", meaning: "A medical condition in which the skin becomes red, swollen, and sore, sometimes with blisters.", traits: ["Suffix -itis always means inflammation.", "Includes rashes and eczema.", "Treated by dermatologists."] },
+          { word: "Ophthalmology", phonetic: "off-thal-MOL′-ə-jee", root: "Root: ophthalmos (eye) + logos (study)", quote: "Medical science of the eye and vision surgery.", meaning: "The branch of medicine concerned with the study and treatment of disorders and diseases of the eye.", traits: ["Practitioner: ophthalmologist.", "Adjective: ophthalmological.", "Full medical & surgical discipline."] },
+          { word: "Oculist", phonetic: "OK′-yə-list", root: "Root: oculus (Latin = eye)", quote: "An earlier title for an eye doctor.", meaning: "An ophthalmologist or eye physician (older terminology).", traits: ["Derived from Latin oculus.", "Replaced largely by ophthalmologist.", "Medical eye specialist."] },
+          { word: "Ocular", phonetic: "OK′-yə-lər", root: "Root: oculus (eye) + -ar (adjective)", quote: "Pertaining to or connected with the eye.", meaning: "Of or connected with the eyes or vision.", traits: ["Adjective referring to the eye.", "Example: ocular examination.", "Used in optics and anatomy."] },
+          { word: "Monocle", phonetic: "MON′-ə-kəl", root: "Root: monos (one) + oculus (eye)", quote: "A single eyeglass for one eye.", meaning: "A single eyeglass kept in position by the muscles around the eye.", traits: ["Used for one eye only.", "Vintage symbol of aristocracy.", "Early corrective lens."] },
+          { word: "Binoculars", phonetic: "bə-NOK′-yə-lərz", root: "Root: bi- (two) + oculus (eye)", quote: "Field glasses that increase the range of two eyes.", meaning: "An optical instrument with a lens for each eye, used for viewing distant objects.", traits: ["Increases range of both eyes simultaneously.", "Provides stereoscopic vision.", "Used for navigation & outdoors."] },
+          { word: "Inoculate", phonetic: "in-OK′-yə-layt", root: "Root: in- (into) + oculus (eye / puncture)", quote: "Injecting serum through an eye-like puncture in skin.", meaning: "To treat with a vaccine to produce immunity against a disease.", traits: ["Spelling note: single 'n' (inoculate).", "Creates a microscopic puncture.", "Prevents viral epidemics."] },
+          { word: "Optometrist", phonetic: "op-TOM′-ə-trist", root: "Root: opsis (sight) + metron (measurement)", quote: "One who measures vision and prescribes glasses.", meaning: "A practitioner who examines the eyes for visual defects and prescribes corrective lenses.", traits: ["Not a medical doctor / surgeon.", "Field: optometry; Adj: optometric.", "Measures refractive errors & tests glaucoma."] },
+          { word: "Optician", phonetic: "op-TISH′-ən", root: "Root: opsis (sight) + -ician (expert)", quote: "One who grinds lenses and dispenses optical goods.", meaning: "A person qualified to make and supply eyeglasses and contact lenses on prescription.", traits: ["Fills prescriptions from eye doctors.", "Field: optics; Adj: optical.", "Grinds and fits lenses."] }
+        ],
+        matchingOptions: [
+          { key: "a", text: "principles and methods of teaching (pedagogy)" },
+          { key: "b", text: "stuffing and mounting animal skins (taxidermy)" },
+          { key: "c", text: "delivery of newborn infants (obstetrics)" },
+          { key: "d", text: "stirring up discontent for personal power (demagoguery)" },
+          { key: "e", text: "treatment of skin diseases (dermatology)" },
+          { key: "f", text: "medical science of women's diseases (gynecology)" },
+          { key: "g", text: "medical healing of children (pediatrics)" },
+          { key: "h", text: "penetrating under the skin (hypodermic)" },
+          { key: "i", text: "outermost layer of skin (epidermis)" },
+          { key: "j", text: "thick-skinned animal like an elephant (pachyderm)" },
+          { key: "k", text: "inflammation/infection of the skin (dermatitis)" },
+          { key: "l", text: "medical doctor specialized in eye surgery (ophthalmologist)" },
+          { key: "m", text: "practitioner who measures vision and fits lenses (optometrist)" },
+          { key: "n", text: "technician who grinds lenses and sells glasses (optician)" }
+        ],
+        matchingAnswers: {
+          "Pedagogy": "a", "Taxidermy": "b", "Obstetrics": "c", "Demagoguery": "d",
+          "Dermatology": "e", "Gynecology": "f", "Pediatrics": "g", "Hypodermic": "h",
+          "Epidermis": "i", "Pachyderm": "j", "Dermatitis": "k", "Ophthalmologist": "l",
+          "Optometrist": "m", "Optician": "n"
+        },
+        yesNoQuestions: [
+          { q: "Does a treatise on obstetrics deal with childbirth?", a: "yes" },
+          { q: "Does gynecology deal with the female reproductive organs?", a: "yes" },
+          { q: "Is pediatrics concerned with the diseases of old age?", a: "no" },
+          { q: "Does pedagogy refer to teaching?", a: "yes" },
+          { q: "Is a pedagogue an expert and inspiring teacher?", a: "no" },
+          { q: "Is a demagogue genuinely interested in the welfare of the people?", a: "no" },
+          { q: "Is a lion a pachyderm?", a: "no" },
+          { q: "Is the epidermis one of the layers of the skin?", a: "yes" },
+          { q: "Is dermatitis an inflammation of one of the limbs?", a: "no" },
+          { q: "Is a taxidermist a medical practitioner?", a: "no" },
+          { q: "Is an ophthalmologist a medical doctor?", a: "yes" },
+          { q: "Is an optometrist a medical doctor who performs eye surgery?", a: "no" },
+          { q: "Does an optician prescribe glasses?", a: "no" }
+        ],
+        recallQuestions: [
+          { q: "Specialty of child delivery and maternal care:", word: "obstetrics", hint: "O..." },
+          { q: "Outermost layer of skin:", word: "epidermis", hint: "E..." },
+          { q: "Principles and methods of teaching:", word: "pedagogy", hint: "P..." },
+          { q: "Thick-skinned animal (elephant/rhino):", word: "pachyderm", hint: "P..." },
+          { q: "General skin inflammation or irritation:", word: "dermatitis", hint: "D..." },
+          { q: "Politician who foments political discontent for power:", word: "demagogue", hint: "D..." },
+          { q: "One who sells optical equipment and grinds lenses:", word: "optician", hint: "O..." },
+          { q: "Medical graduate serving an apprenticeship in a hospital:", word: "intern", hint: "I..." },
+          { q: "Treatment and medical healing of childhood diseases:", word: "pediatrics", hint: "P..." },
+          { q: "Practice of stirring up political dissatisfaction for personal gain:", word: "demagoguery", hint: "D..." },
+          { q: "One who stuffs and mounts the skins of animals:", word: "taxidermist", hint: "T..." },
+          { q: "Another title for an eye doctor (derived from Latin oculus):", word: "oculist", hint: "O..." },
+          { q: "Medical science dealing with female ailments:", word: "gynecology", hint: "G..." },
+          { q: "Medical specialty relating to diseases and surgery of the eye:", word: "ophthalmology", hint: "O..." },
+          { q: "A single eyeglass for one eye:", word: "monocle", hint: "M..." },
+          { q: "Adjective pertaining to the eye:", word: "ocular", hint: "O..." },
+          { q: "Practitioner who measures vision and tests for glaucoma:", word: "optometrist", hint: "O..." }
         ]
       }
     ];
 
-    // Scaffold Sessions 5 to 47
+    // Scaffold Sessions 6 to 47
     const SESSION_TITLES = [
-      "Medical Specialists & Roots (I)", "Medical Specialists & Roots (II)", 
+      "Medical Specialists & Roots (II)", 
       "Liars & Deceivers", "Actions & Human Behavior", "Speech Habits & Talkers", "Compliments & Flattery",
       "Insults & Offenses", "Love & Hatred", "Courage & Fearlessness", "Mind & Memory",
       "Customs & Traditions", "Time & Eternity", "Art & Literature", "Music & Aesthetics",
@@ -1457,8 +1372,8 @@
       "Poverty & Scarcity", "Change & Transformation", "Mastery Review & Graduation"
     ];
 
-    for (let i = 5; i <= 47; i++) {
-      const title = SESSION_TITLES[i - 5] || `Advanced Mastery Part ${i}`;
+    for (let i = 6; i <= 47; i++) {
+      const title = SESSION_TITLES[i - 6] || `Advanced Mastery Part ${i}`;
       SESSIONS_DATA.push({
         id: i,
         title: title,
@@ -1477,7 +1392,7 @@
     // Initialize App
     document.addEventListener('DOMContentLoaded', () => {
       renderSessionSidebar();
-      loadSession(4); // Automatically open newly added Session 4
+      loadSession(5); // Automatically open newly added Session 5
     });
 
     // Render 47-Session Sidebar
@@ -1577,7 +1492,7 @@
           <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 20px auto;">
             This session slot is fully wired into the 47-Session Architecture. When you supply Session ${session.id}'s PDF/notes, its flashcards, audio player, matching tests, and recall drills will activate automatically!
           </p>
-          <button class="btn-primary" onclick="loadSession(4)">View Session 4</button>
+          <button class="btn-primary" onclick="loadSession(5)">View Session 5</button>
         </div>
       `;
     }
