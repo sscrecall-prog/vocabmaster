@@ -1018,6 +1018,289 @@
       .content-area { max-width: 100%; padding: 0; }
       .vocab-card { break-inside: avoid; border: 1px solid #ccc; margin-bottom: 12px; }
     }
+
+    /* ============================================================
+       MOBILE-FIRST RESPONSIVE & TOUCH OPTIMIZATIONS
+       ============================================================ */
+
+    /* Universal Touch Ergonomics */
+    *, *::before, *::after {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button, input, select, .session-item, .vocab-card, .bottom-nav-item, .audio-pill, .bookmark-star {
+      touch-action: manipulation;
+    }
+
+    /* Screen Breakpoint: Tablets & Mobiles (<= 768px) */
+    @media (max-width: 768px) {
+      .app-header {
+        height: 58px;
+        padding: 0 12px;
+      }
+
+      .header-left {
+        gap: 8px;
+      }
+
+      .brand-logo {
+        font-size: 1.15rem;
+      }
+
+      .brand-pill {
+        display: none;
+      }
+
+      .header-right {
+        gap: 6px;
+      }
+
+      .icon-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+      }
+
+      .content-area {
+        padding: 16px 12px 96px 12px;
+      }
+
+      /* Hero Session Banner */
+      .session-banner {
+        padding: 20px 16px;
+        margin-bottom: 16px;
+        border-radius: var(--radius-md);
+      }
+
+      .banner-badge {
+        font-size: 0.72rem;
+        padding: 3px 10px;
+        margin-bottom: 8px;
+      }
+
+      .banner-title {
+        font-size: 1.5rem;
+        line-height: 1.25;
+        margin-bottom: 6px;
+      }
+
+      .banner-desc {
+        font-size: 0.85rem;
+        line-height: 1.45;
+      }
+
+      /* Horizontal Scrollable Tabs */
+      .mode-tabs {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 16px;
+        padding: 4px 2px 8px 2px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+      }
+
+      .mode-tabs::-webkit-scrollbar {
+        display: none;
+      }
+
+      .mode-tab-btn {
+        padding: 8px 14px;
+        font-size: 0.82rem;
+        scroll-snap-align: start;
+        flex-shrink: 0;
+      }
+
+      /* Full Width Grid for Cards */
+      .cards-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px;
+      }
+
+      .vocab-card {
+        padding: 16px 14px;
+        border-radius: var(--radius-md);
+      }
+
+      .card-top {
+        margin-bottom: 8px;
+      }
+
+      .vocab-word {
+        font-size: 1.3rem;
+      }
+
+      .phonetic-code {
+        font-size: 0.8rem;
+        margin-bottom: 6px;
+      }
+
+      .hindi-badge {
+        font-size: 0.95rem;
+        padding: 8px 10px;
+        margin-bottom: 8px;
+      }
+
+      .root-box, .quote-box, .example-box, .syn-ant-box {
+        padding: 8px 10px;
+        font-size: 0.82rem;
+        margin-bottom: 8px;
+      }
+
+      .traits-list {
+        padding-top: 8px;
+      }
+
+      .traits-list li {
+        font-size: 0.8rem;
+        margin-bottom: 3px;
+      }
+
+      /* Flashcards on Mobile */
+      .flashcard-wrapper {
+        min-height: 330px;
+        margin-bottom: 14px;
+      }
+
+      .flashcard-front, .flashcard-back {
+        padding: 22px 16px;
+        border-radius: var(--radius-md);
+      }
+
+      #fcWord {
+        font-size: 1.8rem !important;
+      }
+
+      .flashcard-nav {
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .flashcard-nav button {
+        flex: 1;
+        min-height: 44px;
+        font-size: 0.85rem;
+        padding: 10px 8px;
+      }
+
+      /* Quizzes on Mobile */
+      .quiz-card {
+        padding: 16px 12px;
+        margin-bottom: 16px;
+      }
+
+      .quiz-heading {
+        font-size: 1.1rem;
+      }
+
+      .quiz-subtext {
+        font-size: 0.8rem;
+        margin-bottom: 14px;
+      }
+
+      .match-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        padding: 12px 14px;
+      }
+
+      .match-label {
+        font-size: 0.92rem;
+      }
+
+      .match-dropdown {
+        width: 100%;
+        min-width: 0;
+        font-size: 16px; /* Prevents auto-zoom on iOS */
+        padding: 10px 12px;
+      }
+
+      .yn-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 12px 14px;
+      }
+
+      .yn-question {
+        font-size: 0.9rem;
+      }
+
+      .yn-buttons {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+      }
+
+      .btn-yn {
+        flex: 1;
+        min-height: 44px;
+        font-size: 0.85rem;
+      }
+
+      .recall-box {
+        padding: 12px 14px;
+      }
+
+      .recall-input-wrap {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .recall-field {
+        max-width: 100%;
+        width: 100%;
+        font-size: 16px; /* Prevents auto-zoom on iOS */
+        padding: 10px 12px;
+      }
+
+      .ety-option {
+        min-width: 100% !important;
+        min-height: 44px;
+      }
+
+      /* Global Search Modal on Mobile */
+      .search-overlay {
+        padding-top: 12px;
+      }
+
+      .search-modal {
+        width: 95%;
+        max-height: 88vh;
+      }
+
+      .search-modal-header {
+        padding: 12px 14px;
+      }
+
+      .search-modal-input {
+        font-size: 16px;
+      }
+
+      .search-result-item {
+        padding: 12px 14px;
+      }
+
+      /* Mobile Bottom Nav */
+      .bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 64px;
+        padding-bottom: max(6px, env(safe-area-inset-bottom));
+      }
+
+      .bottom-nav-item {
+        font-size: 0.68rem;
+        gap: 3px;
+      }
+
+      .bottom-nav-icon {
+        font-size: 1.25rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1243,11 +1526,19 @@
     </button>
     <button class="bottom-nav-item" onclick="switchView('matching')">
       <span class="bottom-nav-icon">🧩</span>
-      <span>Drills</span>
+      <span>Tests</span>
+    </button>
+    <button class="bottom-nav-item" onclick="switchView('etymology')">
+      <span class="bottom-nav-icon">🧬</span>
+      <span>Roots</span>
+    </button>
+    <button class="bottom-nav-item" onclick="switchView('bookmarks')">
+      <span class="bottom-nav-icon">⭐</span>
+      <span>Saved</span>
     </button>
     <button class="bottom-nav-item" onclick="toggleSidebar()">
       <span class="bottom-nav-icon">📚</span>
-      <span>47 Sessions</span>
+      <span>Sessions</span>
     </button>
   </nav>
 
