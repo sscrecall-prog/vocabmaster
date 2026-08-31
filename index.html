@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -452,7 +452,7 @@
     /* Cards Grid */
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
       gap: 20px;
     }
 
@@ -661,7 +661,7 @@
 
     .flashcard-wrapper {
       perspective: 1000px;
-      height: 360px;
+      min-height: 360px;
       cursor: pointer;
       margin-bottom: 20px;
     }
@@ -974,6 +974,50 @@
     .bottom-nav-icon {
       font-size: 1.15rem;
     }
+
+    /* Example Sentence Box */
+    .example-box { background: linear-gradient(135deg, var(--accent-light), transparent); border-left: 3px solid var(--accent); padding: 10px 14px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 0.82rem; color: var(--text-main); margin-bottom: 12px; font-weight: 500; line-height: 1.5; }
+    .example-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--accent); letter-spacing: 0.5px; margin-bottom: 2px; }
+
+    /* Bookmark Star */
+    .bookmark-star { background: none; border: none; font-size: 1.2rem; cursor: pointer; padding: 4px; opacity: 0.4; transition: opacity 0.2s, transform 0.2s; }
+    .bookmark-star:hover { opacity: 0.8; transform: scale(1.2); }
+    .bookmark-star.active { opacity: 1; transform: scale(1.1); }
+
+    /* Global Search Modal */
+    .search-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 500; display: none; justify-content: center; align-items: flex-start; padding-top: 80px; }
+    .search-overlay.active { display: flex; }
+    .search-modal { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); width: 90%; max-width: 600px; max-height: 70vh; display: flex; flex-direction: column; box-shadow: var(--shadow-lg); animation: fadeIn 0.2s ease; }
+    .search-modal-header { padding: 16px 20px; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; gap: 10px; }
+    .search-modal-input { flex: 1; padding: 10px 14px; border: none; background: transparent; color: var(--text-main); font-size: 1rem; font-weight: 600; outline: none; font-family: inherit; }
+    .search-modal-close { background: var(--bg-elevated); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-main); padding: 6px 12px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
+    .search-results { overflow-y: auto; padding: 8px; flex: 1; }
+    .search-result-item { padding: 12px 16px; border-radius: var(--radius-sm); cursor: pointer; display: flex; flex-direction: column; gap: 4px; margin-bottom: 4px; }
+    .search-result-item:hover { background: var(--bg-elevated); }
+    .search-result-word { font-weight: 800; font-size: 1rem; color: var(--text-main); }
+    .search-result-hindi { font-size: 0.85rem; color: var(--hindi-color); font-weight: 600; }
+    .search-result-session { font-size: 0.72rem; font-weight: 700; color: var(--accent); text-transform: uppercase; }
+    .search-empty { text-align: center; padding: 30px; color: var(--text-muted); font-size: 0.9rem; }
+
+    /* Score Badge */
+    .score-badge { background: var(--success); color: #fff; font-size: 0.65rem; font-weight: 800; padding: 1px 6px; border-radius: var(--radius-full); margin-left: 4px; display: none; }
+
+    /* Bonus Teaser Cards */
+    .vocab-card.bonus-card { border-color: var(--warning); border-style: dashed; }
+    .bonus-badge { background: var(--warning-bg); color: var(--warning); font-size: 0.7rem; font-weight: 800; padding: 2px 8px; border-radius: var(--radius-full); text-transform: uppercase; letter-spacing: 0.5px; }
+
+    /* Confetti */
+    @keyframes confettiDrop { 0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+    .confetti-container { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 9999; overflow: hidden; }
+    .confetti-piece { position: absolute; width: 10px; height: 10px; border-radius: 2px; animation: confettiDrop 2.5s ease-in-out forwards; }
+
+    /* Print Styles */
+    @media print {
+      .app-header, .sidebar, .sidebar-overlay, .bottom-nav, .mode-tabs, .search-overlay, .audio-pill, .bookmark-star, #view-flashcards, #view-matching, #view-yesno, #view-recall, #view-etymology, #view-bookmarks { display: none !important; }
+      .app-layout { display: block; }
+      .content-area { max-width: 100%; padding: 0; }
+      .vocab-card { break-inside: avoid; border: 1px solid #ccc; margin-bottom: 12px; }
+    }
   </style>
 </head>
 <body>
@@ -989,6 +1033,7 @@
     </div>
 
     <div class="header-right">
+      <button class="icon-btn" onclick="openSearch()" title="Search All Words (Ctrl+K)">🔍</button>
       <button class="icon-btn" onclick="toggleTheme()" id="themeToggleBtn" title="Toggle Dark/Light Mode">🌙</button>
       <button class="icon-btn" onclick="window.print()" title="Print / PDF Export">🖨️</button>
     </div>
@@ -1044,9 +1089,11 @@
       <div class="mode-tabs">
         <button class="mode-tab-btn active" onclick="switchView('notes')">📖 Master Notes</button>
         <button class="mode-tab-btn" onclick="switchView('flashcards')">🃏 Flashcards</button>
-        <button class="mode-tab-btn" onclick="switchView('matching')">🧩 Matching Test</button>
-        <button class="mode-tab-btn" onclick="switchView('yesno')">❓ Yes / No Test</button>
-        <button class="mode-tab-btn" onclick="switchView('recall')">✍️ Active Recall</button>
+        <button class="mode-tab-btn" onclick="switchView('matching')">🧩 Matching <span class="score-badge" id="scoreBadge_matching"></span></button>
+        <button class="mode-tab-btn" onclick="switchView('yesno')">❓ Yes / No <span class="score-badge" id="scoreBadge_yesno"></span></button>
+        <button class="mode-tab-btn" onclick="switchView('recall')">✍️ Recall <span class="score-badge" id="scoreBadge_recall"></span></button>
+        <button class="mode-tab-btn" onclick="switchView('etymology')">🧬 Root Quiz</button>
+        <button class="mode-tab-btn" onclick="switchView('bookmarks')">⭐ Bookmarks</button>
       </div>
 
       <!-- VIEW 1: Master Notes Grid -->
@@ -1148,7 +1195,40 @@
         </div>
       </section>
 
+      <!-- VIEW 6: Etymology Root Quiz -->
+      <section id="view-etymology" class="view-pane">
+        <div class="quiz-card">
+          <h3 class="quiz-heading">🧬 Etymology Root Quiz</h3>
+          <p class="quiz-subtext">Match each root word to the English word that derives from it. Questions are shuffled each time!</p>
+          <div id="etymologyQuizList"></div>
+          <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn-primary" onclick="gradeEtymology()">Check Answers</button>
+            <button class="btn-secondary" onclick="resetEtymology()">Shuffle & Reset</button>
+          </div>
+          <div id="etymologyScoreBox" class="score-banner"></div>
+        </div>
+      </section>
+
+      <!-- VIEW 7: Bookmarked Words -->
+      <section id="view-bookmarks" class="view-pane">
+        <div class="cards-grid" id="bookmarksContainer"></div>
+      </section>
+
     </main>
+  </div>
+
+  <!-- Search Overlay Modal -->
+  <div class="search-overlay" id="searchOverlay" onclick="if(event.target===this) closeSearch()">
+    <div class="search-modal">
+      <div class="search-modal-header">
+        <span>🔍</span>
+        <input type="text" class="search-modal-input" id="globalSearchInput" placeholder="Search words across all sessions..." oninput="handleSearchInput(event)" />
+        <button class="search-modal-close" onclick="closeSearch()">ESC</button>
+      </div>
+      <div class="search-results" id="searchResultsList">
+        <div class="search-empty">🔍 Type at least 2 characters to search...</div>
+      </div>
+    </div>
   </div>
 
   <!-- Mobile Bottom Navigation Bar -->
@@ -1195,7 +1275,8 @@
             related: ["Egoism (n)", "Egoistic (adj)", "Egoistical (adj)"],
             synonyms: "Self-seeker, narcissist, self-centered person",
             antonyms: "Altruist, philanthropist, benefactor",
-            traits: ["Driven purely by self-interest.", "Views life as 'dog-eat-dog'.", "Unapologetic about personal profit."] 
+            traits: ["Driven purely by self-interest.", "Views life as 'dog-eat-dog'.", "Unapologetic about personal profit."],
+            example: "The egoist refused to donate even a rupee to the flood relief fund, caring only about his own comfort." 
           },
           { 
             word: "Egotist", 
@@ -1207,7 +1288,8 @@
             related: ["Egotism (n)", "Egotistic (adj)", "Egotistical (adj)"],
             synonyms: "Boaster, braggart, vainglorious person",
             antonyms: "Modest person, humble, self-effacing",
-            traits: ["Constantly brags about achievements.", "Hungry for the spotlight.", "Conversational narcissist."] 
+            traits: ["Constantly brags about achievements.", "Hungry for the spotlight.", "Conversational narcissist."],
+            example: "The arrogant egotist constantly dominated the boardroom discussions, boasting excessively about his previous corporate achievements." 
           },
           { 
             word: "Altruist", 
@@ -1219,7 +1301,8 @@
             related: ["Altruism (n)", "Altruistic (adj)", "Altruistically (adv)"],
             synonyms: "Benefactor, humanitarian, philanthropist",
             antonyms: "Egoist, self-seeker, miser",
-            traits: ["Finds genuine joy in helping others.", "Puts collective needs before own.", "Empathic, noble, and generous."] 
+            traits: ["Finds genuine joy in helping others.", "Puts collective needs before own.", "Empathic, noble, and generous."],
+            example: "As a true altruist, she dedicated her entire weekend to tutoring underprivileged children without expecting any financial compensation." 
           },
           { 
             word: "Introvert", 
@@ -1231,7 +1314,8 @@
             related: ["Introversion (n)", "Introverted (adj)", "To Introvert (v)"],
             synonyms: "Recluse, loner, contemplative thinker",
             antonyms: "Extrovert, socialite, outgoing person",
-            traits: ["Introspective and observant.", "Prefers quiet spaces or deep one-on-one bonds.", "Exhausted by large, noisy crowds."] 
+            traits: ["Introspective and observant.", "Prefers quiet spaces or deep one-on-one bonds.", "Exhausted by large, noisy crowds."],
+            example: "Despite being an introvert, he delivered a compelling presentation that completely captivated the entire audience of senior executives." 
           },
           { 
             word: "Extrovert", 
@@ -1243,7 +1327,8 @@
             related: ["Extroversion (n)", "Extroverted (adj)"],
             synonyms: "Gregarious, sociable, outgoing person",
             antonyms: "Introvert, loner, recluse",
-            traits: ["Energized by crowds and lively discussions.", "Socially uninhibited and communicative.", "Excels in leadership and collaborative roles."] 
+            traits: ["Energized by crowds and lively discussions.", "Socially uninhibited and communicative.", "Excels in leadership and collaborative roles."],
+            example: "The natural extrovert thrived at the networking event, effortlessly striking up conversations with industry leaders and potential investors." 
           },
           { 
             word: "Ambivert", 
@@ -1255,7 +1340,8 @@
             related: ["Ambiversion (n)", "Ambiverted (adj)"],
             synonyms: "Balanced personality, adaptable person",
             antonyms: "Extreme introvert, extreme extrovert",
-            traits: ["Comfortable in both social gatherings and solitude.", "Adapts communication style based on context.", "Represents the majority of normal human behavior."] 
+            traits: ["Comfortable in both social gatherings and solitude.", "Adapts communication style based on context.", "Represents the majority of normal human behavior."],
+            example: "Functioning as an ambivert, he enjoyed leading the team meetings but also cherished his quiet hours analyzing complex data sets." 
           },
           { 
             word: "Misanthrope", 
@@ -1267,7 +1353,8 @@
             related: ["Misanthropy (n)", "Misanthropic (adj)", "Misanthropist (n)"],
             synonyms: "Cynic, hater of mankind, recluse",
             antonyms: "Philanthropist, humanitarian",
-            traits: ["Distrusts human virtue and motives.", "Believes everyone is fundamentally selfish.", "Maintains emotional and social distance."] 
+            traits: ["Distrusts human virtue and motives.", "Believes everyone is fundamentally selfish.", "Maintains emotional and social distance."],
+            example: "Living as a reclusive misanthrope in the remote mountains, he actively avoided all interaction with modern human society." 
           },
           { 
             word: "Misogynist", 
@@ -1279,7 +1366,8 @@
             related: ["Misogyny (n)", "Misogynic (adj)", "Misogynistic (adj)"],
             synonyms: "Woman-hater, anti-feminist",
             antonyms: "Philogynist, feminist",
-            traits: ["Prejudiced or resentful toward females.", "Often rooted in deep emotional insecurity or trauma.", "Opposes gender equality."] 
+            traits: ["Prejudiced or resentful toward females.", "Often rooted in deep emotional insecurity or trauma.", "Opposes gender equality."],
+            example: "The manager's blatant bias against promoting qualified female employees exposed him as a deeply entrenched misogynist within the company." 
           },
           { 
             word: "Misogamist", 
@@ -1291,7 +1379,8 @@
             related: ["Misogamy (n)", "Misogamous (adj)"],
             synonyms: "Marriage-hater, anti-matrimonialist",
             antonyms: "Philogamist, proponent of marriage",
-            traits: ["Rejects formal marriage contracts.", "Fears loss of autonomy and independence.", "Prefers bachelorhood or uncommitted freedom."] 
+            traits: ["Rejects formal marriage contracts.", "Fears loss of autonomy and independence.", "Prefers bachelorhood or uncommitted freedom."],
+            example: "The persistent misogamist politely declined every matrimonial proposal, firmly believing that marriage inevitably stifles personal freedom and growth." 
           },
           { 
             word: "Ascetic", 
@@ -1303,7 +1392,8 @@
             related: ["Asceticism (n)", "Ascetical (adj)", "Ascetically (adv)"],
             synonyms: "Hermit, monk, recluse, austere practitioner",
             antonyms: "Hedonist, epicure, sensualist, sybarite",
-            traits: ["Embraces fasting, minimal food, and plain clothing.", "Rejects luxury, indulgence, and worldly pleasures.", "Pursues spiritual purification and mental clarity."] 
+            traits: ["Embraces fasting, minimal food, and plain clothing.", "Rejects luxury, indulgence, and worldly pleasures.", "Pursues spiritual purification and mental clarity."],
+            example: "The monk embraced an ascetic lifestyle, abandoning all worldly possessions to focus entirely on meditation and spiritual enlightenment." 
           }
         ],
         matchingOptions: [
@@ -1352,7 +1442,8 @@
             related: ["Egocentric", "Egotism", "Egoism"],
             synonyms: "Self-worth, self-image, pride",
             antonyms: "Humility, selflessness, modesty",
-            traits: ["Mental perception of self.", "Vulnerable to slights and criticism.", "Core psychological terminology."] 
+            traits: ["Mental perception of self.", "Vulnerable to slights and criticism.", "Core psychological terminology."],
+            example: "His fragile ego was severely bruised when the junior associate publicly pointed out the obvious flaw in his financial model." 
           },
           { 
             word: "Egocentric", 
@@ -1364,7 +1455,8 @@
             related: ["Egocentricity (n)", "Egocentrism (n)"],
             synonyms: "Self-absorbed, narcissistic, self-seeking",
             antonyms: "Altruistic, community-minded, selfless",
-            traits: ["Extreme, obnoxious form of egoist.", "Functions both as noun & adjective.", "Considers own needs as supreme."] 
+            traits: ["Extreme, obnoxious form of egoist.", "Functions both as noun & adjective.", "Considers own needs as supreme."],
+            example: "The egocentric politician consistently prioritized his personal image over implementing policies that would genuinely benefit his impoverished constituents." 
           },
           { 
             word: "Egomaniac", 
@@ -1376,7 +1468,8 @@
             related: ["Egomania (n)", "Egomaniacal (adj)"],
             synonyms: "Megalomaniac, pathological narcissist",
             antonyms: "Humble person, self-effacing individual",
-            traits: ["Dangerous psychiatric extreme of egoism.", "Volatile, unhinged self-absorption.", "Obsessively fixated on personal desires."] 
+            traits: ["Dangerous psychiatric extreme of egoism.", "Volatile, unhinged self-absorption.", "Obsessively fixated on personal desires."],
+            example: "Only an absolute egomaniac would demand that every office wall be adorned with framed portraits of his own achievements." 
           },
           { 
             word: "Egomaniacal", 
@@ -1388,7 +1481,8 @@
             related: ["Egomaniacally (adv)"],
             synonyms: "Obsessively narcissistic, megalomanic",
             antonyms: "Self-sacrificing, humble",
-            traits: ["Adjective form of egomaniac.", "Describes severe psychological self-fixation.", "Disregards safety or feelings of all others."] 
+            traits: ["Adjective form of egomaniac.", "Describes severe psychological self-fixation.", "Disregards safety or feelings of all others."],
+            example: "Her egomaniacal behavior alienated her closest colleagues, as she consistently claimed sole credit for the team's collaborative successes." 
           },
           { 
             word: "Altruism", 
@@ -1400,7 +1494,8 @@
             related: ["Altruist (n)", "Altruistic (adj)", "Altruistically (adv)"],
             synonyms: "Benevolence, selflessness, charity, philanthropy",
             antonyms: "Egoism, selfishness, greed",
-            traits: ["Philosophical foundation of altruists.", "Derived from Latin root alter.", "Drives charitable and humanitarian causes."] 
+            traits: ["Philosophical foundation of altruists.", "Derived from Latin root alter.", "Drives charitable and humanitarian causes."],
+            example: "The billionaire's unprecedented act of altruism involved donating half his wealth to establish state-of-the-art hospitals in rural areas." 
           },
           { 
             word: "Altruistic", 
@@ -1412,7 +1507,8 @@
             related: ["Altruistically (adv)"],
             synonyms: "Charitable, humanitarian, benevolent",
             antonyms: "Self-serving, selfish, stingy",
-            traits: ["Adjective describing benevolent acts.", "Opposite of egoistic.", "Focuses on uplifting fellow human beings."] 
+            traits: ["Adjective describing benevolent acts.", "Opposite of egoistic.", "Focuses on uplifting fellow human beings."],
+            example: "Driven by altruistic motives, the young doctor volunteered to work in the war-torn region to provide crucial medical assistance." 
           },
           { 
             word: "To Alternate (v.)", 
@@ -1436,7 +1532,8 @@
             related: ["Alternately (adv)"],
             synonyms: "Substitute, replacement, surrogate",
             antonyms: "Primary, original, permanent",
-            traits: ["Adj: 'alternate Saturdays'.", "Noun: substitute delegate.", "Secondary replacement option."] 
+            traits: ["Adj: 'alternate Saturdays'.", "Noun: substitute delegate.", "Secondary replacement option."],
+            example: "Since the main highway was completely blocked by a landslide, the commuters had to take an alternate route through the village." 
           },
           { 
             word: "Alternative", 
@@ -1448,7 +1545,8 @@
             related: ["Alternatively (adv)"],
             synonyms: "Choice, option, substitute pathway",
             antonyms: "Compulsion, obligation, fixed path",
-            traits: ["Freedom of selection.", "Backup plan.", "'No alternative' = no other way out."] 
+            traits: ["Freedom of selection.", "Backup plan.", "'No alternative' = no other way out."],
+            example: "Facing a severe energy crisis, the government aggressively began exploring solar power as a viable alternative to fossil fuels." 
           },
           { 
             word: "Alteration", 
@@ -1472,7 +1570,8 @@
             related: ["Altered (adj)", "Altering (participle)"],
             synonyms: "Modify, adapt, amend, reshape",
             antonyms: "Maintain, preserve, retain",
-            traits: ["Verb meaning modify or adjust.", "Making other plans.", "Root verb behind alteration."] 
+            traits: ["Verb meaning modify or adjust.", "Making other plans.", "Root verb behind alteration."],
+            example: "Realizing the initial strategy was fundamentally flawed, the CEO decided to quickly alter the company's marketing approach." 
           },
           { 
             word: "Altercation", 
@@ -1484,7 +1583,8 @@
             related: ["To Altercate (v)"],
             synonyms: "Quarrel, wrangle, squabble, dispute, brawl",
             antonyms: "Agreement, harmony, consensus, accord",
-            traits: ["Stronger and louder than a simple quarrel.", "Characterized by high emotion and heated words.", "Originates from having 'other' clashing opinions."] 
+            traits: ["Stronger and louder than a simple quarrel.", "Characterized by high emotion and heated words.", "Originates from having 'other' clashing opinions."],
+            example: "A minor disagreement over parking spaces quickly escalated into a heated altercation between the usually peaceful suburban neighbors." 
           },
           { 
             word: "Alter Ego", 
@@ -1496,7 +1596,8 @@
             related: ["Alter-egoism (n)"],
             synonyms: "Bosom friend, mirror image, close confidant",
             antonyms: "Nemesis, arch-enemy, opponent",
-            traits: ["Literally translates to 'other self'.", "Thinks, reacts, and behaves exactly like you.", "In literature: Batman to Bruce Wayne."] 
+            traits: ["Literally translates to 'other self'.", "Thinks, reacts, and behaves exactly like you.", "In literature: Batman to Bruce Wayne."],
+            example: "By day, he was a mild-mannered accountant, but at night, he transformed into a vigilant crime-fighting alter ego." 
           }
         ],
         matchingOptions: [
@@ -1538,7 +1639,8 @@
             related: ["Ambidexterity (n)", "Ambidextrously (adv)"],
             synonyms: "Two-handed, versatile, highly deft",
             antonyms: "Clumsy, awkward, maladroit",
-            traits: ["Both hands function like 'right hands'.", "Noun form: ambidexterity.", "Rare physical coordination useful in surgery & sports."] 
+            traits: ["Both hands function like 'right hands'.", "Noun form: ambidexterity.", "Rare physical coordination useful in surgery & sports."],
+            example: "The ambidextrous surgeon could operate seamlessly with either hand, significantly reducing the duration of complex medical procedures." 
           },
           { 
             word: "Dexterous", 
@@ -1550,7 +1652,8 @@
             related: ["Dexterity (n)", "Dexterously (adv)"],
             synonyms: "Deft, nimble, adroit, handy, agile",
             antonyms: "Clumsy, gauche, awkward, uncoordinated",
-            traits: ["Noun form: dexterity.", "Spelling note: '-e-' before '-rous'.", "Essential quality for surgeons and artisans."] 
+            traits: ["Noun form: dexterity.", "Spelling note: '-e-' before '-rous'.", "Essential quality for surgeons and artisans."],
+            example: "The dexterous artisan intricately carved the delicate wooden sculpture with a level of precision that amazed all the onlookers." 
           },
           { 
             word: "Sinister", 
@@ -1562,7 +1665,8 @@
             related: ["Sinisterness (n)", "Sinisterly (adv)"],
             synonyms: "Ominous, menacing, malevolent, dark, evil",
             antonyms: "Auspicious, benign, favorable, fortunate",
-            traits: ["Derived from ancient superstition against left-handers.", "Implies dark menace.", "Frequently used for villains, omens, and eerie atmospheres."] 
+            traits: ["Derived from ancient superstition against left-handers.", "Implies dark menace.", "Frequently used for villains, omens, and eerie atmospheres."],
+            example: "The abandoned mansion exuded a sinister aura that frightened away adventurous teenagers seeking late-night thrills." 
           },
           { 
             word: "Gauche", 
@@ -1574,7 +1678,8 @@
             related: ["Gaucherie (n)", "Gauchely (adv)"],
             synonyms: "Tactless, clumsy, unpolished, awkward, uncouth",
             antonyms: "Adroit, polished, urbane, suave, tactful",
-            traits: ["Social clumsiness rather than manual clumsiness.", "Pronounced like 'go' + 'sh'.", "Makes embarrassing conversational blunders."] 
+            traits: ["Social clumsiness rather than manual clumsiness.", "Pronounced like 'go' + 'sh'.", "Makes embarrassing conversational blunders."],
+            example: "Her gauche remark about the host's financial struggles created an incredibly awkward silence during the formal dinner party." 
           },
           { 
             word: "Gaucherie", 
@@ -1586,7 +1691,8 @@
             related: ["Gauche (adj)"],
             synonyms: "Social blunder, tactlessness, clumsiness, faux pas",
             antonyms: "Finesse, diplomacy, tact, poise, savoir-faire",
-            traits: ["Noun form of gauche.", "Lacks tact & diplomacy in high-society gatherings.", "Opposite of adroitness and elegance."] 
+            traits: ["Noun form of gauche.", "Lacks tact & diplomacy in high-society gatherings.", "Opposite of adroitness and elegance."],
+            example: "Apologizing immediately for his unintentional gaucherie, he tried desperately to steer the conversation toward a much lighter topic." 
           },
           { 
             word: "Adroit", 
@@ -1598,7 +1704,8 @@
             related: ["Adroitness (n)", "Adroitly (adv)"],
             synonyms: "Resourceful, ingenious, nimble-witted, deft",
             antonyms: "Gauche, clumsy, maladroit, unskillful",
-            traits: ["Mental and verbal dexterity.", "Quick-witted in emergencies and legal disputes.", "Opposite of gauche."] 
+            traits: ["Mental and verbal dexterity.", "Quick-witted in emergencies and legal disputes.", "Opposite of gauche."],
+            example: "The adroit diplomat skillfully navigated the tense negotiations, successfully brokering a peace treaty between the two warring nations." 
           },
           { 
             word: "Anthropology", 
@@ -1610,7 +1717,8 @@
             related: ["Anthropologist (n)", "Anthropological (adj)"],
             synonyms: "Science of humanity, cultural anthropology",
             antonyms: "—",
-            traits: ["Practitioner: anthropologist.", "Adjective: anthropological.", "Covers human evolution and primitive societies."] 
+            traits: ["Practitioner: anthropologist.", "Adjective: anthropological.", "Covers human evolution and primitive societies."],
+            example: "The university professor dedicated his career to anthropology, meticulously studying the ancient cultural practices of indigenous Amazonian tribes." 
           },
           { 
             word: "Philanthropist", 
@@ -1622,7 +1730,8 @@
             related: ["Philanthropy (n)", "Philanthropic (adj)"],
             synonyms: "Benefactor, humanitarian, patron, donor",
             antonyms: "Misanthrope, misanthropist, skinflint",
-            traits: ["Practice: philanthropy.", "Adjective: philanthropic.", "Generously finances hospitals, schools, and charities."] 
+            traits: ["Practice: philanthropy.", "Adjective: philanthropic.", "Generously finances hospitals, schools, and charities."],
+            example: "The renowned philanthropist established an educational foundation that funded full scholarships for thousands of talented but marginalized students." 
           },
           { 
             word: "Gynecologist", 
@@ -1634,7 +1743,8 @@
             related: ["Gynecology (n)", "Gynecological (adj)"],
             synonyms: "Women's doctor, OB-GYN physician",
             antonyms: "—",
-            traits: ["Field: gynecology.", "Adjective: gynecological.", "Dedicated women's reproductive health doctor."] 
+            traits: ["Field: gynecology.", "Adjective: gynecological.", "Dedicated women's reproductive health doctor."],
+            example: "She consulted an experienced gynecologist to discuss her reproductive health and carefully evaluate her options for family planning." 
           },
           { 
             word: "Monogamy", 
@@ -1646,7 +1756,8 @@
             related: ["Monogamist (n)", "Monogamous (adj)"],
             synonyms: "Single marriage, pair-bonding",
             antonyms: "Polygamy, bigamy, plural marriage",
-            traits: ["Person: monogamist.", "Adjective: monogamous.", "Standard legal custom in Western civilization."] 
+            traits: ["Person: monogamist.", "Adjective: monogamous.", "Standard legal custom in Western civilization."],
+            example: "Most modern societies legally mandate monogamy, strictly prohibiting individuals from being married to more than one person simultaneously." 
           },
           { 
             word: "Bigamy", 
@@ -1658,7 +1769,8 @@
             related: ["Bigamist (n)", "Bigamous (adj)"],
             synonyms: "Dual marriage, illegal second marriage",
             antonyms: "Monogamy",
-            traits: ["Person: bigamist.", "Adjective: bigamous.", "Considered a criminal offense in civil legal codes."] 
+            traits: ["Person: bigamist.", "Adjective: bigamous.", "Considered a criminal offense in civil legal codes."],
+            example: "When his secret second family was unexpectedly discovered, he was immediately arrested and formally charged with the crime of bigamy." 
           },
           { 
             word: "Polygamy", 
@@ -1670,7 +1782,8 @@
             related: ["Polygamist (n)", "Polygamous (adj)"],
             synonyms: "Plural marriage, multi-spouse marriage",
             antonyms: "Monogamy",
-            traits: ["Person: polygamist.", "Adjective: polygamous.", "Umbrella term encompassing both polygyny and polyandry."] 
+            traits: ["Person: polygamist.", "Adjective: polygamous.", "Umbrella term encompassing both polygyny and polyandry."],
+            example: "Some historical texts suggest that polygamy was a common practice among tribal leaders to form crucial political alliances." 
           },
           { 
             word: "Polygyny", 
@@ -1682,7 +1795,8 @@
             related: ["Polygynist (n)", "Polygynous (adj)"],
             synonyms: "Multiple wives custom",
             antonyms: "Polyandry, monogyny",
-            traits: ["Person: polygynist.", "Adjective: polygynous.", "Specific anthropological term for multiple wives."] 
+            traits: ["Person: polygynist.", "Adjective: polygynous.", "Specific anthropological term for multiple wives."],
+            example: "Within that specific patriarchal culture, polygyny was permitted, allowing a wealthy man to support and marry multiple wives." 
           },
           { 
             word: "Polyandry", 
@@ -1694,7 +1808,8 @@
             related: ["Polyandrist (n)", "Polyandrous (adj)"],
             synonyms: "Multiple husbands custom",
             antonyms: "Polygyny, monogamy",
-            traits: ["Person: polyandrist.", "Adjective: polyandrous.", "Practiced historically in specific Himalayan regions."] 
+            traits: ["Person: polyandrist.", "Adjective: polyandrous.", "Practiced historically in specific Himalayan regions."],
+            example: "In certain resource-scarce mountainous regions, polyandry was historically practiced to prevent the division of inherited agricultural land." 
           },
           { 
             word: "Misanthropy", 
@@ -1706,7 +1821,8 @@
             related: ["Misanthrope (n)", "Misanthropic (adj)"],
             synonyms: "Cynicism, distrust of humanity",
             antonyms: "Philanthropy, humanitarianism",
-            traits: ["Person: misanthrope / misanthropist.", "Adjective: misanthropic.", "Deeply cynical worldview."] 
+            traits: ["Person: misanthrope / misanthropist.", "Adjective: misanthropic.", "Deeply cynical worldview."],
+            example: "His deepening misanthropy was evident as he increasingly isolated himself, loudly criticizing every aspect of modern human behavior." 
           },
           { 
             word: "Misogyny", 
@@ -1718,7 +1834,8 @@
             related: ["Misogynist (n)", "Misogynistic (adj)"],
             synonyms: "Anti-woman bias, female prejudice",
             antonyms: "Philogyny, feminism",
-            traits: ["Person: misogynist.", "Adjectives: misogynous, misogynistic.", "Rooted in gender hostility."] 
+            traits: ["Person: misogynist.", "Adjectives: misogynous, misogynistic.", "Rooted in gender hostility."],
+            example: "The widespread misogyny prevalent in that corporate culture made it incredibly difficult for talented women to reach leadership positions." 
           },
           { 
             word: "Misogamy", 
@@ -1730,7 +1847,8 @@
             related: ["Misogamist (n)", "Misogamous (adj)"],
             synonyms: "Anti-matrimonialism",
             antonyms: "Philogamy",
-            traits: ["Person: misogamist.", "Adjective: misogamous.", "Avoids matrimony."] 
+            traits: ["Person: misogamist.", "Adjective: misogamous.", "Avoids matrimony."],
+            example: "Driven by a deep-seated misogamy resulting from a bitter divorce, he vowed never to enter into the institution of marriage again." 
           },
           { 
             word: "Asceticism", 
@@ -1742,7 +1860,78 @@
             related: ["Ascetic (n & adj)", "Ascetically (adv)"],
             synonyms: "Austerity, self-denial, monasticism",
             antonyms: "Hedonism, indulgence, sybaritism, luxury",
-            traits: ["Person & Adj: ascetic.", "Rejects worldly comfort.", "Aimed at spiritual purification."] 
+            traits: ["Person & Adj: ascetic.", "Rejects worldly comfort.", "Aimed at spiritual purification."],
+            example: "The guru's practice of extreme asceticism involved prolonged periods of fasting and enduring harsh weather conditions without adequate shelter." 
+          }          },
+          { 
+            word: "Anthropocentric", 
+            phonetic: "an-thrÉ™-pÅ-SEN-trik", 
+            hindi: "à¤®à¤¾à¤¨à¤µà¤•à¥‡à¤‚à¤¦à¥à¤°à¤¿à¤¤ (à¤®à¤¾à¤¨à¤µ à¤•à¥‹ à¤¸à¤°à¥à¤µà¤¶à¥à¤°à¥‡à¤·à¥à¤  à¤®à¤¾à¤¨à¤¨à¥‡ à¤µà¤¾à¤²à¤¾)",
+            root: "Greek 'anthropos' (human) + 'kentron' (center)", 
+            quote: "An anthropocentric view puts humans at the center of existence.", 
+            meaning: "Regarding humankind as the central or most important element of existence.", 
+            related: ["Anthropocentrism (n)", "Anthropocentricity (n)"],
+            synonyms: "Human-centered, homocentric",
+            antonyms: "Biocentric, ecocentric",
+            traits: ["Prioritizes human needs above all.", "Often associated with environmental exploitation.", "A philosophical perspective on man's place."],
+            example: "The philosopher argued that our anthropocentric worldview prevents us from fully recognizing the intrinsic rights of other conscious animal species.",
+            isBonus: true
+          },
+          { 
+            word: "Andromania", 
+            phonetic: "an-drÉ™-MAY-nee-É™", 
+            hindi: "à¤ªà¥à¤°à¥à¤·à¥‹à¤‚ à¤•à¥‡ à¤ªà¥à¤°à¤¤à¤¿ à¤…à¤¤à¥à¤¯à¤§à¤¿à¤• à¤†à¤•à¤°à¥à¤·à¤£ / à¤ªà¥à¤°à¥à¤·-à¤‰à¤¨à¥à¤®à¤¾à¤¦",
+            root: "Greek 'andros' (male) + 'mania' (madness)", 
+            quote: "An obsessive, irrational fascination with men.", 
+            meaning: "An obsessive fascination or abnormal preoccupation with men.", 
+            related: ["Andromaniac (n)"],
+            synonyms: "Male obsession, nymphomania (related)",
+            antonyms: "Misandry, androphobia",
+            traits: ["Involves psychological obsession.", "Focuses exclusively on males.", "Historical clinical term."],
+            example: "Psychological literature from the nineteenth century occasionally used the term andromania to describe a compulsive obsession with men.",
+            isBonus: true
+          },
+          { 
+            word: "Gynandrous", 
+            phonetic: "jÉ™-NAN-drÉ™s", 
+            hindi: "à¤‰à¤­à¤¯à¤²à¤¿à¤‚à¤—à¥€ (à¤¨à¤°-à¤®à¤¾à¤¦à¤¾ à¤¦à¥‹à¤¨à¥‹à¤‚ à¤…à¤‚à¤—à¥‹à¤‚ à¤µà¤¾à¤²à¤¾)",
+            root: "Greek 'gyne' (woman) + 'andros' (man) + '-ous'", 
+            quote: "Having both male and female characteristics.", 
+            meaning: "Having both male and female reproductive organs, especially in botany.", 
+            related: ["Gynandromorph (n)", "Gynandry (n)"],
+            synonyms: "Hermaphroditic, androgynous, bisexual (botany)",
+            antonyms: "Dioecious, unisexual",
+            traits: ["Biological/botanical classification.", "Features dual reproductive systems.", "Often found in orchid species."],
+            example: "Many species of orchids are classified as gynandrous because their male and female reproductive parts are fused together.",
+            isBonus: true
+          },
+          { 
+            word: "Monomania", 
+            phonetic: "mon-É™-MAY-nee-É™", 
+            hindi: "à¤à¤• à¤¹à¥€ à¤¬à¤¾à¤¤ à¤•à¥€ à¤§à¥à¤¨ / à¤à¤• à¤µà¤¿à¤·à¤¯ à¤•à¤¾ à¤œà¥à¤¨à¥‚à¤¨",
+            root: "Greek 'monos' (one) + 'mania' (madness)", 
+            quote: "Captain Ahab's pursuit of the white whale was classic monomania.", 
+            meaning: "An exaggerated or obsessive enthusiasm for or preoccupation with one single subject.", 
+            related: ["Monomaniac (n)", "Monomaniacal (adj)"],
+            synonyms: "Obsession, fixation, preoccupation",
+            antonyms: "Indifference, apathy, disinterest",
+            traits: ["Intense focus on a singular subject.", "Can interfere with daily life.", "Characterized by psychological fixation."],
+            example: "His absolute monomania regarding vintage stamp collecting caused him to spend his entire life savings on a single rare specimen.",
+            isBonus: true
+          },
+          { 
+            word: "Misandrist", 
+            phonetic: "mis-AN-drist", 
+            hindi: "à¤ªà¥à¤°à¥à¤·-à¤¦à¥à¤µà¥‡à¤·à¥€ (à¤ªà¥à¤°à¥à¤·à¥‹à¤‚ à¤¸à¥‡ à¤˜à¥ƒà¤£à¤¾ à¤•à¤°à¤¨à¥‡ à¤µà¤¾à¤²à¤¾)",
+            root: "Greek 'misein' (to hate) + 'andros' (man) + '-ist'", 
+            quote: "A misandrist views all men with suspicion and contempt.", 
+            meaning: "A person who dislikes, despises, or is strongly prejudiced against men.", 
+            related: ["Misandry (n)", "Misandric (adj)"],
+            synonyms: "Man-hater, androphobe",
+            antonyms: "Philandrist, egalitarian",
+            traits: ["Exhibits prejudice against males.", "Counterpart to misogynist.", "Root misein = to hate + andros = man."],
+            example: "The controversial author was frequently labeled a misandrist by critics because her novels consistently portrayed male characters as inherently deceitful.",
+            isBonus: true
           }
         ],
         matchingOptions: [
@@ -1793,7 +1982,8 @@
             related: ["Internal (adj)", "Internalize (v)"],
             synonyms: "Diagnostician, internal medicine physician, clinical expert",
             antonyms: "Surgeon (purely operative specialist)",
-            traits: ["Performs thorough physical exams.", "Uses blood tests, X-rays, ECGs to find root causes.", "Diagnoses complex internal ailments."] 
+            traits: ["Performs thorough physical exams.", "Uses blood tests, X-rays, ECGs to find root causes.", "Diagnoses complex internal ailments."],
+            example: "The internist carefully reviewed my comprehensive blood test results before recommending a specialized treatment plan for my chronic fatigue." 
           },
           { 
             word: "Gynecologist", 
@@ -1817,7 +2007,8 @@
             related: ["Obstetrics (n)", "Obstetric (adj)", "Obstetrical (adj)"],
             synonyms: "Accoucheur, childbirth doctor, maternity specialist",
             antonyms: "—",
-            traits: ["Oversees prenatal care & labor delivery.", "Field: obstetrics; Adj: obstetric.", "Ensures safety of both mother and newborn infant."] 
+            traits: ["Oversees prenatal care & labor delivery.", "Field: obstetrics; Adj: obstetric.", "Ensures safety of both mother and newborn infant."],
+            example: "The dedicated obstetrician rushed to the hospital in the middle of the night to skillfully deliver the premature twins." 
           },
           { 
             word: "Pediatrician", 
@@ -1829,7 +2020,8 @@
             related: ["Pediatrics (n)", "Pediatric (adj)"],
             synonyms: "Child specialist, baby physician",
             antonyms: "Geriatrician (doctor for the elderly)",
-            traits: ["Limits practice to youngsters.", "Supervises inoculations, diet, and growth.", "Field: pediatrics; Adj: pediatric."] 
+            traits: ["Limits practice to youngsters.", "Supervises inoculations, diet, and growth.", "Field: pediatrics; Adj: pediatric."],
+            example: "The gentle pediatrician easily calmed the crying toddler, making the routine vaccination process completely stress-free for the anxious parents." 
           },
           { 
             word: "Dermatologist", 
@@ -1841,7 +2033,8 @@
             related: ["Dermatology (n)", "Dermatological (adj)", "Dermatitis (n)"],
             synonyms: "Skin specialist, skin physician",
             antonyms: "—",
-            traits: ["Treats acne, eczema, psoriasis, and skin cancer.", "Focuses on outer skin covering.", "Field: dermatology; Adj: dermatological."] 
+            traits: ["Treats acne, eczema, psoriasis, and skin cancer.", "Focuses on outer skin covering.", "Field: dermatology; Adj: dermatological."],
+            example: "After examining the suspicious mole, the dermatologist immediately scheduled a biopsy to rule out any possibility of dangerous melanoma." 
           },
           { 
             word: "Ophthalmologist", 
@@ -1853,7 +2046,8 @@
             related: ["Ophthalmology (n)", "Ophthalmological (adj)"],
             synonyms: "Eye physician, oculist, eye surgeon",
             antonyms: "—",
-            traits: ["Treats myopia, cataracts, glaucoma.", "Full medical doctor & eye surgeon.", "Field: ophthalmology; Adj: ophthalmological."] 
+            traits: ["Treats myopia, cataracts, glaucoma.", "Full medical doctor & eye surgeon.", "Field: ophthalmology; Adj: ophthalmological."],
+            example: "The expert ophthalmologist performed a flawless cataract surgery, fully restoring the elderly patient's previously clouded vision within minutes." 
           },
           { 
             word: "Orthopedist", 
@@ -1865,7 +2059,8 @@
             related: ["Orthopedics (n)", "Orthopedic (adj)"],
             synonyms: "Bone specialist, orthopedic surgeon",
             antonyms: "—",
-            traits: ["Treats fractures, slipped discs, clubfoot.", "Uses braces & corrective bone surgery.", "Field: orthopedics; Adj: orthopedic."] 
+            traits: ["Treats fractures, slipped discs, clubfoot.", "Uses braces & corrective bone surgery.", "Field: orthopedics; Adj: orthopedic."],
+            example: "The orthopedist recommended a grueling six-month physical therapy regimen to properly rehabilitate the athlete's severely torn knee ligaments." 
           },
           { 
             word: "Cardiologist", 
@@ -1877,7 +2072,8 @@
             related: ["Cardiology (n)", "Cardiological (adj)", "Cardiac (adj)"],
             synonyms: "Heart specialist, cardiovascular doctor",
             antonyms: "—",
-            traits: ["Diagnoses heart attacks & arrhythmias.", "Interprets electrocardiograms (ECGs).", "Field: cardiology; Adj: cardiological."] 
+            traits: ["Diagnoses heart attacks & arrhythmias.", "Interprets electrocardiograms (ECGs).", "Field: cardiology; Adj: cardiological."],
+            example: "Following his mild heart attack, the cardiologist prescribed a strict low-sodium diet and a daily regimen of cardiovascular exercise." 
           },
           { 
             word: "Neurologist", 
@@ -1889,7 +2085,8 @@
             related: ["Neurology (n)", "Neurological (adj)", "Neuralgia (n)"],
             synonyms: "Nerve specialist, brain physician",
             antonyms: "—",
-            traits: ["Treats epilepsy, stroke, neuropathy, Parkinson's.", "Focuses on organic nerve disorders.", "Field: neurology; Adj: neurological."] 
+            traits: ["Treats epilepsy, stroke, neuropathy, Parkinson's.", "Focuses on organic nerve disorders.", "Field: neurology; Adj: neurological."],
+            example: "The neurologist ordered an extensive MRI scan to precisely determine the root cause of the patient's sudden and debilitating migraines." 
           },
           { 
             word: "Psychiatrist", 
@@ -1901,7 +2098,8 @@
             related: ["Psychiatry (n)", "Psychiatric (adj)", "Psychotherapy (n)"],
             synonyms: "Mind healer, mental health physician, alienist",
             antonyms: "—",
-            traits: ["Uses psychotherapy and pharmaceuticals.", "Alleviates severe neuroses & psychoses.", "Field: psychiatry; Adj: psychiatric."] 
+            traits: ["Uses psychotherapy and pharmaceuticals.", "Alleviates severe neuroses & psychoses.", "Field: psychiatry; Adj: psychiatric."],
+            example: "The compassionate psychiatrist effectively combined cognitive behavioral therapy with a carefully monitored medication plan to treat her severe depression." 
           }
         ],
         matchingOptions: [
@@ -1944,7 +2142,8 @@
             related: ["Internship (n)"],
             synonyms: "Resident doctor, medical apprentice, clinical trainee",
             antonyms: "Consultant, attending specialist",
-            traits: ["Distinct from internist.", "Serves clinical apprenticeship inside hospital.", "Under supervision of senior physicians."] 
+            traits: ["Distinct from internist.", "Serves clinical apprenticeship inside hospital.", "Under supervision of senior physicians."],
+            example: "The ambitious hospital intern worked exhausting eighty-hour weeks, eager to learn surgical techniques from the highly experienced attending physicians." 
           },
           { 
             word: "Obstetrics", 
@@ -1956,7 +2155,8 @@
             related: ["Obstetrician (n)", "Obstetric (adj)", "Obstetrical (adj)"],
             synonyms: "Midwifery, maternal care, labor science",
             antonyms: "—",
-            traits: ["Practitioner: obstetrician.", "Adjectives: obstetric, obstetrical.", "Recognized field since 1834."] 
+            traits: ["Practitioner: obstetrician.", "Adjectives: obstetric, obstetrical.", "Recognized field since 1834."],
+            example: "She chose to specialize in obstetrics because she found immense profound joy in helping mothers safely bring new life into the world." 
           },
           { 
             word: "Pediatrics", 
@@ -1968,7 +2168,8 @@
             related: ["Pediatrician (n)", "Pediatric (adj)"],
             synonyms: "Child medicine, infant care",
             antonyms: "Geriatrics (elderly medicine)",
-            traits: ["Practitioner: pediatrician.", "Adjective: pediatric.", "Contrast with Latin 'pedis' (foot)."] 
+            traits: ["Practitioner: pediatrician.", "Adjective: pediatric.", "Contrast with Latin 'pedis' (foot)."],
+            example: "The newly built hospital wing dedicated to pediatrics was decorated with bright, cheerful murals to help comfort sick children." 
           },
           { 
             word: "Pedagogy", 
@@ -1980,7 +2181,8 @@
             related: ["Pedagogical (adj)", "Pedagogue (n)"],
             synonyms: "Teaching methodology, educational science, instruction",
             antonyms: "—",
-            traits: ["Adjective: pedagogical.", "Literally 'the leading of children'.", "Core curriculum for teachers and educators."] 
+            traits: ["Adjective: pedagogical.", "Literally 'the leading of children'.", "Core curriculum for teachers and educators."],
+            example: "The professor's innovative pedagogy involved interactive group projects rather than traditional, boring lectures, significantly boosting overall student engagement." 
           },
           { 
             word: "Pedagogue", 
@@ -1992,7 +2194,8 @@
             related: ["Pedagoguery (n)", "Pedagogic (adj)"],
             synonyms: "Dogmatic teacher, pedant, strict tutor",
             antonyms: "Progressive educator, inspiring mentor",
-            traits: ["Deteriorated in meaning over time.", "Used as a word of contempt.", "Lacks progressive flexibility."] 
+            traits: ["Deteriorated in meaning over time.", "Used as a word of contempt.", "Lacks progressive flexibility."],
+            example: "The strict, old-fashioned pedagogue demanded absolute silence in his classroom and severely punished any student who dared to whisper." 
           },
           { 
             word: "Demagogue", 
@@ -2004,7 +2207,8 @@
             related: ["Demagoguery (n)", "Demagogic (adj)"],
             synonyms: "Rabble-rouser, agitator, political instigator, populist",
             antonyms: "Statesman, principled leader, diplomat",
-            traits: ["Practice: demagoguery.", "Adjective: demagogic.", "Misleads masses via wild oratory and false promises."] 
+            traits: ["Practice: demagoguery.", "Adjective: demagogic.", "Misleads masses via wild oratory and false promises."],
+            example: "The charismatic demagogue easily manipulated the angry crowd by appealing to their deepest fears and exploiting their economic frustrations." 
           },
           { 
             word: "Demagoguery", 
@@ -2016,7 +2220,8 @@
             related: ["Demagogic (adj)"],
             synonyms: "Rabble-rousing, inflammatory rhetoric, populist pandering",
             antonyms: "Statesmanship, thoughtful governance",
-            traits: ["Noun form of demagogue.", "Exploits societal grievances.", "Self-serving political manipulation."] 
+            traits: ["Noun form of demagogue.", "Exploits societal grievances.", "Self-serving political manipulation."],
+            example: "His political campaign was entirely built on deceitful demagoguery, utilizing inflammatory rhetoric rather than offering any realistic policy solutions." 
           },
           { 
             word: "Dermatology", 
@@ -2028,7 +2233,8 @@
             related: ["Dermatologist (n)", "Dermatological (adj)"],
             synonyms: "Skin science, cutaneology",
             antonyms: "—",
-            traits: ["Practitioner: dermatologist.", "Adjective: dermatological.", "Covers all layers of the epidermis and dermis."] 
+            traits: ["Practitioner: dermatologist.", "Adjective: dermatological.", "Covers all layers of the epidermis and dermis."],
+            example: "Advances in modern dermatology have successfully provided effective laser treatments for severe acne scarring that was previously considered permanent." 
           },
           { 
             word: "Hypodermic", 
@@ -2040,7 +2246,8 @@
             related: ["Hypodermically (adv)"],
             synonyms: "Subcutaneous, under-the-skin",
             antonyms: "Epidermal, surface, topical",
-            traits: ["Greek hypos = under.", "Enters subcutaneous layer.", "Essential for vaccines and serums."] 
+            traits: ["Greek hypos = under.", "Enters subcutaneous layer.", "Essential for vaccines and serums."],
+            example: "The nurse efficiently prepared the hypodermic needle to administer a precise dose of life-saving adrenaline to the allergic patient." 
           },
           { 
             word: "Epidermis", 
@@ -2052,7 +2259,8 @@
             related: ["Epidermal (adj)", "Epidermic (adj)"],
             synonyms: "Cuticle, outer skin layer",
             antonyms: "Endodermis, deep dermis",
-            traits: ["Outermost protective biological barrier.", "Constantly sheds and renews cells.", "Shields internal tissues."] 
+            traits: ["Outermost protective biological barrier.", "Constantly sheds and renews cells.", "Shields internal tissues."],
+            example: "A severe superficial burn will intensely damage the outer epidermis, causing painful blistering and requiring immediate cooling and specialized ointments." 
           },
           { 
             word: "Taxidermist", 
@@ -2064,7 +2272,8 @@
             related: ["Taxidermy (n)"],
             synonyms: "Animal skin preserver, specimen mounter",
             antonyms: "—",
-            traits: ["Business: taxidermy.", "Mounts wildlife specimens for museums and hunters.", "Preserves animal hides."] 
+            traits: ["Business: taxidermy.", "Mounts wildlife specimens for museums and hunters.", "Preserves animal hides."],
+            example: "The skilled taxidermist meticulously preserved the prized hunting trophy, making the majestic stag look as though it were still alive." 
           },
           { 
             word: "Pachyderm", 
@@ -2076,7 +2285,8 @@
             related: ["Pachydermatous (adj)"],
             synonyms: "Thick-skinned beast, elephant, insensitive person",
             antonyms: "Thin-skinned organism, hypersensitive person",
-            traits: ["Greek pachys = thick.", "Literally translates to 'thick skin'.", "Used humorously for insensitive, thick-skinned people."] 
+            traits: ["Greek pachys = thick.", "Literally translates to 'thick skin'.", "Used humorously for insensitive, thick-skinned people."],
+            example: "The colossal African elephant, a well-known pachyderm, gracefully lumbered across the vast savanna in search of a fresh water source." 
           },
           { 
             word: "Dermatitis", 
@@ -2088,7 +2298,8 @@
             related: ["Dermatitic (adj)"],
             synonyms: "Eczema, skin rash, irritation, inflammation",
             antonyms: "Healthy clear skin",
-            traits: ["Suffix -itis always indicates inflammation.", "Includes rashes, allergies, and eczema.", "Treated by dermatologists."] 
+            traits: ["Suffix -itis always indicates inflammation.", "Includes rashes, allergies, and eczema.", "Treated by dermatologists."],
+            example: "His severe allergic reaction to the harsh chemical cleaner resulted in a painful, itchy outbreak of contact dermatitis on his hands." 
           },
           { 
             word: "Ophthalmology", 
@@ -2100,7 +2311,8 @@
             related: ["Ophthalmologist (n)", "Ophthalmological (adj)"],
             synonyms: "Eye medicine, ophthalmic science",
             antonyms: "—",
-            traits: ["Practitioner: ophthalmologist.", "Adjective: ophthalmological.", "Full medical & surgical discipline."] 
+            traits: ["Practitioner: ophthalmologist.", "Adjective: ophthalmological.", "Full medical & surgical discipline."],
+            example: "She decided to specialize in ophthalmology after witnessing her grandmother's vision restored through successful cataract surgery." 
           },
           { 
             word: "Oculist", 
@@ -2112,7 +2324,8 @@
             related: ["Ocular (adj)"],
             synonyms: "Ophthalmologist, eye specialist",
             antonyms: "—",
-            traits: ["Derived from Latin oculus.", "Replaced largely by ophthalmologist in modern medicine.", "Medical eye specialist."] 
+            traits: ["Derived from Latin oculus.", "Replaced largely by ophthalmologist in modern medicine.", "Medical eye specialist."],
+            example: "In the early twentieth century, you would typically visit a local oculist to get a basic prescription for your reading glasses." 
           },
           { 
             word: "Ocular", 
@@ -2136,7 +2349,8 @@
             related: ["Monocled (adj)"],
             synonyms: "Single lens, eye piece",
             antonyms: "Binoculars, eyeglasses",
-            traits: ["Used for one eye only.", "Vintage symbol of aristocracy.", "Early corrective lens."] 
+            traits: ["Used for one eye only.", "Vintage symbol of aristocracy.", "Early corrective lens."],
+            example: "The wealthy, aristocratic villain in the classic film casually adjusted his polished monocle before delivering his chilling, dramatic monologue." 
           },
           { 
             word: "Binoculars", 
@@ -2148,7 +2362,8 @@
             related: ["Binocular (adj)"],
             synonyms: "Field glasses, spyglass, opera glasses",
             antonyms: "Monocle",
-            traits: ["Increases range of both eyes simultaneously.", "Provides stereoscopic 3D vision.", "Used for outdoors & navigation."] 
+            traits: ["Increases range of both eyes simultaneously.", "Provides stereoscopic 3D vision.", "Used for outdoors & navigation."],
+            example: "The enthusiastic birdwatcher heavily relied on her expensive, high-powered binoculars to clearly identify rare avian species nesting in the distant canopy." 
           },
           { 
             word: "Inoculate", 
@@ -2160,7 +2375,8 @@
             related: ["Inoculation (n)", "Inoculated (adj)"],
             synonyms: "Vaccinate, immunize, inject",
             antonyms: "Infect, contaminate",
-            traits: ["Spelling note: single 'n' (inoculate).", "Creates a microscopic puncture in skin.", "Prevents viral epidemics."] 
+            traits: ["Spelling note: single 'n' (inoculate).", "Creates a microscopic puncture in skin.", "Prevents viral epidemics."],
+            example: "The health department launched a massive public campaign to inoculate every child in the district against the highly contagious measles virus." 
           },
           { 
             word: "Optometrist", 
@@ -2172,7 +2388,8 @@
             related: ["Optometry (n)", "Optometric (adj)"],
             synonyms: "Vision tester, refractionist",
             antonyms: "Ophthalmologist (eye surgeon)",
-            traits: ["Not a medical doctor / surgeon.", "Field: optometry; Adj: optometric.", "Measures refractive errors & tests glaucoma."] 
+            traits: ["Not a medical doctor / surgeon.", "Field: optometry; Adj: optometric.", "Measures refractive errors & tests glaucoma."],
+            example: "The friendly optometrist thoroughly tested my vision and quickly prescribed a stronger set of lenses for my deteriorating nearsightedness." 
           },
           { 
             word: "Optician", 
@@ -2184,7 +2401,8 @@
             related: ["Optics (n)", "Optical (adj)"],
             synonyms: "Lens grinder, spectacle maker, optical dispenser",
             antonyms: "—",
-            traits: ["Fills prescriptions from eye doctors.", "Field: optics; Adj: optical.", "Grinds and fits lenses."] 
+            traits: ["Fills prescriptions from eye doctors.", "Field: optics; Adj: optical.", "Grinds and fits lenses."],
+            example: "After receiving my new prescription, the optician expertly helped me select a stylish, lightweight titanium frame that perfectly suited my face." 
           }
         ],
         matchingOptions: [
@@ -2237,7 +2455,8 @@
             related: ["Orthopedist (n)", "Orthopedic (adj)"],
             synonyms: "Bone surgery, musculoskeletal repair",
             antonyms: "—",
-            traits: ["Practitioner: orthopedist.", "Adjective: orthopedic.", "Treats fractures, spine curvature, and joints."] 
+            traits: ["Practitioner: orthopedist.", "Adjective: orthopedic.", "Treats fractures, spine curvature, and joints."],
+            example: "The hospital's specialized department of orthopedics recently acquired a state-of-the-art robotic surgical system to assist with complex spinal fusion procedures." 
           },
           { 
             word: "Orthodontia", 
@@ -2249,7 +2468,8 @@
             related: ["Orthodontist (n)", "Orthodontic (adj)"],
             synonyms: "Teeth straightening, dental alignment",
             antonyms: "—",
-            traits: ["Practitioner: orthodontist.", "Adjective: orthodontic.", "Uses braces to align teeth and correct buck teeth."] 
+            traits: ["Practitioner: orthodontist.", "Adjective: orthodontic.", "Uses braces to align teeth and correct buck teeth."],
+            example: "Thanks to modern advancements in orthodontia, her severely misaligned teeth were completely straightened using practically invisible clear aligners over two years." 
           },
           { 
             word: "Cardiology", 
@@ -2261,7 +2481,8 @@
             related: ["Cardiologist (n)", "Cardiological (adj)", "Cardiac (adj)"],
             synonyms: "Heart medicine, cardiovascular science",
             antonyms: "—",
-            traits: ["Practitioner: cardiologist.", "Adjective: cardiological.", "Diagnoses heart ailments and valve defects."] 
+            traits: ["Practitioner: cardiologist.", "Adjective: cardiological.", "Diagnoses heart ailments and valve defects."],
+            example: "He pursued a demanding fellowship in cardiology, driven by a strong desire to combat the rising epidemic of coronary heart disease." 
           },
           { 
             word: "Cardiac", 
@@ -2273,7 +2494,8 @@
             related: ["Cardially (adv)"],
             synonyms: "Cardiovascular, coronary, myocardial",
             antonyms: "Non-cardiac",
-            traits: ["Adjective referring to the heart.", "Malfunctioning or physiology of heart.", "Cardiovascular health."] 
+            traits: ["Adjective referring to the heart.", "Malfunctioning or physiology of heart.", "Cardiovascular health."],
+            example: "The emergency response team immediately initiated CPR when the elderly marathon runner suffered sudden cardiac arrest right near the finish line." 
           },
           { 
             word: "Cardiogram", 
@@ -2285,7 +2507,8 @@
             related: ["Electrocardiogram (ECG)"],
             synonyms: "ECG printout, heartbeat tracing",
             antonyms: "—",
-            traits: ["Physical printout / record produced.", "Shows electrical pulses of the heart.", "Diagnoses arrhythmias."] 
+            traits: ["Physical printout / record produced.", "Shows electrical pulses of the heart.", "Diagnoses arrhythmias."],
+            example: "The physician meticulously analyzed the jagged lines of the patient's cardiogram, searching for any subtle irregularities in the heart's electrical rhythm." 
           },
           { 
             word: "Cardiograph", 
@@ -2297,7 +2520,8 @@
             related: ["Cardiography (n)"],
             synonyms: "ECG machine, heartbeat recorder",
             antonyms: "—",
-            traits: ["The recording machine.", "Generates cardiograms.", "Clinical cardiac monitor."] 
+            traits: ["The recording machine.", "Generates cardiograms.", "Clinical cardiac monitor."],
+            example: "The hospital technician carefully calibrated the sensitive cardiograph machine before conducting the comprehensive stress test on the recovering patient." 
           },
           { 
             word: "Neurology", 
@@ -2309,7 +2533,8 @@
             related: ["Neurologist (n)", "Neurological (adj)"],
             synonyms: "Neural science, nervous system medicine",
             antonyms: "—",
-            traits: ["Practitioner: neurologist.", "Adjective: neurological.", "Covers brain & spinal cord."] 
+            traits: ["Practitioner: neurologist.", "Adjective: neurological.", "Covers brain & spinal cord."],
+            example: "A breakthrough study published in a prestigious neurology journal revealed completely new insights into how the human brain processes complex traumatic memories." 
           },
           { 
             word: "Neuralgia", 
@@ -2321,7 +2546,8 @@
             related: ["Neuralgic (adj)"],
             synonyms: "Nerve pain, neurodynia",
             antonyms: "Analgesia (painlessness)",
-            traits: ["Root algos = pain.", "Sharp nerve ache.", "Common in facial nerves."] 
+            traits: ["Root algos = pain.", "Sharp nerve ache.", "Common in facial nerves."],
+            example: "She suffered from debilitating trigeminal neuralgia, which sent sharp, agonizing shocks of intense pain across the right side of her face." 
           },
           { 
             word: "Neuritis", 
@@ -2333,7 +2559,8 @@
             related: ["Neuritic (adj)"],
             synonyms: "Nerve inflammation",
             antonyms: "—",
-            traits: ["Suffix -itis = inflammation.", "Causes tenderness & numbness.", "Treated by neurologists."] 
+            traits: ["Suffix -itis = inflammation.", "Causes tenderness & numbness.", "Treated by neurologists."],
+            example: "The prolonged inflammation caused by optic neuritis temporarily blurred his vision and made it extremely painful for him to move his eyes." 
           },
           { 
             word: "Neurosis", 
@@ -2345,7 +2572,8 @@
             related: ["Neurotic (n & adj)", "Neurotically (adv)"],
             synonyms: "Anxiety state, emotional distress, phobia",
             antonyms: "Mental serenity, psychosis (severe break)",
-            traits: ["Does NOT lose contact with reality.", "Noun/Adj: neurotic.", "Energy spent on unproductive worry."] 
+            traits: ["Does NOT lose contact with reality.", "Noun/Adj: neurotic.", "Energy spent on unproductive worry."],
+            example: "His deep-seated fear of contamination developed into a severe neurosis, forcing him to compulsively wash his hands hundreds of times daily." 
           },
           { 
             word: "Neurotic", 
@@ -2357,7 +2585,8 @@
             related: ["Neurotically (adv)"],
             synonyms: "Overly anxious, obsessive, high-strung",
             antonyms: "Calm, balanced, composed",
-            traits: ["Both noun and adjective.", "High anxiety & compulsions.", "Personality growth hindered."] 
+            traits: ["Both noun and adjective.", "High anxiety & compulsions.", "Personality growth hindered."],
+            example: "Her neurotic tendency to obsessively double-check every lock and window often caused her to be late for important morning appointments." 
           },
           { 
             word: "Psychosis", 
@@ -2369,7 +2598,8 @@
             related: ["Psychotic (n & adj)"],
             synonyms: "Insanity, severe mental illness, delusion",
             antonyms: "Sanity, rational clarity, neurosis (milder)",
-            traits: ["Lost contact with reality.", "Severe psychiatric condition.", "Contrasts with neurosis."] 
+            traits: ["Lost contact with reality.", "Severe psychiatric condition.", "Contrasts with neurosis."],
+            example: "During his severe episode of drug-induced psychosis, he experienced terrifying visual hallucinations and completely lost touch with objective reality." 
           },
           { 
             word: "Psychotic", 
@@ -2381,7 +2611,8 @@
             related: ["Psychotically (adv)"],
             synonyms: "Delusional, deranged, insane",
             antonyms: "Sane, lucid, rational",
-            traits: ["Both noun and adjective.", "Delusions or hallucinations.", "Requires intensive psychiatric care."] 
+            traits: ["Both noun and adjective.", "Delusions or hallucinations.", "Requires intensive psychiatric care."],
+            example: "The forensic psychiatrist evaluated the suspect to determine if a genuine psychotic break had tragically compromised his judgment during the violent crime." 
           },
           { 
             word: "Psychiatry", 
@@ -2393,7 +2624,8 @@
             related: ["Psychiatrist (n)", "Psychiatric (adj)"],
             synonyms: "Mental medicine, psychotherapy",
             antonyms: "—",
-            traits: ["Practitioner: psychiatrist.", "Adjective: psychiatric.", "Uses psychotherapy & medication."] 
+            traits: ["Practitioner: psychiatrist.", "Adjective: psychiatric.", "Uses psychotherapy & medication."],
+            example: "The evolving field of psychiatry now strongly emphasizes treating mental health disorders as complex medical conditions rather than simply personal moral failings." 
           },
           { 
             word: "Geriatrics", 
@@ -2405,7 +2637,64 @@
             related: ["Geriatrician (n)", "Geriatric (adj)"],
             synonyms: "Eldercare medicine, clinical gerontology",
             antonyms: "Pediatrics (child medicine)",
-            traits: ["Practitioner: geriatrician.", "Adjective: geriatric.", "Addresses aging ailments."] 
+            traits: ["Practitioner: geriatrician.", "Adjective: geriatric.", "Addresses aging ailments."],
+            example: "The passionate nurse decided to specialize in geriatrics, dedicating her life to improving the daily comfort and medical care of elderly patients." 
+          }          },
+          { 
+            word: "Pedodontia", 
+            phonetic: "pee-dÅ-DON-shÉ™", 
+            hindi: "à¤¬à¤¾à¤² à¤¦à¤‚à¤¤ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾ (à¤¬à¤šà¥à¤šà¥‹à¤‚ à¤•à¥‡ à¤¦à¤¾à¤‚à¤¤à¥‹à¤‚ à¤•à¤¾ à¤µà¤¿à¤œà¥à¤žà¤¾à¤¨)",
+            root: "Greek 'paidos' (child) + 'odontos' (tooth)", 
+            quote: "Good dental habits formed in childhood last a lifetime.", 
+            meaning: "The branch of dentistry that deals with children's teeth.", 
+            related: ["Pedodontist (n)", "Pedodontics (n)"],
+            synonyms: "Pediatric dentistry",
+            antonyms: "â€”",
+            traits: ["Focuses on children's oral health.", "Emphasizes preventive care.", "Requires gentle patient management."],
+            example: "The dental clinic specialized in pedodontia, featuring a brightly colored waiting room filled with toys to help calm anxious young children.",
+            isBonus: true
+          },
+          { 
+            word: "Cardialgia", 
+            phonetic: "kahr-dee-AL-jÉ™", 
+            hindi: "à¤¸à¥€à¤¨à¥‡ à¤®à¥‡à¤‚ à¤œà¤²à¤¨ / à¤¹à¥ƒà¤¦à¤¯-à¤¶à¥‚à¤²",
+            root: "Greek 'kardia' (heart) + 'algos' (pain)", 
+            quote: "What seemed like a heart ailment was merely simple cardialgia.", 
+            meaning: "Pain in or near the heart; often used to describe heartburn.", 
+            related: ["Cardiac (adj)", "Analgesic (shares root algos)"],
+            synonyms: "Heartburn, pyrosis, chest pain",
+            antonyms: "â€”",
+            traits: ["Describes physical heart-area pain.", "Often confused with heart attacks.", "Usually gastrointestinal in origin."],
+            example: "After consuming a massive, heavily spiced meal late at night, he suffered from severe cardialgia that kept him completely awake until dawn.",
+            isBonus: true
+          },
+          { 
+            word: "Odontalgia", 
+            phonetic: "oh-don-TAL-jÉ™", 
+            hindi: "à¤¦à¤¾à¤‚à¤¤ à¤•à¤¾ à¤¦à¤°à¥à¤¦ / à¤¦à¤‚à¤¤-à¤¶à¥‚à¤²",
+            root: "Greek 'odontos' (tooth) + 'algos' (pain)", 
+            quote: "Few tortures are as relentless as severe odontalgia.", 
+            meaning: "A pain in a tooth; a toothache.", 
+            related: ["Odontology (n)", "Analgesia (n)"],
+            synonyms: "Toothache",
+            antonyms: "â€”",
+            traits: ["Caused by dental decay or infection.", "Can range from mild to excruciating.", "Requires prompt dental intervention."],
+            example: "The excruciating odontalgia she experienced over the weekend forced her to schedule an emergency extraction with her dentist early Monday morning.",
+            isBonus: true
+          },
+          { 
+            word: "Nostalgia", 
+            phonetic: "nos-TAL-jÉ™", 
+            hindi: "à¤…à¤¤à¥€à¤¤ à¤•à¥€ à¤¯à¤¾à¤¦ / à¤ªà¥à¤°à¤¾à¤¨à¥€ à¤¯à¤¾à¤¦à¥‹à¤‚ à¤•à¥€ à¤²à¤¾à¤²à¤¸à¤¾ / à¤—à¥ƒà¤¹-à¤µà¤¿à¤°à¤¹",
+            root: "Greek 'nostos' (return home) + 'algos' (pain)", 
+            quote: "Nostalgia paints the past in brighter, warmer colors.", 
+            meaning: "A sentimental longing for the past, typically for a period or place with happy personal associations.", 
+            related: ["Nostalgic (adj)", "Nostalgically (adv)"],
+            synonyms: "Reminiscence, wistfulness, homesickness",
+            antonyms: "Anticipation, futurism, forward-looking",
+            traits: ["Evokes strong emotional memories.", "Often triggered by music, scents, or photos.", "Mixes happiness with a sense of loss."],
+            example: "Hearing that classic nineties pop song on the radio instantly filled her with a warm, comforting wave of sweet childhood nostalgia.",
+            isBonus: true
           }
         ],
         matchingOptions: [
@@ -2453,7 +2742,9 @@
             related: ["Psychology (n)", "Psychological (adj)", "Psychologically (adv)"],
             synonyms: "Behavioral scientist, counselor, mind researcher",
             antonyms: "—",
-            traits: ["Studies what makes people act and feel.", "Employed by schools, industries, and clinical centers.", "Conducts private or group therapy."] 
+            traits: ["Studies what makes people act and feel.", "Employed by schools, industries, and clinical centers.", "Conducts private or group therapy."],
+            example: "The skilled orthodontist carefully adjusted the tension on the wire braces, ensuring that the teenager's teeth would gradually shift into perfect alignment.",
+            example: "The clinical psychologist employed cognitive behavioral techniques to help the severely traumatized veteran finally process his disturbing battlefield memories." 
           },
           { 
             word: "Psychoanalyst", 
@@ -2465,7 +2756,8 @@
             related: ["Psychoanalysis (n)", "Psychoanalytic (adj)"],
             synonyms: "Freudian therapist, depth psychologist",
             antonyms: "—",
-            traits: ["Follows techniques devised by Sigmund Freud.", "Helps interpret free-flowing ideas and dreams.", "Addresses deep-seated neuroses and anxieties."] 
+            traits: ["Follows techniques devised by Sigmund Freud.", "Helps interpret free-flowing ideas and dreams.", "Addresses deep-seated neuroses and anxieties."],
+            example: "During the intensive therapy sessions, the psychoanalyst patiently encouraged the patient to freely explore his deeply repressed childhood memories and subconscious fears." 
           },
           { 
             word: "Orthodontist", 
@@ -2513,7 +2805,8 @@
             related: ["Osteopathy (n)", "Osteopathic (adj)"],
             synonyms: "Bone manipulator, manipulative therapist",
             antonyms: "—",
-            traits: ["Founded in 1874 by Andrew T. Still.", "Believes displaced bones press on nerves and vessels.", "Holds full rights and privileges of medical doctors in most states."] 
+            traits: ["Founded in 1874 by Andrew T. Still.", "Believes displaced bones press on nerves and vessels.", "Holds full rights and privileges of medical doctors in most states."],
+            example: "The holistic osteopath utilized gentle manual manipulation techniques to properly realign the patient's spine and effectively relieve her chronic lower back pain." 
           },
           { 
             word: "Chiropractor", 
@@ -2525,7 +2818,8 @@
             related: ["Chiropractic (n & adj)"],
             synonyms: "Spinal adjuster, manual joint therapist",
             antonyms: "—",
-            traits: ["Maintains structural integrity of the nervous system.", "Applies manual pressure to spinal joints.", "Legally licensed and recognized in 45+ states."] 
+            traits: ["Maintains structural integrity of the nervous system.", "Applies manual pressure to spinal joints.", "Legally licensed and recognized in 45+ states."],
+            example: "After his minor car accident, he regularly visited a skilled chiropractor to carefully adjust his neck and restore his full range of motion." 
           },
           { 
             word: "Podiatrist", 
@@ -2537,7 +2831,8 @@
             related: ["Podiatry (n)", "Podiatric (adj)"],
             synonyms: "Chiropodist, foot doctor",
             antonyms: "—",
-            traits: ["Treats corns, calluses, bunions, and fallen arches.", "Performs minor foot surgeries and prescribes orthotics.", "Formerly known as a chiropodist."] 
+            traits: ["Treats corns, calluses, bunions, and fallen arches.", "Performs minor foot surgeries and prescribes orthotics.", "Formerly known as a chiropodist."],
+            example: "The sports podiatrist carefully analyzed the marathon runner's unusual gait and custom-designed specialized orthotic inserts to prevent further painful foot injuries." 
           },
           { 
             word: "Graphologist", 
@@ -2549,7 +2844,8 @@
             related: ["Graphology (n)", "Graphological (adj)"],
             synonyms: "Handwriting analyst, signature verifier",
             antonyms: "—",
-            traits: ["Examines stroke angles, pressure, and letter formations.", "Consulted in legal signature verifications and hiring.", "Bridges personality profiling with handwriting analysis."] 
+            traits: ["Examines stroke angles, pressure, and letter formations.", "Consulted in legal signature verifications and hiring.", "Bridges personality profiling with handwriting analysis."],
+            example: "The forensic graphologist was called to the courtroom to testify whether the suspicious signature on the disputed will was actually a clumsy forgery." 
           },
           { 
             word: "Gerontologist", 
@@ -2561,7 +2857,8 @@
             related: ["Gerontology (n)", "Gerontological (adj)"],
             synonyms: "Senior-aging researcher, elderhood specialist",
             antonyms: "Pediatrician (child doctor)",
-            traits: ["Focuses on social, economic, and non-medical aging issues.", "Contrasts with geriatrician (medical doctor for elderly).", "Designs retirement and senior community policies."] 
+            traits: ["Focuses on social, economic, and non-medical aging issues.", "Contrasts with geriatrician (medical doctor for elderly).", "Designs retirement and senior community policies."],
+            example: "The pioneering gerontologist published a groundbreaking sociological study examining how strong community ties significantly improve the overall life expectancy of the elderly." 
           }
         ],
         matchingOptions: [
@@ -2649,7 +2946,8 @@
     // Initialize App
     document.addEventListener('DOMContentLoaded', () => {
       renderSessionSidebar();
-      loadSession(1); // Open Session 1
+      loadSession(1);
+      updateProgressBar();
     });
 
     // Render 47-Session Sidebar
@@ -2707,6 +3005,9 @@
         renderMatchingQuiz(session);
         renderYesNoQuiz(session);
         renderRecallQuiz(session);
+        renderEtymologyQuiz(session);
+        renderBookmarksView();
+        updateScoreBadges();
       } else {
         renderPlaceholderSession(session);
       }
@@ -2714,43 +3015,35 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Render Master Notes Cards with Hindi, Roots, Related Words & Synonyms
+    // Render Master Notes Cards with Hindi, Roots, Related Words, Synonyms & Examples
     function renderVocabCards(words) {
       const container = document.getElementById('vocabCardsContainer');
       container.innerHTML = '';
 
       words.forEach((w, idx) => {
         const card = document.createElement('div');
-        card.className = 'vocab-card';
+        card.className = 'vocab-card' + (w.isBonus ? ' bonus-card' : '');
 
-        // Related chips HTML
         let relatedHtml = '';
         if (w.related && w.related.length > 0) {
-          relatedHtml = `
-            <div class="related-words-wrap">
-              <div class="related-title">Derived Family Words:</div>
-              <div class="related-chips">
-                ${w.related.map(r => `<span class="related-chip">${r}</span>`).join('')}
-              </div>
-            </div>
-          `;
+          relatedHtml = `<div class="related-words-wrap"><div class="related-title">Derived Family Words:</div><div class="related-chips">${w.related.map(r => `<span class="related-chip">${r}</span>`).join('')}</div></div>`;
         }
 
-        // Syn/Ant Box HTML
         let synAntHtml = '';
         if (w.synonyms || w.antonyms) {
-          synAntHtml = `
-            <div class="syn-ant-box">
-              ${w.synonyms ? `<div class="syn-line">🟢 <strong>Synonyms:</strong> ${w.synonyms}</div>` : ''}
-              ${w.antonyms ? `<div class="ant-line">🔴 <strong>Antonyms:</strong> ${w.antonyms}</div>` : ''}
-            </div>
-          `;
+          synAntHtml = `<div class="syn-ant-box">${w.synonyms ? `<div class="syn-line">🟢 <strong>Synonyms:</strong> ${w.synonyms}</div>` : ''}${w.antonyms ? `<div class="ant-line">🔴 <strong>Antonyms:</strong> ${w.antonyms}</div>` : ''}</div>`;
         }
+
+        const bookmarked = isBookmarked(currentSessionId, w.word);
 
         card.innerHTML = `
           <div class="card-top">
             <span class="card-index">${idx + 1 < 10 ? '0' + (idx + 1) : idx + 1}</span>
-            <button class="audio-pill" onclick="speakText('${w.word}')">🔊 Listen</button>
+            <div style="display:flex;gap:6px;align-items:center;">
+              ${w.isBonus ? '<span class="bonus-badge">🎯 Bonus Teaser</span>' : ''}
+              <button class="bookmark-star ${bookmarked ? 'active' : ''}" data-session="${currentSessionId}" data-word="${w.word}" onclick="event.stopPropagation(); toggleBookmark(${currentSessionId}, '${w.word.replace(/'/g, "\\'")}'); updateBookmarkIcons();">${bookmarked ? '⭐' : '☆'}</button>
+              <button class="audio-pill" onclick="speakText('${w.word}')">🔊 Listen</button>
+            </div>
           </div>
           <h3 class="vocab-word">${w.word}</h3>
           <span class="phonetic-code">${w.phonetic}</span>
@@ -2760,6 +3053,8 @@
           
           <div class="quote-box">"${w.quote}"</div>
           <p class="vocab-desc">${w.meaning}</p>
+          
+          ${w.example ? `<div class="example-box"><div class="example-label">📝 Exam Sentence</div>${w.example}</div>` : ''}
           
           ${relatedHtml}
           ${synAntHtml}
@@ -2887,6 +3182,8 @@
       const box = document.getElementById('matchingScoreBox');
       box.style.display = 'flex';
       box.innerHTML = `<span>Score: <strong>${score} / ${selects.length}</strong></span> <span>${score === selects.length ? '🎉 Perfect!' : 'Review incorrect items above'}</span>`;
+      saveQuizScore(currentSessionId, 'matching', score, selects.length);
+      if (score === selects.length) triggerConfetti();
     }
 
     function resetMatching() {
@@ -2953,6 +3250,8 @@
       const box = document.getElementById('yesNoScoreBox');
       box.style.display = 'flex';
       box.innerHTML = `<span>Score: <strong>${score} / ${rows.length}</strong></span> <span>${score === rows.length ? '🌟 Mastery Achieved!' : 'Check marked answers'}</span>`;
+      saveQuizScore(currentSessionId, 'yesno', score, rows.length);
+      if (score === rows.length) triggerConfetti();
     }
 
     function resetYesNo() {
@@ -3009,6 +3308,8 @@
       const box = document.getElementById('recallScoreBox');
       box.style.display = 'flex';
       box.innerHTML = `<span>Score: <strong>${score} / ${boxes.length}</strong></span> <span>${score === boxes.length ? '🏆 Vocabulary Master!' : 'Retry spellings'}</span>`;
+      saveQuizScore(currentSessionId, 'recall', score, boxes.length);
+      if (score === boxes.length) triggerConfetti();
     }
 
     function revealRecall() {
@@ -3066,6 +3367,106 @@
       document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
       document.getElementById('themeToggleBtn').innerText = isDark ? '🌙' : '☀️';
     }
+
+    // ==========================================
+    // NEW FEATURES: Search, Bookmarks, Scores, Etymology, Confetti
+    // ==========================================
+
+    // GLOBAL SEARCH
+    function openSearch() { document.getElementById('searchOverlay').classList.add('active'); const inp = document.getElementById('globalSearchInput'); inp.value = ''; inp.focus(); renderSearchResults(''); }
+    function closeSearch() { document.getElementById('searchOverlay').classList.remove('active'); }
+    function handleSearchInput(e) { renderSearchResults(e.target.value.trim().toLowerCase()); }
+    function renderSearchResults(query) {
+      const c = document.getElementById('searchResultsList');
+      if (!query || query.length < 2) { c.innerHTML = '<div class="search-empty">🔍 Type at least 2 characters to search across all sessions...</div>'; return; }
+      let r = [];
+      SESSIONS_DATA.forEach(s => { if (!s.words || !s.words.length) return; s.words.forEach(w => { if (`${w.word} ${w.hindi||''} ${w.meaning} ${w.synonyms||''} ${w.root||''}`.toLowerCase().includes(query)) r.push({w,sid:s.id,st:s.title}); }); });
+      if (!r.length) { c.innerHTML = '<div class="search-empty">No words found. Try a different term.</div>'; return; }
+      c.innerHTML = r.map(x => `<div class="search-result-item" onclick="goToWord(${x.sid},'${x.w.word.replace(/'/g,"\\'")}')"><span class="search-result-session">Session ${x.sid} • ${x.st}</span><span class="search-result-word">${x.w.word}</span><span class="search-result-hindi">${x.w.hindi||''}</span></div>`).join('');
+    }
+    function goToWord(sid, wn) { closeSearch(); loadSession(sid); switchView('notes'); setTimeout(() => { document.querySelectorAll('.vocab-word').forEach(c => { if (c.textContent.trim().toLowerCase() === wn.toLowerCase()) { c.closest('.vocab-card').scrollIntoView({behavior:'smooth',block:'center'}); c.closest('.vocab-card').style.boxShadow = '0 0 0 3px var(--accent)'; setTimeout(() => c.closest('.vocab-card').style.boxShadow = '', 2000); } }); }, 300); }
+    document.addEventListener('keydown', e => { if ((e.ctrlKey||e.metaKey) && e.key === 'k') { e.preventDefault(); openSearch(); } if (e.key === 'Escape') closeSearch(); });
+
+    // BOOKMARKS
+    function getBookmarks() { try { return JSON.parse(localStorage.getItem('vm_bookmarks')||'[]'); } catch { return []; } }
+    function saveBookmarks(b) { localStorage.setItem('vm_bookmarks', JSON.stringify(b)); }
+    function toggleBookmark(sid, wn) { let b = getBookmarks(); const k = sid+'::'+wn; const i = b.indexOf(k); if (i>=0) b.splice(i,1); else b.push(k); saveBookmarks(b); updateBookmarkIcons(); }
+    function isBookmarked(sid, wn) { return getBookmarks().includes(sid+'::'+wn); }
+    function updateBookmarkIcons() { document.querySelectorAll('.bookmark-star').forEach(btn => { const s = parseInt(btn.getAttribute('data-session')); const w = btn.getAttribute('data-word'); const bk = isBookmarked(s, w); btn.classList.toggle('active', bk); btn.textContent = bk ? '⭐' : '☆'; }); }
+    function renderBookmarksView() {
+      const c = document.getElementById('bookmarksContainer'); if (!c) return;
+      const bk = getBookmarks();
+      if (!bk.length) { c.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px 24px;background:var(--bg-card);border-radius:var(--radius-md);border:1px dashed var(--border-color);"><h3 style="font-size:1.4rem;margin-bottom:8px;">☆ No Bookmarks Yet</h3><p style="color:var(--text-muted);max-width:400px;margin:0 auto;">Click the ☆ star icon on any word card to bookmark it for quick review.</p></div>'; return; }
+      let cards = [];
+      bk.forEach(key => { const [sid, wn] = key.split('::'); const session = SESSIONS_DATA.find(s => s.id === parseInt(sid)); if (!session||!session.words) return; const w = session.words.find(x => x.word === wn); if (w) cards.push({w,sid:parseInt(sid),st:session.title}); });
+      c.innerHTML = cards.map(x => { const w = x.w; return `<div class="vocab-card"><div class="card-top"><span class="card-index" style="font-size:0.65rem;">S${x.sid}</span><button class="bookmark-star active" data-session="${x.sid}" data-word="${w.word}" onclick="toggleBookmark(${x.sid},'${w.word.replace(/'/g,"\\'")}');renderBookmarksView();">⭐</button></div><h3 class="vocab-word">${w.word}</h3><span class="phonetic-code">${w.phonetic}</span>${w.hindi?`<div class="hindi-badge">🎯 हिन्दी: ${w.hindi}</div>`:''}${w.root?`<div class="root-box">🌱 <strong>Root:</strong> ${w.root}</div>`:''}<p class="vocab-desc">${w.meaning}</p>${w.example?`<div class="example-box"><div class="example-label">📝 Exam Sentence</div>${w.example}</div>`:''}</div>`; }).join('');
+    }
+
+    // QUIZ SCORE PERSISTENCE
+    function saveQuizScore(sid, type, score, total) { const k = `vm_score_${sid}_${type}`; const p = JSON.parse(localStorage.getItem(k)||'{"best":0,"total":0}'); if (score > p.best) localStorage.setItem(k, JSON.stringify({best:score,total})); updateScoreBadges(); updateProgressBar(); }
+    function getQuizScore(sid, type) { return JSON.parse(localStorage.getItem(`vm_score_${sid}_${type}`)||'{"best":0,"total":0}'); }
+    function updateScoreBadges() { ['matching','yesno','recall'].forEach(t => { const d = getQuizScore(currentSessionId, t); const b = document.getElementById(`scoreBadge_${t}`); if (b && d.total > 0) { b.textContent = `${d.best}/${d.total}`; b.style.display = 'inline'; } else if (b) { b.style.display = 'none'; } }); }
+
+    // DYNAMIC PROGRESS BAR
+    function updateProgressBar() {
+      let ready = 0;
+      SESSIONS_DATA.forEach(s => { if (s.words && s.words.length > 0) ready++; });
+      document.getElementById('totalProgressText').textContent = `${ready} / 47 Ready`;
+      document.getElementById('totalProgressFill').style.width = `${((ready/47)*100).toFixed(1)}%`;
+      document.querySelectorAll('.session-item').forEach(item => {
+        const id = parseInt(item.getAttribute('data-id'));
+        const s = SESSIONS_DATA.find(x => x.id === id);
+        const badge = item.querySelector('.session-item-badge');
+        if (!s || !badge) return;
+        if (s.words && s.words.length > 0) {
+          let mastered = true;
+          ['matching','yesno','recall'].forEach(t => { const d = getQuizScore(id, t); if (!d.total || d.best/d.total < 0.8) mastered = false; });
+          badge.textContent = mastered ? 'Mastered 🏆' : 'Ready ✅';
+        }
+      });
+    }
+
+    // SHUFFLE UTILITY
+    function shuffleArray(a) { const s = [...a]; for (let i = s.length-1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [s[i],s[j]] = [s[j],s[i]]; } return s; }
+
+    // ETYMOLOGY ROOT QUIZ
+    function renderEtymologyQuiz(session) {
+      const c = document.getElementById('etymologyQuizList'); if (!c) return;
+      if (!session.words || !session.words.length) { c.innerHTML = '<div class="search-empty">No words available.</div>'; return; }
+      const rm = {};
+      session.words.forEach(w => { if (w.root) { const m = w.root.match(/[''\u2018\u2019]([^''\u2018\u2019]+)[''\u2018\u2019]/); if (m) { const r = m[1].toLowerCase(); if (!rm[r]) rm[r] = []; rm[r].push(w.word); } } });
+      const roots = Object.entries(rm).filter(([_,ws]) => ws.length >= 1);
+      if (!roots.length) { c.innerHTML = '<div class="search-empty">No root data available.</div>'; return; }
+      const sr = shuffleArray(roots).slice(0, Math.min(10, roots.length));
+      const all = session.words.map(w => w.word);
+      let html = '';
+      sr.forEach(([root, cws], i) => {
+        const correct = cws[Math.floor(Math.random()*cws.length)];
+        let opts = [correct];
+        const wrong = shuffleArray(all.filter(w => !cws.includes(w)));
+        for (let j = 0; j < Math.min(3, wrong.length); j++) opts.push(wrong[j]);
+        opts = shuffleArray(opts);
+        html += `<div class="recall-box" data-correct="${correct}"><p class="recall-title">${i+1}. Which word comes from the root <strong style="color:var(--root-color);">"${root}"</strong>?</p><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">${opts.map(o => `<button class="btn-secondary ety-option" onclick="selectEtyOption(this)" style="flex:1;min-width:120px;">${o}</button>`).join('')}</div></div>`;
+      });
+      c.innerHTML = html;
+      const sb = document.getElementById('etymologyScoreBox'); if (sb) sb.style.display = 'none';
+    }
+    function selectEtyOption(btn) { const p = btn.closest('.recall-box'); p.querySelectorAll('.ety-option').forEach(b => { b.style.background=''; b.style.color=''; b.style.borderColor=''; }); btn.style.background='var(--accent)'; btn.style.color='#fff'; btn.style.borderColor='var(--accent)'; }
+    function gradeEtymology() {
+      const boxes = document.querySelectorAll('#etymologyQuizList .recall-box'); let score = 0;
+      boxes.forEach(box => { const correct = box.getAttribute('data-correct'); const sel = box.querySelector('.ety-option[style*="var(--accent)"]');
+        box.querySelectorAll('.ety-option').forEach(b => { if (b.textContent.trim() === correct) { b.style.background='var(--success)'; b.style.color='#fff'; b.style.borderColor='var(--success)'; } });
+        if (sel && sel.textContent.trim() === correct) score++; else if (sel) { sel.style.background='var(--error)'; sel.style.color='#fff'; sel.style.borderColor='var(--error)'; }
+      });
+      const box = document.getElementById('etymologyScoreBox'); box.style.display = 'flex';
+      box.innerHTML = `<span>Score: <strong>${score} / ${boxes.length}</strong></span> <span>${score === boxes.length ? '🧬 Root Master!' : 'Review roots above'}</span>`;
+      saveQuizScore(currentSessionId, 'etymology', score, boxes.length);
+      if (score === boxes.length) triggerConfetti();
+    }
+    function resetEtymology() { const s = SESSIONS_DATA.find(x => x.id === currentSessionId); if (s) renderEtymologyQuiz(s); }
+
+    // CONFETTI ANIMATION
+    function triggerConfetti() { const c = document.createElement('div'); c.className = 'confetti-container'; document.body.appendChild(c); const colors = ['#4f46e5','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899']; for (let i = 0; i < 50; i++) { const p = document.createElement('div'); p.className = 'confetti-piece'; p.style.left = Math.random()*100+'%'; p.style.background = colors[Math.floor(Math.random()*colors.length)]; p.style.animationDelay = Math.random()*1.5+'s'; p.style.animationDuration = (2+Math.random()*2)+'s'; p.style.width = (6+Math.random()*8)+'px'; p.style.height = (6+Math.random()*8)+'px'; c.appendChild(p); } setTimeout(() => c.remove(), 4000); }
   </script>
 </body>
 </html>
