@@ -657,13 +657,16 @@
       max-width: 620px;
       margin: 0 auto;
       text-align: center;
+      width: 100%;
     }
 
     .flashcard-wrapper {
       perspective: 1000px;
-      min-height: 360px;
+      height: 420px;
       cursor: pointer;
-      margin-bottom: 20px;
+      margin: 0 auto 20px auto;
+      width: 100%;
+      max-width: 580px;
     }
 
     .flashcard-inner {
@@ -681,18 +684,20 @@
 
     .flashcard-front, .flashcard-back {
       position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
       border-radius: var(--radius-lg);
-      padding: 30px 24px;
+      padding: 28px 24px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       border: 1px solid var(--border-color);
       box-shadow: var(--shadow-md);
+      box-sizing: border-box;
     }
 
     .flashcard-front {
@@ -706,7 +711,9 @@
       transform: rotateY(180deg);
       text-align: left;
       align-items: flex-start;
+      justify-content: flex-start;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .flashcard-nav {
@@ -1159,12 +1166,12 @@
 
       /* Flashcards on Mobile */
       .flashcard-wrapper {
-        min-height: 330px;
+        height: 440px;
         margin-bottom: 14px;
       }
 
       .flashcard-front, .flashcard-back {
-        padding: 22px 16px;
+        padding: 20px 16px;
         border-radius: var(--radius-md);
       }
 
@@ -1401,7 +1408,8 @@
               <div class="flashcard-back">
                 <span style="font-size: 0.75rem; font-weight: 700; color: var(--success); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Root & Detailed Meaning</span>
                 <div id="fcRoot" class="root-box" style="width: 100%; margin-bottom: 8px;">🌱 Root: ego (Latin = I, self)</div>
-                <h3 id="fcMeaning" style="font-size: 1rem; font-weight: 700; line-height: 1.4; margin-bottom: 10px;">Driven purely by self-interest and personal profit.</h3>
+                <h3 id="fcMeaning" style="font-size: 1rem; font-weight: 700; line-height: 1.4; margin-bottom: 8px;">Driven purely by self-interest and personal profit.</h3>
+                <div id="fcExample" class="example-box" style="width: 100%; margin-bottom: 8px; display: none;"></div>
                 <div id="fcSynAnt" class="syn-ant-box" style="width: 100%; margin-bottom: 8px;">
                   <span class="syn-line">🟢 Syn: Self-seeker, narcissist</span>
                   <span class="ant-line">🔴 Ant: Altruist, humanitarian</span>
@@ -3636,6 +3644,16 @@
       
       let relatedStr = card.related ? `Related: ${card.related.join(', ')}` : (card.traits[0] || '');
       document.getElementById('fcDetails').innerText = relatedStr;
+
+      const fcEx = document.getElementById('fcExample');
+      if (fcEx) {
+        if (card.example) {
+          fcEx.innerHTML = `<div class="example-label">📝 Exam Sentence</div>${card.example}`;
+          fcEx.style.display = 'block';
+        } else {
+          fcEx.style.display = 'none';
+        }
+      }
       
       document.getElementById('fcCounter').innerText = `Card ${currentFlashcardIndex + 1} of ${session.words.length}`;
     }
