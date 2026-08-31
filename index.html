@@ -6,7 +6,7 @@
   <title>VocabMaster — 47 Session Master Hub</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet" />
   
   <style>
     :root {
@@ -23,6 +23,14 @@
       --accent-hover: #4338ca;
       --accent-light: #eef2ff;
       --accent-glow: rgba(79, 70, 229, 0.16);
+      --hindi-color: #b45309;
+      --hindi-bg: #fef3c7;
+      --syn-color: #047857;
+      --syn-bg: #ecfdf5;
+      --ant-color: #b91c1c;
+      --ant-bg: #fef2f2;
+      --root-color: #6d28d9;
+      --root-bg: #f5f3ff;
       --success: #10b981;
       --success-bg: #ecfdf5;
       --error: #ef4444;
@@ -54,6 +62,14 @@
       --accent-hover: #818cf8;
       --accent-light: rgba(99, 102, 241, 0.15);
       --accent-glow: rgba(99, 102, 241, 0.25);
+      --hindi-color: #fcd34d;
+      --hindi-bg: rgba(245, 158, 11, 0.15);
+      --syn-color: #6ee7b7;
+      --syn-bg: rgba(16, 185, 129, 0.15);
+      --ant-color: #fca5a5;
+      --ant-bg: rgba(239, 68, 68, 0.15);
+      --root-color: #c4b5fd;
+      --root-bg: rgba(139, 92, 246, 0.15);
       --success: #34d399;
       --success-bg: rgba(16, 185, 129, 0.15);
       --error: #f87171;
@@ -74,7 +90,7 @@
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg-primary);
       color: var(--text-main);
       line-height: 1.6;
@@ -336,7 +352,7 @@
     /* Content Area */
     .content-area {
       flex: 1;
-      max-width: 1000px;
+      max-width: 1050px;
       margin: 0 auto;
       padding: 24px 20px 100px 20px;
       width: 100%;
@@ -344,7 +360,7 @@
 
     /* Hero Banner */
     .session-banner {
-      background: linear-gradient(135deg, #4338ca 0%, #6366f1 60%, #9333ea 100%);
+      background: linear-gradient(135deg, #3730a3 0%, #4f46e5 50%, #7c3aed 100%);
       border-radius: var(--radius-lg);
       padding: 32px 24px;
       color: white;
@@ -358,7 +374,7 @@
       display: inline-block;
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(8px);
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: var(--radius-full);
       font-size: 0.75rem;
       font-weight: 700;
@@ -377,7 +393,7 @@
     .banner-desc {
       font-size: 0.95rem;
       opacity: 0.92;
-      max-width: 680px;
+      max-width: 720px;
       line-height: 1.5;
     }
 
@@ -436,7 +452,7 @@
     /* Cards Grid */
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
       gap: 20px;
     }
 
@@ -460,7 +476,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .card-index {
@@ -497,7 +513,7 @@
     }
 
     .vocab-word {
-      font-size: 1.35rem;
+      font-size: 1.4rem;
       font-weight: 800;
       color: var(--text-main);
       margin-bottom: 4px;
@@ -511,19 +527,88 @@
       padding: 2px 8px;
       border-radius: 6px;
       display: inline-block;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       font-weight: 600;
     }
 
-    .root-tag {
+    /* Hindi Meaning Badge */
+    .hindi-badge {
+      background: var(--hindi-bg);
+      color: var(--hindi-color);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Root & Etymology Box */
+    .root-box {
+      background: var(--root-bg);
+      color: var(--root-color);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Related Words Chips */
+    .related-words-wrap {
+      margin-bottom: 10px;
+    }
+
+    .related-title {
       font-size: 0.75rem;
       font-weight: 700;
-      color: #9333ea;
-      background: rgba(147, 51, 234, 0.1);
+      text-transform: uppercase;
+      color: var(--text-subtle);
+      margin-bottom: 4px;
+    }
+
+    .related-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .related-chip {
+      background: var(--bg-elevated);
+      color: var(--text-main);
+      font-size: 0.75rem;
+      font-weight: 600;
       padding: 2px 8px;
-      border-radius: 6px;
-      display: inline-block;
-      margin-bottom: 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Synonyms & Antonyms Box */
+    .syn-ant-box {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background: var(--bg-elevated);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+    }
+
+    .syn-line {
+      color: var(--syn-color);
+      font-weight: 600;
+    }
+
+    .ant-line {
+      color: var(--ant-color);
+      font-weight: 600;
     }
 
     .quote-box {
@@ -532,16 +617,16 @@
       padding: 10px 12px;
       border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       font-style: italic;
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       color: var(--text-main);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       font-weight: 500;
     }
 
     .vocab-desc {
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       color: var(--text-muted);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       flex: 1;
     }
 
@@ -552,11 +637,11 @@
     }
 
     .traits-list li {
-      font-size: 0.825rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       position: relative;
-      padding-left: 16px;
+      padding-left: 14px;
     }
 
     .traits-list li::before {
@@ -569,14 +654,14 @@
 
     /* Flashcard View */
     .flashcard-section {
-      max-width: 600px;
+      max-width: 620px;
       margin: 0 auto;
       text-align: center;
     }
 
     .flashcard-wrapper {
       perspective: 1000px;
-      height: 320px;
+      height: 360px;
       cursor: pointer;
       margin-bottom: 20px;
     }
@@ -601,7 +686,7 @@
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
       border-radius: var(--radius-lg);
-      padding: 36px 24px;
+      padding: 30px 24px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -619,6 +704,9 @@
       background: linear-gradient(135deg, var(--bg-elevated), var(--bg-card));
       color: var(--text-main);
       transform: rotateY(180deg);
+      text-align: left;
+      align-items: flex-start;
+      overflow-y: auto;
     }
 
     .flashcard-nav {
@@ -945,10 +1033,10 @@
       
       <!-- Session Banner -->
       <div class="session-banner" id="sessionHero">
-        <span class="banner-badge" id="heroBadge">Session 07 • Occupations & Practitioners</span>
-        <h1 class="banner-title" id="heroTitle">10 Various Practitioners</h1>
+        <span class="banner-badge" id="heroBadge">Session 01 • Human Nature</span>
+        <h1 class="banner-title" id="heroTitle">Personality Types</h1>
         <p class="banner-desc" id="heroDesc">
-          Master the titles, methods, and specialized fields of 10 essential human behavioral, allied health, and investigative practitioners.
+          Master the psychological drivers, behavioral patterns, Hindi meanings, roots, synonyms & antonyms for 10 personality archetypes.
         </p>
       </div>
 
@@ -975,14 +1063,20 @@
             <div class="flashcard-inner">
               <div class="flashcard-front">
                 <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Tap Card to Flip ↻</span>
-                <h2 id="fcWord" style="font-size: 2.2rem; font-weight: 800; margin-bottom: 6px;">Psychoanalyst</h2>
-                <span id="fcPhonetic" class="phonetic-code">sī-kō-AN′-ə-list</span>
-                <p id="fcQuote" class="quote-box" style="margin-top: 16px; width: 100%;">"Delving into the unconscious to resolve deep emotional conflicts."</p>
+                <h2 id="fcWord" style="font-size: 2.2rem; font-weight: 800; margin-bottom: 6px;">Egoist</h2>
+                <span id="fcPhonetic" class="phonetic-code">EE′-gō-ist</span>
+                <div id="fcHindi" class="hindi-badge" style="margin-top: 10px; font-size: 1.05rem;">🎯 स्वार्थी / आत्मकेन्द्री व्यक्ति</div>
+                <p id="fcQuote" class="quote-box" style="margin-top: 12px; width: 100%;">"What is in it for me?"</p>
               </div>
               <div class="flashcard-back">
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--success); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Meaning & Practice</span>
-                <h3 id="fcMeaning" style="font-size: 1.15rem; font-weight: 700; line-height: 1.5; margin-bottom: 12px;">Practitioner trained in Freudian techniques, analyzing unconscious dreams, traumas, and repressions.</h3>
-                <p id="fcDetails" style="font-size: 0.85rem; color: var(--text-muted);">Root: psyche (mind) + analysis (loosening/examining).</p>
+                <span style="font-size: 0.75rem; font-weight: 700; color: var(--success); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Root & Detailed Meaning</span>
+                <div id="fcRoot" class="root-box" style="width: 100%; margin-bottom: 8px;">🌱 Root: ego (Latin = I, self)</div>
+                <h3 id="fcMeaning" style="font-size: 1rem; font-weight: 700; line-height: 1.4; margin-bottom: 10px;">Driven purely by self-interest and personal profit.</h3>
+                <div id="fcSynAnt" class="syn-ant-box" style="width: 100%; margin-bottom: 8px;">
+                  <span class="syn-line">🟢 Syn: Self-seeker, narcissist</span>
+                  <span class="ant-line">🔴 Ant: Altruist, humanitarian</span>
+                </div>
+                <p id="fcDetails" style="font-size: 0.8rem; color: var(--text-muted);">Related: Egoism (n), Egoistic (adj)</p>
               </div>
             </div>
           </div>
@@ -999,8 +1093,8 @@
       <!-- VIEW 3: Matching Quiz -->
       <section id="view-matching" class="view-pane">
         <div class="quiz-card">
-          <h3 class="quiz-heading">🧩 Match Practitioner with Field / Interest</h3>
-          <p class="quiz-subtext">Select the correct matching interest or specialty from the dropdown.</p>
+          <h3 class="quiz-heading">🧩 Match Words with Definitions</h3>
+          <p class="quiz-subtext">Select the correct matching definition or field from the dropdown.</p>
           
           <div id="matchingQuizList">
             <!-- Dynamically generated matching rows -->
@@ -1019,7 +1113,7 @@
       <section id="view-yesno" class="view-pane">
         <div class="quiz-card">
           <h3 class="quiz-heading">❓ Rapid Conceptual Verification</h3>
-          <p class="quiz-subtext">Tap TRUE or FALSE to test your instant comprehension of the practitioners.</p>
+          <p class="quiz-subtext">Tap TRUE/YES or FALSE/NO to test your instant comprehension of the terms.</p>
 
           <div id="yesNoQuizList">
             <!-- Dynamically generated yes/no rows -->
@@ -1038,7 +1132,7 @@
       <section id="view-recall" class="view-pane">
         <div class="quiz-card">
           <h3 class="quiz-heading">✍️ Active Recall & Spelling Mastery</h3>
-          <p class="quiz-subtext">Type the exact practitioner name based on the description and starting letter hint.</p>
+          <p class="quiz-subtext">Type the exact vocabulary word based on the clue and starting letter hint.</p>
 
           <div id="recallQuizList">
             <!-- Dynamically generated recall inputs -->
@@ -1080,7 +1174,7 @@
   <!-- Core JavaScript Application -->
   <script>
     // ==========================================
-    // 47 SESSIONS MASTER CURRICULUM REGISTRY
+    // 47 SESSIONS MASTER CURRICULUM REGISTRY (SESSIONS 1-7 DEEPLY ENRICHED)
     // ==========================================
     const SESSIONS_DATA = [
       // SESSION 1
@@ -1089,23 +1183,140 @@
         title: "Personality Types",
         subtitle: "10 Personality Archetypes",
         category: "Human Nature",
-        desc: "Master the psychological drivers, behavioral patterns, and phonetic pronunciation of 10 essential human personality profiles.",
+        desc: "Master the psychological drivers, behavioral patterns, Hindi meanings, roots, synonyms & antonyms of 10 essential human personality profiles.",
         words: [
-          { word: "Egoist", phonetic: "EE′-gō-ist", root: "Root: ego (Latin = I, self)", quote: "What is in it for me?", meaning: "Ruthless self-advancement and personal gain.", traits: ["Driven by self-interest.", "Views life as 'dog-eat-dog'.", "Unapologetic about personal profit."] },
-          { word: "Egotist", phonetic: "EE′-gō-tist", root: "Root: ego (I) + t (talk)", quote: "Let me tell you how incredible I am.", meaning: "Extreme conceit, boasting, and endless self-flattery.", traits: ["Constantly brags about achievements.", "Hungry for the spotlight.", "Conversational narcissist."] },
-          { word: "Altruist", phonetic: "AL′-troo-ist", root: "Root: alter (Latin = other)", quote: "How can I improve the lives of others?", meaning: "Selfless devotion to the welfare of fellow humans.", traits: ["Finds joy in helping others.", "Puts collective needs first.", "Empathic and generous."] },
-          { word: "Introvert", phonetic: "IN′-trə-vurt′", root: "Root: intro- (inward) + verto (to turn)", quote: "I recharge in quiet solitude.", meaning: "Channels mental energy and reflection inward.", traits: ["Introspective and observant.", "Prefers quiet spaces or one-on-one bonds.", "Creative and deep thinker."] },
-          { word: "Extrovert", phonetic: "EKS′-trə-vurt′", root: "Root: extro- (outward) + verto (to turn)", quote: "Life is best shared with people!", meaning: "Directs vitality and enthusiasm outwardly toward people.", traits: ["Energized by crowds and discussions.", "Socially uninhibited.", "Excels in leadership and team roles."] },
-          { word: "Ambivert", phonetic: "AM′-bə-vurt′", root: "Root: ambi- (both) + verto (to turn)", quote: "Balance and adaptability in all environments.", meaning: "Maintains a flexible balance of inward and outward focus.", traits: ["Comfortable at parties or in solitude.", "Adapts based on context.", "Represents the psychological norm."] },
-          { word: "Misanthrope", phonetic: "MIS′-ən-thrōp′", root: "Root: misein (hate) + anthropos (mankind)", quote: "Humanity is fundamentally crooked.", meaning: "Chronic cynicism, suspicion, and dislike toward humankind.", traits: ["Distrusts human virtue.", "Believes people are selfish.", "Keeps emotional distance."] },
-          { word: "Misogynist", phonetic: "mə-SOJ′-ə-nist", root: "Root: misein (hate) + gyne (woman)", quote: "A deep hostility and aversion toward women.", meaning: "Prejudice, resentment, or hatred directed specifically at females.", traits: ["Contempt or bias toward women.", "Emotional defense barrier.", "Distrusts female equality."] },
-          { word: "Misogamist", phonetic: "mə-SOG′-ə-mist", root: "Root: misein (hate) + gamos (marriage)", quote: "Why get locked into a legal cage?", meaning: "Rejection of and opposition to the institution of marriage.", traits: ["Rejects formal marriage contracts.", "Values autonomy.", "Prefers freedom."] },
-          { word: "Ascetic", phonetic: "ə-SET′-ik", root: "Root: asketes (monk / hermit / disciplined)", quote: "Simplicity and self-denial elevate the spirit.", meaning: "Practices severe self-discipline and shuns earthly pleasures.", traits: ["Embraces austerity and fasting.", "Rejects luxury and hedonism.", "Pursues spiritual clarity."] }
+          { 
+            word: "Egoist", 
+            phonetic: "EE′-gō-ist", 
+            hindi: "स्वार्थी / आत्मकेन्द्री व्यक्ति",
+            root: "Latin 'ego' (I, self) + '-ist' (person)", 
+            quote: "What is in it for me?", 
+            meaning: "Ruthless self-advancement and personal gain at the cost of others.", 
+            related: ["Egoism (n)", "Egoistic (adj)", "Egoistical (adj)"],
+            synonyms: "Self-seeker, narcissist, self-centered person",
+            antonyms: "Altruist, philanthropist, benefactor",
+            traits: ["Driven purely by self-interest.", "Views life as 'dog-eat-dog'.", "Unapologetic about personal profit."] 
+          },
+          { 
+            word: "Egotist", 
+            phonetic: "EE′-gō-tist", 
+            hindi: "आत्म-प्रशंसक / शेखीबाज़ / घमंडी",
+            root: "Latin 'ego' (I) + 't' (talk) + '-ist'", 
+            quote: "Let me tell you how incredible I am.", 
+            meaning: "Extreme conceit, boasting, and endless obnoxious self-flattery.", 
+            related: ["Egotism (n)", "Egotistic (adj)", "Egotistical (adj)"],
+            synonyms: "Boaster, braggart, vainglorious person",
+            antonyms: "Modest person, humble, self-effacing",
+            traits: ["Constantly brags about achievements.", "Hungry for the spotlight.", "Conversational narcissist."] 
+          },
+          { 
+            word: "Altruist", 
+            phonetic: "AL′-troo-ist", 
+            hindi: "परोपकारी / निःस्वार्थ समाजसेवक",
+            root: "Latin 'alter' (other) + '-ist' (person)", 
+            quote: "How can I improve the lives of others?", 
+            meaning: "Selfless devotion and actions directed toward the welfare of fellow humans.", 
+            related: ["Altruism (n)", "Altruistic (adj)", "Altruistically (adv)"],
+            synonyms: "Benefactor, humanitarian, philanthropist",
+            antonyms: "Egoist, self-seeker, miser",
+            traits: ["Finds genuine joy in helping others.", "Puts collective needs before own.", "Empathic, noble, and generous."] 
+          },
+          { 
+            word: "Introvert", 
+            phonetic: "IN′-trə-vurt′", 
+            hindi: "अन्तर्मुखी (एकांतप्रिय, शांत व्यक्ति)",
+            root: "Latin 'intro-' (inward) + 'verto' (to turn)", 
+            quote: "I recharge in quiet solitude.", 
+            meaning: "A person who channels mental energy, feelings, and reflection inward.", 
+            related: ["Introversion (n)", "Introverted (adj)", "To Introvert (v)"],
+            synonyms: "Recluse, loner, contemplative thinker",
+            antonyms: "Extrovert, socialite, outgoing person",
+            traits: ["Introspective and observant.", "Prefers quiet spaces or deep one-on-one bonds.", "Exhausted by large, noisy crowds."] 
+          },
+          { 
+            word: "Extrovert", 
+            phonetic: "EKS′-trə-vurt′", 
+            hindi: "बहिर्मुखी (मिलनसार, सामाजिक व्यक्ति)",
+            root: "Latin 'extro-' (outward) + 'verto' (to turn)", 
+            quote: "Life is best shared with people!", 
+            meaning: "A person whose thoughts and vitality are directed outward toward social interaction.", 
+            related: ["Extroversion (n)", "Extroverted (adj)"],
+            synonyms: "Gregarious, sociable, outgoing person",
+            antonyms: "Introvert, loner, recluse",
+            traits: ["Energized by crowds and lively discussions.", "Socially uninhibited and communicative.", "Excels in leadership and collaborative roles."] 
+          },
+          { 
+            word: "Ambivert", 
+            phonetic: "AM′-bə-vurt′", 
+            hindi: "उभयमुखी (संतुलित स्वभाव वाला व्यक्ति)",
+            root: "Latin 'ambi-' (both) + 'verto' (to turn)", 
+            quote: "Balance and adaptability in all situations.", 
+            meaning: "A person who has a flexible balance of introverted and extroverted qualities.", 
+            related: ["Ambiversion (n)", "Ambiverted (adj)"],
+            synonyms: "Balanced personality, adaptable person",
+            antonyms: "Extreme introvert, extreme extrovert",
+            traits: ["Comfortable in both social gatherings and solitude.", "Adapts communication style based on context.", "Represents the majority of normal human behavior."] 
+          },
+          { 
+            word: "Misanthrope", 
+            phonetic: "MIS′-ən-thrōp′", 
+            hindi: "मानवद्वेषी (इंसानों से नफ़रत करने वाला)",
+            root: "Greek 'misein' (to hate) + 'anthropos' (mankind)", 
+            quote: "Humanity is fundamentally crooked.", 
+            meaning: "A person who dislikes, distrusts, or cynically avoids humankind.", 
+            related: ["Misanthropy (n)", "Misanthropic (adj)", "Misanthropist (n)"],
+            synonyms: "Cynic, hater of mankind, recluse",
+            antonyms: "Philanthropist, humanitarian",
+            traits: ["Distrusts human virtue and motives.", "Believes everyone is fundamentally selfish.", "Maintains emotional and social distance."] 
+          },
+          { 
+            word: "Misogynist", 
+            phonetic: "mə-SOJ′-ə-nist", 
+            hindi: "स्त्रीद्वेषी (नारी जाति से घृणा करने वाला)",
+            root: "Greek 'misein' (to hate) + 'gyne' (woman)", 
+            quote: "Deep-seated contempt and prejudice toward women.", 
+            meaning: "A person who harbors hatred, distrust, or ingrained hostility against women.", 
+            related: ["Misogyny (n)", "Misogynic (adj)", "Misogynistic (adj)"],
+            synonyms: "Woman-hater, anti-feminist",
+            antonyms: "Philogynist, feminist",
+            traits: ["Prejudiced or resentful toward females.", "Often rooted in deep emotional insecurity or trauma.", "Opposes gender equality."] 
+          },
+          { 
+            word: "Misogamist", 
+            phonetic: "mə-SOG′-ə-mist", 
+            hindi: "विवाहद्वेषी (शादी की प्रथा से नफ़रत करने वाला)",
+            root: "Greek 'misein' (to hate) + 'gamos' (marriage)", 
+            quote: "Why lock yourself into a legal cage?", 
+            meaning: "A person who hates or strongly opposes the formal institution of marriage.", 
+            related: ["Misogamy (n)", "Misogamous (adj)"],
+            synonyms: "Marriage-hater, anti-matrimonialist",
+            antonyms: "Philogamist, proponent of marriage",
+            traits: ["Rejects formal marriage contracts.", "Fears loss of autonomy and independence.", "Prefers bachelorhood or uncommitted freedom."] 
+          },
+          { 
+            word: "Ascetic", 
+            phonetic: "ə-SET′-ik", 
+            hindi: "तपस्वी / संन्यासी (कठोर संयमी जीवन जीने वाला)",
+            root: "Greek 'asketes' (monk, hermit, disciplined)", 
+            quote: "Simplicity, austerity, and self-denial purify the soul.", 
+            meaning: "One who practices severe self-discipline and shuns all earthly luxuries.", 
+            related: ["Asceticism (n)", "Ascetical (adj)", "Ascetically (adv)"],
+            synonyms: "Hermit, monk, recluse, austere practitioner",
+            antonyms: "Hedonist, epicure, sensualist, sybarite",
+            traits: ["Embraces fasting, minimal food, and plain clothing.", "Rejects luxury, indulgence, and worldly pleasures.", "Pursues spiritual purification and mental clarity."] 
+          }
         ],
         matchingOptions: [
-          { key: "a", text: "Turns thoughts inward" }, { key: "b", text: "Hates marriage" }, { key: "c", text: "Talks about accomplishments" },
-          { key: "d", text: "Hates people" }, { key: "e", text: "Does not pursue fleshly pleasures" }, { key: "f", text: "Interested in the welfare of others" },
-          { key: "g", text: "Believes in self-advancement" }, { key: "h", text: "Turns thoughts both inward & outward" }, { key: "i", text: "Hates women" }, { key: "j", text: "Turns thoughts outward" }
+          { key: "a", text: "Turns thoughts inward (Introvert)" }, 
+          { key: "b", text: "Hates marriage (Misogamist)" }, 
+          { key: "c", text: "Talks boastfully about accomplishments (Egotist)" },
+          { key: "d", text: "Hates people and mankind (Misanthrope)" }, 
+          { key: "e", text: "Does not pursue fleshly pleasures / ascetic life (Ascetic)" }, 
+          { key: "f", text: "Interested in the welfare of others (Altruist)" },
+          { key: "g", text: "Believes in ruthless self-advancement (Egoist)" }, 
+          { key: "h", text: "Turns thoughts both inward & outward (Ambivert)" }, 
+          { key: "i", text: "Hates women (Misogynist)" }, 
+          { key: "j", text: "Turns thoughts outward (Extrovert)" }
         ],
         matchingAnswers: { "Egoist": "g", "Egotist": "c", "Altruist": "f", "Introvert": "a", "Extrovert": "j", "Ambivert": "h", "Misanthrope": "d", "Misogynist": "i", "Misogamist": "b", "Ascetic": "e" },
         yesNoQuestions: [
@@ -1115,11 +1326,11 @@
           { q: "Does an ascetic lead a life of luxury?", a: "no" }, { q: "Does a misogamist try to avoid marriage?", a: "yes" }
         ],
         recallQuestions: [
-          { q: "Who lives a lonely, austere life?", word: "ascetic", hint: "A..." }, { q: "Whose interests are turned outward?", word: "extrovert", hint: "E..." },
-          { q: "Who is supremely selfish?", word: "egoist", hint: "E..." }, { q: "Who hates people?", word: "misanthrope", hint: "M..." },
-          { q: "Whose interests are turned both inward and outward?", word: "ambivert", hint: "A..." }, { q: "Who is incredibly conceited?", word: "egotist", hint: "E..." },
-          { q: "Who is more interested in the welfare of others than in his own?", word: "altruist", hint: "A..." }, { q: "Who hates women?", word: "misogynist", hint: "M..." },
-          { q: "Whose interests are turned inward?", word: "introvert", hint: "I..." }, { q: "Who hates marriage?", word: "misogamist", hint: "M..." }
+          { q: "Who lives a lonely, austere, self-denying life?", word: "ascetic", hint: "A..." }, { q: "Whose interests are turned outward toward people?", word: "extrovert", hint: "E..." },
+          { q: "Who is supremely, ruthlessly selfish?", word: "egoist", hint: "E..." }, { q: "Who hates humankind and people?", word: "misanthrope", hint: "M..." },
+          { q: "Whose interests are turned both inward and outward?", word: "ambivert", hint: "A..." }, { q: "Who is incredibly conceited and boasts constantly?", word: "egotist", hint: "E..." },
+          { q: "Who is genuinely interested in the welfare of others?", word: "altruist", hint: "A..." }, { q: "Who hates and distrusts women?", word: "misogynist", hint: "M..." },
+          { q: "Whose interests and thoughts are turned inward?", word: "introvert", hint: "I..." }, { q: "Who hates and avoids the institution of marriage?", word: "misogamist", hint: "M..." }
         ]
       },
 
@@ -1131,25 +1342,168 @@
         category: "Etymology & Roots",
         desc: "Explore how Latin roots 'ego' (I, self) and 'alter' (other) spawn essential English words dealing with self-concept, disputes, alternatives, and companions.",
         words: [
-          { word: "Ego", phonetic: "EE′-gō", root: "Root: ego (Latin = I, self)", quote: "One's concept of oneself.", meaning: "One's self-esteem, self-importance, or concept of oneself.", traits: ["Mental perception of self.", "Vulnerable to criticism.", "Core psychology term."] },
-          { word: "Egocentric", phonetic: "ee-gō-SEN′-trik", root: "Root: ego (I) + centrum (center)", quote: "I am the center of the universe.", meaning: "Utterly involved with oneself; self-centered to an intolerable extreme.", traits: ["Extreme form of egoist.", "Both noun & adjective.", "Intolerable selfishness."] },
-          { word: "Egomaniac", phonetic: "ee-gō-MAY′-nee-ak", root: "Root: ego (I) + mania (obsession)", quote: "My desires are a morbid obsession.", meaning: "A person with a dangerous, obsessive fixation on their own needs.", traits: ["Dangerous extreme of egoism.", "Volatile and obsessed.", "Noun for extreme narcissist."] },
-          { word: "Egomaniacal", phonetic: "ee′-gō-mə-NĪ′-ə-kəl", root: "Suffix: -al (adjective)", quote: "Morbidly and obsessively wrapped up in oneself.", meaning: "Characterized by egomania; morbidly self-absorbed.", traits: ["Adjective form.", "Describes pathological self-focus.", "Severe emotional imbalance."] },
-          { word: "Altruism", phonetic: "AL′-troo-iz-əm", root: "Root: alter (Latin = other)", quote: "Putting others before oneself.", meaning: "The ethical principle and practice of concern for the happiness of other people.", traits: ["Philosophy of altruists.", "Derived from Latin alter.", "Philanthropic action."] },
-          { word: "Altruistic", phonetic: "al-troo-IS′-tik", root: "Suffix: -ic (pertaining to)", quote: "Actions directed toward the benefit of others.", meaning: "Unselfish, charitable, and motivated by a desire to help others.", traits: ["Adjective form.", "Opposite of egoistic.", "Focuses on community well-being."] },
-          { word: "To Alternate (v.)", phonetic: "AWL′-tər-nayt′", root: "Root: alter (other)", quote: "To take one and skip the other in turn.", meaning: "To occur in turn repeatedly; skip one and take the other.", traits: ["Cyclical recurrence.", "Example: alternating days.", "Succession by turns."] },
-          { word: "Alternate (adj./noun)", phonetic: "AWL′-tər-nət", root: "Root: alter (other)", quote: "The other choice or substitute.", meaning: "Other possible; a substitute person who takes over when original is absent.", traits: ["Adj: 'alternate Saturdays'.", "Noun: substitute delegate.", "Secondary replacement."] },
-          { word: "Alternative", phonetic: "awl-TUR′-nə-tiv", root: "Root: alter (other)", quote: "A choice between options.", meaning: "A distinct choice or course of action available among options.", traits: ["Freedom of selection.", "Backup pathway.", "'No alternative' = no other choice."] },
-          { word: "Alteration", phonetic: "awl′-tər-AY′-shən", root: "Root: alter (other) + -ation", quote: "A change into something other.", meaning: "The act or process of changing or modifying something.", traits: ["Making an entity different.", "Garment alterations.", "Implies change."] },
-          { word: "To Alter", phonetic: "AWL′-tər", root: "Root: alter (other)", quote: "To change; to make different.", meaning: "To make structural or conditional changes to plans or ideas.", traits: ["Verb: modify or adjust.", "Making other plans.", "Root verb behind alteration."] },
-          { word: "Altercation", phonetic: "awl′-tər-KAY′-shən", root: "Root: alter (other ideas)", quote: "A heated verbal dispute or fight with words.", meaning: "A noisy, angry argument or dispute caused by having clashing ideas.", traits: ["Stronger than a quarrel.", "High emotion and heat.", "Arises from conflicting opinions."] },
-          { word: "Alter Ego", phonetic: "AWL′-tər EE′-gō", root: "Root: alter (other) + ego (I, self)", quote: "My other I; my other self.", meaning: "A trusted intimate friend so similar in temperament that they are your mirror image.", traits: ["Literally 'other self'.", "Thinks and acts alike.", "Intimate mirror image."] }
+          { 
+            word: "Ego", 
+            phonetic: "EE′-gō", 
+            hindi: "अहं / आत्म-बोध / स्वाभिमान",
+            root: "Latin 'ego' (I, self)", 
+            quote: "One's concept of oneself.", 
+            meaning: "One's self-esteem, self-importance, or psychological concept of self.", 
+            related: ["Egocentric", "Egotism", "Egoism"],
+            synonyms: "Self-worth, self-image, pride",
+            antonyms: "Humility, selflessness, modesty",
+            traits: ["Mental perception of self.", "Vulnerable to slights and criticism.", "Core psychological terminology."] 
+          },
+          { 
+            word: "Egocentric", 
+            phonetic: "ee-gō-SEN′-trik", 
+            hindi: "स्व-केन्द्रित / केवल अपने हित सोचने वाला",
+            root: "Latin 'ego' (I) + 'centrum' (center)", 
+            quote: "I am the center of the universe.", 
+            meaning: "Utterly involved with oneself; self-centered to an intolerable extreme.", 
+            related: ["Egocentricity (n)", "Egocentrism (n)"],
+            synonyms: "Self-absorbed, narcissistic, self-seeking",
+            antonyms: "Altruistic, community-minded, selfless",
+            traits: ["Extreme, obnoxious form of egoist.", "Functions both as noun & adjective.", "Considers own needs as supreme."] 
+          },
+          { 
+            word: "Egomaniac", 
+            phonetic: "ee-gō-MAY′-nee-ak", 
+            hindi: "अत्यधिक अहंकारी / सनकी स्वार्थी व्यक्ति",
+            root: "Latin 'ego' (I) + Greek 'mania' (madness/obsession)", 
+            quote: "My desires are a dangerous obsession.", 
+            meaning: "A person with a dangerous, obsessive fixation on their own needs and importance.", 
+            related: ["Egomania (n)", "Egomaniacal (adj)"],
+            synonyms: "Megalomaniac, pathological narcissist",
+            antonyms: "Humble person, self-effacing individual",
+            traits: ["Dangerous psychiatric extreme of egoism.", "Volatile, unhinged self-absorption.", "Obsessively fixated on personal desires."] 
+          },
+          { 
+            word: "Egomaniacal", 
+            phonetic: "ee′-gō-mə-NĪ′-ə-kəl", 
+            hindi: "अहंकार-उन्मादी (रोगपूर्ण आत्म-मुग्धता से ग्रस्त)",
+            root: "Suffix '-al' (adjective suffix)", 
+            quote: "Morbidly and obsessively wrapped up in oneself.", 
+            meaning: "Characterized by egomania; pathologically and morbidly self-absorbed.", 
+            related: ["Egomaniacally (adv)"],
+            synonyms: "Obsessively narcissistic, megalomanic",
+            antonyms: "Self-sacrificing, humble",
+            traits: ["Adjective form of egomaniac.", "Describes severe psychological self-fixation.", "Disregards safety or feelings of all others."] 
+          },
+          { 
+            word: "Altruism", 
+            phonetic: "AL′-troo-iz-əm", 
+            hindi: "परोपकारिता / निःस्वार्थ सेवा भाव",
+            root: "Latin 'alter' (other) + '-ism' (practice/philosophy)", 
+            quote: "Putting the welfare of others before oneself.", 
+            meaning: "The ethical principle and practice of concern for the happiness of other people.", 
+            related: ["Altruist (n)", "Altruistic (adj)", "Altruistically (adv)"],
+            synonyms: "Benevolence, selflessness, charity, philanthropy",
+            antonyms: "Egoism, selfishness, greed",
+            traits: ["Philosophical foundation of altruists.", "Derived from Latin root alter.", "Drives charitable and humanitarian causes."] 
+          },
+          { 
+            word: "Altruistic", 
+            phonetic: "al-troo-IS′-tik", 
+            hindi: "परोपकारी / दूसरों का भला चाहने वाला",
+            root: "Suffix '-ic' (pertaining to)", 
+            quote: "Actions devoted to the well-being of others.", 
+            meaning: "Unselfish, charitable, and motivated by a desire to help others.", 
+            related: ["Altruistically (adv)"],
+            synonyms: "Charitable, humanitarian, benevolent",
+            antonyms: "Self-serving, selfish, stingy",
+            traits: ["Adjective describing benevolent acts.", "Opposite of egoistic.", "Focuses on uplifting fellow human beings."] 
+          },
+          { 
+            word: "To Alternate (v.)", 
+            phonetic: "AWL′-tər-nayt′", 
+            hindi: "बारी-बारी से करना / एक छोड़कर एक लेना",
+            root: "Latin 'alter' (other) + '-ate' (verb)", 
+            quote: "To take one and skip the other in turn.", 
+            meaning: "To occur in turn repeatedly; skip one and take the other.", 
+            related: ["Alternation (n)", "Alternator (n)"],
+            synonyms: "Rotate, oscillate, interchange, cycle",
+            antonyms: "Maintain constant, persist continuously",
+            traits: ["Cyclical recurrence.", "Example: alternating hot and cold days.", "Regular succession by turns."] 
+          },
+          { 
+            word: "Alternate (adj./noun)", 
+            phonetic: "AWL′-tər-nət", 
+            hindi: "वैकल्पिक / स्थानापन्न / एकान्तर",
+            root: "Latin 'alter' (other)", 
+            quote: "The other choice or substitute delegate.", 
+            meaning: "Other possible; a substitute person who steps in when the original is absent.", 
+            related: ["Alternately (adv)"],
+            synonyms: "Substitute, replacement, surrogate",
+            antonyms: "Primary, original, permanent",
+            traits: ["Adj: 'alternate Saturdays'.", "Noun: substitute delegate.", "Secondary replacement option."] 
+          },
+          { 
+            word: "Alternative", 
+            phonetic: "awl-TUR′-nə-tiv", 
+            hindi: "विकल्प / दूसरा उपाय",
+            root: "Latin 'alter' (other) + '-ive'", 
+            quote: "A distinct choice between available options.", 
+            meaning: "A choice or course of action available among options.", 
+            related: ["Alternatively (adv)"],
+            synonyms: "Choice, option, substitute pathway",
+            antonyms: "Compulsion, obligation, fixed path",
+            traits: ["Freedom of selection.", "Backup plan.", "'No alternative' = no other way out."] 
+          },
+          { 
+            word: "Alteration", 
+            phonetic: "awl′-tər-AY′-shən", 
+            hindi: "परिवर्तन / फेरबदल / संशोधन",
+            root: "Latin 'alter' (other) + '-ation' (noun)", 
+            quote: "A change into something other.", 
+            meaning: "The act or process of changing, modifying, or adjusting something.", 
+            related: ["To Alter (v)", "Alterable (adj)", "Unalterable (adj)"],
+            synonyms: "Modification, adjustment, amendment, change",
+            antonyms: "Preservation, permanence, status quo",
+            traits: ["Making something different.", "Example: tailoring alterations on clothes.", "Implies a shift from the original state."] 
+          },
+          { 
+            word: "To Alter", 
+            phonetic: "AWL′-tər", 
+            hindi: "बदलना / रूपांतरित करना",
+            root: "Latin 'alter' (other)", 
+            quote: "To change; to make different.", 
+            meaning: "To make structural or conditional changes to plans, garments, or ideas.", 
+            related: ["Altered (adj)", "Altering (participle)"],
+            synonyms: "Modify, adapt, amend, reshape",
+            antonyms: "Maintain, preserve, retain",
+            traits: ["Verb meaning modify or adjust.", "Making other plans.", "Root verb behind alteration."] 
+          },
+          { 
+            word: "Altercation", 
+            phonetic: "awl′-tər-KAY′-shən", 
+            hindi: "तीखी तकरार / कहा-सुनी / मौखिक विवाद",
+            root: "Latin 'alter' (clashing other ideas) + '-ation'", 
+            quote: "A heated verbal dispute or violent fight with words.", 
+            meaning: "A noisy, angry argument caused by having clashing opinions.", 
+            related: ["To Altercate (v)"],
+            synonyms: "Quarrel, wrangle, squabble, dispute, brawl",
+            antonyms: "Agreement, harmony, consensus, accord",
+            traits: ["Stronger and louder than a simple quarrel.", "Characterized by high emotion and heated words.", "Originates from having 'other' clashing opinions."] 
+          },
+          { 
+            word: "Alter Ego", 
+            phonetic: "AWL′-tər EE′-gō", 
+            hindi: "अभिन्न मित्र / दूसरा स्वरूप (दूसरा 'मैं')",
+            root: "Latin 'alter' (other) + 'ego' (I, self)", 
+            quote: "My other I; my other self.", 
+            meaning: "A trusted intimate friend so similar in temperament that they are your mirror image.", 
+            related: ["Alter-egoism (n)"],
+            synonyms: "Bosom friend, mirror image, close confidant",
+            antonyms: "Nemesis, arch-enemy, opponent",
+            traits: ["Literally translates to 'other self'.", "Thinks, reacts, and behaves exactly like you.", "In literature: Batman to Bruce Wayne."] 
+          }
         ],
         matchingOptions: [
-          { key: "a", text: "one excessively fixated on own desires (egocentric)" }, { key: "b", text: "to change (to alter)" }, { key: "c", text: "heated dispute (altercation)" },
-          { key: "d", text: "one's concept of oneself (ego)" }, { key: "e", text: "to take one, skip one (to alternate)" }, { key: "f", text: "putting another's welfare first (altruism)" },
-          { key: "g", text: "morbidly wrapped up in oneself (egomaniacal)" }, { key: "h", text: "interested in welfare of others (altruistic)" }, { key: "i", text: "a choice (alternative)" },
-          { key: "j", text: "a change (alteration)" }, { key: "k", text: "one's other self (alter ego)" }, { key: "l", text: "other possible / substitute (alternate)" }
+          { key: "a", text: "one excessively fixated on own desires (egocentric)" }, { key: "b", text: "to change (to alter)" }, { key: "c", text: "heated verbal dispute (altercation)" },
+          { key: "d", text: "one's concept of oneself (ego)" }, { key: "e", text: "to take one, skip one in turn (to alternate)" }, { key: "f", text: "putting another's welfare first (altruism)" },
+          { key: "g", text: "morbidly wrapped up in oneself (egomaniacal)" }, { key: "h", text: "interested in welfare of others (altruistic)" }, { key: "i", text: "a choice between options (alternative)" },
+          { key: "j", text: "a change or modification (alteration)" }, { key: "k", text: "one's other self / mirror friend (alter ego)" }, { key: "l", text: "other possible / substitute (alternate)" }
         ],
         matchingAnswers: { "Ego": "d", "Egocentric": "a", "Altruism": "f", "To Alternate": "e", "To Alter": "b", "Altercation": "c", "Egomaniacal": "g", "Altruistic": "h", "Alternative": "i", "Alteration": "j", "Alter Ego": "k", "Alternate (adj.)": "l" },
         yesNoQuestions: [
@@ -1174,27 +1528,222 @@
         category: "Etymology & Roots",
         desc: "Master the roots verto (turn), dexter (right hand), sinister (left hand), gauche/droit, misein (hate), anthropos (mankind), gyne (woman), gamos (marriage), and asketes (monk).",
         words: [
-          { word: "Ambidextrous", phonetic: "am-bə-DEKS′-trəs", root: "Root: ambi (both) + dexter (right hand / skillful)", quote: "Able to use both hands with equal skill.", meaning: "Capable of using both hands with equal dexterity and ease.", traits: ["Both hands function like 'right hands'.", "Noun form: ambidexterity.", "Physical versatility."] },
-          { word: "Ambidexterity", phonetic: "am′-bə-deks-TAIR′-ə-tee", root: "Suffix: -ity (quality / condition)", quote: "The quality of being ambidextrous.", meaning: "The state of being equally adept with both hands.", traits: ["Noun form of ambidextrous.", "Rare physical coordination.", "Motor mastery."] },
-          { word: "Dexterous", phonetic: "DEKS′-trəs", root: "Root: dexter (Latin = right hand, skillful)", quote: "Skillful with the hands or body.", meaning: "Showing or having physical skill, manual dexterity, or cleverness.", traits: ["Noun form: dexterity.", "Spelling note: '-e-' before '-rous'.", "Essential for surgeons."] },
-          { word: "Dexterity", phonetic: "deks-TAIR′-ə-tee", root: "Suffix: -ity (noun suffix)", quote: "Skill and grace in physical movement.", meaning: "Readiness and grace in physical activity; especially skill in using the hands.", traits: ["Manual skill and nimbleness.", "Opposite of clumsiness.", "High coordination."] },
-          { word: "Sinister", phonetic: "SIN′-ə-stər", root: "Root: sinister (Latin = left hand)", quote: "Threatening, evil, or dangerous.", meaning: "Giving the impression that something harmful or evil is happening or will happen.", traits: ["Derived from suspicion of lefties.", "Implies dark menace.", "Used for villains & omens."] },
-          { word: "Gauche", phonetic: "GŌSH", root: "Root: gauche (French = left hand)", quote: "Awkward, tactless, and without social finesse.", meaning: "Lacking ease or grace; socially awkward and clumsy in manners.", traits: ["Social clumsiness.", "Pronounced like 'go' + 'sh'.", "Makes embarrassing blunders."] },
-          { word: "Gaucherie", phonetic: "GŌ′-shə-ree", root: "Suffix: -rie (noun practice / state)", quote: "An awkward, tactless way of behaving.", meaning: "A socially awkward or tactless act, manner, or remark.", traits: ["Noun form of gauche.", "Lacks tact & diplomacy.", "Opposite of adroitness."] },
-          { word: "Adroit", phonetic: "ə-DROYT′", root: "Root: droit (French = right hand)", quote: "Clever, skillful, and quick-witted.", meaning: "Clever or skillful in using the hands or mind; ingenious in handling tricky situations.", traits: ["Mental and verbal dexterity.", "Quick-witted in emergencies.", "Opposite of gauche."] },
-          { word: "Adroitness", phonetic: "ə-DROYT′-nəs", root: "Suffix: -ness (noun quality)", quote: "Skill, ingenuity, and mental cleverness.", meaning: "The quality of being adroit; cleverness, resourcefulness, and finesse.", traits: ["Noun form of adroit.", "High social poise.", "Handles problems smoothly."] },
-          { word: "Anthropology", phonetic: "an-thrə-POL′-ə-jee", root: "Root: anthropos (mankind) + logos (study)", quote: "The study of human development and cultures.", meaning: "The scientific study of human origins, societies, cultures, and physical development.", traits: ["Practitioner: anthropologist.", "Adjective: anthropological.", "Covers human evolution."] },
-          { word: "Philanthropist", phonetic: "fə-LAN′-thrə-pist", root: "Root: philos (love) + anthropos (mankind)", quote: "One who loves mankind and donates to charity.", meaning: "A person who seeks to promote the welfare of others by generous donation of money.", traits: ["Practice: philanthropy.", "Adjective: philanthropic.", "Selfless benefactor."] },
-          { word: "Gynecologist", phonetic: "gīn-ə-KOL′-ə-jist", root: "Root: gyne (woman) + logos (study)", quote: "Medical specialist who treats female disorders.", meaning: "A physician specialized in the medical care of the female reproductive system.", traits: ["Field: gynecology.", "Adjective: gynecological.", "Dedicated women's doctor."] },
-          { word: "Monogamy", phonetic: "mə-NOG′-ə-mee", root: "Root: monos (one) + gamos (marriage)", quote: "The custom of only one marriage at a time.", meaning: "The practice or state of being married to one person at a time.", traits: ["Person: monogamist.", "Adjective: monogamous.", "Standard legal custom in Western world."] },
-          { word: "Bigamy", phonetic: "BIG′-ə-mee", root: "Root: bi- (two) + gamos (marriage)", quote: "Unlawful act of having two spouses simultaneously.", meaning: "The act of entering into a marriage with one person while still legally married to another.", traits: ["Person: bigamist.", "Adjective: bigamous.", "Illegal in modern civil law."] },
-          { word: "Polygamy", phonetic: "pə-LIG′-ə-mee", root: "Root: polys (many) + gamos (marriage)", quote: "The custom of plural marriage.", meaning: "The practice or custom of having more than one wife or husband at the same time.", traits: ["Person: polygamist.", "Adjective: polygamous.", "General term for multiple spouses."] },
-          { word: "Polygyny", phonetic: "pə-LIJ′-ə-nee", root: "Root: polys (many) + gyne (woman)", quote: "The custom of one man having many wives.", meaning: "Polygamy in which a man has more than one wife at the same time.", traits: ["Person: polygynist.", "Adjective: polygynous.", "Specific form for multiple wives."] },
-          { word: "Polyandry", phonetic: "pol-ee-AN′-dree", root: "Root: polys (many) + andros (male/husband)", quote: "The custom of one woman having many husbands.", meaning: "Polygamy in which a woman has more than one husband at the same time.", traits: ["Person: polyandrist.", "Adjective: polyandrous.", "Practiced historically in Himalayan regions."] },
-          { word: "Misanthropy", phonetic: "mis-AN′-thrə-pee", root: "Root: misein (hate) + anthropos (mankind)", quote: "General hatred or distrust of humankind.", meaning: "A general hatred, dislike, or distrust of the human species or human behavior.", traits: ["Person: misanthrope / misanthropist.", "Adjective: misanthropic.", "Cynical worldview."] },
-          { word: "Misogyny", phonetic: "mə-SOJ′-ə-nee", root: "Root: misein (hate) + gyne (woman)", quote: "Hatred, prejudice, or contempt against women.", meaning: "Dislike of, contempt for, or ingrained prejudice against women.", traits: ["Person: misogynist.", "Adjectives: misogynous, misogynistic.", "Rooted in gender hostility."] },
-          { word: "Misogamy", phonetic: "mə-SOG′-ə-mee", root: "Root: misein (hate) + gamos (marriage)", quote: "Hatred of or aversion to marriage.", meaning: "The hatred of or strong prejudice against marriage.", traits: ["Person: misogamist.", "Adjective: misogamous.", "Avoids matrimony."] },
-          { word: "Asceticism", phonetic: "ə-SET′-ə-siz-əm", root: "Root: asketes (monk, hermit)", quote: "Devotion to a lonely, austere, self-denying life.", meaning: "Severe self-discipline and avoidance of all forms of indulgence.", traits: ["Person & Adj: ascetic.", "Rejects worldly luxury.", "Spiritual purification."] }
+          { 
+            word: "Ambidextrous", 
+            phonetic: "am-bə-DEKS′-trəs", 
+            hindi: "दोनों हाथों से समान रूप से निपुण (सव्यसाची)",
+            root: "Latin 'ambi-' (both) + 'dexter' (right hand / skillful)", 
+            quote: "Able to use both hands with equal skill.", 
+            meaning: "Capable of using both hands with equal dexterity, strength, and ease.", 
+            related: ["Ambidexterity (n)", "Ambidextrously (adv)"],
+            synonyms: "Two-handed, versatile, highly deft",
+            antonyms: "Clumsy, awkward, maladroit",
+            traits: ["Both hands function like 'right hands'.", "Noun form: ambidexterity.", "Rare physical coordination useful in surgery & sports."] 
+          },
+          { 
+            word: "Dexterous", 
+            phonetic: "DEKS′-trəs", 
+            hindi: "कुशल / निपुण / हाथ के काम में दक्ष",
+            root: "Latin 'dexter' (right hand) + '-ous' (adj)", 
+            quote: "Skillful with the hands or body.", 
+            meaning: "Showing or having physical skill, manual dexterity, or mental quickness.", 
+            related: ["Dexterity (n)", "Dexterously (adv)"],
+            synonyms: "Deft, nimble, adroit, handy, agile",
+            antonyms: "Clumsy, gauche, awkward, uncoordinated",
+            traits: ["Noun form: dexterity.", "Spelling note: '-e-' before '-rous'.", "Essential quality for surgeons and artisans."] 
+          },
+          { 
+            word: "Sinister", 
+            phonetic: "SIN′-ə-stər", 
+            hindi: "भयावह / अशुभ / दुर्भावनापूर्ण",
+            root: "Latin 'sinister' (left hand / ominous)", 
+            quote: "Threatening, evil, or dangerous.", 
+            meaning: "Giving the impression that something harmful, evil, or disastrous will happen.", 
+            related: ["Sinisterness (n)", "Sinisterly (adv)"],
+            synonyms: "Ominous, menacing, malevolent, dark, evil",
+            antonyms: "Auspicious, benign, favorable, fortunate",
+            traits: ["Derived from ancient superstition against left-handers.", "Implies dark menace.", "Frequently used for villains, omens, and eerie atmospheres."] 
+          },
+          { 
+            word: "Gauche", 
+            phonetic: "GŌSH", 
+            hindi: "फूहड़ / असभ्य / सामाजिक रूप से अनाड़ी",
+            root: "French 'gauche' (left hand)", 
+            quote: "Awkward, tactless, and without social finesse.", 
+            meaning: "Lacking social ease or grace; tactless and clumsy in manners.", 
+            related: ["Gaucherie (n)", "Gauchely (adv)"],
+            synonyms: "Tactless, clumsy, unpolished, awkward, uncouth",
+            antonyms: "Adroit, polished, urbane, suave, tactful",
+            traits: ["Social clumsiness rather than manual clumsiness.", "Pronounced like 'go' + 'sh'.", "Makes embarrassing conversational blunders."] 
+          },
+          { 
+            word: "Gaucherie", 
+            phonetic: "GŌ′-shə-ree", 
+            hindi: "फूहड़पन / असभ्य व्यवहार / बेढंगापन",
+            root: "French 'gauche' + '-rie'", 
+            quote: "An awkward, tactless way of behaving.", 
+            meaning: "A socially awkward, clumsy, or tactless act, remark, or manner.", 
+            related: ["Gauche (adj)"],
+            synonyms: "Social blunder, tactlessness, clumsiness, faux pas",
+            antonyms: "Finesse, diplomacy, tact, poise, savoir-faire",
+            traits: ["Noun form of gauche.", "Lacks tact & diplomacy in high-society gatherings.", "Opposite of adroitness and elegance."] 
+          },
+          { 
+            word: "Adroit", 
+            phonetic: "ə-DROYT′", 
+            hindi: "चतुर / कुशल / हाज़िरजवाब",
+            root: "French 'à droit' (to the right / right-handed)", 
+            quote: "Clever, skillful, and quick-witted.", 
+            meaning: "Clever or skillful in using the hands or mind; ingenious in handling tricky situations.", 
+            related: ["Adroitness (n)", "Adroitly (adv)"],
+            synonyms: "Resourceful, ingenious, nimble-witted, deft",
+            antonyms: "Gauche, clumsy, maladroit, unskillful",
+            traits: ["Mental and verbal dexterity.", "Quick-witted in emergencies and legal disputes.", "Opposite of gauche."] 
+          },
+          { 
+            word: "Anthropology", 
+            phonetic: "an-thrə-POL′-ə-jee", 
+            hindi: "मानव-विज्ञान (मानव विकास एवं संस्कृति का अध्ययन)",
+            root: "Greek 'anthropos' (mankind) + 'logos' (study)", 
+            quote: "The scientific study of human development and cultures.", 
+            meaning: "The scientific study of human origins, biological evolution, societies, and cultures.", 
+            related: ["Anthropologist (n)", "Anthropological (adj)"],
+            synonyms: "Science of humanity, cultural anthropology",
+            antonyms: "—",
+            traits: ["Practitioner: anthropologist.", "Adjective: anthropological.", "Covers human evolution and primitive societies."] 
+          },
+          { 
+            word: "Philanthropist", 
+            phonetic: "fə-LAN′-thrə-pist", 
+            hindi: "दानवीर / जनहितैषी / मानव प्रेमी",
+            root: "Greek 'philos' (love) + 'anthropos' (mankind)", 
+            quote: "One who loves mankind and donates generously to charity.", 
+            meaning: "A person who promotes the welfare of others, especially by donating money to humanitarian causes.", 
+            related: ["Philanthropy (n)", "Philanthropic (adj)"],
+            synonyms: "Benefactor, humanitarian, patron, donor",
+            antonyms: "Misanthrope, misanthropist, skinflint",
+            traits: ["Practice: philanthropy.", "Adjective: philanthropic.", "Generously finances hospitals, schools, and charities."] 
+          },
+          { 
+            word: "Gynecologist", 
+            phonetic: "gīn-ə-KOL′-ə-jist", 
+            hindi: "स्त्री रोग विशेषज्ञ",
+            root: "Greek 'gyne' (woman) + 'logos' (study)", 
+            quote: "Medical specialist who treats female reproductive health.", 
+            meaning: "A physician specialized in the medical care and diseases of the female reproductive system.", 
+            related: ["Gynecology (n)", "Gynecological (adj)"],
+            synonyms: "Women's doctor, OB-GYN physician",
+            antonyms: "—",
+            traits: ["Field: gynecology.", "Adjective: gynecological.", "Dedicated women's reproductive health doctor."] 
+          },
+          { 
+            word: "Monogamy", 
+            phonetic: "mə-NOG′-ə-mee", 
+            hindi: "एकल विवाह (एक समय में एक शादी की प्रथा)",
+            root: "Greek 'monos' (one) + 'gamos' (marriage)", 
+            quote: "The custom of only one marriage at a time.", 
+            meaning: "The practice or state of being married to one person at a time.", 
+            related: ["Monogamist (n)", "Monogamous (adj)"],
+            synonyms: "Single marriage, pair-bonding",
+            antonyms: "Polygamy, bigamy, plural marriage",
+            traits: ["Person: monogamist.", "Adjective: monogamous.", "Standard legal custom in Western civilization."] 
+          },
+          { 
+            word: "Bigamy", 
+            phonetic: "BIG′-ə-mee", 
+            hindi: "द्विविवाह (पहली शादी रहते गैरकानूनी दूसरी शादी)",
+            root: "Latin/Greek 'bi-' (two) + 'gamos' (marriage)", 
+            quote: "Unlawful act of having two spouses simultaneously.", 
+            meaning: "The act of entering into a marriage with one person while still legally married to another.", 
+            related: ["Bigamist (n)", "Bigamous (adj)"],
+            synonyms: "Dual marriage, illegal second marriage",
+            antonyms: "Monogamy",
+            traits: ["Person: bigamist.", "Adjective: bigamous.", "Considered a criminal offense in civil legal codes."] 
+          },
+          { 
+            word: "Polygamy", 
+            phonetic: "pə-LIG′-ə-mee", 
+            hindi: "बहुविवाह (एक से अधिक जीवनसाथी रखने की प्रथा)",
+            root: "Greek 'polys' (many) + 'gamos' (marriage)", 
+            quote: "The custom of plural marriage.", 
+            meaning: "The practice or custom of having more than one wife or husband simultaneously.", 
+            related: ["Polygamist (n)", "Polygamous (adj)"],
+            synonyms: "Plural marriage, multi-spouse marriage",
+            antonyms: "Monogamy",
+            traits: ["Person: polygamist.", "Adjective: polygamous.", "Umbrella term encompassing both polygyny and polyandry."] 
+          },
+          { 
+            word: "Polygyny", 
+            phonetic: "pə-LIJ′-ə-nee", 
+            hindi: "बहुपत्नी प्रथा (एक पुरुष की कई पत्नियां होना)",
+            root: "Greek 'polys' (many) + 'gyne' (woman)", 
+            quote: "The custom of one man having many wives.", 
+            meaning: "A form of polygamy in which a man has more than one wife at the same time.", 
+            related: ["Polygynist (n)", "Polygynous (adj)"],
+            synonyms: "Multiple wives custom",
+            antonyms: "Polyandry, monogyny",
+            traits: ["Person: polygynist.", "Adjective: polygynous.", "Specific anthropological term for multiple wives."] 
+          },
+          { 
+            word: "Polyandry", 
+            phonetic: "pol-ee-AN′-dree", 
+            hindi: "बहुपति प्रथा (एक स्त्री के कई पति होना)",
+            root: "Greek 'polys' (many) + 'andros' (male / husband)", 
+            quote: "The custom of one woman having many husbands.", 
+            meaning: "A form of polygamy in which a woman has more than one husband at the same time.", 
+            related: ["Polyandrist (n)", "Polyandrous (adj)"],
+            synonyms: "Multiple husbands custom",
+            antonyms: "Polygyny, monogamy",
+            traits: ["Person: polyandrist.", "Adjective: polyandrous.", "Practiced historically in specific Himalayan regions."] 
+          },
+          { 
+            word: "Misanthropy", 
+            phonetic: "mis-AN′-thrə-pee", 
+            hindi: "मानवद्वेष / मनुष्य जाति से घृणा",
+            root: "Greek 'misein' (to hate) + 'anthropos' (mankind)", 
+            quote: "General hatred or distrust of humankind.", 
+            meaning: "A general hatred, dislike, or distrust of the human species or human behavior.", 
+            related: ["Misanthrope (n)", "Misanthropic (adj)"],
+            synonyms: "Cynicism, distrust of humanity",
+            antonyms: "Philanthropy, humanitarianism",
+            traits: ["Person: misanthrope / misanthropist.", "Adjective: misanthropic.", "Deeply cynical worldview."] 
+          },
+          { 
+            word: "Misogyny", 
+            phonetic: "mə-SOJ′-ə-nee", 
+            hindi: "स्त्रीद्वेष / नारी जाति से घृणा",
+            root: "Greek 'misein' (to hate) + 'gyne' (woman)", 
+            quote: "Hatred, prejudice, or contempt against women.", 
+            meaning: "Dislike of, contempt for, or ingrained prejudice against women.", 
+            related: ["Misogynist (n)", "Misogynistic (adj)"],
+            synonyms: "Anti-woman bias, female prejudice",
+            antonyms: "Philogyny, feminism",
+            traits: ["Person: misogynist.", "Adjectives: misogynous, misogynistic.", "Rooted in gender hostility."] 
+          },
+          { 
+            word: "Misogamy", 
+            phonetic: "mə-SOG′-ə-mee", 
+            hindi: "विवाहद्वेष / शादी की प्रथा से घृणा",
+            root: "Greek 'misein' (to hate) + 'gamos' (marriage)", 
+            quote: "Hatred of or aversion to marriage.", 
+            meaning: "The hatred of or strong prejudice against entering into marriage.", 
+            related: ["Misogamist (n)", "Misogamous (adj)"],
+            synonyms: "Anti-matrimonialism",
+            antonyms: "Philogamy",
+            traits: ["Person: misogamist.", "Adjective: misogamous.", "Avoids matrimony."] 
+          },
+          { 
+            word: "Asceticism", 
+            phonetic: "ə-SET′-ə-siz-əm", 
+            hindi: "तपस्या / संन्यास / वैराग्यपूर्ण जीवन",
+            root: "Greek 'asketes' (monk, hermit, disciplined)", 
+            quote: "Devotion to a lonely, austere, self-denying life.", 
+            meaning: "Severe self-discipline and avoidance of all forms of indulgence and luxury.", 
+            related: ["Ascetic (n & adj)", "Ascetically (adv)"],
+            synonyms: "Austerity, self-denial, monasticism",
+            antonyms: "Hedonism, indulgence, sybaritism, luxury",
+            traits: ["Person & Adj: ascetic.", "Rejects worldly comfort.", "Aimed at spiritual purification."] 
+          }
         ],
         matchingOptions: [
           { key: "a", text: "capable of using both hands with equal skill (ambidextrous)" }, { key: "b", text: "skillful / manual dexterity (dexterous)" }, { key: "c", text: "evil, threatening (sinister)" },
@@ -1232,18 +1781,128 @@
         title: "How to Talk About Doctors",
         subtitle: "10 Medical Specialists",
         category: "Medicine & Health",
-        desc: "Learn the specific clinical specialties, diagnostic methods, and proper titles for 10 essential medical doctors.",
+        desc: "Learn the specific clinical specialties, diagnostic methods, Hindi translations, and proper titles for 10 essential medical doctors.",
         words: [
-          { word: "Internist", phonetic: "in-TURN′-ist", root: "Root: internus (Latin = inside)", quote: "What's wrong with you and why?", meaning: "A physician specialized in internal medicine and comprehensive diagnostic checkups.", traits: ["Performs thorough physical exams.", "Uses X-rays, blood tests, cardiograms.", "Diagnoses complex internal ailments."] },
-          { word: "Gynecologist", phonetic: "gīn-ə-KOL′-ə-jist", root: "Root: gyne (woman) + logos (study)", quote: "Treating female reproductive and sexual organs.", meaning: "A medical specialist treating diseases and hygiene of the female reproductive system.", traits: ["Specializes in women's health.", "Field: gynecology; Adj: gynecological.", "Focuses on non-pregnancy female care."] },
-          { word: "Obstetrician", phonetic: "ob-stə-TRISH′-ən", root: "Root: obstetrix (midwife / to stand before)", quote: "Having a baby? Pregnancy & delivery care.", meaning: "A physician who delivers babies and cares for mothers during and after pregnancy.", traits: ["Oversees prenatal care & childbirth.", "Field: obstetrics; Adj: obstetric.", "Ensures maternal & infant safety."] },
-          { word: "Pediatrician", phonetic: "pee′-dee-ə-TRISH′-ən", root: "Root: paidos (child) + iatreia (healing)", quote: "Is your baby or young child ill?", meaning: "A medical doctor specialized in the care, development, and diseases of infants and children.", traits: ["Limits practice to youngsters.", "Supervises inoculations & diet.", "Field: pediatrics; Adj: pediatric."] },
-          { word: "Dermatologist", phonetic: "dur-mə-TOL′-ə-jist", root: "Root: derma (skin) + logos (study)", quote: "Keeping your skin clear and healthy.", meaning: "A doctor specialized in the diagnosis and treatment of skin disorders.", traits: ["Treats acne, eczema, psoriasis, cancer.", "Focuses on outer skin covering.", "Field: dermatology; Adj: dermatological."] },
-          { word: "Ophthalmologist", phonetic: "off-thal-MOL′-ə-jist", root: "Root: ophthalmos (eye) + logos (study)", quote: "Are your eyes and vision healthy?", meaning: "A medical eye doctor who diagnoses vision disorders, prescribes glasses, drugs, and performs surgery.", traits: ["Treats myopia, cataracts, glaucoma.", "Full medical doctor & eye surgeon.", "Field: ophthalmology; Adj: ophthalmological."] },
-          { word: "Orthopedist", phonetic: "awr-thə-PEE′-dist", root: "Root: orthos (straight) + paidos (child / bone)", quote: "How are your bones and skeletal system?", meaning: "A surgeon specialized in correcting skeletal deformities, fractures, and spinal disorders.", traits: ["Treats fractures, slipped discs, clubfoot.", "Uses braces & corrective bone surgery.", "Field: orthopedics; Adj: orthopedic."] },
-          { word: "Cardiologist", phonetic: "kahr-dee-OL′-ə-jist", root: "Root: kardia (heart) + logos (study)", quote: "Does your heart go pitter-patter?", meaning: "A physician specializing in diseases of the heart and the circulatory system.", traits: ["Diagnoses heart attacks & arrhythmias.", "Interprets electrocardiograms (ECGs).", "Field: cardiology; Adj: cardiological."] },
-          { word: "Neurologist", phonetic: "noor-OL′-ə-jist", root: "Root: neuron (nerve) + logos (study)", quote: "Is your brain and nervous system working?", meaning: "A physician specializing in the brain, spinal cord, and nervous system disorders.", traits: ["Treats epilepsy, stroke, neuropathy.", "Focuses on organic nerve disorders.", "Field: neurology; Adj: neurological."] },
-          { word: "Psychiatrist", phonetic: "sī-KĪ′-ə-trist", root: "Root: psyche (mind/soul) + iatreia (healing)", quote: "Alleviating mental and emotional distress.", meaning: "A medical doctor specialized in treating mental, emotional, and behavioral disorders.", traits: ["Uses psychotherapy and medication.", "Alleviates severe neuroses & anxieties.", "Field: psychiatry; Adj: psychiatric."] }
+          { 
+            word: "Internist", 
+            phonetic: "in-TURN′-ist", 
+            hindi: "आंतरिक रोग विशेषज्ञ / फिजिशियन (निदान विशेषज्ञ)",
+            root: "Latin 'internus' (inside) + '-ist'", 
+            quote: "What's wrong with you and why?", 
+            meaning: "A physician specialized in internal medicine and comprehensive diagnostic checkups.", 
+            related: ["Internal (adj)", "Internalize (v)"],
+            synonyms: "Diagnostician, internal medicine physician, clinical expert",
+            antonyms: "Surgeon (purely operative specialist)",
+            traits: ["Performs thorough physical exams.", "Uses blood tests, X-rays, ECGs to find root causes.", "Diagnoses complex internal ailments."] 
+          },
+          { 
+            word: "Gynecologist", 
+            phonetic: "gīn-ə-KOL′-ə-jist", 
+            hindi: "स्त्री रोग विशेषज्ञ",
+            root: "Greek 'gyne' (woman) + 'logos' (study)", 
+            quote: "Treating female reproductive and sexual organs.", 
+            meaning: "A medical specialist treating diseases and hygiene of the female reproductive system.", 
+            related: ["Gynecology (n)", "Gynecological (adj)"],
+            synonyms: "Women's health specialist, OB-GYN physician",
+            antonyms: "—",
+            traits: ["Specializes in female health.", "Field: gynecology; Adj: gynecological.", "Focuses on non-pregnancy female care."] 
+          },
+          { 
+            word: "Obstetrician", 
+            phonetic: "ob-stə-TRISH′-ən", 
+            hindi: "प्रसूति विशेषज्ञ (गर्भावस्था एवं डिलीवरी डॉक्टर)",
+            root: "Latin 'obstetrix' (midwife / 'to stand before') + '-ician' (expert)", 
+            quote: "Pregnancy, delivery, and postpartum maternal care.", 
+            meaning: "A physician who delivers babies and cares for mothers during and after pregnancy.", 
+            related: ["Obstetrics (n)", "Obstetric (adj)", "Obstetrical (adj)"],
+            synonyms: "Accoucheur, childbirth doctor, maternity specialist",
+            antonyms: "—",
+            traits: ["Oversees prenatal care & labor delivery.", "Field: obstetrics; Adj: obstetric.", "Ensures safety of both mother and newborn infant."] 
+          },
+          { 
+            word: "Pediatrician", 
+            phonetic: "pee′-dee-ə-TRISH′-ən", 
+            hindi: "बाल रोग विशेषज्ञ (शिशु एवं बच्चों के डॉक्टर)",
+            root: "Greek 'paidos' (child) + 'iatreia' (medical healing) + '-ician'", 
+            quote: "Is your baby or young child ill?", 
+            meaning: "A medical doctor specialized in the care, development, and diseases of infants and children.", 
+            related: ["Pediatrics (n)", "Pediatric (adj)"],
+            synonyms: "Child specialist, baby physician",
+            antonyms: "Geriatrician (doctor for the elderly)",
+            traits: ["Limits practice to youngsters.", "Supervises inoculations, diet, and growth.", "Field: pediatrics; Adj: pediatric."] 
+          },
+          { 
+            word: "Dermatologist", 
+            phonetic: "dur-mə-TOL′-ə-jist", 
+            hindi: "त्वचा रोग विशेषज्ञ (स्किन स्पेशलिस्ट)",
+            root: "Greek 'derma' (skin) + 'logos' (study) + '-ist'", 
+            quote: "Keeping your skin clear and healthy.", 
+            meaning: "A doctor specialized in the diagnosis and treatment of skin disorders.", 
+            related: ["Dermatology (n)", "Dermatological (adj)", "Dermatitis (n)"],
+            synonyms: "Skin specialist, skin physician",
+            antonyms: "—",
+            traits: ["Treats acne, eczema, psoriasis, and skin cancer.", "Focuses on outer skin covering.", "Field: dermatology; Adj: dermatological."] 
+          },
+          { 
+            word: "Ophthalmologist", 
+            phonetic: "off-thal-MOL′-ə-jist", 
+            hindi: "नेत्र रोग विशेषज्ञ / आँख के सर्जन (आई स्पेशलिस्ट)",
+            root: "Greek 'ophthalmos' (eye) + 'logos' (study) + '-ist'", 
+            quote: "Are your eyes and vision healthy?", 
+            meaning: "A medical eye doctor who diagnoses vision disorders, prescribes glasses, drugs, and performs surgery.", 
+            related: ["Ophthalmology (n)", "Ophthalmological (adj)"],
+            synonyms: "Eye physician, oculist, eye surgeon",
+            antonyms: "—",
+            traits: ["Treats myopia, cataracts, glaucoma.", "Full medical doctor & eye surgeon.", "Field: ophthalmology; Adj: ophthalmological."] 
+          },
+          { 
+            word: "Orthopedist", 
+            phonetic: "awr-thə-PEE′-dist", 
+            hindi: "हड्डी एवं जोड़ विशेषज्ञ (अस्थि रोग विशेषज्ञ)",
+            root: "Greek 'orthos' (straight) + 'paidos' (child / bone)", 
+            quote: "How are your bones and skeletal system?", 
+            meaning: "A surgeon specialized in correcting skeletal deformities, fractures, and spinal disorders.", 
+            related: ["Orthopedics (n)", "Orthopedic (adj)"],
+            synonyms: "Bone specialist, orthopedic surgeon",
+            antonyms: "—",
+            traits: ["Treats fractures, slipped discs, clubfoot.", "Uses braces & corrective bone surgery.", "Field: orthopedics; Adj: orthopedic."] 
+          },
+          { 
+            word: "Cardiologist", 
+            phonetic: "kahr-dee-OL′-ə-jist", 
+            hindi: "हृदय रोग विशेषज्ञ (हार्ट स्पेशलिस्ट)",
+            root: "Greek 'kardia' (heart) + 'logos' (study) + '-ist'", 
+            quote: "Does your heart go pitter-patter?", 
+            meaning: "A physician specializing in diseases of the heart and the circulatory system.", 
+            related: ["Cardiology (n)", "Cardiological (adj)", "Cardiac (adj)"],
+            synonyms: "Heart specialist, cardiovascular doctor",
+            antonyms: "—",
+            traits: ["Diagnoses heart attacks & arrhythmias.", "Interprets electrocardiograms (ECGs).", "Field: cardiology; Adj: cardiological."] 
+          },
+          { 
+            word: "Neurologist", 
+            phonetic: "noor-OL′-ə-jist", 
+            hindi: "तंत्रिका तंत्र एवं मस्तिष्क विशेषज्ञ (न्यूरोलॉजिस्ट)",
+            root: "Greek 'neuron' (nerve) + 'logos' (study) + '-ist'", 
+            quote: "Is your brain and nervous system working?", 
+            meaning: "A physician specializing in the brain, spinal cord, and nervous system disorders.", 
+            related: ["Neurology (n)", "Neurological (adj)", "Neuralgia (n)"],
+            synonyms: "Nerve specialist, brain physician",
+            antonyms: "—",
+            traits: ["Treats epilepsy, stroke, neuropathy, Parkinson's.", "Focuses on organic nerve disorders.", "Field: neurology; Adj: neurological."] 
+          },
+          { 
+            word: "Psychiatrist", 
+            phonetic: "sī-KĪ′-ə-trist", 
+            hindi: "मनोचिकित्सक (मानसिक रोग विशेषज्ञ)",
+            root: "Greek 'psyche' (mind/soul) + 'iatreia' (healing) + '-ist'", 
+            quote: "Alleviating mental and emotional distress.", 
+            meaning: "A medical doctor specialized in treating mental, emotional, and behavioral disorders.", 
+            related: ["Psychiatry (n)", "Psychiatric (adj)", "Psychotherapy (n)"],
+            synonyms: "Mind healer, mental health physician, alienist",
+            antonyms: "—",
+            traits: ["Uses psychotherapy and pharmaceuticals.", "Alleviates severe neuroses & psychoses.", "Field: psychiatry; Adj: psychiatric."] 
+          }
         ],
         matchingOptions: [
           { key: "a", text: "diagnosis; internal organs (internist)" }, { key: "b", text: "female reproductive organs (gynecologist)" }, { key: "c", text: "pregnancy, childbirth (obstetrician)" },
@@ -1275,27 +1934,258 @@
         category: "Etymology & Roots",
         desc: "Explore the derivations behind intern, obstetrics, pediatrics, pedagogy, demagogues, skin (derma), eyes (oculus/ophthalmos), and optical specialists.",
         words: [
-          { word: "Intern (e)", phonetic: "IN′-turn", root: "Root: internus (Latin = inside)", quote: "A medical graduate serving an apprenticeship.", meaning: "A recent medical school graduate training inside a hospital before full licensing.", traits: ["Distinct from internist.", "Serves clinical apprenticeship.", "Inside hospital system."] },
-          { word: "Obstetrics", phonetic: "ob-STET′-riks", root: "Root: obstetrix (midwife, 'to stand before')", quote: "Medical specialty of childbirth and delivery.", meaning: "The branch of medicine and surgery concerned with childbirth and midwifery.", traits: ["Practitioner: obstetrician.", "Adjectives: obstetric, obstetrical.", "Recognized field since 1834."] },
-          { word: "Pediatrics", phonetic: "pee-dee-AT′-riks", root: "Root: paidos (child) + iatreia (healing)", quote: "Medical healing and care of children.", meaning: "The branch of medicine dealing with children and their diseases.", traits: ["Practitioner: pediatrician.", "Adjective: pediatric.", "Contrast with Latin 'pedis' (foot)."] },
-          { word: "Pedagogy", phonetic: "PED′-ə-gō-jee", root: "Root: paidos (child) + agogos (leading)", quote: "Principles and methods of teaching.", meaning: "The method and practice of teaching, especially as an academic subject or theoretical concept.", traits: ["Adjective: pedagogical.", "Literally 'leading of children'.", "Core college education subject."] },
-          { word: "Pedagogue", phonetic: "PED′-ə-gog", root: "Root: paidos (child) + agogos (leader)", quote: "A narrow-minded, dogmatic teacher.", meaning: "A teacher, especially a strict, pedantic, or old-fashioned dogmatic one.", traits: ["Deteriorated in meaning over time.", "Used as a word of contempt.", "Lacks progressive flexibility."] },
-          { word: "Demagogue", phonetic: "DEM′-ə-gog", root: "Root: demos (people) + agogos (leading)", quote: "One who stirs political discontent for power.", meaning: "A political leader who seeks support by appealing to popular desires and prejudices.", traits: ["Practice: demagoguery.", "Adjective: demagogic.", "Misleads masses via wild oratory."] },
-          { word: "Demagoguery", phonetic: "dem-ə-GOG′-ə-ree", root: "Suffix: -ery (practice / conduct)", quote: "Practice of stirring up political dissatisfaction.", meaning: "Political activity or practices that seek support by appealing to prejudices.", traits: ["Noun form of demagogue.", "Exploits societal grievances.", "Self-serving manipulation."] },
-          { word: "Dermatology", phonetic: "dur-mə-TOL′-ə-jee", root: "Root: derma (skin) + logos (study)", quote: "Medical specialty dealing with skin diseases.", meaning: "The branch of medicine concerned with the diagnosis and treatment of skin disorders.", traits: ["Practitioner: dermatologist.", "Adjective: dermatological.", "Covers all skin layers."] },
-          { word: "Hypodermic", phonetic: "hī-pə-DURM′-ik", root: "Root: hypos (under) + derma (skin)", quote: "Penetrating under the skin.", meaning: "Relating to the region immediately beneath the skin (e.g. hypodermic needle).", traits: ["Greek hypos = under.", "Enters subcutaneous layer.", "Essential for vaccines & serums."] },
-          { word: "Epidermis", phonetic: "ep-ə-DUR′-mis", root: "Root: epi- (outer) + derma (skin)", quote: "The outermost layer of the skin.", meaning: "The outer, nonvascular, nonsensitive layer of the skin, covering the dermis.", traits: ["Outermost protective barrier.", "Constantly sheds & renews cells.", "Shields internal tissues."] },
-          { word: "Taxidermist", phonetic: "TAKS′-ə-dur-mist", root: "Root: taxis (arrangement) + derma (skin)", quote: "One who prepares and stuffs animal skins.", meaning: "A person who prepares, stuffs, and mounts the skins of animals with lifelike effect.", traits: ["Business: taxidermy.", "Mounts wildlife specimens.", "Preserves animal hides."] },
-          { word: "Pachyderm", phonetic: "PAK′-ə-durm", root: "Root: pachys (thick) + derma (skin)", quote: "A thick-skinned animal (elephant, rhino).", meaning: "A very large mammal with thick skin, especially an elephant, rhinoceros, or hippopotamus.", traits: ["Greek pachys = thick.", "Literally 'thick skin'.", "Used for insensitive people."] },
-          { word: "Dermatitis", phonetic: "dur-mə-TĪ′-tis", root: "Root: derma (skin) + -itis (inflammation)", quote: "General inflammation of the skin.", meaning: "A medical condition in which the skin becomes red, swollen, and sore, with blisters.", traits: ["Suffix -itis = inflammation.", "Includes rashes & eczema.", "Treated by dermatologists."] },
-          { word: "Ophthalmology", phonetic: "off-thal-MOL′-ə-jee", root: "Root: ophthalmos (eye) + logos (study)", quote: "Medical science of the eye and vision surgery.", meaning: "The branch of medicine concerned with the study and treatment of eye disorders.", traits: ["Practitioner: ophthalmologist.", "Adjective: ophthalmological.", "Full medical & surgical discipline."] },
-          { word: "Oculist", phonetic: "OK′-yə-list", root: "Root: oculus (Latin = eye)", quote: "An earlier title for an eye doctor.", meaning: "An ophthalmologist or eye physician (older terminology).", traits: ["Derived from Latin oculus.", "Replaced by ophthalmologist.", "Medical eye specialist."] },
-          { word: "Ocular", phonetic: "OK′-yə-lər", root: "Root: oculus (eye) + -ar (adjective)", quote: "Pertaining to or connected with the eye.", meaning: "Of or connected with the eyes or vision.", traits: ["Adjective referring to the eye.", "Example: ocular exam.", "Used in optics & anatomy."] },
-          { word: "Monocle", phonetic: "MON′-ə-kəl", root: "Root: monos (one) + oculus (eye)", quote: "A single eyeglass for one eye.", meaning: "A single eyeglass kept in position by the muscles around the eye.", traits: ["Used for one eye only.", "Vintage symbol of aristocracy.", "Early corrective lens."] },
-          { word: "Binoculars", phonetic: "bə-NOK′-yə-lərz", root: "Root: bi- (two) + oculus (eye)", quote: "Field glasses increasing range of two eyes.", meaning: "An optical instrument with a lens for each eye, used for viewing distant objects.", traits: ["Increases range of both eyes.", "Stereoscopic vision.", "Used for outdoors & navigation."] },
-          { word: "Inoculate", phonetic: "in-OK′-yə-layt", root: "Root: in- (into) + oculus (eye / puncture)", quote: "Injecting serum through an eye-like puncture.", meaning: "To treat with a vaccine to produce immunity against a disease.", traits: ["Spelling note: single 'n'.", "Creates microscopic puncture.", "Prevents epidemics."] },
-          { word: "Optometrist", phonetic: "op-TOM′-ə-trist", root: "Root: opsis (sight) + metron (measurement)", quote: "One who measures vision and prescribes glasses.", meaning: "A practitioner who examines the eyes for visual defects and prescribes corrective lenses.", traits: ["Not a medical doctor / surgeon.", "Field: optometry; Adj: optometric.", "Measures refractive errors & tests glaucoma."] },
-          { word: "Optician", phonetic: "op-TISH′-ən", root: "Root: opsis (sight) + -ician (expert)", quote: "One who grinds lenses and dispenses optical goods.", meaning: "A person qualified to make and supply eyeglasses on prescription.", traits: ["Fills prescriptions from eye doctors.", "Field: optics; Adj: optical.", "Grinds and fits lenses."] }
+          { 
+            word: "Intern (e)", 
+            phonetic: "IN′-turn", 
+            hindi: "प्रशिक्षु डॉक्टर / इंटर्न",
+            root: "Latin 'internus' (inside)", 
+            quote: "A medical graduate serving an apprenticeship.", 
+            meaning: "A recent medical school graduate training inside a hospital before full licensing.", 
+            related: ["Internship (n)"],
+            synonyms: "Resident doctor, medical apprentice, clinical trainee",
+            antonyms: "Consultant, attending specialist",
+            traits: ["Distinct from internist.", "Serves clinical apprenticeship inside hospital.", "Under supervision of senior physicians."] 
+          },
+          { 
+            word: "Obstetrics", 
+            phonetic: "ob-STET′-riks", 
+            hindi: "प्रसूति विज्ञान (शिशु जन्म एवं मातृत्व विज्ञान)",
+            root: "Latin 'obstetrix' (midwife, 'to stand before')", 
+            quote: "Medical specialty of childbirth and delivery.", 
+            meaning: "The branch of medicine and surgery concerned with childbirth and midwifery.", 
+            related: ["Obstetrician (n)", "Obstetric (adj)", "Obstetrical (adj)"],
+            synonyms: "Midwifery, maternal care, labor science",
+            antonyms: "—",
+            traits: ["Practitioner: obstetrician.", "Adjectives: obstetric, obstetrical.", "Recognized field since 1834."] 
+          },
+          { 
+            word: "Pediatrics", 
+            phonetic: "pee-dee-AT′-riks", 
+            hindi: "बाल चिकित्सा विज्ञान",
+            root: "Greek 'paidos' (child) + 'iatreia' (healing)", 
+            quote: "Medical healing and care of children.", 
+            meaning: "The branch of medicine dealing with children and their diseases.", 
+            related: ["Pediatrician (n)", "Pediatric (adj)"],
+            synonyms: "Child medicine, infant care",
+            antonyms: "Geriatrics (elderly medicine)",
+            traits: ["Practitioner: pediatrician.", "Adjective: pediatric.", "Contrast with Latin 'pedis' (foot)."] 
+          },
+          { 
+            word: "Pedagogy", 
+            phonetic: "PED′-ə-gō-jee", 
+            hindi: "शिक्षण शास्त्र / अध्यापन सिद्धांत",
+            root: "Greek 'paidos' (child) + 'agogos' (leading)", 
+            quote: "Principles and methods of teaching.", 
+            meaning: "The method and practice of teaching, especially as an academic subject or theoretical concept.", 
+            related: ["Pedagogical (adj)", "Pedagogue (n)"],
+            synonyms: "Teaching methodology, educational science, instruction",
+            antonyms: "—",
+            traits: ["Adjective: pedagogical.", "Literally 'the leading of children'.", "Core curriculum for teachers and educators."] 
+          },
+          { 
+            word: "Pedagogue", 
+            phonetic: "PED′-ə-gog", 
+            hindi: "रूढ़िवादी / संकीर्ण विचारधारा वाला शिक्षक",
+            root: "Greek 'paidos' (child) + 'agogos' (leader)", 
+            quote: "A narrow-minded, dogmatic, strait-laced teacher.", 
+            meaning: "A teacher, especially a strict, pedantic, or old-fashioned dogmatic one.", 
+            related: ["Pedagoguery (n)", "Pedagogic (adj)"],
+            synonyms: "Dogmatic teacher, pedant, strict tutor",
+            antonyms: "Progressive educator, inspiring mentor",
+            traits: ["Deteriorated in meaning over time.", "Used as a word of contempt.", "Lacks progressive flexibility."] 
+          },
+          { 
+            word: "Demagogue", 
+            phonetic: "DEM′-ə-gog", 
+            hindi: "दुर्जन नेता / भड़काऊ भाषण देकर जनता को बहकाने वाला",
+            root: "Greek 'demos' (people) + 'agogos' (leading)", 
+            quote: "One who stirs political discontent for personal power.", 
+            meaning: "A political leader who seeks support by appealing to popular desires and prejudices rather than rational argument.", 
+            related: ["Demagoguery (n)", "Demagogic (adj)"],
+            synonyms: "Rabble-rouser, agitator, political instigator, populist",
+            antonyms: "Statesman, principled leader, diplomat",
+            traits: ["Practice: demagoguery.", "Adjective: demagogic.", "Misleads masses via wild oratory and false promises."] 
+          },
+          { 
+            word: "Demagoguery", 
+            phonetic: "dem-ə-GOG′-ə-ree", 
+            hindi: "जनोत्तेजना / जनता को भड़काने की राजनीति",
+            root: "Suffix '-ery' (practice / conduct)", 
+            quote: "Practice of stirring up political dissatisfaction.", 
+            meaning: "Political activity or practices that seek support by appealing to popular prejudices.", 
+            related: ["Demagogic (adj)"],
+            synonyms: "Rabble-rousing, inflammatory rhetoric, populist pandering",
+            antonyms: "Statesmanship, thoughtful governance",
+            traits: ["Noun form of demagogue.", "Exploits societal grievances.", "Self-serving political manipulation."] 
+          },
+          { 
+            word: "Dermatology", 
+            phonetic: "dur-mə-TOL′-ə-jee", 
+            hindi: "त्वचा विज्ञान",
+            root: "Greek 'derma' (skin) + 'logos' (study)", 
+            quote: "Medical specialty dealing with skin diseases.", 
+            meaning: "The branch of medicine concerned with the diagnosis and treatment of skin disorders.", 
+            related: ["Dermatologist (n)", "Dermatological (adj)"],
+            synonyms: "Skin science, cutaneology",
+            antonyms: "—",
+            traits: ["Practitioner: dermatologist.", "Adjective: dermatological.", "Covers all layers of the epidermis and dermis."] 
+          },
+          { 
+            word: "Hypodermic", 
+            phonetic: "hī-pə-DURM′-ik", 
+            hindi: "त्वचा के नीचे जाने वाला (सुई / इंजेक्शन)",
+            root: "Greek 'hypos' (under) + 'derma' (skin)", 
+            quote: "Penetrating under the skin.", 
+            meaning: "Relating to the region immediately beneath the skin (e.g. hypodermic needle).", 
+            related: ["Hypodermically (adv)"],
+            synonyms: "Subcutaneous, under-the-skin",
+            antonyms: "Epidermal, surface, topical",
+            traits: ["Greek hypos = under.", "Enters subcutaneous layer.", "Essential for vaccines and serums."] 
+          },
+          { 
+            word: "Epidermis", 
+            phonetic: "ep-ə-DUR′-mis", 
+            hindi: "उपत्वचा / त्वचा की सबसे बाहरी परत",
+            root: "Greek 'epi-' (outer) + 'derma' (skin)", 
+            quote: "The outermost layer of the skin.", 
+            meaning: "The outer, nonvascular layer of the skin, covering the inner dermis.", 
+            related: ["Epidermal (adj)", "Epidermic (adj)"],
+            synonyms: "Cuticle, outer skin layer",
+            antonyms: "Endodermis, deep dermis",
+            traits: ["Outermost protective biological barrier.", "Constantly sheds and renews cells.", "Shields internal tissues."] 
+          },
+          { 
+            word: "Taxidermist", 
+            phonetic: "TAKS′-ə-dur-mist", 
+            hindi: "चर्म-प्रसाधक (जानवरों की खाल में भूसा भरकर सजाने वाला)",
+            root: "Greek 'taxis' (arrangement) + 'derma' (skin) + '-ist'", 
+            quote: "One who prepares and stuffs animal skins.", 
+            meaning: "A person who prepares, stuffs, and mounts the skins of animals with lifelike effect.", 
+            related: ["Taxidermy (n)"],
+            synonyms: "Animal skin preserver, specimen mounter",
+            antonyms: "—",
+            traits: ["Business: taxidermy.", "Mounts wildlife specimens for museums and hunters.", "Preserves animal hides."] 
+          },
+          { 
+            word: "Pachyderm", 
+            phonetic: "PAK′-ə-durm", 
+            hindi: "मोटी चमड़ी वाला जानवर (हाथी, गैंडा) / असंवेदनशील व्यक्ति",
+            root: "Greek 'pachys' (thick) + 'derma' (skin)", 
+            quote: "A thick-skinned animal (elephant, rhino).", 
+            meaning: "A very large mammal with thick skin, especially an elephant, rhinoceros, or hippopotamus.", 
+            related: ["Pachydermatous (adj)"],
+            synonyms: "Thick-skinned beast, elephant, insensitive person",
+            antonyms: "Thin-skinned organism, hypersensitive person",
+            traits: ["Greek pachys = thick.", "Literally translates to 'thick skin'.", "Used humorously for insensitive, thick-skinned people."] 
+          },
+          { 
+            word: "Dermatitis", 
+            phonetic: "dur-mə-TĪ′-tis", 
+            hindi: "त्वचा की सूजन / चर्म-शोथ (एक्जिमा / खुजली)",
+            root: "Greek 'derma' (skin) + '-itis' (inflammation)", 
+            quote: "General inflammation or infection of the skin.", 
+            meaning: "A medical condition in which the skin becomes red, swollen, and sore, with blisters.", 
+            related: ["Dermatitic (adj)"],
+            synonyms: "Eczema, skin rash, irritation, inflammation",
+            antonyms: "Healthy clear skin",
+            traits: ["Suffix -itis always indicates inflammation.", "Includes rashes, allergies, and eczema.", "Treated by dermatologists."] 
+          },
+          { 
+            word: "Ophthalmology", 
+            phonetic: "off-thal-MOL′-ə-jee", 
+            hindi: "नेत्र विज्ञान (आँखों का चिकित्सीय एवं शल्य विज्ञान)",
+            root: "Greek 'ophthalmos' (eye) + 'logos' (study)", 
+            quote: "Medical science of the eye and vision surgery.", 
+            meaning: "The branch of medicine concerned with the study and treatment of disorders and diseases of the eye.", 
+            related: ["Ophthalmologist (n)", "Ophthalmological (adj)"],
+            synonyms: "Eye medicine, ophthalmic science",
+            antonyms: "—",
+            traits: ["Practitioner: ophthalmologist.", "Adjective: ophthalmological.", "Full medical & surgical discipline."] 
+          },
+          { 
+            word: "Oculist", 
+            phonetic: "OK′-yə-list", 
+            hindi: "आँख का डॉक्टर (नेत्र चिकित्सक - पुराना नाम)",
+            root: "Latin 'oculus' (eye) + '-ist'", 
+            quote: "An earlier title for an eye doctor.", 
+            meaning: "An ophthalmologist or eye physician (older terminology).", 
+            related: ["Ocular (adj)"],
+            synonyms: "Ophthalmologist, eye specialist",
+            antonyms: "—",
+            traits: ["Derived from Latin oculus.", "Replaced largely by ophthalmologist in modern medicine.", "Medical eye specialist."] 
+          },
+          { 
+            word: "Ocular", 
+            phonetic: "OK′-yə-lər", 
+            hindi: "नेत्र-संबंधी / दृष्टि-संबंधी",
+            root: "Latin 'oculus' (eye) + '-ar' (adjective)", 
+            quote: "Pertaining to or connected with the eye.", 
+            meaning: "Of or connected with the eyes or vision.", 
+            related: ["Ocularly (adv)"],
+            synonyms: "Visual, ophthalmic, optical",
+            antonyms: "Auditory, non-visual",
+            traits: ["Adjective referring to the eye.", "Example: ocular examination.", "Used in optics & anatomy."] 
+          },
+          { 
+            word: "Monocle", 
+            phonetic: "MON′-ə-kəl", 
+            hindi: "एक आँख का चश्मा",
+            root: "Greek 'monos' (one) + Latin 'oculus' (eye)", 
+            quote: "A single eyeglass for one eye.", 
+            meaning: "A single eyeglass kept in position by the muscles around the eye.", 
+            related: ["Monocled (adj)"],
+            synonyms: "Single lens, eye piece",
+            antonyms: "Binoculars, eyeglasses",
+            traits: ["Used for one eye only.", "Vintage symbol of aristocracy.", "Early corrective lens."] 
+          },
+          { 
+            word: "Binoculars", 
+            phonetic: "bə-NOK′-yə-lərz", 
+            hindi: "दूरबीन (दोनों आँखों से देखने वाला यंत्र)",
+            root: "Latin 'bi-' (two) + 'oculus' (eye)", 
+            quote: "Field glasses increasing range of two eyes.", 
+            meaning: "An optical instrument with a lens for each eye, used for viewing distant objects.", 
+            related: ["Binocular (adj)"],
+            synonyms: "Field glasses, spyglass, opera glasses",
+            antonyms: "Monocle",
+            traits: ["Increases range of both eyes simultaneously.", "Provides stereoscopic 3D vision.", "Used for outdoors & navigation."] 
+          },
+          { 
+            word: "Inoculate", 
+            phonetic: "in-OK′-yə-layt", 
+            hindi: "टीका लगाना / टीकाकरण करना",
+            root: "Latin 'in-' (into) + 'oculus' (eye / puncture / bud)", 
+            quote: "Injecting serum through an eye-like puncture.", 
+            meaning: "To treat with a vaccine to produce immunity against a disease.", 
+            related: ["Inoculation (n)", "Inoculated (adj)"],
+            synonyms: "Vaccinate, immunize, inject",
+            antonyms: "Infect, contaminate",
+            traits: ["Spelling note: single 'n' (inoculate).", "Creates a microscopic puncture in skin.", "Prevents viral epidemics."] 
+          },
+          { 
+            word: "Optometrist", 
+            phonetic: "op-TOM′-ə-trist", 
+            hindi: "दृष्टि-मापक विशेषज्ञ (नंबर नापकर चश्मा देने वाला)",
+            root: "Greek 'opsis' (sight) + 'metron' (measurement)", 
+            quote: "One who measures vision and prescribes glasses.", 
+            meaning: "A practitioner who examines the eyes for visual defects and prescribes corrective lenses.", 
+            related: ["Optometry (n)", "Optometric (adj)"],
+            synonyms: "Vision tester, refractionist",
+            antonyms: "Ophthalmologist (eye surgeon)",
+            traits: ["Not a medical doctor / surgeon.", "Field: optometry; Adj: optometric.", "Measures refractive errors & tests glaucoma."] 
+          },
+          { 
+            word: "Optician", 
+            phonetic: "op-TISH′-ən", 
+            hindi: "चश्मा बनाने एवं बेचने वाला तकनीशियन",
+            root: "Greek 'opsis' (sight) + '-ician' (expert technician)", 
+            quote: "One who grinds lenses and dispenses optical goods.", 
+            meaning: "A person qualified to make and supply eyeglasses on prescription.", 
+            related: ["Optics (n)", "Optical (adj)"],
+            synonyms: "Lens grinder, spectacle maker, optical dispenser",
+            antonyms: "—",
+            traits: ["Fills prescriptions from eye doctors.", "Field: optics; Adj: optical.", "Grinds and fits lenses."] 
+          }
         ],
         matchingOptions: [
           { key: "a", text: "principles and methods of teaching (pedagogy)" }, { key: "b", text: "stuffing and mounting animal skins (taxidermy)" },
@@ -1337,21 +2227,186 @@
         category: "Etymology & Roots",
         desc: "Master the roots orthos (straight), odontos (tooth), kardia (heart), neuron (nerve), algos (pain), psyche (mind), and geras (old age).",
         words: [
-          { word: "Orthopedics", phonetic: "awr-thə-PEE′-diks", root: "Root: orthos (straight) + paidos (child / bone)", quote: "Straightening bones and joints.", meaning: "The medical specialty dealing with the correction of deformities of bones or muscles.", traits: ["Practitioner: orthopedist.", "Adjective: orthopedic.", "Treats fractures, spine curvature, and joints."] },
-          { word: "Orthodontia", phonetic: "awr-thə-DON′-shə", root: "Root: orthos (straight) + odontos (tooth)", quote: "Straightening teeth and correcting bad bites.", meaning: "The treatment of irregularities in the teeth and jaws.", traits: ["Practitioner: orthodontist.", "Adjective: orthodontic.", "Uses braces to align teeth."] },
-          { word: "Cardiology", phonetic: "kahr-dee-OL′-ə-jee", root: "Root: kardia (heart) + logos (study)", quote: "Science of the heart and circulatory system.", meaning: "The branch of medicine that deals with diseases of the heart.", traits: ["Practitioner: cardiologist.", "Adjective: cardiological.", "Diagnoses heart ailments."] },
-          { word: "Cardiac", phonetic: "KAHR′-dee-ak", root: "Root: kardia (heart) + -ac (adjective)", quote: "Pertaining to the heart.", meaning: "Relating to the heart (e.g. cardiac arrest).", traits: ["Adjective referring to the heart.", "Malfunctioning of heart.", "Cardiovascular health."] },
-          { word: "Cardiogram", phonetic: "KAHR′-dee-ə-gram′", root: "Root: kardia (heart) + gramma (record)", quote: "The electrically produced record of heartbeat.", meaning: "A recording of the muscle activity within the heart made by a cardiograph.", traits: ["Physical printout / record.", "Electrical pulses of heart.", "Diagnoses arrhythmias."] },
-          { word: "Cardiograph", phonetic: "KAHR′-dee-ə-graf′", root: "Root: kardia (heart) + graphein (to write)", quote: "The instrument that records heartbeat.", meaning: "An instrument for recording heart muscle activity electrically.", traits: ["The recording machine.", "Generates cardiograms.", "Clinical cardiac monitor."] },
-          { word: "Neurology", phonetic: "noor-OL′-ə-jee", root: "Root: neuron (nerve) + logos (study)", quote: "Scientific study of the nervous system.", meaning: "The branch of medicine dealing with the anatomy, functions, and disorders of nerves.", traits: ["Practitioner: neurologist.", "Adjective: neurological.", "Covers brain & spinal cord."] },
-          { word: "Neuralgia", phonetic: "noor-AL′-jə", root: "Root: neuron (nerve) + algos (pain)", quote: "Acute, sharp pain along a nerve.", meaning: "Intense pain along the course of a nerve.", traits: ["Root algos = pain.", "Sharp nerve ache.", "Common in facial nerves."] },
-          { word: "Neuritis", phonetic: "noor-Ī′-tis", root: "Root: neuron (nerve) + -itis (inflammation)", quote: "Inflammation of a nerve or nerves.", meaning: "Inflammation of a nerve or nerves, characterized by pain and tenderness.", traits: ["Suffix -itis = inflammation.", "Causes tenderness & numbness.", "Treated by neurologists."] },
-          { word: "Neurosis", phonetic: "noor-Ō′-sis", root: "Root: neuron (nerve) + -osis (abnormal condition)", quote: "Excessive worry and emotional disturbance.", meaning: "A mild mental or emotional illness involving symptoms of stress, anxiety, and obsessive behavior.", traits: ["Does NOT lose contact with reality.", "Noun/Adj: neurotic.", "Energy spent on unproductive worry."] },
-          { word: "Neurotic", phonetic: "noor-OT′-ik", root: "Root: neuron + -osis + -ic", quote: "Suffering from or relating to neurosis.", meaning: "A person with neurosis; abnormally sensitive, anxious, or obsessive.", traits: ["Both noun and adjective.", "High anxiety & compulsions.", "Personality growth hindered."] },
-          { word: "Psychosis", phonetic: "sī-KŌ′-sis", root: "Root: psyche (mind) + -osis (diseased condition)", quote: "Full-blown mental unbalance (loss of reality).", meaning: "A severe mental disorder in which contact is lost with external reality.", traits: ["Lost contact with reality.", "Severe psychiatric condition.", "Contrasts with neurosis."] },
-          { word: "Psychotic", phonetic: "sī-KOT′-ik", root: "Root: psyche + -osis + -ic", quote: "Mentally unbalanced; suffering from psychosis.", meaning: "Relating to, denoting, or suffering from a psychosis.", traits: ["Both noun and adjective.", "Delusions or hallucinations.", "Requires intensive psychiatric care."] },
-          { word: "Psychiatry", phonetic: "sī-KĪ′-ə-tree", root: "Root: psyche (mind) + iatreia (medical healing)", quote: "Medical healing of the mind.", meaning: "The medical specialty devoted to the diagnosis and treatment of mental disorders.", traits: ["Practitioner: psychiatrist.", "Adjective: psychiatric.", "Uses psychotherapy & medication."] },
-          { word: "Geriatrics", phonetic: "jair-ee-AT′-riks", root: "Root: geras (old age) + iatreia (healing)", quote: "Medical specialty dealing with the elderly.", meaning: "The branch of medicine dealing with the health and care of old people.", traits: ["Practitioner: geriatrician.", "Adjective: geriatric.", "Addresses aging ailments."] }
+          { 
+            word: "Orthopedics", 
+            phonetic: "awr-thə-PEE′-diks", 
+            hindi: "अस्थि-रोग शल्य चिकित्सा (हड्डियों और जोड़ों का इलाज)",
+            root: "Greek 'orthos' (straight/correct) + 'paidos' (child / bone)", 
+            quote: "Straightening bones and joints.", 
+            meaning: "The medical specialty dealing with the correction of deformities of bones, spine, or muscles.", 
+            related: ["Orthopedist (n)", "Orthopedic (adj)"],
+            synonyms: "Bone surgery, musculoskeletal repair",
+            antonyms: "—",
+            traits: ["Practitioner: orthopedist.", "Adjective: orthopedic.", "Treats fractures, spine curvature, and joints."] 
+          },
+          { 
+            word: "Orthodontia", 
+            phonetic: "awr-thə-DON′-shə", 
+            hindi: "दंत-संशोधन विज्ञान (टेढ़े दांत सीधे करने का विज्ञान)",
+            root: "Greek 'orthos' (straight) + 'odontos' (tooth)", 
+            quote: "Straightening teeth and correcting bad bites.", 
+            meaning: "The dental specialty treating irregularities in the teeth and jaws.", 
+            related: ["Orthodontist (n)", "Orthodontic (adj)"],
+            synonyms: "Teeth straightening, dental alignment",
+            antonyms: "—",
+            traits: ["Practitioner: orthodontist.", "Adjective: orthodontic.", "Uses braces to align teeth and correct buck teeth."] 
+          },
+          { 
+            word: "Cardiology", 
+            phonetic: "kahr-dee-OL′-ə-jee", 
+            hindi: "हृदय रोग विज्ञान",
+            root: "Greek 'kardia' (heart) + 'logos' (study)", 
+            quote: "Science of the heart and circulatory system.", 
+            meaning: "The branch of medicine that deals with diseases and abnormalities of the heart.", 
+            related: ["Cardiologist (n)", "Cardiological (adj)", "Cardiac (adj)"],
+            synonyms: "Heart medicine, cardiovascular science",
+            antonyms: "—",
+            traits: ["Practitioner: cardiologist.", "Adjective: cardiological.", "Diagnoses heart ailments and valve defects."] 
+          },
+          { 
+            word: "Cardiac", 
+            phonetic: "KAHR′-dee-ak", 
+            hindi: "हृदय-संबंधी / दिल से जुड़ा हुआ",
+            root: "Greek 'kardia' (heart) + '-ac' (adjective)", 
+            quote: "Pertaining to the heart.", 
+            meaning: "Relating to the heart (e.g. cardiac arrest, cardiac condition).", 
+            related: ["Cardially (adv)"],
+            synonyms: "Cardiovascular, coronary, myocardial",
+            antonyms: "Non-cardiac",
+            traits: ["Adjective referring to the heart.", "Malfunctioning or physiology of heart.", "Cardiovascular health."] 
+          },
+          { 
+            word: "Cardiogram", 
+            phonetic: "KAHR′-dee-ə-gram′", 
+            hindi: "हृदय-आलेख / दिल की धड़कन का ग्राफ (ईसीजी रिपोर्ट)",
+            root: "Greek 'kardia' (heart) + 'gramma' (record)", 
+            quote: "The electrically produced record of heartbeat.", 
+            meaning: "A recording of the muscle activity within the heart made by a cardiograph.", 
+            related: ["Electrocardiogram (ECG)"],
+            synonyms: "ECG printout, heartbeat tracing",
+            antonyms: "—",
+            traits: ["Physical printout / record produced.", "Shows electrical pulses of the heart.", "Diagnoses arrhythmias."] 
+          },
+          { 
+            word: "Cardiograph", 
+            phonetic: "KAHR′-dee-ə-graf′", 
+            hindi: "हृदय-आलेखक यंत्र (धड़कन रिकॉर्ड करने वाली मशीन)",
+            root: "Greek 'kardia' (heart) + 'graphein' (to write)", 
+            quote: "The instrument that records heartbeat.", 
+            meaning: "An instrument for recording heart muscle activity electrically.", 
+            related: ["Cardiography (n)"],
+            synonyms: "ECG machine, heartbeat recorder",
+            antonyms: "—",
+            traits: ["The recording machine.", "Generates cardiograms.", "Clinical cardiac monitor."] 
+          },
+          { 
+            word: "Neurology", 
+            phonetic: "noor-OL′-ə-jee", 
+            hindi: "तंत्रिका विज्ञान (नर्वस सिस्टम का अध्ययन)",
+            root: "Greek 'neuron' (nerve) + 'logos' (study)", 
+            quote: "Scientific study of the nervous system.", 
+            meaning: "The branch of medicine dealing with the anatomy, functions, and disorders of nerves.", 
+            related: ["Neurologist (n)", "Neurological (adj)"],
+            synonyms: "Neural science, nervous system medicine",
+            antonyms: "—",
+            traits: ["Practitioner: neurologist.", "Adjective: neurological.", "Covers brain & spinal cord."] 
+          },
+          { 
+            word: "Neuralgia", 
+            phonetic: "noor-AL′-jə", 
+            hindi: "तंत्रिका-शूल / नस का तीव्र दर्द",
+            root: "Greek 'neuron' (nerve) + 'algos' (pain)", 
+            quote: "Acute, sharp pain along a nerve.", 
+            meaning: "Intense, intermittent pain along the course of a nerve.", 
+            related: ["Neuralgic (adj)"],
+            synonyms: "Nerve pain, neurodynia",
+            antonyms: "Analgesia (painlessness)",
+            traits: ["Root algos = pain.", "Sharp nerve ache.", "Common in facial nerves."] 
+          },
+          { 
+            word: "Neuritis", 
+            phonetic: "noor-Ī′-tis", 
+            hindi: "तंत्रिका-शोथ / नसों की सूजन",
+            root: "Greek 'neuron' (nerve) + '-itis' (inflammation)", 
+            quote: "Inflammation of a nerve or nerves.", 
+            meaning: "Inflammation of a nerve, characterized by pain, tenderness, and numbness.", 
+            related: ["Neuritic (adj)"],
+            synonyms: "Nerve inflammation",
+            antonyms: "—",
+            traits: ["Suffix -itis = inflammation.", "Causes tenderness & numbness.", "Treated by neurologists."] 
+          },
+          { 
+            word: "Neurosis", 
+            phonetic: "noor-Ō′-sis", 
+            hindi: "मनस्ताप / अत्यधिक चिंता की बीमारी (वास्तविकता से संपर्क रहता है)",
+            root: "Greek 'neuron' (nerve) + '-osis' (abnormal condition)", 
+            quote: "Excessive worry and emotional disturbance.", 
+            meaning: "A mild mental illness involving symptoms of stress, anxiety, and obsessive behavior without loss of reality.", 
+            related: ["Neurotic (n & adj)", "Neurotically (adv)"],
+            synonyms: "Anxiety state, emotional distress, phobia",
+            antonyms: "Mental serenity, psychosis (severe break)",
+            traits: ["Does NOT lose contact with reality.", "Noun/Adj: neurotic.", "Energy spent on unproductive worry."] 
+          },
+          { 
+            word: "Neurotic", 
+            phonetic: "noor-OT′-ik", 
+            hindi: "अतिसंवेदनशील / चिंताग्रस्त व्यक्ति",
+            root: "Root: neuron + -osis + -ic", 
+            quote: "Suffering from or relating to neurosis.", 
+            meaning: "A person with neurosis; abnormally sensitive, anxious, or obsessive.", 
+            related: ["Neurotically (adv)"],
+            synonyms: "Overly anxious, obsessive, high-strung",
+            antonyms: "Calm, balanced, composed",
+            traits: ["Both noun and adjective.", "High anxiety & compulsions.", "Personality growth hindered."] 
+          },
+          { 
+            word: "Psychosis", 
+            phonetic: "sī-KŌ′-sis", 
+            hindi: "मनोविकृति / पागलपन (वास्तविकता से पूरी तरह संपर्क टूटना)",
+            root: "Greek 'psyche' (mind) + '-osis' (diseased condition)", 
+            quote: "Full-blown mental unbalance (loss of reality).", 
+            meaning: "A severe mental disorder in which contact is lost with external reality.", 
+            related: ["Psychotic (n & adj)"],
+            synonyms: "Insanity, severe mental illness, delusion",
+            antonyms: "Sanity, rational clarity, neurosis (milder)",
+            traits: ["Lost contact with reality.", "Severe psychiatric condition.", "Contrasts with neurosis."] 
+          },
+          { 
+            word: "Psychotic", 
+            phonetic: "sī-KOT′-ik", 
+            hindi: "मनोविकृत / मानसिक संतुलन खो चुका व्यक्ति",
+            root: "Root: psyche + -osis + -ic", 
+            quote: "Mentally unbalanced; suffering from psychosis.", 
+            meaning: "Relating to, denoting, or suffering from a psychosis.", 
+            related: ["Psychotically (adv)"],
+            synonyms: "Delusional, deranged, insane",
+            antonyms: "Sane, lucid, rational",
+            traits: ["Both noun and adjective.", "Delusions or hallucinations.", "Requires intensive psychiatric care."] 
+          },
+          { 
+            word: "Psychiatry", 
+            phonetic: "sī-KĪ′-ə-tree", 
+            hindi: "मनोचिकित्सा विज्ञान",
+            root: "Greek 'psyche' (mind) + 'iatreia' (medical healing)", 
+            quote: "Medical healing of the mind.", 
+            meaning: "The medical specialty devoted to the diagnosis and treatment of mental disorders.", 
+            related: ["Psychiatrist (n)", "Psychiatric (adj)"],
+            synonyms: "Mental medicine, psychotherapy",
+            antonyms: "—",
+            traits: ["Practitioner: psychiatrist.", "Adjective: psychiatric.", "Uses psychotherapy & medication."] 
+          },
+          { 
+            word: "Geriatrics", 
+            phonetic: "jair-ee-AT′-riks", 
+            hindi: "वृद्धावस्था चिकित्सा विज्ञान (बुजुर्गों का इलाज)",
+            root: "Greek 'geras' (old age) + 'iatreia' (healing)", 
+            quote: "Medical specialty dealing with the elderly.", 
+            meaning: "The branch of medicine dealing with the health and diseases of old people.", 
+            related: ["Geriatrician (n)", "Geriatric (adj)"],
+            synonyms: "Eldercare medicine, clinical gerontology",
+            antonyms: "Pediatrics (child medicine)",
+            traits: ["Practitioner: geriatrician.", "Adjective: geriatric.", "Addresses aging ailments."] 
+          }
         ],
         matchingOptions: [
           { key: "a", text: "treatment of skeletal deformities (orthopedics)" }, { key: "b", text: "straightening of teeth (orthodontia)" },
@@ -1386,127 +2441,127 @@
         title: "How to Talk About Various Practitioners",
         subtitle: "10 Specialized & Allied Practitioners",
         category: "Occupations & Professions",
-        desc: "Explore the roles, methodologies, and specialized domains of 10 practitioners dealing with human behavior, psychoanalysis, vision, posture, foot care, handwriting, and aging.",
+        desc: "Explore the roles, methodologies, Hindi meanings, roots, synonyms & antonyms of 10 practitioners dealing with human behavior, psychoanalysis, vision, posture, foot care, handwriting, and aging.",
         words: [
-          {
-            word: "Psychologist",
-            phonetic: "sī-KOL′-ə-jist",
-            root: "Root: psyche (mind) + logos (science / study)",
-            quote: "Expert in the dark mysteries of human behavior.",
-            meaning: "A professional specialized in understanding human behavior, emotions, and personality dynamics.",
-            traits: [
-              "Studies what makes people tick.",
-              "Employed by schools, industries, and clinical centers.",
-              "Conducts private or group behavioral therapy."
-            ]
+          { 
+            word: "Psychologist", 
+            phonetic: "sī-KOL′-ə-jist", 
+            hindi: "मनोवैज्ञानिक (मानव व्यवहार एवं मन का विशेषज्ञ)",
+            root: "Greek 'psyche' (mind) + 'logos' (science/study)", 
+            quote: "Expert in the dark mysteries of human behavior.", 
+            meaning: "A professional specialized in understanding human behavior, emotions, and personality dynamics.", 
+            related: ["Psychology (n)", "Psychological (adj)", "Psychologically (adv)"],
+            synonyms: "Behavioral scientist, counselor, mind researcher",
+            antonyms: "—",
+            traits: ["Studies what makes people act and feel.", "Employed by schools, industries, and clinical centers.", "Conducts private or group therapy."] 
           },
-          {
-            word: "Psychoanalyst",
-            phonetic: "sī-kō-AN′-ə-list",
-            root: "Root: psyche (mind) + analysis (examination)",
-            quote: "Delving into the unconscious to resolve deep conflicts.",
-            meaning: "A practitioner trained in Freudian techniques who analyzes the unconscious mind, childhood traumas, and repressions.",
-            traits: [
-              "Follows the techniques devised by Sigmund Freud.",
-              "Helps interpret free-flowing ideas and dreams.",
-              "Addresses deep-seated neuroses and anxieties."
-            ]
+          { 
+            word: "Psychoanalyst", 
+            phonetic: "sī-kō-AN′-ə-list", 
+            hindi: "मनोविश्लेषक (अवचेतन मन और स्वप्नों का विश्लेषक)",
+            root: "Greek 'psyche' (mind) + 'analysis' (loosening/examining)", 
+            quote: "Delving into the unconscious to resolve deep conflicts.", 
+            meaning: "A practitioner trained in Freudian techniques who analyzes the unconscious mind, childhood traumas, and repressions.", 
+            related: ["Psychoanalysis (n)", "Psychoanalytic (adj)"],
+            synonyms: "Freudian therapist, depth psychologist",
+            antonyms: "—",
+            traits: ["Follows techniques devised by Sigmund Freud.", "Helps interpret free-flowing ideas and dreams.", "Addresses deep-seated neuroses and anxieties."] 
           },
-          {
-            word: "Orthodontist",
-            phonetic: "awr-thə-DON′-tist",
-            root: "Root: orthos (straight) + odontos (tooth)",
-            quote: "Straightening teeth and perfecting your bite.",
-            meaning: "A dentist with postgraduate specialization in straightening crooked teeth and correcting jaw alignment.",
-            traits: [
-              "Uses braces and retainers to retract buck teeth.",
-              "Ensures proper dental occlusion and spacing.",
-              "Specializes in facial & dental aesthetics."
-            ]
+          { 
+            word: "Orthodontist", 
+            phonetic: "awr-thə-DON′-tist", 
+            hindi: "दंत-संशोधक (टेढ़े दांत सीधे करने वाला डेंटिस्ट)",
+            root: "Greek 'orthos' (straight) + 'odontos' (tooth)", 
+            quote: "Straightening teeth and perfecting your bite.", 
+            meaning: "A dentist with postgraduate specialization in straightening crooked teeth and correcting jaw alignment.", 
+            related: ["Orthodontia (n)", "Orthodontic (adj)"],
+            synonyms: "Teeth straightener, dental aligner",
+            antonyms: "—",
+            traits: ["Uses braces and retainers to retract buck teeth.", "Ensures proper dental occlusion and spacing.", "Specializes in facial & dental aesthetics."] 
           },
-          {
-            word: "Optometrist",
-            phonetic: "op-TOM′-ə-trist",
-            root: "Root: opsis (vision) + metron (measurement)",
-            quote: "Measuring vision and prescribing corrective lenses.",
-            meaning: "A practitioner who tests eyesight, checks for glaucoma, and prescribes eyeglasses or contact lenses.",
-            traits: [
-              "Measures refractive vision errors.",
-              "Does not perform surgery or prescribe general drugs.",
-              "Provides accurate visual prescriptions."
-            ]
+          { 
+            word: "Optometrist", 
+            phonetic: "op-TOM′-ə-trist", 
+            hindi: "दृष्टि-परीक्षक / चश्मे का नंबर जांचने वाला",
+            root: "Greek 'opsis' (vision) + 'metron' (measurement)", 
+            quote: "Measuring vision and prescribing corrective lenses.", 
+            meaning: "A practitioner who tests eyesight, checks for glaucoma, and prescribes eyeglasses or contact lenses.", 
+            related: ["Optometry (n)", "Optometric (adj)"],
+            synonyms: "Sight tester, refractionist, vision specialist",
+            antonyms: "—",
+            traits: ["Measures refractive vision errors.", "Does not perform surgery or prescribe general drugs.", "Provides accurate visual prescriptions."] 
           },
-          {
-            word: "Optician",
-            phonetic: "op-TISH′-ən",
-            root: "Root: opsis (vision) + -ician (expert technician)",
-            quote: "Grinding lenses and dispensing optical goods.",
-            meaning: "A technician who makes, grinds, and fits lenses based on prescriptions from optometrists or ophthalmologists.",
-            traits: [
-              "Fills optical prescriptions accurately.",
-              "Deals in eyeglass frames and contact lenses.",
-              "Does not examine patients' eyes."
-            ]
+          { 
+            word: "Optician", 
+            phonetic: "op-TISH′-ən", 
+            hindi: "चश्मा विक्रेता एवं लेंस निर्माता",
+            root: "Greek 'opsis' (vision) + '-ician' (expert technician)", 
+            quote: "Grinding lenses and dispensing optical goods.", 
+            meaning: "A technician who makes, grinds, and fits lenses based on prescriptions from optometrists or ophthalmologists.", 
+            related: ["Optics (n)", "Optical (adj)"],
+            synonyms: "Lens grinder, spectacle maker, optical dispenser",
+            antonyms: "—",
+            traits: ["Fills optical prescriptions accurately.", "Deals in eyeglass frames and contact lenses.", "Does not examine patients' eyes."] 
           },
-          {
-            word: "Osteopath",
-            phonetic: "OS′-tee-ə-path",
-            root: "Root: osteon (bone) + pathos (suffering / disease)",
-            quote: "Drugless healing via bone and joint manipulation.",
-            meaning: "A practitioner treating diseases through physical manipulation of bones and muscles, founded on the link between skeletal displacement and blood flow.",
-            traits: [
-              "Founded in 1874 by Andrew T. Still.",
-              "Believes displaced bones press on nerves and vessels.",
-              "Holds full rights and privileges of medical doctors in most states."
-            ]
+          { 
+            word: "Osteopath", 
+            phonetic: "OS′-tee-ə-path", 
+            hindi: "अस्थि-चिकित्सक (मालिश एवं जोड़ संशोधन द्वारा बिना दवा इलाज)",
+            root: "Greek 'osteon' (bone) + 'pathos' (disease/suffering)", 
+            quote: "Drugless healing via bone and joint manipulation.", 
+            meaning: "A practitioner treating diseases through physical manipulation of bones and muscles.", 
+            related: ["Osteopathy (n)", "Osteopathic (adj)"],
+            synonyms: "Bone manipulator, manipulative therapist",
+            antonyms: "—",
+            traits: ["Founded in 1874 by Andrew T. Still.", "Believes displaced bones press on nerves and vessels.", "Holds full rights and privileges of medical doctors in most states."] 
           },
-          {
-            word: "Chiropractor",
-            phonetic: "KĪ′-rə-prak′-tər",
-            root: "Root: cheir (hand) + praktikos (practical / working)",
-            quote: "Manipulating spinal articulations by hand.",
-            meaning: "A practitioner treating mechanical disorders of the musculoskeletal system, especially through spinal adjustments.",
-            traits: [
-              "Maintains structural integrity of the nervous system.",
-              "Applies manual pressure to spinal joints.",
-              "Legally licensed and recognized in 45+ states."
-            ]
+          { 
+            word: "Chiropractor", 
+            phonetic: "KĪ′-rə-prak′-tər", 
+            hindi: "रीढ़ की हड्डी एवं जोड़ों का हस्त-संशोधक",
+            root: "Greek 'cheir' (hand) + 'praktikos' (practical/working)", 
+            quote: "Manipulating spinal articulations by hand.", 
+            meaning: "A practitioner treating mechanical disorders of the musculoskeletal system, especially through spinal adjustments.", 
+            related: ["Chiropractic (n & adj)"],
+            synonyms: "Spinal adjuster, manual joint therapist",
+            antonyms: "—",
+            traits: ["Maintains structural integrity of the nervous system.", "Applies manual pressure to spinal joints.", "Legally licensed and recognized in 45+ states."] 
           },
-          {
-            word: "Podiatrist",
-            phonetic: "pə-DĪ′-ə-trist",
-            root: "Root: pous / podos (foot) + iatreia (healing)",
-            quote: "Treating foot ailments, corns, and fallen arches.",
-            meaning: "A specialist qualified to diagnose and treat disorders of the foot, ankle, and lower extremities.",
-            traits: [
-              "Treats corns, calluses, bunions, and fallen arches.",
-              "Performs minor foot surgeries and prescribes orthotics.",
-              "Formerly known as a chiropodist."
-            ]
+          { 
+            word: "Podiatrist", 
+            phonetic: "pə-DĪ′-ə-trist", 
+            hindi: "पाद-रोग चिकित्सक (पैरों की बीमारियों का डॉक्टर)",
+            root: "Greek 'pous / podos' (foot) + 'iatreia' (healing)", 
+            quote: "Treating foot ailments, corns, and fallen arches.", 
+            meaning: "A specialist qualified to diagnose and treat disorders of the foot, ankle, and lower extremities.", 
+            related: ["Podiatry (n)", "Podiatric (adj)"],
+            synonyms: "Chiropodist, foot doctor",
+            antonyms: "—",
+            traits: ["Treats corns, calluses, bunions, and fallen arches.", "Performs minor foot surgeries and prescribes orthotics.", "Formerly known as a chiropodist."] 
           },
-          {
-            word: "Graphologist",
-            phonetic: "graf-OL′-ə-jist",
-            root: "Root: graphein (to write) + logos (study)",
-            quote: "Analyzing character and personality from handwriting.",
-            meaning: "An expert in analyzing handwriting to assess personality traits, aptitudes, and document authenticity.",
-            traits: [
-              "Examines stroke angles, pressure, and letter formations.",
-              "Consulted in legal signature verifications and corporate hiring.",
-              "Bridges personality profiling with handwriting analysis."
-            ]
+          { 
+            word: "Graphologist", 
+            phonetic: "graf-OL′-ə-jist", 
+            hindi: "हस्तलेख विश्लेषक (हैंडराइटिंग से स्वभाव बताने वाला)",
+            root: "Greek 'graphein' (to write) + 'logos' (study)", 
+            quote: "Analyzing character and personality from handwriting.", 
+            meaning: "An expert in analyzing handwriting to assess personality traits, aptitudes, and document authenticity.", 
+            related: ["Graphology (n)", "Graphological (adj)"],
+            synonyms: "Handwriting analyst, signature verifier",
+            antonyms: "—",
+            traits: ["Examines stroke angles, pressure, and letter formations.", "Consulted in legal signature verifications and hiring.", "Bridges personality profiling with handwriting analysis."] 
           },
-          {
-            word: "Gerontologist",
-            phonetic: "jair′-ən-TOL′-ə-jist",
-            root: "Root: geron (old man / elder) + logos (study)",
-            quote: "Addressing the non-medical challenges of aging.",
-            meaning: "A social scientist who deals with the economic, financial, sexual, social, and retirement aspects of the elderly.",
-            traits: [
-              "Focuses on social, economic, and non-medical aging issues.",
-              "Contrasts with geriatrician (medical doctor for elderly).",
-              "Designs retirement and senior community policies."
-            ]
+          { 
+            word: "Gerontologist", 
+            phonetic: "jair′-ən-TOL′-ə-jist", 
+            hindi: "वृद्धावस्था समाज-वैज्ञानिक (बुजुर्गों की गैर-चिकित्सीय समस्याओं का विशेषज्ञ)",
+            root: "Greek 'geron' (old man / elder) + 'logos' (study)", 
+            quote: "Addressing the non-medical challenges of aging.", 
+            meaning: "A social scientist who deals with the economic, financial, sexual, social, and retirement aspects of the elderly.", 
+            related: ["Gerontology (n)", "Gerontological (adj)"],
+            synonyms: "Senior-aging researcher, elderhood specialist",
+            antonyms: "Pediatrician (child doctor)",
+            traits: ["Focuses on social, economic, and non-medical aging issues.", "Contrasts with geriatrician (medical doctor for elderly).", "Designs retirement and senior community policies."] 
           }
         ],
         matchingOptions: [
@@ -1594,7 +2649,7 @@
     // Initialize App
     document.addEventListener('DOMContentLoaded', () => {
       renderSessionSidebar();
-      loadSession(7); // Automatically open newly added Session 7
+      loadSession(1); // Open Session 1
     });
 
     // Render 47-Session Sidebar
@@ -1659,7 +2714,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Render Master Notes Cards
+    // Render Master Notes Cards with Hindi, Roots, Related Words & Synonyms
     function renderVocabCards(words) {
       const container = document.getElementById('vocabCardsContainer');
       container.innerHTML = '';
@@ -1667,6 +2722,31 @@
       words.forEach((w, idx) => {
         const card = document.createElement('div');
         card.className = 'vocab-card';
+
+        // Related chips HTML
+        let relatedHtml = '';
+        if (w.related && w.related.length > 0) {
+          relatedHtml = `
+            <div class="related-words-wrap">
+              <div class="related-title">Derived Family Words:</div>
+              <div class="related-chips">
+                ${w.related.map(r => `<span class="related-chip">${r}</span>`).join('')}
+              </div>
+            </div>
+          `;
+        }
+
+        // Syn/Ant Box HTML
+        let synAntHtml = '';
+        if (w.synonyms || w.antonyms) {
+          synAntHtml = `
+            <div class="syn-ant-box">
+              ${w.synonyms ? `<div class="syn-line">🟢 <strong>Synonyms:</strong> ${w.synonyms}</div>` : ''}
+              ${w.antonyms ? `<div class="ant-line">🔴 <strong>Antonyms:</strong> ${w.antonyms}</div>` : ''}
+            </div>
+          `;
+        }
+
         card.innerHTML = `
           <div class="card-top">
             <span class="card-index">${idx + 1 < 10 ? '0' + (idx + 1) : idx + 1}</span>
@@ -1674,9 +2754,16 @@
           </div>
           <h3 class="vocab-word">${w.word}</h3>
           <span class="phonetic-code">${w.phonetic}</span>
-          ${w.root ? `<div class="root-tag">${w.root}</div>` : ''}
+          
+          ${w.hindi ? `<div class="hindi-badge">🎯 हिन्दी: ${w.hindi}</div>` : ''}
+          ${w.root ? `<div class="root-box">🌱 <strong>Root:</strong> ${w.root}</div>` : ''}
+          
           <div class="quote-box">"${w.quote}"</div>
           <p class="vocab-desc">${w.meaning}</p>
+          
+          ${relatedHtml}
+          ${synAntHtml}
+
           <ul class="traits-list">
             ${w.traits.map(t => `<li>${t}</li>`).join('')}
           </ul>
@@ -1694,7 +2781,7 @@
           <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 20px auto;">
             This session slot is fully wired into the 47-Session Architecture. When you supply Session ${session.id}'s PDF/notes, its flashcards, audio player, matching tests, and recall drills will activate automatically!
           </p>
-          <button class="btn-primary" onclick="loadSession(7)">View Session 7</button>
+          <button class="btn-primary" onclick="loadSession(1)">Back to Session 1</button>
         </div>
       `;
     }
@@ -1712,9 +2799,20 @@
       document.getElementById('flashcardElement').classList.remove('flipped');
       document.getElementById('fcWord').innerText = card.word;
       document.getElementById('fcPhonetic').innerText = card.phonetic;
+      document.getElementById('fcHindi').innerText = `🎯 हिन्दी: ${card.hindi || ''}`;
       document.getElementById('fcQuote').innerText = `"${card.quote}"`;
+      
+      document.getElementById('fcRoot').innerText = `🌱 Root: ${card.root || ''}`;
       document.getElementById('fcMeaning').innerText = card.meaning;
-      document.getElementById('fcDetails').innerText = card.traits[0] || (card.root || '');
+      
+      let synAntStr = '';
+      if (card.synonyms) synAntStr += `<span class="syn-line">🟢 <strong>Syn:</strong> ${card.synonyms}</span><br/>`;
+      if (card.antonyms) synAntStr += `<span class="ant-line">🔴 <strong>Ant:</strong> ${card.antonyms}</span>`;
+      document.getElementById('fcSynAnt').innerHTML = synAntStr;
+      
+      let relatedStr = card.related ? `Related: ${card.related.join(', ')}` : (card.traits[0] || '');
+      document.getElementById('fcDetails').innerText = relatedStr;
+      
       document.getElementById('fcCounter').innerText = `Card ${currentFlashcardIndex + 1} of ${session.words.length}`;
     }
 
@@ -1761,7 +2859,7 @@
           <div class="match-item">
             <span class="match-label">${idx + 1}. ${word}</span>
             <select class="match-dropdown" data-correct="${correctKey}">
-              <option value="">Select interest / field...</option>
+              <option value="">Select definition / field...</option>
               ${session.matchingOptions.map(opt => `<option value="${opt.key}">${opt.key}. ${opt.text}</option>`).join('')}
             </select>
           </div>
@@ -1812,8 +2910,8 @@
           <div class="yn-row" data-ans="${q.a}">
             <span class="yn-question">${idx + 1}. ${q.q}</span>
             <div class="yn-buttons">
-              <button class="btn-yn" onclick="selectYN(this, 'yes')">TRUE</button>
-              <button class="btn-yn" onclick="selectYN(this, 'no')">FALSE</button>
+              <button class="btn-yn" onclick="selectYN(this, 'yes')">TRUE / YES</button>
+              <button class="btn-yn" onclick="selectYN(this, 'no')">FALSE / NO</button>
             </div>
           </div>
         `;
