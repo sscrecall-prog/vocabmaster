@@ -455,64 +455,7 @@
       .mobile-only { display: inline-flex !important; }
     }
 
-    /* Floating Quick-Open Tab on Desktop when Collapsed */
-    .floating-sidebar-tab {
-      position: fixed;
-      left: 0;
-      top: 110px;
-      z-index: 90;
-      display: none;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 15px 9px 12px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-left: none;
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
-      color: var(--text-main);
-      font-size: 0.84rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: var(--shadow-md), 0 4px 18px rgba(79, 70, 229, 0.16);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      transform: translateX(-100%);
-      opacity: 0;
-      pointer-events: none;
-    }
 
-    @media (min-width: 901px) {
-      .floating-sidebar-tab {
-        display: flex;
-      }
-      body.sidebar-is-collapsed .floating-sidebar-tab {
-        transform: translateX(0);
-        opacity: 1;
-        pointer-events: auto;
-      }
-    }
-
-    .floating-sidebar-tab:hover {
-      background: var(--bg-elevated);
-      border-color: var(--accent);
-      color: var(--accent);
-      box-shadow: var(--shadow-lg), 0 4px 22px var(--accent-glow);
-      transform: translateX(3px);
-    }
-
-    .floating-sidebar-tab .tab-icon {
-      font-size: 1.05rem;
-    }
-
-    .floating-sidebar-tab .tab-arrow {
-      color: var(--accent);
-      font-weight: 800;
-      font-size: 0.75rem;
-      transition: transform 0.2s ease;
-    }
-
-    .floating-sidebar-tab:hover .tab-arrow {
-      transform: translateX(2px);
-    }
 
     /* Content Area expands gracefully when sidebar is collapsed */
     .content-area {
@@ -2694,12 +2637,6 @@
     <!-- Sidebar Overlay for Mobile -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-    <!-- Floating Sidebar Toggle for Desktop when Collapsed -->
-    <button class="floating-sidebar-tab" id="floatingSidebarTab" onclick="toggleSidebar()" aria-label="Open Course Curriculum Sidebar" title="Open Curriculum (Ctrl+B)">
-      <span class="tab-icon">📚</span>
-      <span class="tab-text">Curriculum</span>
-      <span class="tab-arrow">▶</span>
-    </button>
 
     <!-- 47-Session Sidebar Drawer -->
     <aside class="sidebar" id="appSidebar" aria-label="Course Curriculum">
