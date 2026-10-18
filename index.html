@@ -2199,81 +2199,437 @@
       box-shadow: 0 0 0 3px var(--accent-light);
     }
 
-    /* Yes/No Wide Grid */
+    /* Yes/No Rapid Conceptual Verification Luxury Overhaul */
+    .yn-container {
+      position: relative;
+    }
+
+    .quiz-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .quiz-badge-strip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .yn-speed-badge {
+      background: rgba(245, 158, 11, 0.12);
+      color: #d97706;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    [data-theme="dark"] .yn-speed-badge {
+      color: #fbbf24;
+      background: rgba(245, 158, 11, 0.18);
+    }
+
+    .yn-meta-tracker {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      min-width: 220px;
+    }
+
+    .yn-stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.86rem;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      font-weight: 700;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .yn-stat-label {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .yn-stat-val {
+      color: var(--accent);
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-weight: 800;
+    }
+
+    .yn-progress-bar-wrap {
+      width: 100%;
+      height: 8px;
+      background: var(--bg-surface);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .yn-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent) 0%, #10b981 100%);
+      border-radius: var(--radius-full);
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
     #yesNoQuizList {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 620px), 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 580px), 1fr));
+      gap: 18px;
+      margin-top: 10px;
       margin-bottom: 24px;
     }
 
     .yn-row {
+      position: relative;
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      padding: 18px 20px;
-      background: var(--bg-elevated);
+      justify-content: space-between;
+      gap: 16px;
+      padding: 22px 24px;
+      background: var(--bg-card);
       border-radius: var(--radius-md);
       border: 1.5px solid var(--border-color);
-      transition: all 0.2s ease;
-      justify-content: space-between;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
     }
 
     .yn-row:hover {
-      border-color: var(--accent);
+      border-color: rgba(99, 102, 241, 0.45);
       background: var(--bg-surface);
       transform: translateY(-2px);
-      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.08);
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.08);
     }
 
-    .yn-question {
+    .yn-row.state-correct {
+      border-color: #10b981 !important;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), var(--bg-card)) !important;
+      box-shadow: 0 4px 18px rgba(16, 185, 129, 0.14) !important;
+    }
+
+    .yn-row.state-wrong {
+      border-color: #ef4444 !important;
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), var(--bg-card)) !important;
+      box-shadow: 0 4px 18px rgba(239, 68, 68, 0.14) !important;
+    }
+
+    .yn-row.state-unanswered {
+      border-color: #f59e0b !important;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.06), var(--bg-card)) !important;
+    }
+
+    .yn-row-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .yn-q-chip {
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(99, 102, 241, 0.1);
+      color: var(--accent);
+      border: 1px solid rgba(99, 102, 241, 0.22);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    [data-theme="dark"] .yn-q-chip {
+      background: rgba(99, 102, 241, 0.18);
+      color: #a5b4fc;
+      border-color: rgba(99, 102, 241, 0.35);
+    }
+
+    .yn-status-badge {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
       font-weight: 700;
-      font-size: 0.98rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.2px;
+    }
+
+    .yn-status-badge.visible {
+      display: inline-flex;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .yn-status-badge.badge-correct {
+      background: rgba(16, 185, 129, 0.14);
+      color: #059669;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    [data-theme="dark"] .yn-status-badge.badge-correct {
+      color: #34d399;
+    }
+
+    .yn-status-badge.badge-wrong {
+      background: rgba(239, 68, 68, 0.14);
+      color: #dc2626;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    [data-theme="dark"] .yn-status-badge.badge-wrong {
+      color: #f87171;
+    }
+
+    .yn-status-badge.badge-unanswered {
+      background: rgba(245, 158, 11, 0.14);
+      color: #d97706;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    [data-theme="dark"] .yn-status-badge.badge-unanswered {
+      color: #fbbf24;
+    }
+
+    .yn-question-text {
+      font-weight: 700;
+      font-size: 1.05rem;
       color: var(--text-main);
-      line-height: 1.5;
+      line-height: 1.55;
+      margin: 0;
     }
 
     .yn-buttons {
-      display: flex;
-      gap: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 4px;
     }
 
     .btn-yn {
-      padding: 8px 20px;
-      border-radius: var(--radius-full);
-      border: 1px solid var(--border-color);
-      background: var(--bg-card);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border-color);
+      background: var(--bg-surface);
       color: var(--text-main);
-      font-weight: 800;
-      font-size: 0.85rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.4px;
       cursor: pointer;
-      min-width: 76px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+      outline: none;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    .btn-yn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .btn-yn-yes:hover {
+      border-color: #10b981;
+      color: #10b981;
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .btn-yn-no:hover {
+      border-color: #ef4444;
+      color: #ef4444;
+      background: rgba(239, 68, 68, 0.08);
     }
 
     .btn-yn.active-yes {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+      color: #ffffff !important;
+      border-color: #10b981 !important;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35) !important;
+      font-weight: 800;
+      transform: translateY(-1px);
     }
 
     .btn-yn.active-no {
-      background: #64748b;
-      color: #fff;
-      border-color: #64748b;
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%) !important;
+      color: #ffffff !important;
+      border-color: #ef4444 !important;
+      box-shadow: 0 4px 16px rgba(239, 68, 68, 0.35) !important;
+      font-weight: 800;
+      transform: translateY(-1px);
     }
 
     .btn-yn.correct {
-      background: var(--success) !important;
-      color: #fff !important;
-      border-color: var(--success) !important;
-      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+      background: linear-gradient(135deg, #10b981 0%, #047857 100%) !important;
+      color: #ffffff !important;
+      border-color: #10b981 !important;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.45) !important;
     }
 
     .btn-yn.wrong {
-      background: var(--error) !important;
-      color: #fff !important;
-      border-color: var(--error) !important;
-      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+      background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%) !important;
+      color: #ffffff !important;
+      border-color: #ef4444 !important;
+      box-shadow: 0 4px 16px rgba(239, 68, 68, 0.45) !important;
+      animation: ynShake 0.4s ease;
+    }
+
+    .btn-yn.hint-answer {
+      border: 2px dashed #10b981 !important;
+      background: rgba(16, 185, 129, 0.14) !important;
+      color: #059669 !important;
+      font-weight: 800;
+    }
+
+    [data-theme="dark"] .btn-yn.hint-answer {
+      color: #34d399 !important;
+      background: rgba(16, 185, 129, 0.2) !important;
+    }
+
+    @keyframes ynShake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-5px); }
+      40%, 80% { transform: translateX(5px); }
+    }
+
+    .yn-actions-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .yn-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 13px 26px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .yn-action-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .yn-score-banner {
+      margin-top: 24px;
+      padding: 22px 28px;
+      border-radius: var(--radius-md);
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 18px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .yn-score-banner.mastery {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.14), rgba(99, 102, 241, 0.08));
+      border: 1.5px solid #10b981;
+    }
+
+    .yn-score-banner.practice {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.14), rgba(99, 102, 241, 0.06));
+      border: 1.5px solid #f59e0b;
+    }
+
+    .yn-score-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .yn-score-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      background: var(--bg-card);
+      border: 2px solid currentColor;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      flex-shrink: 0;
+    }
+
+    .yn-score-text h4 {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .yn-score-text p {
+      margin: 3px 0 0 0;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .yn-score-badge {
+      font-size: 1.25rem;
+      font-weight: 900;
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      padding: 8px 18px;
+      border-radius: 8px;
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    @media (max-width: 640px) {
+      #yesNoQuizList {
+        grid-template-columns: 1fr;
+      }
+      .yn-meta-tracker {
+        align-items: stretch;
+        width: 100%;
+      }
+      .quiz-header-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .yn-actions-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .yn-action-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .yn-score-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
 
     /* Active Recall Input */
@@ -2934,20 +3290,41 @@
 
       <!-- VIEW 4: Yes/No Quiz -->
       <section id="view-yesno" class="view-pane">
-        <div class="quiz-card">
-          <h3 class="quiz-heading">❓ Rapid Conceptual Verification</h3>
-          <p class="quiz-subtext">Tap TRUE/YES or FALSE/NO to test your instant comprehension of the terms.</p>
+        <div class="quiz-card yn-container">
+          <div class="quiz-header-bar">
+            <div>
+              <div class="quiz-badge-strip">
+                <span class="quiz-badge"><span class="badge-dot pulse"></span> RAPID DRILL • TRUE / FALSE</span>
+                <span class="quiz-badge yn-speed-badge">⚡ Instant Cognition</span>
+              </div>
+              <h3 class="quiz-heading">❓ Rapid Conceptual Verification</h3>
+              <p class="quiz-subtext">Tap TRUE / YES or FALSE / NO to test your instant comprehension of word definitions and core concepts.</p>
+            </div>
+            <div class="yn-meta-tracker">
+              <div class="yn-stat-pill">
+                <span class="yn-stat-label">Progress:</span>
+                <span class="yn-stat-val" id="ynProgressText">0 / 0 Answered</span>
+              </div>
+              <div class="yn-progress-bar-wrap">
+                <div class="yn-progress-bar" id="ynProgressBar" style="width: 0%;"></div>
+              </div>
+            </div>
+          </div>
 
           <div id="yesNoQuizList">
             <!-- Dynamically generated yes/no rows -->
           </div>
 
-          <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
-            <button class="btn-primary" onclick="gradeYesNo()">Submit Score</button>
-            <button class="btn-secondary" onclick="resetYesNo()">Reset</button>
+          <div class="yn-actions-bar">
+            <button class="btn-primary yn-action-btn" onclick="gradeYesNo()">
+              <span>⚡ Check Answers & Score</span>
+            </button>
+            <button class="btn-secondary yn-action-btn" onclick="resetYesNo()">
+              <span>🔄 Reset All</span>
+            </button>
           </div>
 
-          <div id="yesNoScoreBox" class="score-banner"></div>
+          <div id="yesNoScoreBox" class="score-banner yn-score-banner"></div>
         </div>
       </section>
 
@@ -9340,66 +9717,183 @@
     // Yes/No Quiz Renderer
     function renderYesNoQuiz(session) {
       const container = document.getElementById('yesNoQuizList');
-      if (!session.yesNoQuestions) return;
+      if (!container) return;
+      if (!session || !session.yesNoQuestions || session.yesNoQuestions.length === 0) {
+        container.innerHTML = '<p style="color:var(--text-muted); padding:20px; text-align:center;">No rapid verification questions available for this session yet.</p>';
+        return;
+      }
 
       let html = '';
       session.yesNoQuestions.forEach((q, idx) => {
+        const qNum = idx < 9 ? '0' + (idx + 1) : (idx + 1);
         html += `
-          <div class="yn-row" data-ans="${q.a}">
-            <span class="yn-question">${idx + 1}. ${q.q}</span>
+          <div class="yn-row" data-ans="${q.a}" id="ynCard_${idx}">
+            <div class="yn-row-header">
+              <span class="yn-q-chip">Q${qNum}</span>
+              <span class="yn-status-badge" id="ynStatus_${idx}"></span>
+            </div>
+            <p class="yn-question-text">${q.q}</p>
             <div class="yn-buttons">
-              <button class="btn-yn" onclick="selectYN(this, 'yes')">TRUE / YES</button>
-              <button class="btn-yn" onclick="selectYN(this, 'no')">FALSE / NO</button>
+              <button type="button" class="btn-yn btn-yn-yes" onclick="selectYN(this, 'yes')">
+                <span class="btn-yn-icon">✓</span>
+                <span class="btn-yn-label">TRUE / YES</span>
+              </button>
+              <button type="button" class="btn-yn btn-yn-no" onclick="selectYN(this, 'no')">
+                <span class="btn-yn-icon">✕</span>
+                <span class="btn-yn-label">FALSE / NO</span>
+              </button>
             </div>
           </div>
         `;
       });
       container.innerHTML = html;
-      document.getElementById('yesNoScoreBox').style.display = 'none';
+      updateYNTracker();
+      const scoreBox = document.getElementById('yesNoScoreBox');
+      if (scoreBox) {
+        scoreBox.style.display = 'none';
+        scoreBox.className = 'score-banner yn-score-banner';
+      }
     }
 
     function selectYN(btn, val) {
       const parent = btn.closest('.yn-buttons');
-      parent.querySelectorAll('.btn-yn').forEach(b => b.classList.remove('active-yes', 'active-no', 'correct', 'wrong'));
+      const card = btn.closest('.yn-row');
+      
+      // Clear sibling button states
+      parent.querySelectorAll('.btn-yn').forEach(b => {
+        b.classList.remove('active-yes', 'active-no', 'correct', 'wrong', 'hint-answer');
+      });
+      
+      // Reset card status badges on re-selection
+      if (card) {
+        card.classList.remove('state-correct', 'state-wrong', 'state-unanswered');
+        const badge = card.querySelector('.yn-status-badge');
+        if (badge) {
+          badge.className = 'yn-status-badge';
+          badge.innerHTML = '';
+        }
+      }
+
       btn.classList.add(val === 'yes' ? 'active-yes' : 'active-no');
+      updateYNTracker();
+    }
+
+    function updateYNTracker() {
+      const rows = document.querySelectorAll('#yesNoQuizList .yn-row');
+      const total = rows.length;
+      if (total === 0) return;
+      let answered = 0;
+      rows.forEach(r => {
+        if (r.querySelector('.active-yes, .active-no')) answered++;
+      });
+      const pct = Math.round((answered / total) * 100);
+      const textEl = document.getElementById('ynProgressText');
+      const barEl = document.getElementById('ynProgressBar');
+      if (textEl) textEl.textContent = `${answered} / ${total} Answered`;
+      if (barEl) barEl.style.width = `${pct}%`;
     }
 
     function gradeYesNo() {
       const rows = document.querySelectorAll('#yesNoQuizList .yn-row');
+      if (!rows.length) return;
       let score = 0;
-      rows.forEach(row => {
-        const correct = row.getAttribute('data-ans');
-        const selected = row.querySelector('.active-yes, .active-no');
-        const yesBtn = row.querySelectorAll('.btn-yn')[0];
-        const noBtn = row.querySelectorAll('.btn-yn')[1];
+      let unansweredCount = 0;
 
-        yesBtn.classList.remove('correct', 'wrong');
-        noBtn.classList.remove('correct', 'wrong');
+      rows.forEach((row, idx) => {
+        const correct = (row.getAttribute('data-ans') || '').toLowerCase().trim();
+        const selected = row.querySelector('.active-yes, .active-no');
+        const yesBtn = row.querySelector('.btn-yn-yes');
+        const noBtn = row.querySelector('.btn-yn-no');
+        const badge = row.querySelector('.yn-status-badge');
+
+        // Reset previous grade classes
+        row.classList.remove('state-correct', 'state-wrong', 'state-unanswered');
+        if (yesBtn) yesBtn.classList.remove('correct', 'wrong', 'hint-answer');
+        if (noBtn) noBtn.classList.remove('correct', 'wrong', 'hint-answer');
 
         if (selected) {
           const val = selected.classList.contains('active-yes') ? 'yes' : 'no';
           if (val === correct) {
             selected.classList.add('correct');
+            row.classList.add('state-correct');
             score++;
+            if (badge) {
+              badge.className = 'yn-status-badge visible badge-correct';
+              badge.innerHTML = '✓ Correct';
+            }
           } else {
             selected.classList.add('wrong');
-            if (correct === 'yes') yesBtn.classList.add('correct');
-            else noBtn.classList.add('correct');
+            row.classList.add('state-wrong');
+            // Highlight the true answer so student learns
+            const correctBtn = correct === 'yes' ? yesBtn : noBtn;
+            if (correctBtn) correctBtn.classList.add('hint-answer');
+            if (badge) {
+              badge.className = 'yn-status-badge visible badge-wrong';
+              badge.innerHTML = `✕ Expected: ${correct === 'yes' ? 'TRUE / YES' : 'FALSE / NO'}`;
+            }
+          }
+        } else {
+          // Unattempted
+          unansweredCount++;
+          row.classList.add('state-unanswered');
+          const correctBtn = correct === 'yes' ? yesBtn : noBtn;
+          if (correctBtn) correctBtn.classList.add('hint-answer');
+          if (badge) {
+            badge.className = 'yn-status-badge visible badge-unanswered';
+            badge.innerHTML = `⚠️ Skipped (Answer: ${correct === 'yes' ? 'YES' : 'NO'})`;
           }
         }
       });
+
+      const total = rows.length;
+      const pct = Math.round((score / total) * 100);
+      const isMastery = score === total;
+      const isPass = pct >= 80;
+
       const box = document.getElementById('yesNoScoreBox');
-      box.style.display = 'flex';
-      box.innerHTML = `<span>Score: <strong>${score} / ${rows.length}</strong></span> <span>${score === rows.length ? '🌟 Mastery Achieved!' : 'Check marked answers'}</span>`;
-      saveQuizScore(currentSessionId, 'yesno', score, rows.length);
-      if (score === rows.length) triggerConfetti();
+      if (box) {
+        box.style.display = 'flex';
+        box.className = `score-banner yn-score-banner ${isMastery || isPass ? 'mastery' : 'practice'}`;
+        box.innerHTML = `
+          <div class="yn-score-left">
+            <div class="yn-score-circle" style="color: ${isMastery ? '#10b981' : isPass ? '#6366f1' : '#f59e0b'};">
+              ${isMastery ? '🏆' : isPass ? '⭐' : '🎯'}
+            </div>
+            <div class="yn-score-text">
+              <h4>${isMastery ? 'Perfect Mastery! 100% Accuracy' : isPass ? 'Great Job! Strong Comprehension' : 'Keep Practicing! Review Marked Concepts'}</h4>
+              <p>${isMastery ? 'You answered every conceptual question accurately without hesitation.' : `You scored ${score} of ${total} correct (${pct}%). Check the expected answers highlighted above.`}</p>
+            </div>
+          </div>
+          <div class="yn-score-badge">
+            ${score} / ${total} (${pct}%)
+          </div>
+        `;
+      }
+
+      saveQuizScore(currentSessionId, 'yesno', score, total);
+      updateScoreBadges();
+      if (isMastery) triggerConfetti();
     }
 
     function resetYesNo() {
-      document.querySelectorAll('#yesNoQuizList .btn-yn').forEach(b => {
-        b.classList.remove('active-yes', 'active-no', 'correct', 'wrong');
+      const rows = document.querySelectorAll('#yesNoQuizList .yn-row');
+      rows.forEach(r => {
+        r.classList.remove('state-correct', 'state-wrong', 'state-unanswered');
+        const badge = r.querySelector('.yn-status-badge');
+        if (badge) {
+          badge.className = 'yn-status-badge';
+          badge.innerHTML = '';
+        }
+        r.querySelectorAll('.btn-yn').forEach(b => {
+          b.classList.remove('active-yes', 'active-no', 'correct', 'wrong', 'hint-answer');
+        });
       });
-      document.getElementById('yesNoScoreBox').style.display = 'none';
+      updateYNTracker();
+      const box = document.getElementById('yesNoScoreBox');
+      if (box) {
+        box.style.display = 'none';
+        box.className = 'score-banner yn-score-banner';
+      }
     }
 
     // Active Recall Quiz Renderer
