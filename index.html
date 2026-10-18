@@ -532,7 +532,7 @@
 
     @media (min-width: 901px) {
       body.sidebar-is-collapsed .content-area {
-        max-width: 1240px;
+        max-width: 1560px;
       }
     }
 
@@ -653,12 +653,12 @@
       color: #fff;
     }
 
-    /* Content Area */
+    /* Content Area (Wider Executive Proportions) */
     .content-area {
       flex: 1;
-      max-width: 1080px;
+      max-width: 1360px;
       margin: 0 auto;
-      padding: 24px 24px 100px 24px;
+      padding: 24px 32px 100px 32px;
       width: 100%;
     }
 
@@ -840,7 +840,9 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      margin-bottom: 16px;
+      margin: 0 auto 16px auto;
+      max-width: 1020px;
+      width: 100%;
       flex-wrap: wrap;
     }
 
@@ -933,7 +935,8 @@
       gap: 8px;
       overflow-x: auto;
       padding-bottom: 12px;
-      margin-bottom: 20px;
+      margin: 0 auto 20px auto;
+      max-width: 1020px;
       scrollbar-width: thin;
       -webkit-overflow-scrolling: touch;
       width: 100%;
@@ -992,11 +995,11 @@
 
     .single-card-mode .vocab-card {
       width: 100%;
-      max-width: 680px;
+      max-width: 1020px;
       margin: 0 auto;
       border-radius: var(--radius-lg);
-      padding: 28px;
-      box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--border-color);
+      padding: 32px 36px;
+      box-shadow: 0 16px 36px -4px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--border-color);
       animation: singleCardPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -1011,7 +1014,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      max-width: 680px;
+      max-width: 1020px;
       margin: 24px auto 0 auto;
       width: 100%;
       flex-wrap: wrap;
@@ -1194,6 +1197,26 @@
       border: 1px solid rgba(99, 102, 241, 0.15);
     }
 
+    /* Card Badges Row (Side-by-side on wide screens) */
+    .card-badges-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .card-badges-row {
+        flex-direction: row;
+        align-items: stretch;
+      }
+      .card-badges-row .hindi-badge,
+      .card-badges-row .root-box {
+        flex: 1;
+        margin-bottom: 0 !important;
+      }
+    }
+
     /* Hindi Meaning Callout (Amber/Saffron Glass) */
     .hindi-badge {
       background: var(--hindi-bg);
@@ -1315,13 +1338,21 @@
     .syn-ant-box {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 8px;
       background: var(--bg-elevated);
-      padding: 10px 12px;
+      padding: 12px 16px;
       border-radius: var(--radius-sm);
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       margin-bottom: 14px;
       border: 1px solid var(--border-color);
+    }
+
+    @media (min-width: 768px) {
+      .syn-ant-box {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
     }
 
     .syn-line {
@@ -1337,7 +1368,15 @@
     .traits-list {
       list-style: none;
       border-top: 1px dashed var(--border-color);
-      padding-top: 12px;
+      padding-top: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .traits-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 8px 24px;
+      }
     }
 
     .traits-list li {
@@ -8099,8 +8138,10 @@
           <h3 class="vocab-word">${w.word}</h3>
           <span class="phonetic-code">${w.phonetic}</span>
           
-          ${w.hindi ? `<div class="hindi-badge">🎯 हिन्दी: ${w.hindi}</div>` : ''}
-          ${w.root ? `<div class="root-box">🌱 <strong>Root:</strong> ${w.root}</div>` : ''}
+          <div class="card-badges-row">
+            ${w.hindi ? `<div class="hindi-badge">🎯 हिन्दी: ${w.hindi}</div>` : ''}
+            ${w.root ? `<div class="root-box">🌱 <strong>Root:</strong> ${w.root}</div>` : ''}
+          </div>
           
           <div class="quote-box">"${w.quote}"</div>
           <p class="vocab-desc">${w.meaning}</p>
