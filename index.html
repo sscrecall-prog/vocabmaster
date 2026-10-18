@@ -834,11 +834,239 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Master Notes Toolbar & Single Word Card Focus System */
+    .notes-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .notes-mode-toggle {
+      display: inline-flex;
+      background: var(--bg-elevated);
+      padding: 4px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-color);
+      gap: 4px;
+    }
+
+    .notes-mode-btn {
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .notes-mode-btn:hover {
+      color: var(--text-main);
+    }
+
+    .notes-mode-btn.active {
+      background: var(--bg-surface);
+      color: var(--accent);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .single-word-nav-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .single-word-counter {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      background: var(--bg-elevated);
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-color);
+    }
+
+    .single-word-nav-btns {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-nav-arrow {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-main);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 800;
+      transition: all 0.2s ease;
+    }
+
+    .btn-nav-arrow:hover:not(:disabled) {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 2px 8px var(--accent-glow);
+    }
+
+    .btn-nav-arrow:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    /* Word Picker Track (Horizontal Chip Carousel) */
+    .word-picker-track {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+      width: 100%;
+    }
+
+    .word-picker-chip {
+      white-space: nowrap;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .word-picker-chip:hover {
+      border-color: var(--accent);
+      color: var(--text-main);
+      background: var(--bg-elevated);
+    }
+
+    .word-picker-chip.active {
+      background: var(--accent-gradient);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 2px 10px var(--accent-glow);
+    }
+
+    .word-picker-chip .chip-num {
+      font-size: 0.72rem;
+      opacity: 0.85;
+      font-family: 'Fira Code', monospace;
+    }
+
     /* Modern Vocab Cards Grid */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
       gap: 24px;
+    }
+
+    /* Single Card Mode Container & Card Sizing */
+    .single-card-mode {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .single-card-mode .vocab-card {
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--border-color);
+      animation: singleCardPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes singleCardPop {
+      from { opacity: 0; transform: translateY(10px) scale(0.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Single Word Bottom Navigation */
+    .single-word-nav-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      max-width: 680px;
+      margin: 24px auto 0 auto;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .single-word-progress-center {
+      flex: 1;
+      min-width: 160px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .single-word-progress-bar {
+      width: 100%;
+      height: 6px;
+      background: var(--border-color);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .single-word-progress-fill {
+      height: 100%;
+      background: var(--accent-gradient);
+      border-radius: 6px;
+      transition: width 0.3s ease;
+    }
+
+    .single-word-progress-text {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .kbd-hint {
+      font-size: 0.7rem;
+      opacity: 0.7;
+      font-family: 'Fira Code', monospace;
+      margin-left: 4px;
+    }
+
+    @media (max-width: 640px) {
+      .single-card-mode .vocab-card {
+        padding: 20px 16px;
+      }
+      .single-word-nav-bottom {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .single-word-nav-bottom .btn-primary,
+      .single-word-nav-bottom .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
     }
 
     .vocab-card {
@@ -1862,10 +2090,56 @@
         </div>
       </div>
 
-      <!-- VIEW 1: Master Notes Grid -->
+      <!-- VIEW 1: Master Notes (Single Word Card Focus Mode & Grid Toggle) -->
       <section id="view-notes" class="view-pane active">
-        <div class="cards-grid" id="vocabCardsContainer">
+        <!-- View Controls Header Bar -->
+        <div class="notes-header-bar">
+          <div class="notes-mode-toggle">
+            <button class="notes-mode-btn active" id="btnModeSingle" onclick="setNotesViewMode('single')" title="Focus on 1 single word card at a time">
+              <span>🎴 Single Card Focus</span>
+            </button>
+            <button class="notes-mode-btn" id="btnModeGrid" onclick="setNotesViewMode('grid')" title="View all cards together in a list">
+              <span>⊞ All Cards Grid</span>
+            </button>
+          </div>
+          
+          <div class="single-word-nav-top" id="singleWordNavTop">
+            <span class="single-word-counter" id="singleWordCounter">Word 1 of 10</span>
+            <div class="single-word-nav-btns">
+              <button class="btn-nav-arrow" id="btnPrevWordTop" onclick="prevSingleWord()" aria-label="Previous Word" title="Previous Word (← / A)">◀</button>
+              <button class="btn-nav-arrow" id="btnNextWordTop" onclick="nextSingleWord()" aria-label="Next Word" title="Next Word (→ / D)">▶</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Word Picker Carousel (Horizontal Chip Bar) -->
+        <div class="word-picker-track" id="wordPickerTrack">
+          <!-- Dynamically populated chips: 01 Egoist, 02 Egotist... -->
+        </div>
+
+        <!-- Cards Container -->
+        <div id="vocabCardsContainer" class="single-card-mode">
           <!-- Cards populated dynamically via JS -->
+        </div>
+
+        <!-- Bottom Navigation for Single Card Focus Mode -->
+        <div class="single-word-nav-bottom" id="singleWordNavBottom">
+          <button class="btn-secondary" id="btnPrevWordBottom" onclick="prevSingleWord()">
+            <span>← Previous Word</span>
+            <span class="kbd-hint">[← / A]</span>
+          </button>
+          
+          <div class="single-word-progress-center">
+            <div class="single-word-progress-bar">
+              <div class="single-word-progress-fill" id="singleWordProgressFill" style="width: 10%;"></div>
+            </div>
+            <span class="single-word-progress-text" id="singleWordProgressText">Word 1 of 10</span>
+          </div>
+
+          <button class="btn-primary" id="btnNextWordBottom" onclick="nextSingleWord()">
+            <span>Next Word →</span>
+            <span class="kbd-hint">[→ / D]</span>
+          </button>
         </div>
       </section>
 
@@ -7636,6 +7910,8 @@
     // App State
     let currentSessionId = 1;
     let currentFlashcardIndex = 0;
+    let currentSingleWordIndex = 0;
+    let notesViewMode = 'single'; // Default: Single One Word Card on Screen!
 
     // Initialize App
     
@@ -7658,6 +7934,21 @@
         } else if (e.key.toLowerCase() === 's') {
           e.preventDefault();
           speakCurrentFlashcard();
+        }
+      }
+
+      // Keyboard Controls for Single Word Card in Master Notes
+      const notesPane = document.getElementById('view-notes');
+      if (notesPane && notesPane.classList.contains('active') && notesViewMode === 'single') {
+        if (e.key === 'ArrowRight' || e.key.toLowerCase() === 'd') {
+          e.preventDefault();
+          nextSingleWord();
+        } else if (e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a') {
+          e.preventDefault();
+          prevSingleWord();
+        } else if (e.key.toLowerCase() === 's') {
+          e.preventDefault();
+          speakCurrentSingleWord();
         }
       }
     });
@@ -7777,28 +8068,22 @@
       return totalTests > 0 && mastered;
     }
 
-    // Render Master Notes Cards with Hindi, Roots, Related Words, Synonyms & Examples
-    function renderVocabCards(words) {
-      const container = document.getElementById('vocabCardsContainer');
-      container.innerHTML = '';
+    // Helper to generate a single vocab card HTML
+    function createVocabCardHtml(w, idx, total) {
+      let relatedHtml = '';
+      if (w.related && w.related.length > 0) {
+        relatedHtml = `<div class="related-words-wrap"><div class="related-title">Derived Family Words:</div><div class="related-chips">${w.related.map(r => `<span class="related-chip">${r}</span>`).join('')}</div></div>`;
+      }
 
-      words.forEach((w, idx) => {
-        const card = document.createElement('div');
-        card.className = 'vocab-card' + (w.isBonus ? ' bonus-card' : '');
+      let synAntHtml = '';
+      if (w.synonyms || w.antonyms) {
+        synAntHtml = `<div class="syn-ant-box">${w.synonyms ? `<div class="syn-line">🟢 <strong>Synonyms:</strong> ${w.synonyms}</div>` : ''}${w.antonyms ? `<div class="ant-line">🔴 <strong>Antonyms:</strong> ${w.antonyms}</div>` : ''}</div>`;
+      }
 
-        let relatedHtml = '';
-        if (w.related && w.related.length > 0) {
-          relatedHtml = `<div class="related-words-wrap"><div class="related-title">Derived Family Words:</div><div class="related-chips">${w.related.map(r => `<span class="related-chip">${r}</span>`).join('')}</div></div>`;
-        }
+      const bookmarked = isBookmarked(currentSessionId, w.word);
 
-        let synAntHtml = '';
-        if (w.synonyms || w.antonyms) {
-          synAntHtml = `<div class="syn-ant-box">${w.synonyms ? `<div class="syn-line">🟢 <strong>Synonyms:</strong> ${w.synonyms}</div>` : ''}${w.antonyms ? `<div class="ant-line">🔴 <strong>Antonyms:</strong> ${w.antonyms}</div>` : ''}</div>`;
-        }
-
-        const bookmarked = isBookmarked(currentSessionId, w.word);
-
-        card.innerHTML = `
+      return `
+        <div class="vocab-card${w.isBonus ? ' bonus-card' : ''}" id="vocabCard_${idx}" data-word-idx="${idx}">
           <div class="card-top">
             <span class="card-index">${idx + 1 < 10 ? '0' + (idx + 1) : idx + 1}</span>
             <div style="display:flex;gap:8px;align-items:center;">
@@ -7828,9 +8113,144 @@
           <ul class="traits-list">
             ${w.traits.map(t => `<li>${t}</li>`).join('')}
           </ul>
-        `;
-        container.appendChild(card);
-      });
+        </div>
+      `;
+    }
+
+    // Set Master Notes View Mode ('single' or 'grid')
+    function setNotesViewMode(mode) {
+      notesViewMode = mode;
+      try { localStorage.setItem('vm_notes_view_mode', mode); } catch (e) {}
+      const session = SESSIONS_DATA.find(s => s.id === currentSessionId);
+      if (session && session.words) renderVocabCards(session.words);
+    }
+
+    // Single Word Navigation
+    function nextSingleWord() {
+      const session = SESSIONS_DATA.find(s => s.id === currentSessionId);
+      if (!session || !session.words || session.words.length === 0) return;
+      currentSingleWordIndex = (currentSingleWordIndex + 1) % session.words.length;
+      renderVocabCards(session.words);
+    }
+
+    function prevSingleWord() {
+      const session = SESSIONS_DATA.find(s => s.id === currentSessionId);
+      if (!session || !session.words || session.words.length === 0) return;
+      currentSingleWordIndex = (currentSingleWordIndex - 1 + session.words.length) % session.words.length;
+      renderVocabCards(session.words);
+    }
+
+    function jumpToSingleWord(idx) {
+      const session = SESSIONS_DATA.find(s => s.id === currentSessionId);
+      if (!session || !session.words) return;
+      if (idx >= 0 && idx < session.words.length) {
+        currentSingleWordIndex = idx;
+        renderVocabCards(session.words);
+      }
+    }
+
+    function speakCurrentSingleWord() {
+      const session = SESSIONS_DATA.find(s => s.id === currentSessionId);
+      if (session && session.words && session.words[currentSingleWordIndex]) {
+        speakText(session.words[currentSingleWordIndex].word);
+      }
+    }
+
+    // Render Master Notes Cards (Single Word Card Focus Mode OR All Cards Grid)
+    function renderVocabCards(words) {
+      const container = document.getElementById('vocabCardsContainer');
+      if (!container) return;
+
+      try {
+        const savedMode = localStorage.getItem('vm_notes_view_mode');
+        if (savedMode === 'single' || savedMode === 'grid') notesViewMode = savedMode;
+      } catch (e) {}
+
+      // Update Toolbar Buttons
+      const btnSingle = document.getElementById('btnModeSingle');
+      const btnGrid = document.getElementById('btnModeGrid');
+      if (btnSingle) btnSingle.classList.toggle('active', notesViewMode === 'single');
+      if (btnGrid) btnGrid.classList.toggle('active', notesViewMode === 'grid');
+
+      const navTop = document.getElementById('singleWordNavTop');
+      const pickerTrack = document.getElementById('wordPickerTrack');
+      const navBottom = document.getElementById('singleWordNavBottom');
+
+      // Bound check for currentSingleWordIndex
+      if (currentSingleWordIndex < 0) currentSingleWordIndex = 0;
+      if (currentSingleWordIndex >= words.length) currentSingleWordIndex = 0;
+
+      if (notesViewMode === 'single') {
+        container.className = 'single-card-mode';
+        if (navTop) navTop.style.display = 'flex';
+        if (pickerTrack) pickerTrack.style.display = 'flex';
+        if (navBottom) navBottom.style.display = 'flex';
+
+        // Render Quick Word Picker Chips
+        if (pickerTrack) {
+          pickerTrack.innerHTML = words.map((w, idx) => `
+            <button class="word-picker-chip${idx === currentSingleWordIndex ? ' active' : ''}" onclick="jumpToSingleWord(${idx})" title="Jump to ${w.word}">
+              <span class="chip-num">${idx + 1 < 10 ? '0' + (idx + 1) : idx + 1}</span>
+              <span>${w.word}</span>
+            </button>
+          `).join('');
+
+          // Auto-scroll active chip into view
+          const activeChip = pickerTrack.querySelector('.word-picker-chip.active');
+          if (activeChip && typeof activeChip.scrollIntoView === 'function') {
+            activeChip.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+        }
+
+        // Render EXACTLY 1 SINGLE WORD CARD
+        const currentWord = words[currentSingleWordIndex];
+        container.innerHTML = createVocabCardHtml(currentWord, currentSingleWordIndex, words.length);
+
+        // Update Counter and Progress
+        const counterText = `Word ${currentSingleWordIndex + 1} of ${words.length}`;
+        const counterEl = document.getElementById('singleWordCounter');
+        if (counterEl) counterEl.innerText = counterText;
+
+        const progressPercent = Math.round(((currentSingleWordIndex + 1) / words.length) * 100);
+        const progressFill = document.getElementById('singleWordProgressFill');
+        if (progressFill) progressFill.style.width = `${progressPercent}%`;
+
+        const progressTextEl = document.getElementById('singleWordProgressText');
+        if (progressTextEl) progressTextEl.innerText = `${counterText} • ${progressPercent}% Completed`;
+
+        // Attach touch swipe gesture on mobile for single card navigation
+        const singleCardEl = container.querySelector('.vocab-card');
+        if (singleCardEl && typeof singleCardEl.addEventListener === 'function') {
+          let touchStartX = 0, touchStartY = 0;
+          singleCardEl.addEventListener('touchstart', (e) => {
+            if (e.touches && e.touches[0]) {
+              touchStartX = e.touches[0].clientX;
+              touchStartY = e.touches[0].clientY;
+            }
+          }, { passive: true });
+          singleCardEl.addEventListener('touchend', (e) => {
+            if (!e.changedTouches || !e.changedTouches[0]) return;
+            const diffX = e.changedTouches[0].clientX - touchStartX;
+            const diffY = e.changedTouches[0].clientY - touchStartY;
+            // Swipe Left -> Next Word
+            if (diffX < -50 && Math.abs(diffX) > Math.abs(diffY)) {
+              nextSingleWord();
+            }
+            // Swipe Right -> Prev Word
+            else if (diffX > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+              prevSingleWord();
+            }
+          }, { passive: true });
+        }
+      } else {
+        // All Cards Grid Mode
+        container.className = 'cards-grid';
+        if (navTop) navTop.style.display = 'none';
+        if (pickerTrack) pickerTrack.style.display = 'none';
+        if (navBottom) navBottom.style.display = 'none';
+
+        container.innerHTML = words.map((w, idx) => createVocabCardHtml(w, idx, words.length)).join('');
+      }
     }
 
     // Render Placeholder for Future Sessions
@@ -8240,7 +8660,26 @@
       if (!r.length) { c.innerHTML = '<div class="search-empty">No words found. Try a different term.</div>'; return; }
       c.innerHTML = r.map(x => `<div class="search-result-item" onclick="goToWord(${x.sid},'${x.w.word.replace(/'/g,"\\'")}')"><span class="search-result-session">Session ${x.sid} • ${x.st}</span><span class="search-result-word">${x.w.word}</span><span class="search-result-hindi">${x.w.hindi||''}</span></div>`).join('');
     }
-    function goToWord(sid, wn) { closeSearch(); loadSession(sid); switchView('notes'); setTimeout(() => { document.querySelectorAll('.vocab-word').forEach(c => { if (c.textContent.trim().toLowerCase() === wn.toLowerCase()) { c.closest('.vocab-card').scrollIntoView({behavior:'smooth',block:'center'}); c.closest('.vocab-card').style.boxShadow = '0 0 0 3px var(--accent)'; setTimeout(() => c.closest('.vocab-card').style.boxShadow = '', 2000); } }); }, 300); }
+    function goToWord(sid, wn) {
+      closeSearch();
+      loadSession(sid);
+      const session = SESSIONS_DATA.find(s => s.id === sid);
+      if (session && session.words) {
+        const wordIdx = session.words.findIndex(w => w.word.toLowerCase() === wn.toLowerCase());
+        if (wordIdx >= 0) {
+          currentSingleWordIndex = wordIdx;
+        }
+      }
+      switchView('notes');
+      setTimeout(() => {
+        const card = document.querySelector('.vocab-card');
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          card.style.boxShadow = '0 0 0 4px var(--accent), 0 12px 32px var(--accent-glow)';
+          setTimeout(() => { card.style.boxShadow = ''; }, 2200);
+        }
+      }, 300);
+    }
     document.addEventListener('keydown', e => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openSearch(); }
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b') { e.preventDefault(); toggleSidebar(); }
