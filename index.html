@@ -1397,43 +1397,111 @@
       top: 1px;
     }
 
-    /* 3D Flashcards Experience */
+    /* Ultra-Wide, Clean & Beautiful 3D Flashcard Player */
     .flashcard-section {
-      max-width: 650px;
+      max-width: 1380px;
       margin: 0 auto;
-      text-align: center;
       width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .flashcard-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .flashcard-deck-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .flashcard-deck-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.88rem;
+      font-weight: 800;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+    }
+
+    .flashcard-flip-prompt {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .kbd-pill {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 0.72rem;
+      font-family: 'Fira Code', monospace;
+      color: var(--text-main);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
     }
 
     .flashcard-wrapper {
-      perspective: 1200px;
-      height: 440px;
+      perspective: 1600px;
+      height: 520px;
       cursor: pointer;
-      margin: 0 auto 20px auto;
+      margin: 10px auto 20px auto;
       width: 100%;
-      max-width: 600px;
+      max-width: 1380px;
       position: relative;
+      user-select: none;
     }
 
-    /* Stack illusion */
+    /* Stack depth illusion (multi-card deck look) */
+    .flashcard-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 12px 28px -14px 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      z-index: -2;
+      opacity: 0.45;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
     .flashcard-wrapper::after {
       content: '';
       position: absolute;
-      inset: 6px 12px -12px 12px;
+      inset: 6px 14px -7px 14px;
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
       z-index: -1;
-      opacity: 0.4;
-      box-shadow: var(--shadow-sm);
+      opacity: 0.75;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .flashcard-wrapper:hover::after {
+      transform: translateY(2px);
     }
 
     .flashcard-inner {
       position: relative;
       width: 100%;
       height: 100%;
-      text-align: center;
-      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: transform 0.65s cubic-bezier(0.34, 1.35, 0.64, 1);
       transform-style: preserve-3d;
     }
 
@@ -1449,63 +1517,346 @@
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
       border-radius: var(--radius-lg);
-      padding: 32px 28px;
+      padding: 32px 40px;
+      box-sizing: border-box;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.16), 0 0 0 1px var(--border-color);
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      border: 1px solid var(--border-color);
-      box-shadow: var(--shadow-lg);
-      box-sizing: border-box;
     }
 
     .flashcard-front {
       background: var(--bg-card);
       color: var(--text-main);
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flashcard-front::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--accent-gradient);
     }
 
     .flashcard-back {
-      background: linear-gradient(135deg, var(--bg-elevated), var(--bg-card));
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-surface) 100%);
       color: var(--text-main);
       transform: rotateY(180deg);
-      text-align: left;
-      align-items: flex-start;
-      justify-content: flex-start;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
+      justify-content: space-between;
+      position: relative;
+      text-align: left;
     }
 
-    .flip-hint-badge {
-      font-size: 0.75rem;
+    .flashcard-back::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #10b981, #06b6d4, #6366f1);
+    }
+
+    /* Flashcard Front Elements */
+    .fc-front-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    .fc-chip-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .fc-session-pill {
+      font-size: 0.78rem;
       font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
       color: var(--accent);
       background: var(--accent-light);
       padding: 4px 12px;
       border-radius: var(--radius-full);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+    }
+
+    .fc-num-pill {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      background: var(--bg-elevated);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-color);
+    }
+
+    .fc-front-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .fc-flip-hint {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .fc-front-hero {
+      text-align: center;
+      margin: 16px 0;
+    }
+
+    .fc-word-title {
+      font-size: 3.5rem;
+      font-weight: 850;
+      color: var(--text-main);
+      letter-spacing: -0.6px;
+      margin-bottom: 8px;
+      line-height: 1.15;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+
+    .fc-phonetic-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .fc-front-bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: 100%;
+      margin: 10px 0;
+    }
+
+    .fc-hindi-card {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), var(--bg-elevated));
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: var(--radius-md);
+      padding: 16px 22px;
+      text-align: left;
+    }
+
+    .fc-quote-card {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), var(--bg-elevated));
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: var(--radius-md);
+      padding: 16px 22px;
+      text-align: left;
+    }
+
+    .fc-card-sublabel {
+      font-size: 0.74rem;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.8px;
-      margin-bottom: 12px;
+      color: var(--text-subtle);
+      margin-bottom: 6px;
+    }
+
+    .fc-hindi-text {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--hindi-color);
+      line-height: 1.35;
+    }
+
+    .fc-quote-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      font-style: italic;
+      color: var(--text-main);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .fc-front-footer-bar, .fc-back-footer-bar {
+      text-align: center;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border-color);
+      width: 100%;
+    }
+
+    .fc-footer-prompt {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .flashcard-nav {
+    .fc-footer-prompt kbd {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.72rem;
+      color: var(--text-main);
+    }
+
+    /* Flashcard Back Elements */
+    .fc-back-topbar {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      gap: 14px;
-      margin-top: 18px;
+      width: 100%;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 14px;
+    }
+
+    .fc-back-heading-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       flex-wrap: wrap;
     }
 
-    .keyboard-hints {
-      margin-top: 14px;
+    .fc-back-word {
+      font-size: 1.85rem;
+      font-weight: 850;
+      color: var(--text-main);
+      letter-spacing: -0.4px;
+    }
+
+    .fc-back-phonetic {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.92rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .fc-back-hindi-pill {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--hindi-color);
+      background: rgba(239, 68, 68, 0.08);
+      padding: 3px 12px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .fc-back-actions {
       display: flex;
-      justify-content: center;
-      gap: 14px;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .fc-back-body-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      width: 100%;
+      flex: 1;
+      margin-bottom: 12px;
+    }
+
+    .fc-back-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .fc-meaning-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+    }
+
+    .fc-meaning-text {
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--text-main);
+      margin: 0;
+    }
+
+    .fc-tool-pill {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
       font-size: 0.78rem;
-      color: var(--text-subtle);
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .fc-tool-pill:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 2px 8px var(--accent-glow);
+    }
+
+    @media (max-width: 900px) {
+      .flashcard-wrapper {
+        height: auto;
+        min-height: 540px;
+      }
+      .fc-front-bottom-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .fc-back-body-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .fc-word-title {
+        font-size: 2.6rem;
+      }
+      .flashcard-front, .flashcard-back {
+        padding: 24px 20px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .fc-word-title {
+        font-size: 2.1rem;
+      }
+      .fc-front-hero {
+        margin: 10px 0;
+      }
+      .fc-front-actions .fc-flip-hint {
+        display: none;
+      }
+      .flashcard-nav-bottom {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .flashcard-header-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .flashcard-deck-info {
+        justify-content: space-between;
+      }
     }
 
     /* Buttons */
@@ -2345,38 +2696,155 @@
         </div>
       </section>
 
-      <!-- VIEW 2: Interactive Flashcard Player -->
+      <!-- VIEW 2: Interactive Flashcard Player (Ultra-Wide, Clean & Beautiful Luxury Deck) -->
       <section id="view-flashcards" class="view-pane">
         <div class="flashcard-section">
-          <div class="flashcard-wrapper" id="flashcardElement" onclick="flipFlashcard()">
-            <div class="flashcard-inner">
-              <div class="flashcard-front">
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Tap Card to Flip ↻</span>
-                <h2 id="fcWord" style="font-size: 2.2rem; font-weight: 800; margin-bottom: 6px;">Egoist</h2>
-                <span id="fcPhonetic" class="phonetic-code">EE′-gō-ist</span>
-                <div id="fcHindi" class="hindi-badge" style="margin-top: 10px; font-size: 1.05rem;">🎯 स्वार्थी / आत्मकेन्द्री व्यक्ति</div>
-                <p id="fcQuote" class="quote-box" style="margin-top: 12px; width: 100%;">"What is in it for me?"</p>
-              </div>
-              <div class="flashcard-back">
-                <span style="font-size: 0.75rem; font-weight: 700; color: var(--success); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Root & Detailed Meaning</span>
-                <div id="fcRoot" class="root-box" style="width: 100%; margin-bottom: 8px;">🌱 Root: ego (Latin = I, self)</div>
-                <h3 id="fcMeaning" style="font-size: 1rem; font-weight: 700; line-height: 1.4; margin-bottom: 8px;">Driven purely by self-interest and personal profit.</h3>
-                <div id="fcExample" class="example-box" style="width: 100%; margin-bottom: 8px; display: none;"></div>
-                <div id="fcSynAnt" class="syn-ant-box" style="width: 100%; margin-bottom: 8px;">
-                  <span class="syn-line">🟢 Syn: Self-seeker, narcissist</span>
-                  <span class="ant-line">🔴 Ant: Altruist, humanitarian</span>
-                </div>
-                <p id="fcDetails" style="font-size: 0.8rem; color: var(--text-muted);">Related: Egoism (n), Egoistic (adj)</p>
+          <!-- Flashcards Header Bar -->
+          <div class="flashcard-header-bar">
+            <div class="flashcard-deck-info">
+              <span class="flashcard-deck-badge" id="fcDeckBadge">🃏 Flashcard Deck • Session 01</span>
+              <span class="flashcard-flip-prompt">💡 Click card or press <kbd class="kbd-pill">SPACE</kbd> to flip</span>
+            </div>
+            <div class="single-word-nav-top">
+              <span class="single-word-counter" id="fcCounterTop">Card 1 of 10</span>
+              <div class="single-word-nav-btns">
+                <button class="btn-nav-arrow" onclick="prevFlashcard()" aria-label="Previous Flashcard" title="Previous Card (← / A)">◀</button>
+                <button class="btn-nav-arrow" onclick="nextFlashcard()" aria-label="Next Flashcard" title="Next Card (→ / D)">▶</button>
               </div>
             </div>
           </div>
 
-          <div class="flashcard-nav">
-            <button class="btn-secondary" onclick="prevFlashcard()">← Previous</button>
-            <button class="audio-pill" onclick="speakCurrentFlashcard()">🔊 Listen</button>
-            <button class="btn-primary" onclick="nextFlashcard()">Next →</button>
+          <!-- Quick Flashcard Picker Carousel Track -->
+          <div class="word-picker-track" id="flashcardPickerTrack">
+            <!-- Dynamically populated chips: 01 Egoist, 02 Egotist... -->
           </div>
-          <p style="margin-top: 14px; font-size: 0.85rem; color: var(--text-muted);" id="fcCounter">Card 1 of 10</p>
+
+          <!-- 3D Flashcard Wrapper -->
+          <div class="flashcard-wrapper" id="flashcardElement" onclick="flipFlashcard()" role="button" tabindex="0" aria-label="Vocabulary Flashcard. Click or press Space to flip.">
+            <div class="flashcard-inner">
+              <!-- FRONT FACE -->
+              <div class="flashcard-front">
+                <div class="fc-front-topbar">
+                  <div class="fc-chip-badge">
+                    <span class="fc-session-pill" id="fcFrontSession">Session 1</span>
+                    <span class="fc-num-pill" id="fcFrontNum">#01</span>
+                  </div>
+                  <div class="fc-front-actions">
+                    <button class="audio-pill" onclick="event.stopPropagation(); speakCurrentFlashcard();" title="Pronounce Word (S)">
+                      <span>🔊</span>
+                      <div class="soundwave-bars"><span class="sw-bar"></span><span class="sw-bar"></span><span class="sw-bar"></span></div>
+                      <span>Listen</span>
+                    </button>
+                    <span class="fc-flip-hint">↻ Click to Flip</span>
+                  </div>
+                </div>
+
+                <div class="fc-front-hero">
+                  <h2 id="fcWord" class="fc-word-title">Egoist</h2>
+                  <div class="fc-phonetic-wrap">
+                    <span id="fcPhonetic" class="phonetic-code">EE′-gō-ist</span>
+                  </div>
+                </div>
+
+                <div class="fc-front-bottom-grid">
+                  <div class="fc-hindi-card">
+                    <div class="fc-card-sublabel">🎯 हिन्दी अर्थ</div>
+                    <div id="fcHindi" class="fc-hindi-text">स्वार्थी / आत्मकेन्द्री व्यक्ति</div>
+                  </div>
+                  <div class="fc-quote-card">
+                    <div class="fc-card-sublabel">💬 Core Philosophy</div>
+                    <p id="fcQuote" class="fc-quote-text">"What is in it for me?"</p>
+                  </div>
+                </div>
+
+                <div class="fc-front-footer-bar">
+                  <span class="fc-footer-prompt">↻ Tap card or press <kbd>SPACE</kbd> to reveal Root, Meaning & Exam Sentence</span>
+                </div>
+              </div>
+
+              <!-- BACK FACE -->
+              <div class="flashcard-back">
+                <div class="fc-back-topbar">
+                  <div class="fc-back-heading-wrap">
+                    <span class="fc-back-word" id="fcBackWord">Egoist</span>
+                    <span class="fc-back-phonetic" id="fcBackPhonetic">/ EE′-gō-ist /</span>
+                    <span class="fc-back-hindi-pill" id="fcBackHindi">स्वार्थी</span>
+                  </div>
+                  <div class="fc-back-actions">
+                    <button class="audio-pill" onclick="event.stopPropagation(); speakCurrentFlashcard();" title="Pronounce Word (S)">
+                      <span>🔊</span>
+                      <div class="soundwave-bars"><span class="sw-bar"></span><span class="sw-bar"></span><span class="sw-bar"></span></div>
+                      <span>Listen</span>
+                    </button>
+                    <span class="fc-flip-hint">↻ Flip Back</span>
+                  </div>
+                </div>
+
+                <div class="fc-back-body-grid">
+                  <!-- Left Column: Root, Definition & Exam Sentence -->
+                  <div class="fc-back-col">
+                    <div id="fcRoot" class="root-box">🌱 Root: ego (Latin = I, self)</div>
+                    <div class="fc-meaning-card">
+                      <div class="fc-card-sublabel">📖 Core Definition</div>
+                      <h3 id="fcMeaning" class="fc-meaning-text">Driven purely by self-interest and personal profit.</h3>
+                    </div>
+                    <div id="fcExample" class="example-box">
+                      <div class="example-label">📝 Exam Sentence</div>
+                      <div id="fcExampleText">The egoist refused to donate even a rupee to the flood relief fund...</div>
+                    </div>
+                  </div>
+
+                  <!-- Right Column: Synonyms, Antonyms, Related Words & Traits -->
+                  <div class="fc-back-col">
+                    <div id="fcSynAnt" class="syn-ant-box">
+                      <!-- Synonyms and Antonyms -->
+                    </div>
+                    <div class="related-words-wrap" id="fcRelatedWrap">
+                      <div class="related-title">✦ Derived Family Words:</div>
+                      <div class="related-chips" id="fcRelatedChips">
+                        <!-- Chips -->
+                      </div>
+                    </div>
+                    <div class="fc-traits-wrap" id="fcTraitsWrap">
+                      <div class="related-title">✦ Behavioral Traits:</div>
+                      <ul class="traits-list" id="fcTraitsList">
+                        <!-- Traits -->
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="fc-back-footer-bar">
+                  <span class="fc-footer-prompt">↻ Tap card or press <kbd>SPACE</kbd> to return to front</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Navigation for Flashcards (Matching Single Card Master Notes) -->
+          <div class="single-word-nav-bottom flashcard-nav-bottom">
+            <button class="btn-secondary" onclick="prevFlashcard()" title="Previous Flashcard (← / A)">
+              <span>← Previous Card</span>
+              <span class="kbd-hint">[← / A]</span>
+            </button>
+            
+            <div class="single-word-progress-center">
+              <div class="single-word-progress-bar">
+                <div class="single-word-progress-fill" id="fcProgressFill" style="width: 10%;"></div>
+              </div>
+              <div style="display:flex; align-items:center; gap: 10px; margin-top: 6px; flex-wrap: wrap; justify-content: center;">
+                <span class="single-word-progress-text" id="fcCounter">Card 1 of 10 • 10% Completed</span>
+                <button class="fc-tool-pill" onclick="flipFlashcard()" title="Flip Card (Space)">↻ Flip</button>
+                <button class="fc-tool-pill" onclick="speakCurrentFlashcard()" title="Pronounce Word (S)">🔊 Speak</button>
+                <button class="fc-tool-pill" onclick="shuffleFlashcards()" title="Shuffle Deck">🔀 Shuffle</button>
+              </div>
+            </div>
+
+            <button class="btn-primary" onclick="nextFlashcard()" title="Next Flashcard (→ / D)">
+              <span>Next Card →</span>
+              <span class="kbd-hint">[→ / D]</span>
+            </button>
+          </div>
         </div>
       </section>
 
@@ -8161,6 +8629,7 @@
       updateProgressBar();
       initSidebarState();
       setupSidebarTouch();
+      setupFlashcardTouch();
     });
 
     // Render 47-Session Sidebar
@@ -8473,42 +8942,150 @@
 
     // Flashcard Controller
     function flipFlashcard() {
-      document.getElementById('flashcardElement').classList.toggle('flipped');
+      const el = document.getElementById('flashcardElement');
+      if (el) el.classList.toggle('flipped');
+    }
+
+    function jumpToFlashcard(idx) {
+      const session = SESSIONS_DATA.find(s => s.id === currentSessionId);
+      if (!session || !session.words) return;
+      if (idx >= 0 && idx < session.words.length) {
+        currentFlashcardIndex = idx;
+        updateFlashcardUI();
+      }
+    }
+
+    function shuffleFlashcards() {
+      const session = SESSIONS_DATA.find(s => s.id === currentSessionId);
+      if (!session || !session.words || session.words.length <= 1) return;
+      let nextIdx = currentFlashcardIndex;
+      while (nextIdx === currentFlashcardIndex) {
+        nextIdx = Math.floor(Math.random() * session.words.length);
+      }
+      currentFlashcardIndex = nextIdx;
+      updateFlashcardUI();
     }
 
     function updateFlashcardUI() {
       const session = SESSIONS_DATA.find(s => s.id === currentSessionId);
       if (!session || !session.words || session.words.length === 0) return;
 
+      if (currentFlashcardIndex < 0) currentFlashcardIndex = 0;
+      if (currentFlashcardIndex >= session.words.length) currentFlashcardIndex = 0;
+
       const card = session.words[currentFlashcardIndex];
-      document.getElementById('flashcardElement').classList.remove('flipped');
-      document.getElementById('fcWord').innerText = card.word;
-      document.getElementById('fcPhonetic').innerText = card.phonetic;
-      document.getElementById('fcHindi').innerText = `🎯 हिन्दी: ${card.hindi || ''}`;
-      document.getElementById('fcQuote').innerText = `"${card.quote}"`;
-      
-      document.getElementById('fcRoot').innerText = `🌱 Root: ${card.root || ''}`;
-      document.getElementById('fcMeaning').innerText = card.meaning;
-      
-      let synAntStr = '';
-      if (card.synonyms) synAntStr += `<span class="syn-line">🟢 <strong>Syn:</strong> ${card.synonyms}</span><br/>`;
-      if (card.antonyms) synAntStr += `<span class="ant-line">🔴 <strong>Ant:</strong> ${card.antonyms}</span>`;
-      document.getElementById('fcSynAnt').innerHTML = synAntStr;
-      
-      let relatedStr = card.related ? `Related: ${card.related.join(', ')}` : (card.traits[0] || '');
-      document.getElementById('fcDetails').innerText = relatedStr;
+      const fcEl = document.getElementById('flashcardElement');
+      if (fcEl) fcEl.classList.remove('flipped');
+
+      // Top info & badges
+      const deckBadge = document.getElementById('fcDeckBadge');
+      if (deckBadge) deckBadge.innerText = `🃏 Flashcard Deck • Session ${session.id < 10 ? '0' + session.id : session.id}`;
+
+      const counterTop = document.getElementById('fcCounterTop');
+      if (counterTop) counterTop.innerText = `Card ${currentFlashcardIndex + 1} of ${session.words.length}`;
+
+      const frontSession = document.getElementById('fcFrontSession');
+      if (frontSession) frontSession.innerText = `Session ${session.id}`;
+
+      const frontNum = document.getElementById('fcFrontNum');
+      if (frontNum) frontNum.innerText = `#${currentFlashcardIndex + 1 < 10 ? '0' + (currentFlashcardIndex + 1) : (currentFlashcardIndex + 1)}`;
+
+      // Front Face
+      const fcWord = document.getElementById('fcWord');
+      if (fcWord) fcWord.innerText = card.word;
+
+      const fcPhonetic = document.getElementById('fcPhonetic');
+      if (fcPhonetic) fcPhonetic.innerText = card.phonetic || '';
+
+      const fcHindi = document.getElementById('fcHindi');
+      if (fcHindi) fcHindi.innerText = card.hindi || 'N/A';
+
+      const fcQuote = document.getElementById('fcQuote');
+      if (fcQuote) fcQuote.innerText = `"${card.quote || ''}"`;
+
+      // Back Face Topbar
+      const backWord = document.getElementById('fcBackWord');
+      if (backWord) backWord.innerText = card.word;
+
+      const backPhonetic = document.getElementById('fcBackPhonetic');
+      if (backPhonetic) backPhonetic.innerText = card.phonetic ? `/${card.phonetic}/` : '';
+
+      const backHindi = document.getElementById('fcBackHindi');
+      if (backHindi) backHindi.innerText = card.hindi || '';
+
+      // Back Face Column 1: Root, Meaning, Exam Sentence
+      const fcRoot = document.getElementById('fcRoot');
+      if (fcRoot) fcRoot.innerHTML = `🌱 <strong>Root:</strong> ${card.root || 'N/A'}`;
+
+      const fcMeaning = document.getElementById('fcMeaning');
+      if (fcMeaning) fcMeaning.innerText = card.meaning || '';
 
       const fcEx = document.getElementById('fcExample');
+      const fcExText = document.getElementById('fcExampleText');
       if (fcEx) {
         if (card.example) {
-          fcEx.innerHTML = `<div class="example-label">📝 Exam Sentence</div>${card.example}`;
+          if (fcExText) fcExText.innerText = card.example;
           fcEx.style.display = 'block';
         } else {
           fcEx.style.display = 'none';
         }
       }
-      
-      document.getElementById('fcCounter').innerText = `Card ${currentFlashcardIndex + 1} of ${session.words.length}`;
+
+      // Back Face Column 2: Synonyms & Antonyms, Related Chips, Traits
+      const fcSynAnt = document.getElementById('fcSynAnt');
+      if (fcSynAnt) {
+        let synAntHtml = '';
+        if (card.synonyms) synAntHtml += `<div class="syn-line">🟢 <strong>Synonyms:</strong> ${card.synonyms}</div>`;
+        if (card.antonyms) synAntHtml += `<div class="ant-line">🔴 <strong>Antonyms:</strong> ${card.antonyms}</div>`;
+        if (!card.synonyms && !card.antonyms) synAntHtml = `<span style="color:var(--text-muted); font-size:0.85rem;">Synonyms & Antonyms covered in context</span>`;
+        fcSynAnt.innerHTML = synAntHtml;
+      }
+
+      const fcRelatedWrap = document.getElementById('fcRelatedWrap');
+      const fcRelatedChips = document.getElementById('fcRelatedChips');
+      if (fcRelatedWrap && fcRelatedChips) {
+        if (card.related && card.related.length > 0) {
+          fcRelatedChips.innerHTML = card.related.map(r => `<span class="related-chip">${r}</span>`).join('');
+          fcRelatedWrap.style.display = 'block';
+        } else {
+          fcRelatedWrap.style.display = 'none';
+        }
+      }
+
+      const fcTraitsWrap = document.getElementById('fcTraitsWrap');
+      const fcTraitsList = document.getElementById('fcTraitsList');
+      if (fcTraitsWrap && fcTraitsList) {
+        if (card.traits && card.traits.length > 0) {
+          fcTraitsList.innerHTML = card.traits.map(t => `<li>${t}</li>`).join('');
+          fcTraitsWrap.style.display = 'block';
+        } else {
+          fcTraitsWrap.style.display = 'none';
+        }
+      }
+
+      // Progress Bar & Counter
+      const progressPercent = Math.round(((currentFlashcardIndex + 1) / session.words.length) * 100);
+      const fcProgressFill = document.getElementById('fcProgressFill');
+      if (fcProgressFill) fcProgressFill.style.width = `${progressPercent}%`;
+
+      const fcCounter = document.getElementById('fcCounter');
+      if (fcCounter) fcCounter.innerText = `Card ${currentFlashcardIndex + 1} of ${session.words.length} • ${progressPercent}% Completed`;
+
+      // Quick Flashcard Picker Track Chips
+      const pickerTrack = document.getElementById('flashcardPickerTrack');
+      if (pickerTrack) {
+        pickerTrack.innerHTML = session.words.map((w, idx) => `
+          <button class="word-picker-chip${idx === currentFlashcardIndex ? ' active' : ''}" onclick="jumpToFlashcard(${idx})" title="Jump to ${w.word}">
+            <span class="chip-num">${idx + 1 < 10 ? '0' + (idx + 1) : idx + 1}</span>
+            <span>${w.word}</span>
+          </button>
+        `).join('');
+
+        const activeChip = pickerTrack.querySelector('.word-picker-chip.active');
+        if (activeChip && typeof activeChip.scrollIntoView === 'function') {
+          activeChip.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }
     }
 
     function nextFlashcard() {
@@ -8527,9 +9104,36 @@
 
     function speakCurrentFlashcard() {
       const session = SESSIONS_DATA.find(s => s.id === currentSessionId);
-      if (session && session.words) {
+      if (session && session.words && session.words[currentFlashcardIndex]) {
         speakText(session.words[currentFlashcardIndex].word);
       }
+    }
+
+    function setupFlashcardTouch() {
+      const fcEl = document.getElementById('flashcardElement');
+      if (!fcEl || typeof fcEl.addEventListener !== 'function') return;
+      let startX = 0, startY = 0, startTime = 0;
+      fcEl.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches[0]) {
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+          startTime = Date.now();
+        }
+      }, { passive: true });
+      fcEl.addEventListener('touchend', (e) => {
+        if (!e.changedTouches || !e.changedTouches[0]) return;
+        const diffX = e.changedTouches[0].clientX - startX;
+        const diffY = e.changedTouches[0].clientY - startY;
+        const elapsed = Date.now() - startTime;
+        // Fast swipe
+        if (elapsed < 500 && Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+          if (diffX < 0) {
+            nextFlashcard();
+          } else {
+            prevFlashcard();
+          }
+        }
+      }, { passive: true });
     }
 
     // Speech Synthesis
@@ -8808,6 +9412,10 @@
       document.querySelectorAll('.bottom-nav-item').forEach(b => {
         if (b.getAttribute('onclick').includes(viewKey)) b.classList.add('active');
       });
+
+      if (viewKey === 'flashcards') {
+        updateFlashcardUI();
+      }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
