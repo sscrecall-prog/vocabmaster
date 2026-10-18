@@ -1549,104 +1549,267 @@
       color: var(--accent);
     }
 
-    /* Quizzes and Drills */
+    /* Ultra-Wide, Clean & Beautiful Quiz System */
     .quiz-card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 28px;
-      margin-bottom: 24px;
-      box-shadow: var(--shadow-sm);
+      border-radius: var(--radius-lg);
+      padding: 32px 36px;
+      margin: 0 auto 32px auto;
+      max-width: 1380px;
+      width: 100%;
+      box-shadow: 0 16px 40px -4px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--border-color);
     }
 
     .quiz-heading {
-      font-size: 1.3rem;
+      font-size: 1.5rem;
       font-weight: 800;
       color: var(--text-main);
       margin-bottom: 6px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      letter-spacing: -0.3px;
     }
 
     .quiz-subtext {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--text-muted);
-      margin-bottom: 22px;
+      margin-bottom: 24px;
+      line-height: 1.5;
     }
 
-    /* Matching Quiz */
-    .matching-row {
+    /* Definitions Reference Key Box (Norman Lewis Guide) */
+    .matching-options-guide {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin-bottom: 28px;
+    }
+
+    .options-guide-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .options-guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+      gap: 10px 16px;
+    }
+
+    .option-pill-card {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      font-size: 0.86rem;
+      color: var(--text-main);
+      line-height: 1.4;
+    }
+
+    .option-pill-card .opt-letter {
+      font-family: 'Fira Code', monospace;
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: #fff;
+      background: var(--accent);
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .option-pill-card .opt-desc {
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* Matching Cards Grid (Wide 2-Column Responsive) */
+    .matching-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 620px), 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .match-item {
+      background: var(--bg-elevated);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      padding: 14px;
-      background: var(--bg-elevated);
-      border-radius: var(--radius-sm);
-      margin-bottom: 10px;
-      border: 1px solid var(--border-color);
+      gap: 12px;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: var(--shadow-sm);
     }
 
-    @media (min-width: 680px) {
-      .matching-row {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
+    .match-item:hover {
+      border-color: var(--accent);
+      background: var(--bg-surface);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(79, 70, 229, 0.1);
     }
 
-    .matching-word {
+    .match-item.is-answered {
+      border-color: rgba(99, 102, 241, 0.5);
+    }
+
+    .match-item.is-correct {
+      border-color: #10b981 !important;
+      background: rgba(16, 185, 129, 0.06) !important;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.12) !important;
+    }
+
+    .match-item.is-wrong {
+      border-color: #ef4444 !important;
+      background: rgba(239, 68, 68, 0.06) !important;
+      box-shadow: 0 4px 16px rgba(239, 68, 68, 0.12) !important;
+    }
+
+    .match-item-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .match-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .match-index-pill {
+      font-size: 0.78rem;
       font-weight: 800;
-      font-size: 1.05rem;
-      color: var(--text-main);
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 3px 9px;
+      border-radius: var(--radius-full);
+      font-family: 'Fira Code', monospace;
+      border: 1px solid rgba(99, 102, 241, 0.2);
     }
 
-    .matching-select {
-      padding: 9px 14px;
+    .match-word-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: -0.2px;
+    }
+
+    .match-result-badge {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      display: none;
+    }
+
+    .match-result-badge.correct {
+      display: inline-flex;
+      background: rgba(16, 185, 129, 0.18);
+      color: #059669;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    [data-theme="dark"] .match-result-badge.correct {
+      color: #34d399;
+    }
+
+    .match-result-badge.wrong {
+      display: inline-flex;
+      background: rgba(239, 68, 68, 0.18);
+      color: #dc2626;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    [data-theme="dark"] .match-result-badge.wrong {
+      color: #f87171;
+    }
+
+    .match-select-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .match-dropdown {
+      width: 100%;
+      padding: 12px 18px;
       border-radius: var(--radius-sm);
-      border: 1px solid var(--border-color);
+      border: 1.5px solid var(--border-color);
       background: var(--bg-card);
       color: var(--text-main);
-      font-size: 0.88rem;
+      font-size: 0.92rem;
       font-weight: 600;
-      max-width: 480px;
-      width: 100%;
+      cursor: pointer;
       outline: none;
+      transition: all 0.2s ease;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 44px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
     }
 
-    .matching-select:focus {
+    .match-dropdown:focus {
       border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
     }
 
-    /* Yes/No Drill */
+    /* Yes/No Wide Grid */
+    #yesNoQuizList {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 620px), 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
     .yn-row {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      padding: 14px 16px;
+      gap: 14px;
+      padding: 18px 20px;
       background: var(--bg-elevated);
-      border-radius: var(--radius-sm);
-      margin-bottom: 10px;
-      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border-color);
+      transition: all 0.2s ease;
+      justify-content: space-between;
     }
 
-    @media (min-width: 640px) {
-      .yn-row {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
+    .yn-row:hover {
+      border-color: var(--accent);
+      background: var(--bg-surface);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.08);
     }
 
     .yn-question {
       font-weight: 700;
-      font-size: 0.94rem;
+      font-size: 0.98rem;
       color: var(--text-main);
+      line-height: 1.5;
     }
 
     .yn-buttons {
       display: flex;
-      gap: 8px;
+      gap: 10px;
     }
 
     .btn-yn {
@@ -8379,58 +8542,117 @@
       }
     }
 
-    // Matching Quiz Renderer
+    // Enhanced Matching Quiz Renderer (Wide 2-Column Luxury Cards & Definitions Key)
     function renderMatchingQuiz(session) {
       const container = document.getElementById('matchingQuizList');
-      if (!session.matchingAnswers) return;
+      if (!container || !session.matchingAnswers) return;
 
-      let html = '';
+      let guideHtml = '';
+      if (session.matchingOptions && session.matchingOptions.length > 0) {
+        guideHtml = `
+          <div class="matching-options-guide">
+            <div class="options-guide-title">📋 Definitions Key (${session.matchingOptions.length} Options):</div>
+            <div class="options-guide-grid">
+              ${session.matchingOptions.map(opt => `
+                <div class="option-pill-card">
+                  <span class="opt-letter">${opt.key.toUpperCase()}</span>
+                  <span class="opt-desc">${opt.text}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      let gridHtml = '<div class="matching-grid">';
       Object.keys(session.matchingAnswers).forEach((word, idx) => {
         const correctKey = session.matchingAnswers[word];
-        html += `
-          <div class="match-item">
-            <span class="match-label">${idx + 1}. ${word}</span>
-            <select class="match-dropdown" data-correct="${correctKey}">
-              <option value="">Select definition / field...</option>
-              ${session.matchingOptions.map(opt => `<option value="${opt.key}">${opt.key}. ${opt.text}</option>`).join('')}
-            </select>
+        gridHtml += `
+          <div class="match-item" id="matchItem_${idx}">
+            <div class="match-item-header">
+              <div class="match-header-left">
+                <span class="match-index-pill">${idx + 1 < 10 ? '0' + (idx + 1) : idx + 1}</span>
+                <span class="match-word-title">${word}</span>
+              </div>
+              <span class="match-result-badge" id="matchBadge_${idx}"></span>
+            </div>
+            <div class="match-select-wrapper">
+              <select class="match-dropdown" data-idx="${idx}" data-correct="${correctKey}" onchange="onMatchSelectChange(this, ${idx})">
+                <option value="">Select matching definition...</option>
+                ${session.matchingOptions.map(opt => `<option value="${opt.key}">[${opt.key.toUpperCase()}] ${opt.text}</option>`).join('')}
+              </select>
+            </div>
           </div>
         `;
       });
-      container.innerHTML = html;
-      document.getElementById('matchingScoreBox').style.display = 'none';
+      gridHtml += '</div>';
+
+      container.innerHTML = guideHtml + gridHtml;
+      const scoreBox = document.getElementById('matchingScoreBox');
+      if (scoreBox) scoreBox.style.display = 'none';
+    }
+
+    function onMatchSelectChange(select, idx) {
+      const item = document.getElementById(`matchItem_${idx}`);
+      if (item) {
+        item.classList.toggle('is-answered', !!select.value);
+        item.classList.remove('is-correct', 'is-wrong');
+      }
+      const badge = document.getElementById(`matchBadge_${idx}`);
+      if (badge) {
+        badge.className = 'match-result-badge';
+        badge.style.display = 'none';
+      }
     }
 
     function gradeMatching() {
       const selects = document.querySelectorAll('#matchingQuizList .match-dropdown');
+      if (!selects.length) return;
       let score = 0;
       selects.forEach(select => {
+        const idx = select.getAttribute('data-idx');
         const correct = select.getAttribute('data-correct');
         const chosen = select.value.toLowerCase();
+        const item = document.getElementById(`matchItem_${idx}`);
+        const badge = document.getElementById(`matchBadge_${idx}`);
+
         if (chosen === correct) {
-          select.style.borderColor = 'var(--success)';
-          select.style.background = 'var(--success-bg)';
           score++;
+          if (item) { item.classList.remove('is-wrong'); item.classList.add('is-correct'); }
+          if (badge) {
+            badge.className = 'match-result-badge correct';
+            badge.innerText = '✓ Correct';
+            badge.style.display = 'inline-flex';
+          }
         } else {
-          select.style.borderColor = 'var(--error)';
-          select.style.background = 'var(--error-bg)';
+          if (item) { item.classList.remove('is-correct'); item.classList.add('is-wrong'); }
+          if (badge) {
+            badge.className = 'match-result-badge wrong';
+            badge.innerText = `✕ Answer: [${correct.toUpperCase()}]`;
+            badge.style.display = 'inline-flex';
+          }
         }
       });
+
       const box = document.getElementById('matchingScoreBox');
-      box.style.display = 'flex';
-      box.innerHTML = `<span>Score: <strong>${score} / ${selects.length}</strong></span> <span>${score === selects.length ? '🎉 Perfect!' : 'Review incorrect items above'}</span>`;
+      if (box) {
+        box.style.display = 'flex';
+        const percent = Math.round((score / selects.length) * 100);
+        box.innerHTML = `
+          <div>
+            <span>Score: <strong style="color:var(--accent);">${score} / ${selects.length}</strong> (${percent}%)</span>
+            <span style="margin-left: 14px; font-weight: 600; color: var(--text-muted);">${score === selects.length ? '🎉 Outstanding! All answers matched!' : 'Review the highlighted corrections above.'}</span>
+          </div>
+          <button class="btn-secondary" style="padding: 6px 14px; font-size: 0.82rem;" onclick="resetMatching()">Try Again</button>
+        `;
+      }
       saveQuizScore(currentSessionId, 'matching', score, selects.length);
       if (score === selects.length) triggerConfetti();
     }
 
     function resetMatching() {
-      const selects = document.querySelectorAll('#matchingQuizList .match-dropdown');
-      selects.forEach(s => {
-        s.value = '';
-        s.style.borderColor = '';
-        s.style.background = '';
-      });
-      document.getElementById('matchingScoreBox').style.display = 'none';
+      const session = SESSIONS_DATA.find(s => s.id === currentSessionId);
+      if (session) renderMatchingQuiz(session);
     }
 
     // Yes/No Quiz Renderer
