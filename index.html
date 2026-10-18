@@ -365,6 +365,7 @@
 
     .sidebar {
       width: var(--sidebar-width);
+      min-width: var(--sidebar-width);
       background: var(--bg-surface);
       border-right: 1px solid var(--border-color);
       display: flex;
@@ -373,9 +374,27 @@
       position: sticky;
       top: var(--header-height);
       z-index: 210;
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: margin-left 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.25s ease,
+                  visibility 0.32s ease;
+      will-change: margin-left, transform;
     }
 
+    /* Desktop Collapsed */
+    @media (min-width: 901px) {
+      .sidebar.collapsed {
+        margin-left: calc(-1 * var(--sidebar-width));
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .sidebar-overlay {
+        display: none !important;
+      }
+    }
+
+    /* Mobile Drawer */
     @media (max-width: 900px) {
       .sidebar {
         position: fixed;
@@ -383,8 +402,15 @@
         bottom: 0;
         left: 0;
         height: 100vh;
+        width: 320px;
+        max-width: 86vw;
+        min-width: 0;
         transform: translateX(-100%);
         box-shadow: var(--shadow-lg);
+        z-index: 250;
+        margin-left: 0 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
       }
       .sidebar.open {
         transform: translateX(0);
@@ -392,11 +418,122 @@
     }
 
     .sidebar-header {
-      padding: 18px 20px;
+      padding: 16px 18px;
       border-bottom: 1px solid var(--border-color);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
+    }
+
+    /* Sidebar Collapse & Close Button */
+    .sidebar-toggle-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background: var(--bg-elevated);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .sidebar-toggle-action-btn:hover {
+      background: var(--bg-surface);
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: 0 2px 10px var(--accent-glow);
+    }
+
+    .sidebar-toggle-action-btn .btn-arrow {
+      font-size: 0.75rem;
+      transition: transform 0.2s ease;
+    }
+
+    .sidebar-toggle-action-btn:hover .btn-arrow {
+      transform: translateX(-2px);
+    }
+
+    /* Desktop and Mobile Helper Visibility */
+    .desktop-only { display: inline-flex; }
+    .mobile-only { display: none; }
+    @media (max-width: 900px) {
+      .desktop-only { display: none !important; }
+      .mobile-only { display: inline-flex !important; }
+    }
+
+    /* Floating Quick-Open Tab on Desktop when Collapsed */
+    .floating-sidebar-tab {
+      position: fixed;
+      left: 0;
+      top: 110px;
+      z-index: 90;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 15px 9px 12px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-left: none;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      color: var(--text-main);
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: var(--shadow-md), 0 4px 18px rgba(79, 70, 229, 0.16);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    @media (min-width: 901px) {
+      .floating-sidebar-tab {
+        display: flex;
+      }
+      body.sidebar-is-collapsed .floating-sidebar-tab {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+
+    .floating-sidebar-tab:hover {
+      background: var(--bg-elevated);
+      border-color: var(--accent);
+      color: var(--accent);
+      box-shadow: var(--shadow-lg), 0 4px 22px var(--accent-glow);
+      transform: translateX(3px);
+    }
+
+    .floating-sidebar-tab .tab-icon {
+      font-size: 1.05rem;
+    }
+
+    .floating-sidebar-tab .tab-arrow {
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 0.75rem;
+      transition: transform 0.2s ease;
+    }
+
+    .floating-sidebar-tab:hover .tab-arrow {
+      transform: translateX(2px);
+    }
+
+    /* Content Area expands gracefully when sidebar is collapsed */
+    .content-area {
+      transition: max-width 0.32s cubic-bezier(0.16, 1, 0.3, 1), padding 0.32s ease;
+    }
+
+    @media (min-width: 901px) {
+      body.sidebar-is-collapsed .content-area {
+        max-width: 1240px;
+      }
     }
 
     .sidebar-title {
@@ -1609,7 +1746,7 @@
   <!-- Top Header -->
   <header class="app-header">
     <div class="header-left">
-      <button class="menu-toggle-btn" onclick="toggleSidebar()" aria-label="Toggle Sessions Menu">☰</button>
+      <button class="menu-toggle-btn" id="headerMenuToggleBtn" onclick="toggleSidebar()" aria-label="Toggle Course Curriculum Menu" title="Toggle Sidebar (Ctrl+B)">☰</button>
       <a href="#" class="brand-logo">
         <span>⚡ VocabMaster</span>
         <span class="brand-pill">Part 1 Live</span>
@@ -1619,14 +1756,14 @@
     <div class="header-center">
       <div class="status-beacon-pill">
         <span class="beacon-dot"></span>
-        <span id="headerLiveStatus">18 / 47 Sessions Live • 306 Words</span>
+        <span id="headerLiveStatus">20 / 47 Sessions Live • 338 Words</span>
       </div>
     </div>
 
     <div class="header-right">
       <button class="command-search-btn" onclick="openSearch()" title="Search All Words (Ctrl+K)">
         <span class="search-icon">🔍</span>
-        <span>Search 306 words...</span>
+        <span>Search 338 words...</span>
         <span class="kbd-shortcut">⌘K</span>
       </button>
       <button class="icon-btn" onclick="switchView('bookmarks')" title="View Starred Bookmarks">
@@ -1644,11 +1781,22 @@
     <!-- Sidebar Overlay for Mobile -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
+    <!-- Floating Sidebar Toggle for Desktop when Collapsed -->
+    <button class="floating-sidebar-tab" id="floatingSidebarTab" onclick="toggleSidebar()" aria-label="Open Course Curriculum Sidebar" title="Open Curriculum (Ctrl+B)">
+      <span class="tab-icon">📚</span>
+      <span class="tab-text">Curriculum</span>
+      <span class="tab-arrow">▶</span>
+    </button>
+
     <!-- 47-Session Sidebar Drawer -->
-    <aside class="sidebar" id="appSidebar">
+    <aside class="sidebar" id="appSidebar" aria-label="Course Curriculum">
       <div class="sidebar-header">
         <div class="sidebar-title">📚 Course Curriculum</div>
-        <button class="menu-toggle-btn" style="width:32px; height:32px; font-size: 1rem;" onclick="toggleSidebar()">✕</button>
+        <button class="sidebar-toggle-action-btn" onclick="toggleSidebar()" aria-label="Collapse or Close Sidebar" title="Collapse or Close Sidebar (Ctrl+B / Esc)">
+          <span class="btn-arrow desktop-only">◀</span>
+          <span class="desktop-only">Collapse</span>
+          <span class="mobile-only" style="font-size: 1.15rem; line-height: 1;">✕</span>
+        </button>
       </div>
 
       <div class="sidebar-stats">
@@ -7518,6 +7666,8 @@
       renderSessionSidebar();
       loadSession(1);
       updateProgressBar();
+      initSidebarState();
+      setupSidebarTouch();
     });
 
     // Render 47-Session Sidebar
@@ -7532,7 +7682,7 @@
         li.setAttribute('data-id', session.id);
         li.onclick = () => {
           loadSession(session.id);
-          if (window.innerWidth <= 900) toggleSidebar();
+          if (window.innerWidth <= 900) closeSidebar();
         };
 
         li.innerHTML = `
@@ -7979,12 +8129,92 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Sidebar Toggle
-    function toggleSidebar() {
+    // Enhanced Sidebar Toggle (Desktop Collapse / Expand + Mobile Drawer Open / Close)
+    function openSidebar() {
       const sidebar = document.getElementById('appSidebar');
       const overlay = document.getElementById('sidebarOverlay');
-      sidebar.classList.toggle('open');
-      overlay.classList.toggle('active');
+      const menuBtn = document.getElementById('headerMenuToggleBtn');
+      if (window.innerWidth <= 900) {
+        if (sidebar) sidebar.classList.add('open');
+        if (overlay) overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        if (sidebar) sidebar.classList.remove('collapsed');
+        document.body.classList.remove('sidebar-is-collapsed');
+        try { localStorage.setItem('vm_sidebar_collapsed', 'false'); } catch (e) {}
+      }
+      if (menuBtn) menuBtn.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeSidebar() {
+      const sidebar = document.getElementById('appSidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const menuBtn = document.getElementById('headerMenuToggleBtn');
+      if (window.innerWidth <= 900) {
+        if (sidebar) sidebar.classList.remove('open');
+        if (overlay) overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      } else {
+        if (sidebar) sidebar.classList.add('collapsed');
+        document.body.classList.add('sidebar-is-collapsed');
+        try { localStorage.setItem('vm_sidebar_collapsed', 'true'); } catch (e) {}
+      }
+      if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('appSidebar');
+      if (!sidebar) return;
+      if (window.innerWidth <= 900) {
+        if (sidebar.classList.contains('open')) {
+          closeSidebar();
+        } else {
+          openSidebar();
+        }
+      } else {
+        if (sidebar.classList.contains('collapsed')) {
+          openSidebar();
+        } else {
+          closeSidebar();
+        }
+      }
+    }
+
+    function initSidebarState() {
+      if (window.innerWidth > 900) {
+        try {
+          const isCollapsed = localStorage.getItem('vm_sidebar_collapsed') === 'true';
+          if (isCollapsed) {
+            const sidebar = document.getElementById('appSidebar');
+            if (sidebar) sidebar.classList.add('collapsed');
+            document.body.classList.add('sidebar-is-collapsed');
+            const menuBtn = document.getElementById('headerMenuToggleBtn');
+            if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
+          }
+        } catch (e) {}
+      }
+    }
+
+    function setupSidebarTouch() {
+      const sidebar = document.getElementById('appSidebar');
+      if (!sidebar || typeof sidebar.addEventListener !== 'function') return;
+      let startX = 0, startY = 0;
+      sidebar.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches[0]) {
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+      sidebar.addEventListener('touchend', (e) => {
+        if (window.innerWidth > 900) return;
+        if (!e.changedTouches || !e.changedTouches[0]) return;
+        const diffX = e.changedTouches[0].clientX - startX;
+        const diffY = e.changedTouches[0].clientY - startY;
+        // Swipe left by more than 40px and predominantly horizontal
+        if (diffX < -40 && Math.abs(diffX) > Math.abs(diffY)) {
+          closeSidebar();
+        }
+      }, { passive: true });
     }
 
     // Theme Toggle
@@ -8011,7 +8241,17 @@
       c.innerHTML = r.map(x => `<div class="search-result-item" onclick="goToWord(${x.sid},'${x.w.word.replace(/'/g,"\\'")}')"><span class="search-result-session">Session ${x.sid} • ${x.st}</span><span class="search-result-word">${x.w.word}</span><span class="search-result-hindi">${x.w.hindi||''}</span></div>`).join('');
     }
     function goToWord(sid, wn) { closeSearch(); loadSession(sid); switchView('notes'); setTimeout(() => { document.querySelectorAll('.vocab-word').forEach(c => { if (c.textContent.trim().toLowerCase() === wn.toLowerCase()) { c.closest('.vocab-card').scrollIntoView({behavior:'smooth',block:'center'}); c.closest('.vocab-card').style.boxShadow = '0 0 0 3px var(--accent)'; setTimeout(() => c.closest('.vocab-card').style.boxShadow = '', 2000); } }); }, 300); }
-    document.addEventListener('keydown', e => { if ((e.ctrlKey||e.metaKey) && e.key === 'k') { e.preventDefault(); openSearch(); } if (e.key === 'Escape') closeSearch(); });
+    document.addEventListener('keydown', e => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openSearch(); }
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b') { e.preventDefault(); toggleSidebar(); }
+      if (e.key === 'Escape') {
+        closeSearch();
+        const sidebar = document.getElementById('appSidebar');
+        if (window.innerWidth <= 900 && sidebar && sidebar.classList.contains('open')) {
+          closeSidebar();
+        }
+      }
+    });
 
     // BOOKMARKS
     function getBookmarks() { try { return JSON.parse(localStorage.getItem('vm_bookmarks')||'[]'); } catch { return []; } }
