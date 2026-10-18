@@ -1119,6 +1119,46 @@
       }
     }
 
+    /* Starred Words Empty State */
+    .bookmarks-empty-card {
+      width: 100%;
+      max-width: 900px;
+      margin: 40px auto;
+      text-align: center;
+      padding: 56px 36px;
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      border: 1.5px dashed var(--border-color);
+      box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bookmarks-empty-icon {
+      font-size: 3.2rem;
+      margin-bottom: 16px;
+      display: inline-block;
+      filter: drop-shadow(0 4px 12px rgba(245, 158, 11, 0.3));
+    }
+
+    .bookmarks-empty-card h3 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+
+    .bookmarks-empty-card p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 520px;
+      margin: 0 auto 24px auto;
+      line-height: 1.6;
+    }
+
     .vocab-card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
@@ -3362,9 +3402,57 @@
         </div>
       </section>
 
-      <!-- VIEW 7: Bookmarked Words -->
+      <!-- VIEW 7: Bookmarked Words (Single Word Card Focus Mode & Grid Toggle) -->
       <section id="view-bookmarks" class="view-pane">
-        <div class="cards-grid" id="bookmarksContainer"></div>
+        <!-- View Controls Header Bar for Starred Words -->
+        <div class="notes-header-bar" id="bookmarksHeaderBar">
+          <div class="notes-mode-toggle">
+            <button class="notes-mode-btn active" id="btnBookmarksModeSingle" onclick="setBookmarksViewMode('single')" title="Focus on 1 starred word card at a time">
+              <span>🎴 Single Card Focus</span>
+            </button>
+            <button class="notes-mode-btn" id="btnBookmarksModeGrid" onclick="setBookmarksViewMode('grid')" title="View all starred cards together in a list">
+              <span>⊞ All Cards Grid</span>
+            </button>
+          </div>
+          
+          <div class="single-word-nav-top" id="bookmarksNavTop">
+            <span class="single-word-counter" id="bookmarksCounter">Word 1 of 1</span>
+            <div class="single-word-nav-btns">
+              <button class="btn-nav-arrow" id="btnPrevBookmarkTop" onclick="prevBookmarkWord()" aria-label="Previous Starred Word" title="Previous Starred Word (← / A)">◀</button>
+              <button class="btn-nav-arrow" id="btnNextBookmarkTop" onclick="nextBookmarkWord()" aria-label="Next Starred Word" title="Next Starred Word (→ / D)">▶</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Word Picker Carousel for Starred Words -->
+        <div class="word-picker-track" id="bookmarksPickerTrack">
+          <!-- Dynamically populated chips: S1 • 01 Misogamist... -->
+        </div>
+
+        <!-- Cards Container (Full 1380px Ultra-Wide Luxury Deck) -->
+        <div id="bookmarksContainer" class="single-card-mode">
+          <!-- Starred word cards populated dynamically via JS -->
+        </div>
+
+        <!-- Bottom Navigation for Single Card Focus Mode -->
+        <div class="single-word-nav-bottom" id="bookmarksNavBottom">
+          <button class="btn-secondary" id="btnPrevBookmarkBottom" onclick="prevBookmarkWord()">
+            <span>← Previous Starred Word</span>
+            <span class="kbd-hint">[← / A]</span>
+          </button>
+          
+          <div class="single-word-progress-center">
+            <div class="single-word-progress-bar">
+              <div class="single-word-progress-fill" id="bookmarksProgressFill" style="width: 100%;"></div>
+            </div>
+            <span class="single-word-progress-text" id="bookmarksProgressText">Word 1 of 1</span>
+          </div>
+
+          <button class="btn-primary" id="btnNextBookmarkBottom" onclick="nextBookmarkWord()">
+            <span>Next Starred Word →</span>
+            <span class="kbd-hint">[→ / D]</span>
+          </button>
+        </div>
       </section>
 
     </main>
@@ -9063,6 +9151,21 @@
           speakCurrentSingleWord();
         }
       }
+
+      // Keyboard Controls for Starred Words View
+      const bookmarksPane = document.getElementById('view-bookmarks');
+      if (bookmarksPane && bookmarksPane.classList.contains('active') && bookmarksViewMode === 'single') {
+        if (e.key === 'ArrowRight' || e.key.toLowerCase() === 'd') {
+          e.preventDefault();
+          nextBookmarkWord();
+        } else if (e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a') {
+          e.preventDefault();
+          prevBookmarkWord();
+        } else if (e.key.toLowerCase() === 's') {
+          e.preventDefault();
+          speakCurrentBookmarkWord();
+        }
+      }
     });
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -9194,8 +9297,8 @@
       return totalTests > 0 && mastered;
     }
 
-    // Helper to generate a single vocab card HTML
-    function createVocabCardHtml(w, idx, total) {
+    // Helper to generate a single vocab card HTML (used for both Master Notes and Starred Words)
+    function createVocabCardHtml(w, idx, total, customSessionId) {
       let relatedHtml = '';
       if (w.related && w.related.length > 0) {
         relatedHtml = `<div class="related-words-wrap"><div class="related-title">Derived Family Words:</div><div class="related-chips">${w.related.map(r => `<span class="related-chip">${r}</span>`).join('')}</div></div>`;
@@ -9206,15 +9309,20 @@
         synAntHtml = `<div class="syn-ant-box">${w.synonyms ? `<div class="syn-line">🟢 <strong>Synonyms:</strong> ${w.synonyms}</div>` : ''}${w.antonyms ? `<div class="ant-line">🔴 <strong>Antonyms:</strong> ${w.antonyms}</div>` : ''}</div>`;
       }
 
-      const bookmarked = isBookmarked(currentSessionId, w.word);
+      const sid = customSessionId !== undefined ? customSessionId : (w.sessionId || currentSessionId);
+      const bookmarked = isBookmarked(sid, w.word);
+
+      const indexDisplay = customSessionId !== undefined 
+        ? `S${sid} • #${idx + 1 < 10 ? '0' + (idx + 1) : idx + 1}` 
+        : (idx + 1 < 10 ? '0' + (idx + 1) : idx + 1);
 
       return `
         <div class="vocab-card${w.isBonus ? ' bonus-card' : ''}" id="vocabCard_${idx}" data-word-idx="${idx}">
           <div class="card-top">
-            <span class="card-index">${idx + 1 < 10 ? '0' + (idx + 1) : idx + 1}</span>
+            <span class="card-index">${indexDisplay}</span>
             <div style="display:flex;gap:8px;align-items:center;">
               ${w.isBonus ? '<span class="bonus-badge">⭐ Bonus Teaser</span>' : ''}
-              <button class="bookmark-star ${bookmarked ? 'active' : ''}" data-session="${currentSessionId}" data-word="${w.word}" onclick="event.stopPropagation(); toggleBookmark(${currentSessionId}, '${w.word.replace(/'/g, "\\'")}'); updateBookmarkIcons();" title="Bookmark Word">${bookmarked ? '⭐' : '☆'}</button>
+              <button class="bookmark-star ${bookmarked ? 'active' : ''}" data-session="${sid}" data-word="${w.word}" onclick="event.stopPropagation(); toggleBookmark(${sid}, '${w.word.replace(/'/g, "\\'")}'); updateBookmarkIcons();" title="Bookmark Word">${bookmarked ? '⭐' : '☆'}</button>
               <button class="audio-pill" onclick="speakText('${w.word}', this)">
                 <span>🔊</span>
                 <div class="soundwave-bars"><span class="sw-bar"></span><span class="sw-bar"></span><span class="sw-bar"></span></div>
@@ -9230,7 +9338,7 @@
             ${w.root ? `<div class="root-box">🌱 <strong>Root:</strong> ${w.root}</div>` : ''}
           </div>
           
-          <div class="quote-box">"${w.quote}"</div>
+          ${w.quote ? `<div class="quote-box">"${w.quote}"</div>` : ''}
           <p class="vocab-desc">${w.meaning}</p>
           
           ${w.example ? `<div class="example-box"><div class="example-label">📝 Exam Sentence</div>${w.example}</div>` : ''}
@@ -9238,9 +9346,10 @@
           ${relatedHtml}
           ${synAntHtml}
 
+          ${w.traits && w.traits.length > 0 ? `
           <ul class="traits-list">
             ${w.traits.map(t => `<li>${t}</li>`).join('')}
-          </ul>
+          </ul>` : ''}
         </div>
       `;
     }
@@ -9989,6 +10098,10 @@
         updateFlashcardUI();
       }
 
+      if (viewKey === 'bookmarks') {
+        renderBookmarksView();
+      }
+
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -10135,19 +10248,212 @@
       }
     });
 
-    // BOOKMARKS
-    function getBookmarks() { try { return JSON.parse(localStorage.getItem('vm_bookmarks')||'[]'); } catch { return []; } }
-    function saveBookmarks(b) { localStorage.setItem('vm_bookmarks', JSON.stringify(b)); }
-    function toggleBookmark(sid, wn) { let b = getBookmarks(); const k = sid+'::'+wn; const i = b.indexOf(k); if (i>=0) b.splice(i,1); else b.push(k); saveBookmarks(b); updateBookmarkIcons(); updateProgressBar(); }
-    function isBookmarked(sid, wn) { return getBookmarks().includes(sid+'::'+wn); }
-    function updateBookmarkIcons() { document.querySelectorAll('.bookmark-star').forEach(btn => { const s = parseInt(btn.getAttribute('data-session')); const w = btn.getAttribute('data-word'); const bk = isBookmarked(s, w); btn.classList.toggle('active', bk); btn.textContent = bk ? '⭐' : '☆'; }); }
-    function renderBookmarksView() {
-      const c = document.getElementById('bookmarksContainer'); if (!c) return;
+    // BOOKMARKS & STARRED WORDS (1:1 PARITY WITH MASTER NOTES LUXURY CARD)
+    let currentBookmarkIndex = 0;
+    let bookmarksViewMode = 'single'; // Default to single card focus mode just like Master Notes
+
+    function getBookmarks() { 
+      try { return JSON.parse(localStorage.getItem('vm_bookmarks') || '[]'); } 
+      catch { return []; } 
+    }
+
+    function saveBookmarks(b) { 
+      localStorage.setItem('vm_bookmarks', JSON.stringify(b)); 
+    }
+
+    function toggleBookmark(sid, wn) { 
+      let b = getBookmarks(); 
+      const k = sid + '::' + wn; 
+      const i = b.indexOf(k); 
+      if (i >= 0) b.splice(i, 1); 
+      else b.push(k); 
+      saveBookmarks(b); 
+      updateBookmarkIcons(); 
+      updateProgressBar(); 
+
+      // If user is currently on Starred Words view, update view seamlessly
+      const bookmarksPane = document.getElementById('view-bookmarks');
+      if (bookmarksPane && bookmarksPane.classList.contains('active')) {
+        renderBookmarksView();
+      }
+    }
+
+    function isBookmarked(sid, wn) { 
+      return getBookmarks().includes(sid + '::' + wn); 
+    }
+
+    function updateBookmarkIcons() { 
+      document.querySelectorAll('.bookmark-star').forEach(btn => { 
+        const s = parseInt(btn.getAttribute('data-session')); 
+        const w = btn.getAttribute('data-word'); 
+        const bk = isBookmarked(s, w); 
+        btn.classList.toggle('active', bk); 
+        btn.textContent = bk ? '⭐' : '☆'; 
+      }); 
+      const bkBadge = document.getElementById('headerBookmarkBadge');
+      if (bkBadge) bkBadge.textContent = getBookmarks().length;
+    }
+
+    function setBookmarksViewMode(mode) {
+      bookmarksViewMode = mode;
+      try { localStorage.setItem('vm_bookmarks_view_mode', mode); } catch (e) {}
+      renderBookmarksView();
+    }
+
+    function getBookmarkedWordList() {
       const bk = getBookmarks();
-      if (!bk.length) { c.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px 24px;background:var(--bg-card);border-radius:var(--radius-md);border:1px dashed var(--border-color);"><h3 style="font-size:1.4rem;margin-bottom:8px;">☆ No Bookmarks Yet</h3><p style="color:var(--text-muted);max-width:400px;margin:0 auto;">Click the ☆ star icon on any word card to bookmark it for quick review.</p></div>'; return; }
       let cards = [];
-      bk.forEach(key => { const [sid, wn] = key.split('::'); const session = SESSIONS_DATA.find(s => s.id === parseInt(sid)); if (!session||!session.words) return; const w = session.words.find(x => x.word === wn); if (w) cards.push({w,sid:parseInt(sid),st:session.title}); });
-      c.innerHTML = cards.map(x => { const w = x.w; return `<div class="vocab-card"><div class="card-top"><span class="card-index" style="font-size:0.75rem;">S${x.sid}</span><div style="display:flex;gap:8px;align-items:center;"><button class="bookmark-star active" data-session="${x.sid}" data-word="${w.word}" onclick="toggleBookmark(${x.sid},'${w.word.replace(/'/g,"\\'")}');renderBookmarksView();" title="Remove Bookmark">⭐</button><button class="audio-pill" onclick="speakText('${w.word}', this)"><span>🔊</span><div class="soundwave-bars"><span class="sw-bar"></span><span class="sw-bar"></span><span class="sw-bar"></span></div><span>Listen</span></button></div></div><h3 class="vocab-word">${w.word}</h3><span class="phonetic-code">${w.phonetic}</span>${w.hindi?`<div class="hindi-badge">🎯 हिन्दी: ${w.hindi}</div>`:''}${w.root?`<div class="root-box">🌱 <strong>Root:</strong> ${w.root}</div>`:''}<p class="vocab-desc">${w.meaning}</p>${w.example?`<div class="example-box"><div class="example-label">📝 Exam Sentence</div>${w.example}</div>`:''}</div>`; }).join('');
+      bk.forEach(key => {
+        const [sid, wn] = key.split('::');
+        const session = SESSIONS_DATA.find(s => s.id === parseInt(sid));
+        if (!session || !session.words) return;
+        const w = session.words.find(x => x.word === wn);
+        if (w) cards.push({ w, sid: parseInt(sid), st: session.title });
+      });
+      return cards;
+    }
+
+    function prevBookmarkWord() {
+      const cards = getBookmarkedWordList();
+      if (!cards.length) return;
+      currentBookmarkIndex = (currentBookmarkIndex - 1 + cards.length) % cards.length;
+      renderBookmarksView();
+    }
+
+    function nextBookmarkWord() {
+      const cards = getBookmarkedWordList();
+      if (!cards.length) return;
+      currentBookmarkIndex = (currentBookmarkIndex + 1) % cards.length;
+      renderBookmarksView();
+    }
+
+    function jumpToBookmarkWord(idx) {
+      const cards = getBookmarkedWordList();
+      if (idx >= 0 && idx < cards.length) {
+        currentBookmarkIndex = idx;
+        renderBookmarksView();
+      }
+    }
+
+    function speakCurrentBookmarkWord() {
+      const cards = getBookmarkedWordList();
+      if (cards.length && cards[currentBookmarkIndex]) {
+        speakText(cards[currentBookmarkIndex].w.word);
+      }
+    }
+
+    function renderBookmarksView() {
+      const container = document.getElementById('bookmarksContainer');
+      if (!container) return;
+
+      const headerBar = document.getElementById('bookmarksHeaderBar');
+      const navTop = document.getElementById('bookmarksNavTop');
+      const pickerTrack = document.getElementById('bookmarksPickerTrack');
+      const navBottom = document.getElementById('bookmarksNavBottom');
+
+      try {
+        const savedMode = localStorage.getItem('vm_bookmarks_view_mode');
+        if (savedMode === 'single' || savedMode === 'grid') bookmarksViewMode = savedMode;
+      } catch (e) {}
+
+      const cards = getBookmarkedWordList();
+
+      if (!cards.length) {
+        if (headerBar) headerBar.style.display = 'none';
+        if (pickerTrack) pickerTrack.style.display = 'none';
+        if (navBottom) navBottom.style.display = 'none';
+        container.className = 'single-card-mode';
+        container.innerHTML = `
+          <div class="bookmarks-empty-card">
+            <div class="bookmarks-empty-icon">⭐</div>
+            <h3>No Starred Words Yet</h3>
+            <p>You haven't bookmarked any words yet. Tap the <strong>⭐ star icon</strong> on any word card in Master Notes or 3D Flashcards to save difficult words here for quick high-yield revision!</p>
+            <button class="btn-primary" onclick="switchView('notes')">📖 Explore Master Notes</button>
+          </div>
+        `;
+        return;
+      }
+
+      if (headerBar) headerBar.style.display = 'flex';
+
+      // Update Toolbar Buttons
+      const btnSingle = document.getElementById('btnBookmarksModeSingle');
+      const btnGrid = document.getElementById('btnBookmarksModeGrid');
+      if (btnSingle) btnSingle.classList.toggle('active', bookmarksViewMode === 'single');
+      if (btnGrid) btnGrid.classList.toggle('active', bookmarksViewMode === 'grid');
+
+      // Bound check
+      if (currentBookmarkIndex < 0) currentBookmarkIndex = 0;
+      if (currentBookmarkIndex >= cards.length) currentBookmarkIndex = Math.max(0, cards.length - 1);
+
+      if (bookmarksViewMode === 'single') {
+        container.className = 'single-card-mode';
+        if (navTop) navTop.style.display = 'flex';
+        if (pickerTrack) pickerTrack.style.display = 'flex';
+        if (navBottom) navBottom.style.display = 'flex';
+
+        // Render Quick Word Picker Chips
+        if (pickerTrack) {
+          pickerTrack.innerHTML = cards.map((item, idx) => `
+            <button class="word-picker-chip${idx === currentBookmarkIndex ? ' active' : ''}" onclick="jumpToBookmarkWord(${idx})" title="Jump to ${item.w.word} (Session ${item.sid})">
+              <span class="chip-num">S${item.sid} • ${idx + 1 < 10 ? '0' + (idx + 1) : idx + 1}</span>
+              <span>${item.w.word}</span>
+            </button>
+          `).join('');
+
+          // Auto-scroll active chip into view
+          const activeChip = pickerTrack.querySelector('.word-picker-chip.active');
+          if (activeChip && typeof activeChip.scrollIntoView === 'function') {
+            activeChip.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+        }
+
+        // Render EXACTLY 1 SINGLE WORD CARD matching Master Notes!
+        const activeItem = cards[currentBookmarkIndex];
+        container.innerHTML = createVocabCardHtml(activeItem.w, currentBookmarkIndex, cards.length, activeItem.sid);
+
+        // Update Counter and Progress
+        const counterText = `Starred Word ${currentBookmarkIndex + 1} of ${cards.length}`;
+        const counterEl = document.getElementById('bookmarksCounter');
+        if (counterEl) counterEl.innerText = counterText;
+
+        const progressPercent = Math.round(((currentBookmarkIndex + 1) / cards.length) * 100);
+        const progressFill = document.getElementById('bookmarksProgressFill');
+        if (progressFill) progressFill.style.width = `${progressPercent}%`;
+
+        const progressTextEl = document.getElementById('bookmarksProgressText');
+        if (progressTextEl) progressTextEl.innerText = `${counterText} • ${progressPercent}% Completed`;
+
+        // Mobile touch swipe gestures
+        const singleCardEl = container.querySelector('.vocab-card');
+        if (singleCardEl && typeof singleCardEl.addEventListener === 'function') {
+          let touchStartX = 0, touchStartY = 0;
+          singleCardEl.addEventListener('touchstart', (e) => {
+            if (e.touches && e.touches[0]) {
+              touchStartX = e.touches[0].clientX;
+              touchStartY = e.touches[0].clientY;
+            }
+          }, { passive: true });
+          singleCardEl.addEventListener('touchend', (e) => {
+            if (!e.changedTouches || !e.changedTouches[0]) return;
+            const diffX = e.changedTouches[0].clientX - touchStartX;
+            const diffY = e.changedTouches[0].clientY - touchStartY;
+            if (diffX < -50 && Math.abs(diffX) > Math.abs(diffY)) {
+              nextBookmarkWord();
+            } else if (diffX > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+              prevBookmarkWord();
+            }
+          }, { passive: true });
+        }
+      } else {
+        // All Cards Grid Mode
+        container.className = 'cards-grid';
+        if (navTop) navTop.style.display = 'none';
+        if (pickerTrack) pickerTrack.style.display = 'none';
+        if (navBottom) navBottom.style.display = 'none';
+
+        container.innerHTML = cards.map((item, idx) => createVocabCardHtml(item.w, idx, cards.length, item.sid)).join('');
+      }
     }
 
     // QUIZ SCORE PERSISTENCE
