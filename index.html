@@ -3713,7 +3713,24 @@
       }
     }
 
-</style>
+
+    /* ==========================================================================
+       📱 EMBED / IFRAME MICRO-FRONTEND MODE
+       ========================================================================== */
+    body.embedded-mode {
+      background: var(--bg-primary);
+    }
+    body.embedded-mode.hide-header .app-header {
+      display: none !important;
+    }
+    body.embedded-mode.hide-header .app-layout {
+      height: 100vh;
+    }
+    body.embedded-mode .app-header {
+      backdrop-filter: blur(8px);
+    }
+
+  </style>
 </head>
 <body>
 
@@ -29969,9 +29986,148 @@
       }
     });
 
+    
+    // ==========================================================================
+    // 🌐 EMBED, DEEP-LINKING & CROSS-WINDOW postMessage BRIDGE
+    // ==========================================================================
+    function initEmbedAndDeepLinks() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const hash = window.location.hash || '';
+
+      // 1. Detect Embed Mode (Iframe detection or ?embed=1)
+      const isEmbed = urlParams.get('embed') === '1' || 
+                      urlParams.get('embed') === 'true' || 
+                      urlParams.get('embedded') === 'true' || 
+                      window.self !== window.top;
+
+      if (isEmbed) {
+        document.body.classList.add('embedded-mode');
+        if (urlParams.get('hide_header') === '1' || urlParams.get('hideHeader') === 'true' || urlParams.get('clean') === '1') {
+          document.body.classList.add('hide-header');
+        }
+        // If embedded on desktop, collapse sidebar by default unless explicit ?sidebar=open
+        const sidebar = document.getElementById('appSidebar');
+        if (sidebar && urlParams.get('sidebar') !== 'open') {
+          sidebar.classList.add('collapsed');
+          document.body.classList.add('sidebar-is-collapsed');
+        }
+      }
+
+      // 2. Theme Override (?theme=dark or ?theme=light)
+      const themeParam = urlParams.get('theme');
+      if (themeParam === 'dark' || themeParam === 'light') {
+        document.documentElement.setAttribute('data-theme', themeParam);
+        try { localStorage.setItem('theme', themeParam); } catch (e) {}
+      }
+
+      // 3. Session Deep Linking (?session=X or ?s=X or #session-X or #sX)
+      let targetSession = 1;
+      const sParam = urlParams.get('session') || urlParams.get('s');
+      if (sParam && !isNaN(parseInt(sParam))) {
+        targetSession = Math.min(Math.max(1, parseInt(sParam)), SESSIONS_DATA.length);
+      } else if (hash) {
+        const hashMatch = hash.match(/#?(?:session-?|s)(\d+)/i);
+        if (hashMatch && hashMatch[1]) {
+          targetSession = Math.min(Math.max(1, parseInt(hashMatch[1])), SESSIONS_DATA.length);
+        }
+      }
+
+      // Load Target Session
+      loadSession(targetSession);
+
+      // 4. View Mode Deep Linking (?view=notes|flashcards|matching|yesno|recall|etymology|mindmap)
+      const vParam = urlParams.get('view') || urlParams.get('tab') || urlParams.get('mode');
+      if (vParam) {
+        const validViews = ['notes', 'flashcards', 'matching', 'yesno', 'recall', 'etymology', 'mindmap', 'bookmarks'];
+        if (validViews.includes(vParam.toLowerCase())) {
+          switchView(vParam.toLowerCase());
+        }
+      } else if (hash) {
+        if (hash.includes('mindmap')) switchView('mindmap');
+        else if (hash.includes('flashcard')) switchView('flashcards');
+        else if (hash.includes('matching')) switchView('matching');
+        else if (hash.includes('yesno')) switchView('yesno');
+        else if (hash.includes('recall')) switchView('recall');
+        else if (hash.includes('quiz') || hash.includes('etymology')) switchView('etymology');
+        else if (hash.includes('starred') || hash.includes('bookmark')) switchView('bookmarks');
+      }
+
+      // 5. Notify Parent Platform of Readiness
+      notifyParent({
+        type: 'VOCAB_READY',
+        sessionId: targetSession,
+        sessionsCount: SESSIONS_DATA.length,
+        wordsCount: 946,
+        isEmbedded: isEmbed
+      });
+
+      // 6. Listen for Cross-Window Messages from Parent (React, Vue, Three.js, etc.)
+      window.addEventListener('message', handleParentMessage);
+      
+      // 7. Listen for Hash Changes (e.g. clicking external hash link #s15)
+      window.addEventListener('hashchange', () => {
+        const hMatch = window.location.hash.match(/#?(?:session-?|s)(\d+)/i);
+        if (hMatch && hMatch[1]) {
+          const sid = parseInt(hMatch[1]);
+          if (!isNaN(sid) && sid >= 1 && sid <= SESSIONS_DATA.length) {
+            loadSession(sid);
+          }
+        }
+      });
+    }
+
+    function notifyParent(payload) {
+      if (window.parent && window.parent !== window) {
+        try {
+          window.parent.postMessage({ source: 'VOCABMASTER', ...payload }, '*');
+        } catch (e) {}
+      }
+    }
+
+    function handleParentMessage(event) {
+      const data = event.data;
+      if (!data || typeof data !== 'object') return;
+
+      if (data.type === 'SET_SESSION' && data.sessionId) {
+        const sid = Math.min(Math.max(1, parseInt(data.sessionId)), SESSIONS_DATA.length);
+        loadSession(sid);
+      } else if (data.type === 'SET_VIEW' && data.view) {
+        switchView(data.view.toLowerCase());
+      } else if (data.type === 'SET_THEME' && data.theme) {
+        document.documentElement.setAttribute('data-theme', data.theme);
+      } else if (data.type === 'GET_PROGRESS') {
+        notifyParent({
+          type: 'PROGRESS_REPORT',
+          progress: getAllProgressData()
+        });
+      } else if (data.type === 'FOCUS_WORD' && data.word) {
+        if (typeof openWordInMindMap === 'function') {
+          openWordInMindMap(data.word);
+        }
+      }
+    }
+
+    function getAllProgressData() {
+      const progress = {};
+      SESSIONS_DATA.forEach(s => {
+        progress[s.id] = {
+          id: s.id,
+          title: s.title,
+          category: s.category,
+          wordsCount: s.words ? s.words.length : 0,
+          matching: getQuizScore(s.id, 'matching'),
+          yesno: getQuizScore(s.id, 'yesno'),
+          recall: getQuizScore(s.id, 'recall'),
+          etymology: getQuizScore(s.id, 'etymology')
+        };
+      });
+      return progress;
+    }
+
+
     document.addEventListener('DOMContentLoaded', () => {
       renderSessionSidebar();
-      loadSession(1);
+      initEmbedAndDeepLinks();
       updateProgressBar();
       initSidebarState();
       setupSidebarTouch();
@@ -30071,6 +30227,17 @@
       const activeSidebarItem = document.querySelector(`.session-item[data-id="${id}"]`);
       if (activeSidebarItem && typeof activeSidebarItem.scrollIntoView === 'function') {
         activeSidebarItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      // Notify Parent Platform of Session Switch
+      if (typeof notifyParent === 'function') {
+        notifyParent({
+          type: 'SESSION_CHANGED',
+          sessionId: id,
+          title: session.title,
+          category: session.category,
+          wordsCount: session.words ? session.words.length : 0
+        });
       }
 
       // Update Hero
@@ -31289,7 +31456,7 @@
     }
 
     // QUIZ SCORE PERSISTENCE
-    function saveQuizScore(sid, type, score, total) { const k = `vm_score_${sid}_${type}`; const p = JSON.parse(localStorage.getItem(k)||'{"best":0,"total":0}'); if (score > p.best) localStorage.setItem(k, JSON.stringify({best:score,total})); updateScoreBadges(); updateProgressBar(); }
+    function saveQuizScore(sid, type, score, total) { const k = `vm_score_${sid}_${type}`; const p = JSON.parse(localStorage.getItem(k)||'{"best":0,"total":0}'); if (score > p.best) localStorage.setItem(k, JSON.stringify({best:score,total})); updateScoreBadges(); updateProgressBar(); if (typeof notifyParent === 'function') { notifyParent({ type: 'QUIZ_COMPLETED', sessionId: sid, quizType: type, score, total, percent: Math.round((score/total)*100) }); } }
     function getQuizScore(sid, type) { return JSON.parse(localStorage.getItem(`vm_score_${sid}_${type}`)||'{"best":0,"total":0}'); }
     function updateScoreBadges() { ['matching','yesno','recall'].forEach(t => { const d = getQuizScore(currentSessionId, t); const b = document.getElementById(`scoreBadge_${t}`); if (b && d.total > 0) { b.textContent = `${d.best}/${d.total}`; b.style.display = 'inline'; } else if (b) { b.style.display = 'none'; } }); }
 
